@@ -1,0 +1,80 @@
+[
+  {
+    "file": "${USER_HOME}/Desktop/Figures_new/Figure1.pptx",
+    "mtime_iso": "2026-09-22T12:52:48.916889-07:00",
+    "bytes": 26775,
+    "sha256": "f45785bdc147fa4ee7fe161812dca069f7f40d50078d7ccedbc0737c7cb5b1cd"
+  },
+  {
+    "file": "${USER_HOME}/Desktop/Figures_new/Figure2.pptx",
+    "mtime_iso": "2026-09-22T12:51:01.105149-07:00",
+    "bytes": 54672,
+    "sha256": "1bab518cdeaf5beab9f596397123ebab161e7b286d4e6c77e460099d25a016a3"
+  },
+  {
+    "file": "${USER_HOME}/Desktop/Figures_new/Figure3.pptx",
+    "mtime_iso": "2026-09-22T12:51:01.105500-07:00",
+    "bytes": 20028,
+    "sha256": "21616796d362106fbada110b30c2e7db1666fc5c7b42f9bded9228ec700acea6"
+  },
+  {
+    "file": "${USER_HOME}/Desktop/Figures_new/Figure4.pptx",
+    "mtime_iso": "2026-09-22T12:51:01.105771-07:00",
+    "bytes": 22870,
+    "sha256": "cf92e63146500ba17c091f51665bbb82b0ad6accb4983afd9342b355a1feb6d1"
+  },
+  {
+    "file": "${PRIVATE_WORKSPACE}/paper_rewrite_20260908/figure5_native_comparison_20260923/output/Figure5.pptx",
+    "mtime_iso": "2026-09-23T01:13:31.966449-07:00",
+    "bytes": 18190,
+    "sha256": "b7f70a4efbc8f55fa266ac8519cb07d705f34e7174fe6fdd9c0c1d7fcb93edc9",
+    "desktop_source_superseded": "${USER_HOME}/Desktop/Figures_new/Figure5.pptx",
+    "selection": "Latest native Show-o2 comparison; user override 2026-09-23"
+  },
+  {
+    "file": "${USER_HOME}/Desktop/Figures_new/Figure6.pptx",
+    "mtime_iso": "2026-09-23T00:39:15.533637-07:00",
+    "bytes": 50955,
+    "sha256": "1007117036994e08eaaad43481a6f7290bfea1fc85ce6717764a82ad656e2712"
+  },
+  {
+    "file": "${USER_HOME}/Desktop/Figures_new/Figure7.pptx",
+    "mtime_iso": "2026-09-23T00:18:44.399293-07:00",
+    "bytes": 49199,
+    "sha256": "9da93ceb76b63ce84f4fcd259fe2b0dc4057386159ce452a2770eaf342f37d77"
+  },
+  {
+    "file": "${USER_HOME}/Desktop/Figures_new/Figure8.pptx",
+    "mtime_iso": "2026-09-22T23:51:31.253983-07:00",
+    "bytes": 34813,
+    "sha256": "6d503ad2bc5b05fbb041f6bbecddb2d5ec0a9344c92a82ed87c728b13a3b3127"
+  },
+  {
+    "file": "source_figures/FigureA1.pptx",
+    "sha256": "9c701327a6b93604c7634637cfd196725c641d51ec5c6f383a14640686b42fb9",
+    "selection": "Current appendix revision, 2026-09-23",
+    "pdf": "figs/figureA1.pdf",
+    "pdf_sha256": "85d46c5bbed82dd8768e1db7ab773a60403af9d8187ec4992dd1a787d479d5a5"
+  },
+  {
+    "file": "source_figures/FigureA2.pptx",
+    "sha256": "b16c0bcede665d4961d8c3d6a9f85ecbd746a1f6897ac366a5c22d6ec92b0677",
+    "selection": "Current appendix revision, 2026-09-23",
+    "pdf": "figs/figureA2.pdf",
+    "pdf_sha256": "2dcf9b0d87cc52935df5dda62eb8dadd5e5b2993044edd0375125aaefb6e469e"
+  },
+  {
+    "file": "source_figures/FigureA3.pptx",
+    "sha256": "866b2a3a92fadf6eb7ed5f70b90a2017de268d6eca8054c43c6113f11a3700f0",
+    "selection": "Current appendix revision, 2026-09-23",
+    "pdf": "figs/figureA3.pdf",
+    "pdf_sha256": "20edf2e5aed81471157df715c7534085a9bd3f13834b74a62cbe19bb39a3d91b"
+  },
+  {
+    "file": "source_figures/FigureA4.pptx",
+    "sha256": "bf4957262576158b6f0ff0be17d8351b5acde01a56d9796fb1dfa22bf9b1566a",
+    "selection": "Current appendix revision, 2026-09-23",
+    "pdf": "figs/figureA4.pdf",
+    "pdf_sha256": "c9395221380d29de9d96ea03067738dc15aef54587a15bd303359521727747a1"
+  }
+]

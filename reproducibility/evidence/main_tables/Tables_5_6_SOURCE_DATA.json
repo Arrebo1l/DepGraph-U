@@ -1,0 +1,42 @@
+{
+  "table5_vocab_bypass": {
+    "GenEval": {
+      "status": "local_independent_audit_passed",
+      "quality_reference": 0.8775313193996704,
+      "quality_ours": 0.8775313193996704,
+      "latency_reference_s": 29.311072223262347,
+      "latency_ours_s": 27.599254918725954,
+      "speedup": 1.0620240404886776,
+      "source": "current_record_01"
+    },
+    "DPG-Bench": {
+      "status": "local_independent_audit_passed",
+      "quality_reference": 84.13958395900009,
+      "quality_ours": 84.13958395900009,
+      "latency_reference_s": 29.597759985353605,
+      "latency_ours_s": 27.888409174447048,
+      "speedup": 1.061292517626741,
+      "source": "current_record_02"
+    }
+  },
+  "table6_cadd": {
+    "GenEval": {
+      "status": "local_readonly_final_verification",
+      "quality_reference": 0.7625408562576116,
+      "quality_ours": 0.7625408562576116,
+      "latency_reference_s": 10.695098014752201,
+      "latency_ours_s": 9.581033104205433,
+      "speedup": 1.1162781610740669,
+      "source": "current_record_03"
+    },
+    "DPG-Bench": {
+      "status": "local_independent_audit_passed",
+      "quality_reference": 84.20346599239514,
+      "quality_ours": 84.20346599239514,
+      "latency_reference_s": 10.825930930621608,
+      "latency_ours_s": 9.692791267134634,
+      "speedup": 1.1169054024024134,
+      "source": "current_record_04"
+    }
+  }
+}

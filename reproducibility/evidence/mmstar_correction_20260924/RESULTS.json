@@ -1,0 +1,63 @@
+{
+  "method": "Published MMStar answer rule; overall correct / 1500, expressed as percent",
+  "source": "https://github.com/MMStar-Benchmark/MMStar/blob/main/eval/vlmeval/evaluate/mmstar.py",
+  "responses_sha256": "204773262a06c2bacd6884271df21c16598333de2a78729d0c84f9a287f44234",
+  "results": {
+    "bagel_native": {
+      "n": 1500,
+      "correct": 1015,
+      "official_accuracy_percent": 67.66666666666667,
+      "historical_l2_macro_percent": 68.01346894053637,
+      "answer_rule_disagreements": 0
+    },
+    "bagel_ours": {
+      "n": 1500,
+      "correct": 1000,
+      "official_accuracy_percent": 66.66666666666667,
+      "historical_l2_macro_percent": 66.69248037091121,
+      "answer_rule_disagreements": 0
+    },
+    "exact": {
+      "n": 1500,
+      "correct": 757,
+      "official_accuracy_percent": 50.46666666666667,
+      "historical_l2_macro_percent": 51.7365992690199,
+      "answer_rule_disagreements": 0
+    },
+    "exact_reference": {
+      "n": 1500,
+      "correct": 757,
+      "official_accuracy_percent": 50.46666666666667,
+      "historical_l2_macro_percent": 51.7365992690199,
+      "answer_rule_disagreements": 0
+    },
+    "legacy_reference": {
+      "n": 1500,
+      "correct": 758,
+      "official_accuracy_percent": 50.53333333333333,
+      "historical_l2_macro_percent": 51.78929935180121,
+      "answer_rule_disagreements": 0
+    },
+    "legacy_stable": {
+      "n": 1500,
+      "correct": 758,
+      "official_accuracy_percent": 50.53333333333333,
+      "historical_l2_macro_percent": 51.65821437301721,
+      "answer_rule_disagreements": 0
+    },
+    "stable": {
+      "n": 1500,
+      "correct": 759,
+      "official_accuracy_percent": 50.6,
+      "historical_l2_macro_percent": 51.919044945237694,
+      "answer_rule_disagreements": 0
+    },
+    "stable_reference": {
+      "n": 1500,
+      "correct": 754,
+      "official_accuracy_percent": 50.266666666666666,
+      "historical_l2_macro_percent": 51.66548691100604,
+      "answer_rule_disagreements": 0
+    }
+  }
+}

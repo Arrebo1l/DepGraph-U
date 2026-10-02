@@ -1,0 +1,1365 @@
+[
+  {
+    "id": "S3.T1",
+    "caption": "Table 1: Comparison of various visual encoders on multimodal understanding [43, 23, 14] within the LLaVA-1.5 framework. VQKD is distilled from CLIP ViT-B/14. ”Sem.” refers to semantic encoders that learn semantic-level representations, while ”Pix.” indicates pixel-level tokenizers that focus on low-level visual features.",
+    "rows": [
+      [
+        "# Exp.",
+        "Visual Encoder",
+        "Type",
+        "MME-P ↑",
+        "SEEDB ↑",
+        "TQA ↑"
+      ],
+      [
+        "Continuous:"
+      ],
+      [
+        "1",
+        "CLIP ViT-B/14 [37]",
+        "Sem.",
+        "1460.9",
+        "64.1",
+        "53.4"
+      ],
+      [
+        "Discrete:"
+      ],
+      [
+        "2",
+        "VQGAN [13]",
+        "Pix.",
+        "756.1",
+        "38.2",
+        "46.8"
+      ],
+      [
+        "3",
+        "VQGAN-LC [76]",
+        "Pix.",
+        "744.8",
+        "38.2",
+        "45.7"
+      ],
+      [
+        "4",
+        "LFQ [66]",
+        "Pix.",
+        "889.5",
+        "41.1",
+        "46.4"
+      ],
+      [
+        "5",
+        "VQKD [35]",
+        "Sem.",
+        "1252.4",
+        "57.8",
+        "48.2"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T2",
+    "caption": "Table 2: Comparison of reconstruction quality on the ImageNet 50k validation set. “#Lvls.” represents the number of residual levels used. For 384×384 resolution, the downsample ratio of 14.2 is derived from 384/27.",
+    "rows": [
+      [
+        "Model",
+        "Res.",
+        "ratio",
+        "#Lvls.",
+        "rFID ↓",
+        "PSNR ↑",
+        "SSIM ↑"
+      ],
+      [
+        "VQ-GAN [13]",
+        "256",
+        "16",
+        "1",
+        "4.98",
+        "20.00",
+        "0.629"
+      ],
+      [
+        "LlamaGen [44]",
+        "256",
+        "16",
+        "1",
+        "2.19",
+        "20.79",
+        "0.675"
+      ],
+      [
+        "RQ-VAE [21]",
+        "256",
+        "32",
+        "4",
+        "3.20",
+        "–",
+        "–"
+      ],
+      [
+        "RQ-VAE [21]",
+        "256",
+        "16",
+        "4",
+        "1.30",
+        "–",
+        "–"
+      ],
+      [
+        "VAR [51]",
+        "256",
+        "16",
+        "10",
+        "1.00",
+        "22.63",
+        "0.755"
+      ],
+      [
+        "VILA-U [60]",
+        "256",
+        "16",
+        "4",
+        "1.80",
+        "–",
+        "–"
+      ],
+      [
+        "Ours",
+        "256",
+        "16",
+        "9",
+        "1.37",
+        "21.41",
+        "0.687"
+      ],
+      [
+        "LlamaGen [60]",
+        "384",
+        "14.2",
+        "1",
+        "0.94",
+        "21.94",
+        "0.726"
+      ],
+      [
+        "VILA-U [60]",
+        "384",
+        "14.2",
+        "16",
+        "1.25",
+        "–",
+        "–"
+      ],
+      [
+        "VAR [51]",
+        "384",
+        "16",
+        "13",
+        "2.09",
+        "22.73",
+        "0.774"
+      ],
+      [
+        "Ours",
+        "384",
+        "14.2",
+        "15",
+        "0.63",
+        "22.77",
+        "0.731"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T3",
+    "caption": "Table 3: Evaluation on multimodal understanding benchmarks. We collect evaluations including: SEEDB: SEED Bench-Img [22]; MMV: MM-Vet [67]; POPE [26]; VQAv2 [16]; GQA [19]; TQA: TextVQA [43]; AI2D [20]; RWQA: RealWorldQA [61]; MMMU [68]; MMB: MMBench [32]; MME [14] and MME-P: MME-Perception. We include approaches with continuous visual inputs (top) versus discrete visual inputs (bottom). The best results among approaches with discrete visual input are highlighted in bold. * results are not reported in original paper and tested with lmms-eval [71] using the released checkpoint. When calculating average, we use MME-P and divide it by 20 to have the same scale with other benchmarks.",
+    "rows": [
+      [
+        "Method",
+        "# Params",
+        "Res.",
+        "SEEDB",
+        "MMV",
+        "POPE",
+        "VQAv2",
+        "GQA",
+        "TQA",
+        "AI2D",
+        "RWQA",
+        "MMMU",
+        "MMB",
+        "MME",
+        "MME-P",
+        "Avg."
+      ],
+      [
+        "Continuous Visual Input"
+      ],
+      [
+        "InstructBLIP [30]",
+        "Vicuna-13B",
+        "224",
+        "58.8",
+        "25.6",
+        "78.9",
+        "–",
+        "49.5",
+        "50.7",
+        "–",
+        "–",
+        "–",
+        "36.0",
+        "–",
+        "1212.8",
+        "–"
+      ],
+      [
+        "MiniGPT-4 [75]",
+        "Vicuna-13B",
+        "224",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "1158.7",
+        "866.6",
+        "–"
+      ],
+      [
+        "BLIP-2 [24]",
+        "Vicuna-13B",
+        "224",
+        "46.4",
+        "22.4",
+        "–",
+        "–",
+        "–",
+        "42.5",
+        "–",
+        "–",
+        "26.6",
+        "–",
+        "–",
+        "1293.8",
+        "–"
+      ],
+      [
+        "ShareGPT4V [9]",
+        "Vicuna-7B",
+        "336",
+        "69.7",
+        "37.6",
+        "–",
+        "80.6",
+        "63.3",
+        "60.4",
+        "58.0",
+        "54.9",
+        "37.2",
+        "68.8",
+        "1943.8",
+        "1567.4",
+        "–"
+      ],
+      [
+        "NExT-GPT [58]",
+        "Vicuna-7B",
+        "224",
+        "57.5",
+        "–",
+        "–",
+        "66.0",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "58.0",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Qwen-VL-Chat [3]",
+        "Qwen-7B",
+        "448",
+        "57.7",
+        "–",
+        "–",
+        "78.2",
+        "57.5",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "1848.3",
+        "1487.5",
+        "–"
+      ],
+      [
+        "Janus [57]",
+        "DeepSeek-LLM-1.3B",
+        "384",
+        "63.7",
+        "34.3",
+        "87.0",
+        "77.3",
+        "59.1",
+        "–",
+        "–",
+        "–",
+        "30.5",
+        "69.4",
+        "–",
+        "1338.0",
+        "–"
+      ],
+      [
+        "LLaVA-1.5 [29]",
+        "Vicuna-13B",
+        "336",
+        "68.1",
+        "36.1",
+        "85.9",
+        "80.0",
+        "63.3",
+        "61.3",
+        "61.1",
+        "55.3",
+        "36.4",
+        "67.7",
+        "1826.7",
+        "1531.3",
+        "62.9"
+      ],
+      [
+        "Discrete Visual Input"
+      ],
+      [
+        "Gemini-Nano-1 [49]",
+        "1.8B from scratch",
+        "–",
+        "–",
+        "–",
+        "–",
+        "62.7",
+        "–",
+        "–",
+        "–",
+        "–",
+        "26.3",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Chameleon [48]",
+        "34B from scratch",
+        "256",
+        "–",
+        "–",
+        "–",
+        "69.6",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "LWM [31]",
+        "LLaMA-2-7B",
+        "256",
+        "–",
+        "9.6",
+        "75.2",
+        "55.8",
+        "44.8",
+        "18.8",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "SEED-LLaMA [23]",
+        "LLaMA-2-13B",
+        "224",
+        "53.7",
+        "–",
+        "–",
+        "63.4",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Show-o [62]",
+        "Phi-1.5-1.3B",
+        "256",
+        "–",
+        "–",
+        "80.0",
+        "69.4",
+        "58.0",
+        "–",
+        "–",
+        "–",
+        "26.7",
+        "–",
+        "–",
+        "1097.2",
+        "–"
+      ],
+      [
+        "VILA-U [60]",
+        "LLaMA-2-7B",
+        "256",
+        "56.3",
+        "27.7",
+        "83.9",
+        "75.3",
+        "58.3",
+        "48.3",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "1336.2",
+        "–"
+      ],
+      [
+        "VILA-U [60]",
+        "LLaMA-2-7B",
+        "384",
+        "59.0",
+        "33.5",
+        "85.8",
+        "79.4",
+        "60.8",
+        "60.8",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "1401.8",
+        "–"
+      ],
+      [
+        "EMU3 [55]",
+        "8B from scratch",
+        "512",
+        "68.2",
+        "37.2",
+        "85.2",
+        "75.1",
+        "60.3",
+        "64.7",
+        "70.0",
+        "57.4",
+        "31.6",
+        "58.5",
+        "1509.9*",
+        "1243.8*",
+        "60.9"
+      ],
+      [
+        "TokenFlow-B",
+        "Vicuna-13B",
+        "224",
+        "60.4",
+        "22.4",
+        "84.0",
+        "70.2",
+        "59.3",
+        "49.8",
+        "54.2",
+        "49.4",
+        "34.2",
+        "55.3",
+        "1660.4",
+        "1353.6",
+        "55.2"
+      ],
+      [
+        "TokenFlow-L",
+        "Vicuna-13B",
+        "256",
+        "62.6",
+        "27.7",
+        "85.0",
+        "73.9",
+        "60.3",
+        "54.1",
+        "56.6",
+        "49.2",
+        "34.4",
+        "60.3",
+        "1622.9",
+        "1365.4",
+        "57.5"
+      ],
+      [
+        "TokenFlow-XL",
+        "Vicuna-13B",
+        "384",
+        "68.7",
+        "40.7",
+        "86.8",
+        "77.9",
+        "62.7",
+        "61.5",
+        "66.7",
+        "53.7",
+        "38.7",
+        "68.9",
+        "1840.9",
+        "1545.9",
+        "64.0"
+      ],
+      [
+        "TokenFlow-XL",
+        "Qwen-2.5-14B",
+        "384",
+        "72.6",
+        "48.2",
+        "87.8",
+        "77.6",
+        "62.5",
+        "62.3",
+        "75.8",
+        "56.6",
+        "43.2",
+        "76.8",
+        "1922.2",
+        "1551.1",
+        "67.4"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T4",
+    "caption": "Table 4: Comparison of generation quality on GenEval [15] and DPG-Bench [18]. ”#Step”: the number of model runs needed to generate an image. † result is with rewriting.",
+    "rows": [
+      [
+        "Model",
+        "Text Pretrain",
+        "Res.",
+        "#Steps",
+        "GenEval",
+        "DPG-Bench"
+      ],
+      [
+        "Overall ↑",
+        "Average ↑"
+      ],
+      [
+        "Diffusion-based"
+      ],
+      [
+        "SD v1.5 [41]",
+        "CLIP ViT-L/14",
+        "512",
+        "50",
+        "0.43",
+        "63.18"
+      ],
+      [
+        "DALL-E 2 [39]",
+        "CLIP ViT-H/16",
+        "1024",
+        "–",
+        "0.52",
+        "–"
+      ],
+      [
+        "SD v2.1 [41]",
+        "CLIP ViT-H/14",
+        "768",
+        "50",
+        "0.50",
+        "–"
+      ],
+      [
+        "SDXL [36]",
+        "CLIP ViT-bigG",
+        "1024",
+        "40",
+        "0.55",
+        "74.65"
+      ],
+      [
+        "PixArt-alpha [7]",
+        "Flan-T5-XXL",
+        "512",
+        "20",
+        "0.48",
+        "71.11"
+      ],
+      [
+        "DALL-E 3 [4]",
+        "Flan-T5-XXL",
+        "1024",
+        "–",
+        "0.67†",
+        "83.50"
+      ],
+      [
+        "Autoregressive meets diffusion"
+      ],
+      [
+        "Show-o [62]",
+        "Phi-1.5",
+        "256",
+        "16",
+        "0.53",
+        "67.27"
+      ],
+      [
+        "Transfusion [74]",
+        "–",
+        "256",
+        "250",
+        "0.63",
+        "–"
+      ],
+      [
+        "Autoregressive-based"
+      ],
+      [
+        "Chameleon [48]",
+        "–",
+        "512",
+        "1024",
+        "0.39",
+        "–"
+      ],
+      [
+        "LlamaGen [44]",
+        "Flan-T5-XL",
+        "512",
+        "1024",
+        "0.32",
+        "64.84"
+      ],
+      [
+        "EMU3 [55]",
+        "–",
+        "512",
+        "4096",
+        "0.54 / 0.66†",
+        "80.60"
+      ],
+      [
+        "VAR [51]",
+        "–",
+        "256",
+        "28",
+        "0.53",
+        "71.08"
+      ],
+      [
+        "Ours",
+        "–",
+        "256",
+        "25",
+        "0.55 / 0.63†",
+        "73.38"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T5",
+    "caption": "Table 5: Impact of key design choices on reconstruction quality and multimodal understanding benchmarks. Best results for each metric are highlighted in bold.",
+    "rows": [
+      [
+        "Shared Mapping",
+        "MSVQ",
+        "CLIP Init.",
+        "rFID ↓",
+        "MME-P ↑",
+        "SEEDB ↑",
+        "TQA ↑"
+      ],
+      [
+        "",
+        "",
+        "",
+        "8.07",
+        "1252.38",
+        "57.84",
+        "49.16"
+      ],
+      [
+        "",
+        "",
+        "",
+        "3.96",
+        "1212.51",
+        "55.97",
+        "47.42"
+      ],
+      [
+        "",
+        "",
+        "",
+        "2.18",
+        "1209.90",
+        "56.08",
+        "47.40"
+      ],
+      [
+        "",
+        "",
+        "",
+        "2.16",
+        "1312.09",
+        "58.99",
+        "49.29"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T6",
+    "caption": "Table 6: Impact of sampling strategy to visual generation. We compare single-step v.s. multi-step sampling strategy using GenEval and ImageReward. For multi-step approaches, values in brackets indicate parameters for successive sampling steps.",
+    "rows": [
+      [
+        "Strategy",
+        "Top-k",
+        "Top-p",
+        "GenEval ↑",
+        "ImageReward ↑"
+      ],
+      [
+        "Single Step",
+        "1200",
+        "0.8",
+        "0.502",
+        "0.722"
+      ],
+      [
+        "Multi Step",
+        "[1200, 1]",
+        "[0.8, 0]",
+        "0.541",
+        "0.806"
+      ],
+      [
+        "[1200, 10]",
+        "[0.8, 0.8]",
+        "0.531",
+        "0.799"
+      ],
+      [
+        "[1200, 100]",
+        "[0.8, 0.8]",
+        "0.529",
+        "0.745"
+      ],
+      [
+        "[1200, 100, 1]",
+        "[0.8, 0.8, 0]",
+        "0.553",
+        "0.825"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T7",
+    "caption": "Table 7: Impact of model size to visual generation.",
+    "rows": [
+      [
+        "Model size",
+        "Training epoches",
+        "GenEval ↑",
+        "ImageReward ↑"
+      ],
+      [
+        "1B",
+        "4",
+        "0.485",
+        "0.677"
+      ],
+      [
+        "7B",
+        "2",
+        "0.553",
+        "0.825"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T8",
+    "caption": "Table 8: Impact of different input strategies on multimodal understanding. Best results for each metric are highlighted in bold.",
+    "rows": [
+      [
+        "Input strategy",
+        "MME ↑",
+        "MME-P ↑",
+        "SEEDB ↑",
+        "TQA ↑"
+      ],
+      [
+        "Full scale",
+        "1610.1",
+        "1315.1",
+        "59.6",
+        "49.5"
+      ],
+      [
+        "Full scale residual",
+        "1527.5",
+        "1216.5",
+        "57.0",
+        "48.1"
+      ],
+      [
+        "Last scale semantic feat. only",
+        "1580.3",
+        "1315.6",
+        "60.1",
+        "49.7"
+      ],
+      [
+        "Last scale",
+        "1634.3",
+        "1356.5",
+        "59.9",
+        "49.1"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T9",
+    "caption": "Table 9: Quantitative comparison of multimodal understanding capabilities between our discrete TokenFlow and their corresponding continuous semantic teachers. All experiments are trained with LLaVA-1.5 data for fair comparison. When calculating average, we use MME-P and divide it by 20 to have the same scale with other benchmarks.",
+    "rows": [
+      [
+        "Method",
+        "# Params",
+        "Visual Encoder",
+        "Res.",
+        "SEEDB",
+        "MMV",
+        "POPE",
+        "VQAv2",
+        "GQA",
+        "TQA",
+        "AI2D",
+        "RWQA",
+        "MMMU",
+        "MMB",
+        "MME",
+        "MME-P",
+        "Avg."
+      ],
+      [
+        "Continuous Visual Input"
+      ],
+      [
+        "LLaVA-1.5",
+        "Vicuna-13B",
+        "CLIP ViT-B/14 [37]",
+        "224",
+        "64.1",
+        "30.8",
+        "85.1",
+        "73.8",
+        "61.3",
+        "53.4",
+        "57.8",
+        "50.9",
+        "35.1",
+        "62.0",
+        "1737.0",
+        "1460.9",
+        "58.9"
+      ],
+      [
+        "ViTamin-XL [8]",
+        "256",
+        "65.7",
+        "34.6",
+        "85.8",
+        "76.8",
+        "62.6",
+        "57.4",
+        "59.4",
+        "54.4",
+        "35.0",
+        "66.4",
+        "1839.1",
+        "1514.5",
+        "61.3"
+      ],
+      [
+        "SigLIP-SO400M [69]",
+        "384",
+        "67.5",
+        "38.1",
+        "86.5",
+        "78.6",
+        "63.8",
+        "62.2",
+        "59.5",
+        "57.4",
+        "35.4",
+        "68.3",
+        "1802.1",
+        "1488.2",
+        "62.9"
+      ],
+      [
+        "Discrete Visual Input"
+      ],
+      [
+        "Ours",
+        "Vicuna-13B",
+        "TokenFlow-B",
+        "224",
+        "60.4",
+        "22.4",
+        "84.0",
+        "70.2",
+        "59.3",
+        "49.8",
+        "54.2",
+        "49.4",
+        "34.2",
+        "55.3",
+        "1660.4",
+        "1353.6",
+        "55.2 (93.7%)"
+      ],
+      [
+        "TokenFlow-L",
+        "256",
+        "62.6",
+        "27.7",
+        "85.0",
+        "73.9",
+        "60.3",
+        "54.1",
+        "56.6",
+        "49.2",
+        "34.4",
+        "60.3",
+        "1622.9",
+        "1365.4",
+        "57.5 (93.8%)"
+      ],
+      [
+        "TokenFlow-XL",
+        "384",
+        "65.3",
+        "41.2",
+        "86.2",
+        "76.6",
+        "63.0",
+        "57.5",
+        "56.8",
+        "53.3",
+        "34.7",
+        "62.7",
+        "1794.4",
+        "1502.3",
+        "61.1 (97.1%)"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T10",
+    "caption": "Table 10: Comparison of generation quality on GenEval and DPG-Bench. Obj.: Object. Attri.: Attribute. † result is with rewriting.",
+    "rows": [
+      [
+        "",
+        "GenEval",
+        "DPG-Bench"
+      ],
+      [
+        "Method",
+        "Overall",
+        "Single Obj.",
+        "Two Obj.",
+        "Counting",
+        "Colors",
+        "Position",
+        "Color Attri.",
+        "Overall",
+        "Global",
+        "Entity",
+        "Attribute",
+        "Relation",
+        "Other"
+      ],
+      [
+        "Diffusion-based",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "SDv1.5 [41]",
+        "0.43",
+        "0.97",
+        "0.38",
+        "0.35",
+        "0.76",
+        "0.04",
+        "0.06",
+        "63.18",
+        "74.63",
+        "74.23",
+        "75.39",
+        "73.49",
+        "67.81"
+      ],
+      [
+        "DALL-E 2 [39]",
+        "0.52",
+        "0.94",
+        "0.66",
+        "0.49",
+        "0.77",
+        "0.10",
+        "0.19",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "SDv2.1 [41]",
+        "0.50",
+        "0.98",
+        "0.51",
+        "0.44",
+        "0.85",
+        "0.07",
+        "0.17",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "SDXL [36]",
+        "0.55",
+        "0.98",
+        "0.74",
+        "0.39",
+        "0.85",
+        "0.15",
+        "0.23",
+        "74.65",
+        "83.27",
+        "82.43",
+        "80.91",
+        "86.76",
+        "80.41"
+      ],
+      [
+        "PixArt-alpha [7]",
+        "0.48",
+        "0.98",
+        "0.50",
+        "0.44",
+        "0.80",
+        "0.08",
+        "0.07",
+        "71.11",
+        "74.97",
+        "79.32",
+        "78.60",
+        "82.57",
+        "76.96"
+      ],
+      [
+        "DALL-E 3 [4]",
+        "0.67†",
+        "0.96†",
+        "0.87†",
+        "0.47†",
+        "0.83†",
+        "0.43†",
+        "0.45†",
+        "83.50",
+        "90.97",
+        "89.61",
+        "88.39",
+        "90.58",
+        "89.83"
+      ],
+      [
+        "Autoregressive meets diffusion",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Show-o [62]",
+        "0.53",
+        "0.95",
+        "0.52",
+        "0.49",
+        "0.82",
+        "0.11",
+        "0.28",
+        "67.27",
+        "79.33",
+        "75.44",
+        "78.02",
+        "84.45",
+        "60.80"
+      ],
+      [
+        "Transfusion [74]",
+        "0.63",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Autoregressive-based",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Chameleon [48]",
+        "0.39",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "LlamaGen [44]",
+        "0.32",
+        "0.71",
+        "0.34",
+        "0.21",
+        "0.58",
+        "0.07",
+        "0.04",
+        "64.84",
+        "81.76",
+        "75.43",
+        "76.17",
+        "84.76",
+        "58.40"
+      ],
+      [
+        "EMU3 [55]",
+        "0.54",
+        "0.98",
+        "0.71",
+        "0.34",
+        "0.81",
+        "0.17",
+        "0.21",
+        "80.60",
+        "85.21",
+        "86.68",
+        "86.84",
+        "90.22",
+        "83.15"
+      ],
+      [
+        "VAR [51]",
+        "0.53",
+        "0.95",
+        "0.60",
+        "0.41",
+        "0.81",
+        "0.16",
+        "0.24",
+        "71.08",
+        "77.51",
+        "78.17",
+        "77.80",
+        "85.80",
+        "62.00"
+      ],
+      [
+        "Ours",
+        "0.55",
+        "0.97",
+        "0.66",
+        "0.40",
+        "0.84",
+        "0.17",
+        "0.26",
+        "73.38",
+        "78.72",
+        "79.22",
+        "81.29",
+        "85.22",
+        "71.20"
+      ],
+      [
+        "0.63†",
+        "0.93†",
+        "0.72†",
+        "0.45†",
+        "0.82†",
+        "0.45†",
+        "0.42†"
+      ]
+    ]
+  },
+  {
+    "id": "A3.T11",
+    "caption": "Table 11: Detail settings of TokenFlow-B, TokenFlow-L and TokenFlow-XL.",
+    "rows": [
+      [
+        "Tokenizer",
+        "TokenFlow-B",
+        "TokenFlow-L",
+        "TokenFlow-XL"
+      ],
+      [
+        "Tokenizer settings:",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Input resolution",
+        "224",
+        "256",
+        "384"
+      ],
+      [
+        "Codebook size",
+        "32,768",
+        "32,768",
+        "32,768"
+      ],
+      [
+        "Semantic teacher",
+        "CLIP ViT-B/14-224 [37]",
+        "ViTamin-XL-256 [8]",
+        "SigLIP-SO400M-patch14-384 [69]"
+      ],
+      [
+        "Multi-scale settings",
+        "[1, 2, 4, 6, 8, 10, 12, 14]",
+        "[1, 2, 3, 4, 6, 8, 10, 12, 14, 16]",
+        "[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 17, 22, 27]"
+      ],
+      [
+        "Semantic codebook embedding dimension",
+        "32",
+        "32",
+        "32"
+      ],
+      [
+        "Pixel codebook embedding dimension",
+        "8",
+        "8",
+        "8"
+      ],
+      [
+        "Training settings:",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Learning rate",
+        "1e-4",
+        "1e-4",
+        "1e-4"
+      ],
+      [
+        "Batch size",
+        "256",
+        "256",
+        "256"
+      ],
+      [
+        "Training steps",
+        "1,000,000",
+        "500,000",
+        "500,000"
+      ],
+      [
+        "Distance balance weight wdis",
+        "1.0",
+        "1.0",
+        "1.0"
+      ],
+      [
+        "Commitment loss factor β",
+        "0.25",
+        "0.25",
+        "0.25"
+      ],
+      [
+        "Adversarial loss factor λG",
+        "0.5",
+        "0.5",
+        "0.5"
+      ],
+      [
+        "Max gradient norm",
+        "1.0",
+        "1.0",
+        "1.0"
+      ]
+    ]
+  }
+]

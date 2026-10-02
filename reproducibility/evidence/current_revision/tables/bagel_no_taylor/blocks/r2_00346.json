@@ -1,0 +1,148 @@
+{
+  "repeat": 2,
+  "index": 346,
+  "order": [
+    "rewrite_only",
+    "policy_only",
+    "depgraphu",
+    "native"
+  ],
+  "arms": {
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 2,
+      "label": "formal/r2/rewrite_only/00346",
+      "prompt": "a photo of an orange toaster",
+      "seed": 42,
+      "seconds": 36.54636949673295,
+      "pixel_sha256": "80a6d1f6a071318b4d038c7e03f12d7f7b4334afe4c05f521a2a855b76f45128",
+      "png_sha256": "1ffdc27396c8c9d0c9327c1841794874df04ecd19ae0c1ec00f29d5bc6cf5640",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617328640
+    },
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 2,
+      "label": "formal/r2/policy_only/00346",
+      "prompt": "a photo of an orange toaster",
+      "seed": 42,
+      "seconds": 33.057646956294775,
+      "pixel_sha256": "22549e30294ab9b9235420cd0fcf759bc039808f4af0b474100a3c25da0662f4",
+      "png_sha256": "a38df7211207df7ba4d6ea599296584231afecb1b6d2d20992c4e1a294f9604a",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42617854976
+    },
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 2,
+      "label": "formal/r2/depgraphu/00346",
+      "prompt": "a photo of an orange toaster",
+      "seed": 42,
+      "seconds": 33.00262214243412,
+      "pixel_sha256": "22549e30294ab9b9235420cd0fcf759bc039808f4af0b474100a3c25da0662f4",
+      "png_sha256": "a38df7211207df7ba4d6ea599296584231afecb1b6d2d20992c4e1a294f9604a",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617328640
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 2,
+      "label": "formal/r2/native/00346",
+      "prompt": "a photo of an orange toaster",
+      "seed": 42,
+      "seconds": 36.369413539767265,
+      "pixel_sha256": "80a6d1f6a071318b4d038c7e03f12d7f7b4334afe4c05f521a2a855b76f45128",
+      "png_sha256": "1ffdc27396c8c9d0c9327c1841794874df04ecd19ae0c1ec00f29d5bc6cf5640",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42617854976
+    }
+  }
+}

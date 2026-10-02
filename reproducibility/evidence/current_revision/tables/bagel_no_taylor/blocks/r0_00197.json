@@ -1,0 +1,148 @@
+{
+  "repeat": 0,
+  "index": 197,
+  "order": [
+    "rewrite_only",
+    "policy_only",
+    "depgraphu",
+    "native"
+  ],
+  "arms": {
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 0,
+      "label": "formal/r0/rewrite_only/00197",
+      "prompt": "a photo of two bicycles",
+      "seed": 42,
+      "seconds": 36.52622849866748,
+      "pixel_sha256": "e7ec06e16f1e87524bb8a403eb0c7a9d066bf80f839b423678d895329d0c9de2",
+      "png_sha256": "65eb2aba0bb2e54e6c73b861ce5504458bdc116c32afad02e8fc68feca1c0984",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617271296
+    },
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 0,
+      "label": "formal/r0/policy_only/00197",
+      "prompt": "a photo of two bicycles",
+      "seed": 42,
+      "seconds": 33.11226437985897,
+      "pixel_sha256": "396a4806d9e9d6f01e58d1757c108249fb62c0279cd49b5cc9725afae2d65658",
+      "png_sha256": "151686be6527a518685c59ad47e3479b9c5a1555b1fd19cdf2f3be5cd60ba535",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42617740288
+    },
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 0,
+      "label": "formal/r0/depgraphu/00197",
+      "prompt": "a photo of two bicycles",
+      "seed": 42,
+      "seconds": 32.97367785871029,
+      "pixel_sha256": "396a4806d9e9d6f01e58d1757c108249fb62c0279cd49b5cc9725afae2d65658",
+      "png_sha256": "151686be6527a518685c59ad47e3479b9c5a1555b1fd19cdf2f3be5cd60ba535",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617271296
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 0,
+      "label": "formal/r0/native/00197",
+      "prompt": "a photo of two bicycles",
+      "seed": 42,
+      "seconds": 36.539869733154774,
+      "pixel_sha256": "e7ec06e16f1e87524bb8a403eb0c7a9d066bf80f839b423678d895329d0c9de2",
+      "png_sha256": "65eb2aba0bb2e54e6c73b861ce5504458bdc116c32afad02e8fc68feca1c0984",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42617740288
+    }
+  }
+}

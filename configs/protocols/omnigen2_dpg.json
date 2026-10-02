@@ -1,0 +1,101 @@
+{
+  "status": "authorized_queued_not_launched",
+  "remote_root": "${EXPERIMENT_ROOT}/TaskGraph_omnigen2_cadd_dpg_20260921",
+  "predecessor": "${EXPERIMENT_ROOT}/TaskGraph_lumina_vocab_ablation_20260919",
+  "prerequisites": [
+    "predecessor exit0 and ALL_COMPLETE",
+    "independent96-run/24-block raw ablation audit including48timed AB/CD equality checks",
+    "GPU2 idle",
+    "isolated source/env/weight/evaluator setup verified",
+    "frozen protocol/scripts before inference",
+    "same-process correctness preflight and independent scoring preflight"
+  ],
+  "model": "OmniGen2",
+  "cache": {
+    "fresh_threshold": 3,
+    "first_enhance": 5,
+    "max_order": 4
+  },
+  "source_revision": "18e6f9d5271b517fcb32e999f10df943ae9b8f20",
+  "weight_revision": "df5dca8a981d74e6c3af214c145f5c735fe72367",
+  "arms": {
+    "C": "TaylorSeer with last-layer-only history/prediction",
+    "D": "C plus guarded upstream refiner dispatch"
+  },
+  "settings": {
+    "width": 1024,
+    "height": 1024,
+    "steps": 50,
+    "scheduler": "official FlowMatchEulerDiscreteScheduler",
+    "dtype": "bfloat16",
+    "batch_size": 1,
+    "text_cfg": 5.0,
+    "image_cfg": 1.0,
+    "cfg_range": [
+      0.0,
+      1.0
+    ],
+    "max_sequence_length": 1024,
+    "cache": {
+      "fresh_threshold": 3,
+      "first_enhance": 5,
+      "max_order": 4
+    },
+    "negative_prompt": "(((deformed))), blurry, over saturation, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar",
+    "tf32": false,
+    "cpu_threads": 8
+  },
+  "benchmark": "DPG-Bench",
+  "metadata_sha256": "15b2a82f12d9086b32c2b8a58515e2562df9c8c2c70aeec544466e4e0755387f",
+  "prompts": 1065,
+  "seeds": [
+    42
+  ],
+  "images_per_arm": 1065,
+  "prompt_rewriting": false,
+  "order": "C/D alternate first arm by prompt index parity; reset all RNG/cache state per arm; same-process paired comparisons.",
+  "evaluator_revision": "3c228f1dc6c4d3cad0a47493816151a419f14db3",
+  "evaluator_sha256": {
+    "dpg_bench/compute_dpg_bench.py": "0b2aa9977974e6df26efe93eef056f39aa9e1e3a517126ed329745e7ff37e03d",
+    "dpg_bench/dpg_bench.csv": "68f507652a49aaa4f103f17bbf25e2322a9a318dc61380e6534b749fbf9317aa",
+    "README.md": "34ae58fe34287bb22ccfc1a6d612ffbb318508c94458ab40be7692cbe136635c"
+  },
+  "score": {
+    "pic_num": 1,
+    "resolution": 1024,
+    "model": "damo/mplug_visual-question-answering_coco_large_en",
+    "revision": "v1.0.0",
+    "precision": "float32",
+    "independent_invocations": true
+  },
+  "evaluator_correction": "Reuse reviewed include-first-CSV-data-row correction from Lumina DPG recovery. Verify every question/dependency; run1065-image scoring independently for each arm.",
+  "preflight": {
+    "prompt_indices": [
+      0,
+      1,
+      2
+    ]
+  },
+  "time_scope": "CUDA-synchronized pipeline wall time including prompt encoding, sampling and VAE decode; excludes loading, trace collection, image saving and equality checks",
+  "boundary": "Single image per prompt, not official recommended4-image-grid leaderboard protocol. Equality relative to same TaylorSeer strong baseline, not uncached model. OmniGen2 is decoupled VLM+DiT. Prior cross-process bitwise reproducibility limitation remains; do not demand old GPU3 images match new GPU2. All slower cases retained.",
+  "stop": "Output mismatch/runtime failure/disk<3GiB: stop,preserve evidence,diagnose; no favorable-result retry or threshold relaxation.",
+  "resource_plan": "Do not install/download/copy large files during active GPU2 timing. After predecessor audit, use isolated environment and pinned public weights or local-relay copies using existing access. Do not add cross-card SSH keys/authorized_keys entries without explicit new user consent. Never interrupt GPU1/3, rerun completed GenEval, or modify paper.",
+  "width": 1024,
+  "height": 1024,
+  "steps": 50,
+  "scheduler": "official FlowMatchEulerDiscreteScheduler",
+  "dtype": "bfloat16",
+  "batch_size": 1,
+  "text_cfg": 5.0,
+  "image_cfg": 1.0,
+  "cfg_range": [
+    0.0,
+    1.0
+  ],
+  "max_sequence_length": 1024,
+  "negative_prompt": "(((deformed))), blurry, over saturation, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar",
+  "tf32": false,
+  "cpu_threads": 8,
+  "warmup_prompt": "A red apple on a white plate.",
+  "warmup_seed": 11
+}

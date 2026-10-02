@@ -1,0 +1,14 @@
+{
+  "upstream": "https://github.com/Rirayh/FlashU",
+  "revision": "189f877953387f8b7f1e3f4d63eddbc5b597da52",
+  "scope": "Uninstrumented fixed-policy generation snapshot used by the execution-cost study; historical opt-in branches are retained, not enabled by the release runner.",
+  "target_sha256": {
+    "evaluation/inference_dpg_accelerated.py": "98dc5722ae498f685848aa7217223e2b9a8c39121e7bfe81c79f49375e02595b",
+    "flashu/layer_skipping.py": "76c2f5f5f1c312118950a75a50984616849e8c4b7d35cf7fe2454a99c51363b4",
+    "flashu/patch.py": "e8f42fc926784b38bd968f04cb986544b22b7996f44e25eda85e2c1bdffcdf65",
+    "flashu/shape_trace.py": "49bee4e3d61c23d45ac191a811e84770d7575deca0caf4d14d4f0bd8148336c4",
+    "flashu/viditq_head.py": "8a62be0895ad378113924e75e776f0804b6f2d71d9129d954c5691ca77bbfc77",
+    "models/modeling_showo2_qwen2_5.py": "33aa082e7396984b30e8f785cf0cf279cde54c84a85859962325597cda961789",
+    "transport/tada_sampler.py": "5368a84943a2577c895aa34103b567a9bd5b09813e27b66eab928e60713711ea"
+  }
+}

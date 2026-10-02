@@ -1,0 +1,599 @@
+[
+  {
+    "id": "S2.T1",
+    "caption": "Table 1: MLLMs that unify comprehension and generation and whether they support significant characteristics essential for real-world applications. “Decoder Input” denotes the inputs for image generation, where “Features” means continuous features, “Token” represents discrete tokens, “Text” implies text prompts.",
+    "rows": [
+      [
+        "",
+        "Date",
+        "Decoder Input",
+        "Detec- tion",
+        "Dynamic -Res Img Input",
+        "Image Gen",
+        "High- precision Editing",
+        "Open- source"
+      ],
+      [
+        "Decoder"
+      ],
+      [
+        "Input"
+      ],
+      [
+        "Detec-"
+      ],
+      [
+        "tion"
+      ],
+      [
+        "Dynamic"
+      ],
+      [
+        "-Res Img"
+      ],
+      [
+        "Input"
+      ],
+      [
+        "Image"
+      ],
+      [
+        "Gen"
+      ],
+      [
+        "High-"
+      ],
+      [
+        "precision"
+      ],
+      [
+        "Editing"
+      ],
+      [
+        "Open-"
+      ],
+      [
+        "source"
+      ],
+      [
+        "Emu",
+        "07/2023",
+        "Feature",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "✓"
+      ],
+      [
+        "CM3Leon",
+        "07/ 2023",
+        "Token",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "×"
+      ],
+      [
+        "SEED-OPT",
+        "07/ 2023",
+        "Token",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "×"
+      ],
+      [
+        "LaVIT",
+        "09/2023",
+        "Token",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "✓"
+      ],
+      [
+        "NExT-GPT",
+        "09/2023",
+        "Feature",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "✓"
+      ],
+      [
+        "DreamLLM",
+        "09/2023",
+        "Feature",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "×"
+      ],
+      [
+        "SEED-LLaMA",
+        "10/2023",
+        "Token",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "✓"
+      ],
+      [
+        "VL-GPT",
+        "12/2023",
+        "Feature",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "×"
+      ],
+      [
+        "Gemini",
+        "12/2023",
+        "Token",
+        "×",
+        "-",
+        "✓",
+        "×",
+        "×"
+      ],
+      [
+        "Emu2",
+        "12/2023",
+        "Feature",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "✓"
+      ],
+      [
+        "Unified-IO 2",
+        "12/2023",
+        "Token",
+        "✓",
+        "×",
+        "✓",
+        "×",
+        "✓"
+      ],
+      [
+        "Mini-Gemini",
+        "03/2024",
+        "Text",
+        "×",
+        "×",
+        "✓",
+        "×",
+        "✓"
+      ],
+      [
+        "SEED-X",
+        "04/2024",
+        "Feature",
+        "✓",
+        "✓",
+        "✓",
+        "✓",
+        "✓"
+      ]
+    ]
+  },
+  {
+    "id": "S3.T2",
+    "caption": "Table 2: Comparison on multimodal understanding benchmarks. “Und.” and “Gen.” denote “understanding” and “generation”, respectively.",
+    "rows": [
+      [
+        "Type",
+        "Model",
+        "POPE↑",
+        "MME-P↑",
+        "MMB↑",
+        "SEED(img)↑",
+        "VQAv2(test)↑",
+        "GQA↑",
+        "MMMU↑",
+        "MM-Vet↑"
+      ],
+      [
+        "Und. Only",
+        "LLaVA-v1.5-Phi-1.5 [23]",
+        "84.1",
+        "1128.0",
+        "-",
+        "-",
+        "75.3",
+        "56.5",
+        "30.7",
+        "-"
+      ],
+      [
+        "",
+        "MobileVLM [33]",
+        "84.5",
+        "1196.2",
+        "53.2",
+        "-",
+        "-",
+        "56.1",
+        "-",
+        "-"
+      ],
+      [
+        "",
+        "MobileVLM-V2 [34]",
+        "84.3",
+        "1302.8",
+        "57.7",
+        "-",
+        "-",
+        "59.3",
+        "-",
+        "-"
+      ],
+      [
+        "",
+        "LLaVA-Phi [35]",
+        "85.0",
+        "1335.1",
+        "59.8",
+        "-",
+        "71.4",
+        "-",
+        "-",
+        "28.9"
+      ],
+      [
+        "",
+        "LLaVA [36]",
+        "76.3",
+        "809.6",
+        "38.7",
+        "33.5",
+        "-",
+        "-",
+        "-",
+        "25.5"
+      ],
+      [
+        "",
+        "LLaVA-v1.5 [37]",
+        "85.9",
+        "1510.7",
+        "64.3",
+        "58.6",
+        "78.5",
+        "62.0",
+        "35.4",
+        "31.1"
+      ],
+      [
+        "",
+        "InstructBLIP [38]",
+        "-",
+        "-",
+        "36.0",
+        "53.4",
+        "-",
+        "49.2",
+        "-",
+        "26.2"
+      ],
+      [
+        "",
+        "IDEFICS-9B [39]",
+        "-",
+        "-",
+        "48.2",
+        "-",
+        "50.9",
+        "38.4",
+        "-",
+        "-"
+      ],
+      [
+        "",
+        "Qwen-VL-Chat [5]",
+        "-",
+        "1487.5",
+        "60.6",
+        "58.2",
+        "78.2",
+        "57.5",
+        "-",
+        "-"
+      ],
+      [
+        "Und. and Gen.",
+        "DreamLLM [17]",
+        "-",
+        "-",
+        "-",
+        "-",
+        "72.9",
+        "-",
+        "-",
+        "36.6"
+      ],
+      [
+        "",
+        "LaVIT [20]",
+        "-",
+        "-",
+        "-",
+        "-",
+        "66.0",
+        "46.8",
+        "-",
+        "-"
+      ],
+      [
+        "",
+        "Emu [18]",
+        "-",
+        "-",
+        "-",
+        "-",
+        "52.0",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "",
+        "NExT-GPT [40]",
+        "-",
+        "-",
+        "-",
+        "-",
+        "66.7",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "",
+        "Gemini-Nano-1 [41]",
+        "-",
+        "-",
+        "-",
+        "-",
+        "62.7",
+        "-",
+        "26.3",
+        "-"
+      ],
+      [
+        "",
+        "LWM [42]",
+        "75.2",
+        "-",
+        "-",
+        "-",
+        "55.8",
+        "44.8",
+        "-",
+        "9.6"
+      ],
+      [
+        "",
+        "SEED-X",
+        "84.1",
+        "1457.0",
+        "70.1",
+        "66.5",
+        "71.2",
+        "49.1",
+        "35.6",
+        "43.0"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T3",
+    "caption": "Table 3: Evaluation of text-to-image generation ability on GenEval benchmark. “Und.” and “Gen.” denote “understanding” and “generation”, respectively.",
+    "rows": [
+      [
+        "Type",
+        "Method",
+        "Single Obj.",
+        "Two Obj.",
+        "Counting",
+        "Colors",
+        "Position",
+        "Color Attri.",
+        "Overall↑"
+      ],
+      [
+        "Gen. Only",
+        "LDM [52]",
+        "0.92",
+        "0.29",
+        "0.23",
+        "0.70",
+        "0.02",
+        "0.05",
+        "0.37"
+      ],
+      [
+        "SDv1.5 [52]",
+        "0.97",
+        "0.38",
+        "0.35",
+        "0.76",
+        "0.04",
+        "0.06",
+        "0.43"
+      ],
+      [
+        "PixArt-α [53]",
+        "0.98",
+        "0.50",
+        "0.44",
+        "0.80",
+        "0.08",
+        "0.07",
+        "0.48"
+      ],
+      [
+        "SDv2.1 [52]",
+        "0.98",
+        "0.51",
+        "0.44",
+        "0.85",
+        "0.07",
+        "0.17",
+        "0.50"
+      ],
+      [
+        "DALL-E 2 [54]",
+        "0.94",
+        "0.66",
+        "0.49",
+        "0.77",
+        "0.10",
+        "0.19",
+        "0.52"
+      ],
+      [
+        "SDXL [26]",
+        "0.98",
+        "0.74",
+        "0.39",
+        "0.85",
+        "0.15",
+        "0.23",
+        "0.55"
+      ],
+      [
+        "Und. and Gen.",
+        "LWM [42]",
+        "0.93",
+        "0.41",
+        "0.46",
+        "0.79",
+        "0.09",
+        "0.15",
+        "0.47"
+      ],
+      [
+        "SEED-X",
+        "0.96",
+        "0.65",
+        "0.31",
+        "0.80",
+        "0.18",
+        "0.14",
+        "0.51"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T4",
+    "caption": "Table 4: Overview of the pre-training and instruction tuning datasets.",
+    "rows": [
+      [
+        "Type",
+        "Dataset"
+      ],
+      [
+        "Pre-training"
+      ],
+      [
+        "Image-Caption",
+        "LAION-COCO [56] (Re-caption), SAM [57] (Re-caption), Unsplash [29], LAION-Aesthetics[28], JourneyDB [58], CapFusion [59],"
+      ],
+      [
+        "LAION-COCO [56] (Re-caption), SAM [57] (Re-caption), Unsplash [29],"
+      ],
+      [
+        "LAION-Aesthetics[28], JourneyDB [58], CapFusion [59],"
+      ],
+      [
+        "Grounded Image-Caption",
+        "GRIT [4]"
+      ],
+      [
+        "Interleaved Image-Text",
+        "MMC4 [60], OBELICS [61], OpenFlamingo [62]"
+      ],
+      [
+        "MMC4 [60], OBELICS [61], OpenFlamingo [62]"
+      ],
+      [
+        "OCR",
+        "LLaVAR [63], Slides (In-house)"
+      ],
+      [
+        "Pure Text",
+        "Wikipedi"
+      ],
+      [
+        "Instruction Tuning"
+      ],
+      [
+        "VQA",
+        "LLaVAR [63], Text-rich QA (In-house), MIMIC-IT [64], MathQA [65], ChartQA [66], AI2D [67], ScienceQA [68], KVQA [69], DVQA [70], Grounded QA (In-house), Referencing QA (In-house)"
+      ],
+      [
+        "LLaVAR [63], Text-rich QA (In-house), MIMIC-IT [64], MathQA [65],"
+      ],
+      [
+        "ChartQA [66], AI2D [67], ScienceQA [68], KVQA [69],"
+      ],
+      [
+        "DVQA [70], Grounded QA (In-house), Referencing QA (In-house)"
+      ],
+      [
+        "Conversation",
+        "LLaVA-150k [36], ShareGPT [71], VLIT [72], LVIS-Instruct4V [73], Vision-Flan [74], ALLaVA-4V [75]"
+      ],
+      [
+        "LLaVA-150k [36], ShareGPT [71], VLIT [72],"
+      ],
+      [
+        "LVIS-Instruct4V [73], Vision-Flan [74], ALLaVA-4V [75]"
+      ],
+      [
+        "Image Generation",
+        "LAION-COCO [56] (Re-caption), SAM [57] (Re-caption), Unsplash [29], LAION-Aesthetics[28], JourneyDB [58]"
+      ],
+      [
+        "LAION-COCO [56] (Re-caption), SAM [57] (Re-caption), Unsplash [29],"
+      ],
+      [
+        "LAION-Aesthetics[28], JourneyDB [58]"
+      ],
+      [
+        "Image Editing",
+        "Instructpix2pix [31], MagicBrush [32], Openimages [76]-editing (In-house), Unsplash [29]-editing (In-house)"
+      ],
+      [
+        "Instructpix2pix [31], MagicBrush [32], Openimages [76]-editing (In-house),"
+      ],
+      [
+        "Unsplash [29]-editing (In-house)"
+      ],
+      [
+        "Slides Generation",
+        "In-house data"
+      ],
+      [
+        "Story Telling",
+        "VIST [77]"
+      ],
+      [
+        "Virtual Try-on",
+        "VITON-HD [78]"
+      ]
+    ]
+  }
+]

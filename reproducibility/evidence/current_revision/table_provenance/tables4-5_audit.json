@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "pdf_pages": 2,
+  "independent_zip_compile_text_and_pixels_match": true,
+  "table4_means_rounded_to_3dp_and_seconds_labelled": true,
+  "table5_means_unchanged_and_times_symbols_added": true,
+  "SD_preserved_in_raw_data": true,
+  "visible_SD_removed": true,
+  "visual_review": "no overlaps or clipping",
+  "width_pt": 270,
+  "font_pt": 9.5,
+  "blue_rgb": [
+    229,
+    239,
+    249
+  ],
+  "prior_files_unchanged": 40,
+  "manuscript_modified": false
+}

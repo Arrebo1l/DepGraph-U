@@ -1,0 +1,20 @@
+\begingroup
+\TGmatrixformat
+\begin{tabular}{>{\raggedright\arraybackslash}m{92pt}>{\centering\arraybackslash}m{46.000000pt}>{\centering\arraybackslash}m{46.000000pt}>{\centering\arraybackslash}m{46.000000pt}>{\centering\arraybackslash}m{46.000000pt}>{\centering\arraybackslash}m{46.000000pt}>{\centering\arraybackslash}m{46.000000pt}}
+\toprule
+\textbf{Method} & \textbf{MME-P} & \textbf{GQA} & \textbf{MMB-EN}$^{\dagger}$ & \textbf{MMMU} & \textbf{MMStar}$^{\dagger}$ & \textbf{AI2D} \\
+\midrule
+\TGsection{Quality}
+Policy reference & 1593.54 & 60.693 & 74.914 & 46.111 & 50.267 & 74.644 \\
+\rowcolor{TGshade}
+\textbf{DepGraph-U (Stable)} & 1592.39 & 60.677 & 77.234 & 47.111 & 50.600 & 76.490 \\
+\midrule
+\TGsection{Mean model latency (s) $\downarrow$}
+Policy reference & 0.823 & 0.848 & 1.109 & 1.183 & 2.455 & 1.032 \\
+\rowcolor{TGshade}
+\textbf{DepGraph-U (Stable)} & \textbf{0.434} & \textbf{0.434} & \textbf{0.465} & \textbf{0.491} & \textbf{0.469} & \textbf{0.441} \\
+\rowcolor{TGshade}
+\textbf{Speedup} $\uparrow$ & \TGspeed{1.898} & \TGspeed{1.953} & \TGspeed{2.386} & \TGspeed{2.408} & \TGspeed{5.236} & \TGspeed{2.341} \\
+\bottomrule
+\end{tabular}
+\endgroup

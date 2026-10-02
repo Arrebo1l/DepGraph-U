@@ -1,0 +1,11 @@
+{
+  "upstream": "https://github.com/Rirayh/FlashU",
+  "revision": "189f877953387f8b7f1e3f4d63eddbc5b597da52",
+  "scope": "Independent KV/logits attribution-study model variant, with CUDA event instrumentation. Not a generation patch or a one-command reproduction of all understanding experiments.",
+  "target_sha256": {
+    "models/modeling_showo2_qwen2_5.py": "281d0ecb259c45ab813d87398ad9bd121b5743d261b2419fc6f003fe809099a1"
+  },
+  "extra_files": {
+    "flashu/understanding.py": "implementations/showo2_understanding/understanding.py"
+  }
+}

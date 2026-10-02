@@ -1,0 +1,28 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{Show-o2 generation settings by benchmark and scale.} Auxiliary protocols appear in Appendix~\ref{app:transferprotocol}.}
+\label{tab:genprotocol}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{L{130pt}C{33pt}|ZZZ}
+\toprule
+\textbf{Hyperparameter} & \textbf{Symbol} & \textbf{\tcell[c]{DPG-Bench\\1.5B / 7B}} & \textbf{\tcell[c]{GenEval\\1.5B}} & \textbf{\tcell[c]{GenEval\\7B}} \\
+\midrule
+Show-o2 inference steps & $N_{\rm base}$ & 50 & 100 & 50 \\
+Selected-policy steps & $N$ & 35 & 70 & 35 \\
+Guidance scale & $w$ & 10 & 7.5 & 5 \\
+Head-cache interval & $T_c$ & 5 & 5 & 5 \\
+Final full-network steps & $N_{\rm full}$ & 11 & 21 & 11 \\
+Image seeds & -- & 42 & 0--3 & 0--3 \\
+\midrule
+\multicolumn{5}{l}{\textit{Shared selected-policy settings}} \\
+FFN pruning ratio & $r_p$ & \multicolumn{3}{c}{0.20} \\
+DLS ratio & $r_{\rm DLS}$ & \multicolumn{3}{c}{0.20} \\
+DLS recalculation period & $T_{\rm DLS}$ & \multicolumn{3}{c}{10} \\
+Early / late CFG & -- & \multicolumn{3}{c}{$0.75w$ / $w$} \\
+Image resolution & -- & \multicolumn{3}{c}{$432\times432$} \\
+Batch size & $B$ & \multicolumn{3}{c}{1} \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

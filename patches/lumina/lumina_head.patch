@@ -1,0 +1,19 @@
+--- a/model/modeling_llada.py
++++ b/model/modeling_llada.py
+@@ -1396,7 +1396,15 @@
+ 
+         # Get logits.
+         # shape: (batch_size, seq_len or 1, vocab_size)
+-        if self.config.weight_tying:
++        task_vocab = getattr(self, '_tg_vocab_slice', None)
++        if task_vocab is not None:
++            assert not self.training
++            lo, hi = task_vocab
++            head = self.transformer.wte if self.config.weight_tying else self.transformer.ff_out
++            weight = head.weight[lo:hi]
++            bias = None if self.config.weight_tying or head.bias is None else head.bias[lo:hi]
++            logits = F.linear(x, weight, bias)
++        elif self.config.weight_tying:
+             logits = F.linear(x, self.transformer.wte.weight, None)  # type: ignore
+         else:
+             logits = self.transformer.ff_out(x)  # type: ignore

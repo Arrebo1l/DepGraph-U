@@ -1,0 +1,66 @@
+[
+  {
+    "table": 5,
+    "benchmark": "GenEval",
+    "arm": "reference",
+    "quality": "0.87753",
+    "latency": "29.311",
+    "speedup": "1.000"
+  },
+  {
+    "table": 5,
+    "benchmark": "GenEval",
+    "arm": "ours",
+    "quality": "0.87753",
+    "latency": "27.599",
+    "speedup": "1.062"
+  },
+  {
+    "table": 5,
+    "benchmark": "DPG-Bench",
+    "arm": "reference",
+    "quality": "84.140",
+    "latency": "29.598",
+    "speedup": "1.000"
+  },
+  {
+    "table": 5,
+    "benchmark": "DPG-Bench",
+    "arm": "ours",
+    "quality": "84.140",
+    "latency": "27.888",
+    "speedup": "1.061"
+  },
+  {
+    "table": 6,
+    "benchmark": "GenEval",
+    "arm": "reference",
+    "quality": "0.76254",
+    "latency": "10.695",
+    "speedup": "1.000"
+  },
+  {
+    "table": 6,
+    "benchmark": "GenEval",
+    "arm": "ours",
+    "quality": "0.76254",
+    "latency": "9.581",
+    "speedup": "1.116"
+  },
+  {
+    "table": 6,
+    "benchmark": "DPG-Bench",
+    "arm": "reference",
+    "quality": "84.203",
+    "latency": "10.826",
+    "speedup": "1.000"
+  },
+  {
+    "table": 6,
+    "benchmark": "DPG-Bench",
+    "arm": "ours",
+    "quality": "84.203",
+    "latency": "9.693",
+    "speedup": "1.117"
+  }
+]

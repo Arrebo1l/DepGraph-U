@@ -1,0 +1,133 @@
+{
+  "figure": "A3",
+  "comparison": "Native Show-o2 versus full DepGraph-U system",
+  "model": "Show-o2-1.5B",
+  "seed": 0,
+  "image_size": [
+    432,
+    432
+  ],
+  "native_timepoints": 100,
+  "full_system_timepoints": 70,
+  "full_system_definition": "Inherited FlashU pruning/cache policy plus CADD and VocabBypass",
+  "pairing": "Identical rewritten prompt text and seed label. Separate historical runs; initial-noise identity is not established.",
+  "selection": "Four illustrative cases from an existing six-case visual shortlist. Not random or representative of aggregate quality. No per-example speedup is assigned.",
+  "cases": [
+    {
+      "index": 451,
+      "label": "Donut below a cat",
+      "prompt": "a photo of a donut below a cat.   A highly detailed and vibrant photo featuring a fluffy tabby cat gazing curiously down at a colorful glazed donut placed below it. The cat\u2019s soft fur is illuminated by warm, natural lighting, revealing intricate patterns of stripes and spots. The donut has a glossy finish with sprinkles scattered on top, adding playful splashes of color. The setting is a cozy wooden table with a hint of rustic charm, and a subtle soft-focus background showcases blurred household objects and warm tones, enhancing the homely atmosphere.",
+      "tag": "position",
+      "images": {
+        "showo": {
+          "file": "current_revision/native_cases/images/showo_00451.png",
+          "sha256": "3f258f9a9b2fdff497fde3b92b27268edc27ccce9a55e162284debecf83b7019",
+          "pixel_sha256": "1b83a624fa262e57a5c8799f0f7e2309b85b4099aa47514ee6785fdb297eb69d",
+          "width": 432,
+          "height": 432,
+          "gen_eval_correct": true,
+          "reason": "",
+          "source_run": "native_20260908"
+        },
+        "full": {
+          "file": "current_revision/native_cases/images/full_00451.png",
+          "sha256": "86d70e71bf5176cd071f109e9ef5bb503c35f7bd7dc634bcf6203c7eca3878d5",
+          "pixel_sha256": "a2093c5cff40b25bd56d25b4223af5b2dbf6eddfad3075f20ff1075dd83aac13",
+          "width": 432,
+          "height": 432,
+          "gen_eval_correct": true,
+          "reason": "",
+          "source_run": "full_20260823"
+        }
+      },
+      "native_and_system_outputs_differ": true
+    },
+    {
+      "index": 514,
+      "label": "Green cup, yellow bowl",
+      "prompt": "a photo of a green cup and a yellow bowl.   A high-resolution photograph featuring a vibrant green ceramic cup with a smooth, glossy finish, placed beside a sunny, bright yellow round bowl on a natural wooden table. The scene is lit by soft, natural sunlight streaming in from a nearby window, casting gentle shadows and highlights that accentuate the sheen of the ceramic surfaces. The background is slightly blurred, suggesting a cozy, homey indoor space with hints of warm, neutral tones, allowing the vibrant colors of the cup and bowl to stand out prominently.",
+      "tag": "color_attr",
+      "images": {
+        "showo": {
+          "file": "current_revision/native_cases/images/showo_00514.png",
+          "sha256": "0cd8bc8560915709bad4e313660573f9a657a8caae68c679f1b025f91e56b12c",
+          "pixel_sha256": "904eca354a81e2d4f4385eca33690796321223adec9d9a9dfd584f56ab2029ed",
+          "width": 432,
+          "height": 432,
+          "gen_eval_correct": false,
+          "reason": "expected bowl>=1, found 0",
+          "source_run": "native_20260908"
+        },
+        "full": {
+          "file": "current_revision/native_cases/images/full_00514.png",
+          "sha256": "5aca5237386e8921d77b5bf068ad03021e24c2cb4ddb5207de8b9666cddb0acd",
+          "pixel_sha256": "d251e4b732525516de569bd2ad98fb20d9e1395ff98f5873465d95897e7c5e48",
+          "width": 432,
+          "height": 432,
+          "gen_eval_correct": true,
+          "reason": "",
+          "source_run": "full_20260823"
+        }
+      },
+      "native_and_system_outputs_differ": true
+    },
+    {
+      "index": 548,
+      "label": "Yellow bicycle, red motorcycle",
+      "prompt": "a photo of a yellow bicycle and a red motorcycle. A vibrant and realistic photo showcasing a cheerful yellow bicycle leaning against a rustic brick wall. The bicycle's sleek frame glows under the soft sunlight, its curved handlebars and polished wheels capturing attention. Beside it stands a bold, shiny red motorcycle with gleaming chrome accents and detailed design, parked on a smooth stone pavement. The motorcycle\u2019s fuel tank reflects the surrounding environment, adding depth to the scene. In the background, subtle greenery grows near the wall, complementing the colors of the yellow bicycle and red motorcycle. The overall composition creates a balanced and visually engaging harmony of color and craftsmanship.",
+      "tag": "color_attr",
+      "images": {
+        "showo": {
+          "file": "current_revision/native_cases/images/showo_00548.png",
+          "sha256": "179c4beb9c2181d4bb89d434b131d00b15233d2e51c8e86a9d56d5b3fc6ff0e8",
+          "pixel_sha256": "1b79dd590c88e2163208af06a9c0cbe9c0e26a450b0622ec24dc041814dffbf6",
+          "width": 432,
+          "height": 432,
+          "gen_eval_correct": true,
+          "reason": "",
+          "source_run": "native_20260908"
+        },
+        "full": {
+          "file": "current_revision/native_cases/images/full_00548.png",
+          "sha256": "d772479f5a4fc38389f7b585d631fc39bd110be27d5581a0fc9506c33d41d12c",
+          "pixel_sha256": "a6e4db8ceee1620cfba5549b72b20404592b0e4e87d0918134e49da9ffd9d708",
+          "width": 432,
+          "height": 432,
+          "gen_eval_correct": true,
+          "reason": "",
+          "source_run": "full_20260823"
+        }
+      },
+      "native_and_system_outputs_differ": true
+    },
+    {
+      "index": 506,
+      "label": "Purple keyboard, blue scissors",
+      "prompt": "A photo of a purple computer keyboard and a blue scissors. A high-resolution close-up photo of a sleek, modern computer keyboard with vibrant purple keys, featuring soft backlighting that emits a gentle glow. The keyboard is positioned on a clean, minimalist desk setting, accompanied by a pair of glossy, bright blue scissors placed neatly beside it. The scissors have smooth, ergonomic handles and sharp metal blades that catch the light, creating subtle reflections. The background is softly blurred, with neutral tones of white and gray to highlight the vivid colors of the keyboard and scissors. The overall atmosphere is tidy and organized, evoking themes of creativity, technology, and office productivity.",
+      "tag": "color_attr",
+      "images": {
+        "showo": {
+          "file": "current_revision/native_cases/images/showo_00506.png",
+          "sha256": "be79c6139aea684a3a2f90bb0c471306d82f50e25b23601859f67e8070113e19",
+          "pixel_sha256": "434d5a4c98ccc6a9bc0a4ca56b2b6f4e1e1a11307d49832e7f6004ef7c59ff5f",
+          "width": 432,
+          "height": 432,
+          "gen_eval_correct": true,
+          "reason": "",
+          "source_run": "native_20260908"
+        },
+        "full": {
+          "file": "current_revision/native_cases/images/full_00506.png",
+          "sha256": "99d51d2aa0d8bc8e18891b9577e1e4210f74a4ffec9a42e4cbbf079d8dca2ab8",
+          "pixel_sha256": "4159073dbbaee7093a6ff98d1663c32a549b7d342052e269e2bde959c1fc2106",
+          "width": 432,
+          "height": 432,
+          "gen_eval_correct": true,
+          "reason": "",
+          "source_run": "full_20260823"
+        }
+      },
+      "native_and_system_outputs_differ": true
+    }
+  ]
+}

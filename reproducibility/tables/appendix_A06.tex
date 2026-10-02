@@ -1,0 +1,49 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{Original Stable-Graph results.} Legacy cap-1024 rows retain their paired baselines; see Table~\ref{tab:stable} for cap 128.}
+\label{tab:stablefull}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{L{113pt}|RRR}
+\toprule
+\textbf{Method} & \textbf{Score $\uparrow$} & \textbf{Latency (s) $\downarrow$} & \textbf{Speedup $\uparrow$} \\
+\midrule
+\multicolumn{4}{l}{\textit{MMMU; cap 16}} \\
+\rowcolor{tgray}
+Policy reference & 46.111 & 1.183 & 1.000$\times$ \\
+\rowcolor{tblue}
+\textbf{Stable-Graph KV} & 47.111 & 0.491 & 2.408$\times$ \\
+\midrule
+\multicolumn{4}{l}{\textit{AI2D; cap 16}} \\
+\rowcolor{tgray}
+Policy reference & 74.644 & 1.032 & 1.000$\times$ \\
+\rowcolor{tblue}
+\textbf{Stable-Graph KV} & 76.490 & 0.441 & 2.341$\times$ \\
+\midrule
+\multicolumn{4}{l}{\textit{MME; cap 16}} \\
+\rowcolor{tgray}
+Policy reference & \tcell[r]{1593.54 P\\347.86 C} & 0.823 & 1.000$\times$ \\
+\rowcolor{tblue}
+\textbf{Stable-Graph KV} & \tcell[r]{1592.39 P\\362.86 C} & 0.434 & 1.898$\times$ \\
+\midrule
+\multicolumn{4}{l}{\textit{GQA; cap 16}} \\
+\rowcolor{tgray}
+Policy reference & 60.693 & 0.848 & 1.000$\times$ \\
+\rowcolor{tblue}
+\textbf{Stable-Graph KV} & 60.677 & 0.434 & 1.953$\times$ \\
+\midrule
+\multicolumn{4}{l}{\textit{MMStar; cap 1,024 (legacy diagnostic)}} \\
+\rowcolor{tgray}
+Policy reference & 50.533 & 6.215 & 1.000$\times$ \\
+\rowcolor{tblue}
+\textbf{Stable-Graph KV} & 50.533 & 0.466 & 13.326$\times$ \\
+\midrule
+\multicolumn{4}{l}{\textit{MMBench-EN; cap 1,024 (legacy diagnostic)}} \\
+\rowcolor{tgray}
+Policy reference & 75.086 & 2.062 & 1.000$\times$ \\
+\rowcolor{tblue}
+\textbf{Stable-Graph KV} & 77.062 & 0.463 & 4.451$\times$ \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

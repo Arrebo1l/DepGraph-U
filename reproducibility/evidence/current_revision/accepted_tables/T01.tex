@@ -1,0 +1,21 @@
+\TGformat\TGtitle{1}{\textbf{GenEval quality and latency.} Show-o2: local measurements; other models: reported results. Subscripts: speedup over native Show-o2. Cross-source latencies are not comparable; quality may change.}
+\begin{tabular}{>{\raggedright\arraybackslash}p{99pt}>{\centering\arraybackslash}p{35pt}>{\centering\arraybackslash}p{46pt}>{\centering\arraybackslash}p{42pt}>{\centering\arraybackslash}p{33pt}>{\centering\arraybackslash}p{34pt}>{\centering\arraybackslash}p{39pt}>{\centering\arraybackslash}p{46pt}>{\centering\arraybackslash}p{47pt}>{\centering\arraybackslash}p{75pt}}
+\toprule
+\textbf{Model} & \textbf{Params.} & \textbf{\mbox{Single obj.}} & \textbf{\mbox{Two obj.}} & \textbf{Count} & \textbf{Colors} & \textbf{Position} & \textbf{\mbox{Color attr.}} & \textbf{Overall $\uparrow$} & \textbf{Latency (s) $\downarrow$} \\
+\midrule
+SEED-X & 13B & 0.96 & 0.65 & 0.31 & 0.80 & 0.18 & 0.14 & 0.51 & --- \\
+LWM & 7B & 0.93 & 0.41 & 0.46 & 0.79 & 0.09 & 0.15 & 0.47 & --- \\
+ILLUME & 7B & 0.99 & 0.86 & 0.45 & 0.71 & 0.39 & 0.28 & 0.61 & --- \\
+Show-o & 1.3B & 0.98 & 0.80 & 0.66 & 0.84 & 0.31 & 0.50 & 0.68 & --- \\
+JanusFlow & 1.3B & 0.97 & 0.59 & 0.45 & 0.83 & 0.53 & 0.42 & 0.63 & --- \\
+Janus-Pro & 7B & 0.99 & 0.89 & 0.59 & 0.90 & 0.79 & 0.66 & 0.80 & --- \\
+VILA-U & 7B & 0.89 & 0.62 & 0.36 & 0.79 & 0.20 & 0.23 & 0.47 & 13.58 \\
+\midrule
+Show-o2 & 1.5B & 0.994 & 0.831 & 0.566 & 0.867 & 0.470 & 0.605 & 0.722 & 10.629 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U} & 1.5B & 0.984 & 0.806 & 0.516 & 0.856 & 0.388 & 0.605 & 0.692 & \TGlatratio{3.312}{3.209} \\
+Show-o2 & 7B & 0.978 & 0.760 & 0.478 & 0.819 & 0.237 & 0.512 & 0.631 & 11.514 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U} & 7B & 0.959 & 0.679 & 0.422 & 0.787 & 0.142 & 0.343 & 0.555 & \TGlatratio{3.718}{3.097} \\
+\bottomrule
+\end{tabular}\par

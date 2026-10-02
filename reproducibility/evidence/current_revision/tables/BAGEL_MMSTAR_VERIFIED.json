@@ -1,0 +1,86 @@
+{
+  "verified": true,
+  "raw_file_hashes_checked": 1519,
+  "frozen_source_files_checked": 168,
+  "complete_pairs": 1500,
+  "pair_order_counts": {
+    "native": 750,
+    "ours": 750
+  },
+  "same_policy_traces_equal_cases": 2,
+  "results": {
+    "native": {
+      "score_l2_macro": 68.01346894053638,
+      "raw_accuracy_percent": 67.66666666666667,
+      "correct": 1015,
+      "mean_s": 0.27120617061356705,
+      "total_s": 406.80925592035055,
+      "cap_hits": 0,
+      "decode_call_counts": {
+        "2": 1261,
+        "3": 16,
+        "5": 221,
+        "6": 2
+      },
+      "l2_scores": {
+        "image scene and topic": 60.28368794326241,
+        "image emotion": 80.64516129032258,
+        "image style & quality": 85.8974358974359,
+        "recognition": 55.08474576271186,
+        "object counting": 51.08695652173913,
+        "localization": 70.0,
+        "cross-instance attribute reasoning": 65.1685393258427,
+        "single-instance reasoning": 74.74747474747475,
+        "cross-instance relation reasoning": 87.09677419354838,
+        "common reasoning": 61.386138613861384,
+        "diagram reasoning": 77.27272727272727,
+        "code & sequence reasoning": 58.97435897435898,
+        "geometry": 82.75862068965517,
+        "numeric commonsense and calculation": 60.416666666666664,
+        "statistical reasoning": 65.11627906976744,
+        "biology & chemistry & physics": 65.06849315068493,
+        "electronics & energy & mechanical eng.": 45.65217391304348,
+        "geography & earth science & agriculture": 77.58620689655173
+      }
+    },
+    "ours": {
+      "score_l2_macro": 66.69248037091121,
+      "raw_accuracy_percent": 66.66666666666667,
+      "correct": 1000,
+      "mean_s": 0.23510631915926933,
+      "total_s": 352.659478738904,
+      "cap_hits": 0,
+      "decode_call_counts": {
+        "2": 1411,
+        "3": 11,
+        "5": 77,
+        "6": 1
+      },
+      "l2_scores": {
+        "image scene and topic": 62.4113475177305,
+        "image emotion": 70.96774193548387,
+        "image style & quality": 84.61538461538461,
+        "recognition": 58.47457627118644,
+        "object counting": 50.0,
+        "localization": 70.0,
+        "cross-instance attribute reasoning": 62.92134831460674,
+        "single-instance reasoning": 74.74747474747475,
+        "cross-instance relation reasoning": 82.25806451612904,
+        "common reasoning": 59.4059405940594,
+        "diagram reasoning": 78.18181818181819,
+        "code & sequence reasoning": 48.717948717948715,
+        "geometry": 70.6896551724138,
+        "numeric commonsense and calculation": 66.66666666666666,
+        "statistical reasoning": 67.44186046511628,
+        "biology & chemistry & physics": 65.75342465753424,
+        "electronics & energy & mechanical eng.": 56.52173913043478,
+        "geography & earth science & agriculture": 70.6896551724138
+      }
+    }
+  },
+  "speedup": 1.1535469211690665,
+  "latency_reduction_percent": 13.310851804229495,
+  "quality_change_l2_percentage_points": -1.3209885696251717,
+  "response_matches": 1157,
+  "scope": "Frozen18-L2 macro scoring from saved raw responses; independent recomputation, not a new inference run; adapted approximate policy may change outputs. Runtime preflight hash traces are checked for equality; tensor bytes are not re-exported."
+}

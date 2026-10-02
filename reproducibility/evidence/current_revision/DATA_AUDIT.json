@@ -1,0 +1,33 @@
+{
+  "all_displayed_table6_values_recomputed": true,
+  "displayed": {
+    "generation_native_quality": "0.750",
+    "generation_adapted_quality": "0.833",
+    "generation_native_s": "36.521",
+    "generation_adapted_s": "32.990",
+    "generation_speedup": "1.107",
+    "mmstar_native_quality": "68.013",
+    "mmstar_adapted_quality": "66.692",
+    "mmstar_native_s": "0.271",
+    "mmstar_adapted_s": "0.235",
+    "mmstar_speedup": "1.154"
+  },
+  "generation_raw_blocks": 36,
+  "generation_prompts": 12,
+  "generation_process_repeats": 3,
+  "generation_without_taylorseer": true,
+  "generation_is_full_benchmark": false,
+  "generation_speedup_unrounded": 1.1070317011586421,
+  "mmstar_complete_pairs": 1500,
+  "mmstar_speedup_unrounded": 1.1535469211690665,
+  "tables1_to5_source_unchanged": {
+    "tables/T01.tex": "848247702d344782292c6124ea65d3fb004fcad9aacb36598af7e0142baeb6a3",
+    "tables/T02.tex": "2e1768f20f52c9ad04aa421b9ae1573d8c13f9e722f17be7c6974198994e3ba1",
+    "tables/T03.tex": "a4aee8340dcf2ff8d38aed266464e45dc79a2f63023dc4ee30cea11c415e0d63",
+    "tables/T04.tex": "32719aac3bbfd547d3107a802d805fe7c817cb984c62f87cf4753e8849cfca2f",
+    "tables/T05.tex": "b1ef9cd602f16dd2bcd97798b1de04dea67da7fe861c47b59a9de7c6c2365d70"
+  },
+  "source_generation_sha256": "51d87ffae577e90fb50643ddbc9d7b65ee917ced8bc2343f57ce99141910d014",
+  "source_mmstar_sha256": "651515daa1dc401f4025f0833c621bd6776dc40ae90719e3ca1a9319b314c626",
+  "prior_version": "${PRIVATE_WORKSPACE}/output/pdf/DepGraphU_Six_Tables_v2_compact_20260922"
+}

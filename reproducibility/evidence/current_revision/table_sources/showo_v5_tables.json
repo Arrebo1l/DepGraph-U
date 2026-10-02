@@ -1,0 +1,583 @@
+[
+  {
+    "id": "S4.T1",
+    "caption": "Table 1: Evaluation on multimodal understanding benchmarks. Show-o is currently built upon Phi-1.5 and thus we implement LLaVA-v1.5-Phi-1.5 as our apple-to-apple baseline. Und. and Gen. denote “understanding” and “generation”, respectively. ‡ denotes the improved Show-o that employs CLIP-ViT continuous representations. We highlight the model size of Show-o and LLaVA baseline in green, and we use blue to highlight the larger model size than ours.",
+    "rows": [
+      [
+        "Type",
+        "Model",
+        "# Params",
+        "POPE↑",
+        "MME↑",
+        "Flickr30k↑",
+        "VQAv2(test)↑",
+        "GQA↑",
+        "MMMU↑"
+      ],
+      [
+        "Und. Only",
+        "LLaVA-v1.5 (Liu et al., 2024b)",
+        "7B",
+        "85.9",
+        "1510.7",
+        "-",
+        "78.5",
+        "62.0",
+        "35.4"
+      ],
+      [
+        "InstructBLIP (Dai et al., 2023)",
+        "13B",
+        "78.9",
+        "1212.8",
+        "-",
+        "-",
+        "49.5",
+        "-"
+      ],
+      [
+        "Qwen-VL-Chat Bai et al. (2023)",
+        "7B",
+        "-",
+        "1487.5",
+        "-",
+        "78.2",
+        "57.5",
+        "-"
+      ],
+      [
+        "mPLUG-Owl2 (Ye et al., 2024b)",
+        "7B",
+        "85.8",
+        "1450.2",
+        "-",
+        "79.4",
+        "56.1",
+        "-"
+      ],
+      [
+        "LLaVA-v1.5-Phi-1.5",
+        "1.3B",
+        "84.1",
+        "1128.0",
+        "69.6",
+        "75.3",
+        "56.5",
+        "30.7"
+      ],
+      [
+        "Und. and Gen.",
+        "Gemini-Nano-1 (Anil et al., 2023)",
+        "1.8B",
+        "-",
+        "-",
+        "-",
+        "62.7",
+        "-",
+        "26.3"
+      ],
+      [
+        "CoDI (Tang et al., 2024)",
+        "-",
+        "-",
+        "-",
+        "12.8",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Emu (Sun et al., 2023d)",
+        "13B",
+        "-",
+        "-",
+        "77.4",
+        "57.2",
+        "-",
+        "-"
+      ],
+      [
+        "NExT-GPT (Wu et al., 2023b)",
+        "13B",
+        "-",
+        "-",
+        "84.5",
+        "66.7",
+        "-",
+        "-"
+      ],
+      [
+        "SEED-X (Ge et al., 2024)",
+        "17B",
+        "84.2",
+        "1435.7",
+        "52.3",
+        "-",
+        "47.9",
+        "35.6"
+      ],
+      [
+        "DreamLLM (Dong et al., 2024)",
+        "7B",
+        "-",
+        "-",
+        "-",
+        "72.9",
+        "-",
+        "-"
+      ],
+      [
+        "Chameleon (Team, 2024)",
+        "34B",
+        "-",
+        "-",
+        "74.7",
+        "66.0",
+        "-",
+        "-"
+      ],
+      [
+        "Show-o (Ours)",
+        "1.3B",
+        "80.0",
+        "1097.2",
+        "62.5",
+        "69.4",
+        "58.0",
+        "26.7"
+      ],
+      [
+        "Show-o‡ (Ours)",
+        "1.3B",
+        "84.5",
+        "1232.9",
+        "67.6",
+        "74.7",
+        "61.0",
+        "27.4"
+      ]
+    ]
+  },
+  {
+    "id": "S5.T2",
+    "caption": "Table 2: MSCOCO zero-shot FID. Und. and Gen. denote “understanding” and “generation”, respectively.",
+    "rows": [
+      [
+        "Type",
+        "Method",
+        "# Params",
+        "# Images",
+        "FID-30K↓"
+      ],
+      [
+        "Gen. Only",
+        "DALL·E (Ramesh et al., 2021)",
+        "12B",
+        "250M",
+        "27.50"
+      ],
+      [
+        "GLIDE (Nichol et al., 2021)",
+        "5B",
+        "250M",
+        "12.24"
+      ],
+      [
+        "LDM (Rombach et al., 2022)",
+        "1.4B",
+        "400M",
+        "12.64"
+      ],
+      [
+        "DALL·E 2 (Ramesh et al., 2022a)",
+        "6.5B",
+        "650M",
+        "10.39"
+      ],
+      [
+        "SDv1.5 (Rombach et al., 2022)",
+        "0.9B",
+        "2000M",
+        "9.62"
+      ],
+      [
+        "GigaGAN (Kang et al., 2023)",
+        "0.9B",
+        "2700M",
+        "9.09"
+      ],
+      [
+        "PixArt (Chen et al., 2024)",
+        "0.6B",
+        "25M",
+        "7.32"
+      ],
+      [
+        "Imagen (Saharia et al., 2022)",
+        "3B",
+        "860M",
+        "7.27"
+      ],
+      [
+        "RAPHAEL (Xue et al., 2024)",
+        "3B",
+        "5000M+",
+        "6.61"
+      ],
+      [
+        "Und. and Gen.",
+        "CoDI (Tang et al., 2024)",
+        "-",
+        "400M",
+        "22.26"
+      ],
+      [
+        "LWM (Liu et al., 2024a)",
+        "7B",
+        "-",
+        "12.68"
+      ],
+      [
+        "SEED-X (Ge et al., 2024)",
+        "17B",
+        "-",
+        "14.99"
+      ],
+      [
+        "DreamLLM (Dong et al., 2024)",
+        "7B",
+        "-",
+        "8.76"
+      ],
+      [
+        "Show-o (Ours)",
+        "1.3B",
+        "35M",
+        "9.24"
+      ]
+    ]
+  },
+  {
+    "id": "S5.T3",
+    "caption": "Table 3: Evaluation on the GenEval (Ghosh et al., 2023) benchmark. Und. and Gen. denote “understanding” and “generation”, respectively. We highlight the model size of Show-o in green, and we use blue to highlight the larger model size than ours. Obj.: Object. Attri.: Attribute.",
+    "rows": [
+      [
+        "Type",
+        "Method",
+        "# Params",
+        "Single Obj.",
+        "Two Obj.",
+        "Counting",
+        "Colors",
+        "Position",
+        "Color Attri.",
+        "Overall↑"
+      ],
+      [
+        "Gen. Only",
+        "LlamaGen (Sun et al., 2024)",
+        "0.8B",
+        "0.71",
+        "0.34",
+        "0.21",
+        "0.58",
+        "0.07",
+        "0.04",
+        "0.32"
+      ],
+      [
+        "LDM (Rombach et al., 2022)",
+        "1.4B",
+        "0.92",
+        "0.29",
+        "0.23",
+        "0.70",
+        "0.02",
+        "0.05",
+        "0.37"
+      ],
+      [
+        "SDv1.5 (Rombach et al., 2022)",
+        "0.9B",
+        "0.97",
+        "0.38",
+        "0.35",
+        "0.76",
+        "0.04",
+        "0.06",
+        "0.43"
+      ],
+      [
+        "PixArt-alpha (Chen et al., 2024)",
+        "0.6B",
+        "0.98",
+        "0.50",
+        "0.44",
+        "0.80",
+        "0.08",
+        "0.07",
+        "0.48"
+      ],
+      [
+        "SDv2.1 (Rombach et al., 2022)",
+        "0.9B",
+        "0.98",
+        "0.51",
+        "0.44",
+        "0.85",
+        "0.07",
+        "0.17",
+        "0.50"
+      ],
+      [
+        "DALL-E 2 (Ramesh et al., 2022a)",
+        "6.5B",
+        "0.94",
+        "0.66",
+        "0.49",
+        "0.77",
+        "0.10",
+        "0.19",
+        "0.52"
+      ],
+      [
+        "SDXL (Podell et al., 2023)",
+        "2.6B",
+        "0.98",
+        "0.74",
+        "0.39",
+        "0.85",
+        "0.15",
+        "0.23",
+        "0.55"
+      ],
+      [
+        "SD3 (d=24) (Esser et al., 2024)",
+        "2B",
+        "0.98",
+        "0.74",
+        "0.63",
+        "0.67",
+        "0.34",
+        "0.36",
+        "0.62"
+      ],
+      [
+        "Und. and Gen.",
+        "CoDI (Tang et al., 2024)",
+        "-",
+        "0.89",
+        "0.16",
+        "0.16",
+        "0.65",
+        "0.02",
+        "0.01",
+        "0.31"
+      ],
+      [
+        "LWM (Liu et al., 2024a)",
+        "7B",
+        "0.93",
+        "0.41",
+        "0.46",
+        "0.79",
+        "0.09",
+        "0.15",
+        "0.47"
+      ],
+      [
+        "SEED-X (Ge et al., 2024)",
+        "17B",
+        "0.97",
+        "0.58",
+        "0.26",
+        "0.80",
+        "0.19",
+        "0.14",
+        "0.49"
+      ],
+      [
+        "Chameleon (Team, 2024)",
+        "7B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "0.39"
+      ],
+      [
+        "Show-o (Ours)",
+        "1.3B",
+        "0.98",
+        "0.80",
+        "0.66",
+        "0.84",
+        "0.31",
+        "0.50",
+        "0.68"
+      ]
+    ]
+  },
+  {
+    "id": "S5.T4",
+    "caption": "Table 4: Impact of dataset scale and image resolution on the learning of discrete image token embeddings for multimodal understanding.",
+    "rows": [
+      [
+        "# Image-text",
+        "Image Resolution",
+        "# Image Tokens",
+        "POPE",
+        "MME",
+        "Flickr30k",
+        "VQAv2(test)",
+        "GQA",
+        "MMMU"
+      ],
+      [
+        "35M",
+        "2562",
+        "256",
+        "73.8",
+        "948.4",
+        "36.2",
+        "59.3",
+        "48.7",
+        "25.1"
+      ],
+      [
+        "2.0B",
+        "2562",
+        "256",
+        "76.2",
+        "1014.9",
+        "48.9",
+        "64.7",
+        "54.2",
+        "25.0"
+      ],
+      [
+        "2.0B",
+        "5122",
+        "1024",
+        "80.0",
+        "1097.2",
+        "62.5",
+        "69.4",
+        "58.0",
+        "26.7"
+      ]
+    ]
+  },
+  {
+    "id": "S5.T5",
+    "caption": "Table 5: Ablation studies of various vision encoders and kinds input representations for multimodal understanding. Note that this experiment is based on the Show-o pre-trained on 35M image-text data in a resolution of 256×256.",
+    "rows": [
+      [
+        "# Exp",
+        "Method",
+        "Vision Encoder",
+        "Unified Pretrain",
+        "Feature type",
+        "POPE",
+        "MME",
+        "Flickr30k",
+        "VQAv2(val)",
+        "GQA",
+        "MMMU"
+      ],
+      [
+        "1",
+        "LLaVA",
+        "CLIP-ViT",
+        "✗",
+        "Continuous",
+        "84.1",
+        "1128.0",
+        "69.6",
+        "73.0",
+        "56.5",
+        "30.67"
+      ],
+      [
+        "2",
+        "Show-o‡",
+        "CLIP-ViT",
+        "✓",
+        "Continuous",
+        "84.5",
+        "1182.7",
+        "64.3",
+        "71.9",
+        "57.5",
+        "27.4"
+      ],
+      [
+        "3",
+        "Show-o‡",
+        "CLIP-ViT",
+        "✗",
+        "Continuous",
+        "84.5",
+        "1161.6",
+        "68.5",
+        "73.5",
+        "58.7",
+        "29.2"
+      ],
+      [
+        "4",
+        "Show-o†",
+        "MAGVIT-v2",
+        "✓",
+        "Continuous",
+        "74.3",
+        "947.8",
+        "33.9",
+        "59.4",
+        "51.0",
+        "26.7"
+      ],
+      [
+        "5",
+        "Show-o†",
+        "MAGVIT-v2",
+        "✗",
+        "Continuous",
+        "65.1",
+        "800.0",
+        "12.3",
+        "50.8",
+        "43.9",
+        "24.6"
+      ],
+      [
+        "6",
+        "Show-o",
+        "MAGVIT-v2",
+        "✓",
+        "Discrete",
+        "73.8",
+        "948.4",
+        "36.2",
+        "57.8",
+        "48.7",
+        "25.1"
+      ],
+      [
+        "7",
+        "Show-o",
+        "MAGVIT-v2",
+        "✗",
+        "Discrete",
+        "63.8",
+        "689.1",
+        "4.5",
+        "46.1",
+        "40.5",
+        "28.1"
+      ]
+    ]
+  }
+]

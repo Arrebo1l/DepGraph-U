@@ -1,0 +1,62 @@
+{
+  "purpose": "Replace legacy cap1024 Stable-Graph diagnostics for MMStar/MMBench with fresh paired cap128 results.",
+  "gpu_port": 45428,
+  "uuid": "<recorded-device>",
+  "benchmarks": {
+    "mmstar": {
+      "rows": 1500,
+      "score": "original MMStar official L2-category macro average; report six main-category scores and overall average"
+    },
+    "mmbench": {
+      "rows": 4329,
+      "circular_groups": 1164,
+      "score": "pinned deterministic CircularEval, no API judge or random fallback"
+    }
+  },
+  "arms": {
+    "original_flashu": {
+      "RLS": 0.1,
+      "KV_CACHE": 0,
+      "LOGITS_MODE": "all"
+    },
+    "stable_graph_kv": {
+      "RLS": 0.0,
+      "KV_CACHE": 1,
+      "LOGITS_MODE": "last"
+    }
+  },
+  "fixed": {
+    "max_new_tokens": 128,
+    "batch_size": 1,
+    "RP": 0.1,
+    "TLS": 10,
+    "RHO": 0.5,
+    "LPRUNE": 2,
+    "VNORM_KEEP": "high",
+    "dtype": "bfloat16",
+    "resolution": 432,
+    "profile": true,
+    "Wanda_scores": "same frozen disjoint DPG20 mask"
+  },
+  "rng": "Each sample seed is first32bits of SHA256(TaskGraph-cap128-v1|task|original_index|1234); reset Python/NumPy/torch before timed forward. This differs from historical global-stream protocol. Both arms rerun.",
+  "order": [
+    "mmstar smoke baseline",
+    "mmstar smoke stable",
+    "mmstar full baseline",
+    "mmstar full stable",
+    "mmbench smoke baseline",
+    "mmbench smoke stable",
+    "mmbench full baseline",
+    "mmbench full stable"
+  ],
+  "timing": "Original synchronized model forward, includes stochastic VAE encode, visual embeddings and autoregressive generation. Excludes loading, data preparation, scoring and output writes. Report mean including all examples, median, P95, warmup-excluded mean diagnostic.",
+  "gates": "Identity, fixed source/weight hashes, no competing GPU process, task coverage, scorer integrity, paired input identity/seeds and smoke latent hashes. Stop on runtime/protocol failure. Never gate on speed, quality, or output equality.",
+  "limitations": [
+    "Stable-Graph changes policy and outputs; no losslessness claim.",
+    "Combined policy/KV/last-position gains; no pure-KV attribution.",
+    "One full evaluation per arm, not timing variance estimation.",
+    "Other four tasks remain historical cap16; disclose heterogeneous caps when combining."
+  ],
+  "no_changes": "No manuscript, GPU1/GPU2 job settings, old experiment evidence, or model algorithm changes.",
+  "dataset_loading": "Public MMStar dataset token=false instead of token=true; copied Arrow bytes hash-verified. No credential transfer."
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "file": "research/tables123_data_audit_20260922/sources/seedx.html",
+    "sha256": "c0693b6bbe0ca4881121be2d5a6895b0519b0c0d51fac03fe724b3945fde565b"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/showo_v5.html",
+    "sha256": "5d91d2cdfd5058b6a7a5b7290103e54f18ab62e485b0948e7084c737b6035d2f"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/illume.html",
+    "sha256": "09f758d8676504d983000d7baaecd5362ed3068361575d8ce26cbcf3a40fb6dc"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/janusflow.html",
+    "sha256": "10d30beff15bf0908232f1c672d6e86b400b78259da2ab2e54685d24ee5bdbf6"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/januspro.html",
+    "sha256": "4f896453fd128aa540ee470edae931b8c6a0ff8368d4fd2ce40dd56ee938c2ce"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/emu3.html",
+    "sha256": "52e1ce6a366ab241a57a2a02d3ed79d3d96873ff5cb1be8e1cd639b8eea3a2ef"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/showo2.html",
+    "sha256": "e0e6fa78a65ed2a2a4d7c389ce294bf42c7466a113438081101b88ee7946574d"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/tokenflow.html",
+    "sha256": "a57c642c6159940af9cece8b7b19427386466a97d45a26cf811a729107f36603"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/flashu.html",
+    "sha256": "ee1b5205847da11ea03a95a1ed427820db211a1c6a1a50dafadd04c1defdca90"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/vilau.html",
+    "sha256": "18e8b0634a9ebc10a078f1bb22e0a6370dfc62bafaf1d4014080f43511d766d5"
+  },
+  {
+    "file": "research/tables123_data_audit_20260922/sources/lwm.html",
+    "sha256": "e33ac3c3516cd116b81436e96def96a6f8ea7efea46884a7c9bc4d7069fb5c2c"
+  }
+]

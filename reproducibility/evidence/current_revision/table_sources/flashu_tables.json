@@ -1,0 +1,760 @@
+[
+  {
+    "id": "S3.T1",
+    "caption": "Table 1: Evaluation on multimodal understanding benchmarks. # Params. indicates the number of parameters of the base LLM. Results in gray indicate the vanilla Show-o2 performance. Latency is measured in seconds (s), conducted on samples from MMMU.",
+    "rows": [
+      [
+        "Models",
+        "# Params.",
+        "MME ↑",
+        "GQA↑",
+        "MMB ↑",
+        "MMMU ↑",
+        "MMStar ↑",
+        "AI2D ↑",
+        "Latency (s) ↓"
+      ],
+      [
+        "(p)",
+        "(en)",
+        "(val)"
+      ],
+      [
+        "MetaMorph [58]",
+        "8B",
+        "-",
+        "-",
+        "75.2",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "ILLUME [60]",
+        "7B",
+        "1445.3",
+        "-",
+        "75.1",
+        "38.2",
+        "-",
+        "71.4",
+        "-"
+      ],
+      [
+        "Show-o [71]",
+        "1.3B",
+        "1097.2",
+        "58.0",
+        "-",
+        "27.4",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "JanusFlow [46]",
+        "1.5B",
+        "1333.1",
+        "60.3",
+        "74.9",
+        "29.3",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "SynerGen-VL [33]",
+        "2.4B",
+        "1381.0",
+        "-",
+        "53.7",
+        "34.2",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Liquid [69]",
+        "8B",
+        "1448.0",
+        "61.1",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Emu3 [62]",
+        "8B",
+        "-",
+        "60.3",
+        "58.5",
+        "31.6",
+        "-",
+        "70.0",
+        "1.29"
+      ],
+      [
+        "VILA-U [70]",
+        "7B",
+        "1317.4",
+        "58.5",
+        "63.5",
+        "30.7",
+        "37.2",
+        "48.9",
+        "0.12"
+      ],
+      [
+        "Show-o2 [72]",
+        "1.5B",
+        "1450.9",
+        "60.0",
+        "67.4",
+        "37.1",
+        "43.4",
+        "69.0",
+        "-"
+      ],
+      [
+        "Show-o2 [72]",
+        "7B",
+        "1620.5",
+        "63.1",
+        "79.3",
+        "48.9",
+        "56.6",
+        "78.6",
+        "1.71"
+      ],
+      [
+        "+ FlashU (Ours)",
+        "7B",
+        "1560.5",
+        "60.4",
+        "75.3",
+        "45.1",
+        "48.3",
+        "73.3",
+        "0.96+1.78×"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T2",
+    "caption": "Table 2: Evaluation on the GenEval [21]. # Params. indicates the number of parameters of the base LLM. Results in gray indicate the vanilla Show-o2 performance. The subscript values show the speedup achieved by FlashU. Latency is measured in seconds (s).",
+    "rows": [
+      [
+        "Method",
+        "# Params.",
+        "Single Obj.",
+        "Two Obj.",
+        "Counting",
+        "Colors",
+        "Position",
+        "Color Attri.",
+        "Overall↑",
+        "Latency (s)↓"
+      ],
+      [
+        "SEED-X [20]",
+        "17B",
+        "0.97",
+        "0.58",
+        "0.26",
+        "0.80",
+        "0.19",
+        "0.14",
+        "0.49",
+        "-"
+      ],
+      [
+        "TokenFlow-XL [48]",
+        "14B",
+        "0.95",
+        "0.60",
+        "0.41",
+        "0.81",
+        "0.16",
+        "0.24",
+        "0.55",
+        "-"
+      ],
+      [
+        "ILLUME [60]",
+        "7B",
+        "0.99",
+        "0.86",
+        "0.45",
+        "0.71",
+        "0.39",
+        "0.28",
+        "0.61",
+        "-"
+      ],
+      [
+        "Show-o [71]",
+        "1.3B",
+        "0.98",
+        "0.80",
+        "0.66",
+        "0.84",
+        "0.31",
+        "0.50",
+        "0.68",
+        "-"
+      ],
+      [
+        "MUSE-VL [73]",
+        "7B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "0.57",
+        "-"
+      ],
+      [
+        "Transfusion [83]",
+        "3.5B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "0.63",
+        "-"
+      ],
+      [
+        "D-DiT [35]",
+        "2B",
+        "0.97",
+        "0.80",
+        "0.54",
+        "0.76",
+        "0.32",
+        "0.50",
+        "0.65",
+        "-"
+      ],
+      [
+        "Emu3 [62]",
+        "8B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "0.66",
+        "110.5"
+      ],
+      [
+        "VILA-U [70]",
+        "7B",
+        "0.89",
+        "0.62",
+        "0.36",
+        "0.79",
+        "0.20",
+        "0.23",
+        "0.47",
+        "13.58"
+      ],
+      [
+        "Show-o2 [72]",
+        "1.5B",
+        "0.99",
+        "0.86",
+        "0.55",
+        "0.86",
+        "0.46",
+        "0.63",
+        "0.73",
+        "10.61"
+      ],
+      [
+        "+ FlashU (Ours)",
+        "1.5B",
+        "0.99",
+        "0.84",
+        "0.54",
+        "0.85",
+        "0.41",
+        "0.61",
+        "0.71",
+        "5.28+2.01×"
+      ],
+      [
+        "Show-o2 [72]",
+        "7B",
+        "1.00",
+        "0.87",
+        "0.58",
+        "0.92",
+        "0.52",
+        "0.62",
+        "0.76",
+        "22.74"
+      ],
+      [
+        "+ FlashU (Ours)",
+        "7B",
+        "0.99",
+        "0.80",
+        "0.53",
+        "0.89",
+        "0.46",
+        "0.58",
+        "0.72",
+        "11.82+1.92×"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T3",
+    "caption": "Table 3: Evaluation on DPG-Bench [23]. # Params. denotes the parameter count of the base LLM. Results in gray correspond to vanilla Show-o2. Subscripts indicate the speedup of FlashU. Latency is reported in seconds (s), averaged per sample.",
+    "rows": [
+      [
+        "Method",
+        "# Params.",
+        "Global",
+        "Entity",
+        "Attribute",
+        "Relation",
+        "Overall↑",
+        "Latency (s)↓"
+      ],
+      [
+        "Hunyuan-DiT [34]",
+        "1.5B",
+        "84.59",
+        "80.59",
+        "88.01",
+        "74.36",
+        "78.87",
+        "-"
+      ],
+      [
+        "Playground v2.5 [32]",
+        "-",
+        "83.06",
+        "82.59",
+        "81.20",
+        "84.08",
+        "75.47",
+        "-"
+      ],
+      [
+        "PixArt-Σ [5]",
+        "-",
+        "86.89",
+        "82.89",
+        "88.94",
+        "86.59",
+        "80.54",
+        "-"
+      ],
+      [
+        "DALL-E 3 [2]",
+        "-",
+        "90.97",
+        "89.61",
+        "88.39",
+        "90.58",
+        "83.50",
+        "-"
+      ],
+      [
+        "SD3-Medium [18]",
+        "2B",
+        "87.90",
+        "91.01",
+        "88.83",
+        "80.70",
+        "84.08",
+        "-"
+      ],
+      [
+        "Emu3-DPO [62]",
+        "8B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "81.60",
+        "124.8"
+      ],
+      [
+        "VILA-U [70]",
+        "7B",
+        "89.92",
+        "82.73",
+        "80.80",
+        "87.83",
+        "74.26",
+        "9.78"
+      ],
+      [
+        "Show-o2 [72]",
+        "1.5B",
+        "87.53",
+        "90.38",
+        "91.34",
+        "90.30",
+        "85.02",
+        "5.23"
+      ],
+      [
+        "+ FlashU (Ours)",
+        "1.5B",
+        "84.19",
+        "89.48",
+        "90.98",
+        "90.38",
+        "84.12",
+        "2.82+1.85×"
+      ],
+      [
+        "Show-o2 [72]",
+        "7B",
+        "89.00",
+        "91.78",
+        "89.96",
+        "91.81",
+        "86.14",
+        "11.30"
+      ],
+      [
+        "+ FlashU (Ours)",
+        "7B",
+        "87.79",
+        "90.30",
+        "89.29",
+        "90.30",
+        "84.39",
+        "5.89+1.92×"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T4",
+    "caption": "Table 4: Ablation study on the 7B model of Show-o2 using DPG-Bench [23]. The subscript values show the speedup relative to Show-o2 baseline. Latency is measured in seconds (s).",
+    "rows": [
+      [
+        "Strategy",
+        "Latency (s)",
+        "Score"
+      ],
+      [
+        "Show-o2 [72]",
+        "11.30",
+        "86.14"
+      ],
+      [
+        "FlashU (Ours)",
+        "5.89+1.92×",
+        "84.39"
+      ],
+      [
+        "w/o Dynamic Layer Pruning",
+        "6.70+1.69×",
+        "85.56"
+      ],
+      [
+        "w/o Hybrid Network",
+        "5.65+2.00×",
+        "83.68"
+      ],
+      [
+        "w/o Adaptive Guidance",
+        "8.86+1.28×",
+        "85.34"
+      ],
+      [
+        "FFN Pruning Only",
+        "9.21+1.23×",
+        "85.08"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T5",
+    "caption": "Table 5: Ablation study on the 1.5B model of Show-o2 using DPG-Bench [23]. The subscript values show the speedup relative to Show-o2 baseline. Latency is measured in seconds (s).",
+    "rows": [
+      [
+        "Strategy",
+        "Latency (s)",
+        "Score"
+      ],
+      [
+        "Show-o2 [72]",
+        "5.23",
+        "85.02"
+      ],
+      [
+        "FlashU (Ours)",
+        "2.80+1.87×",
+        "84.12"
+      ],
+      [
+        "w/o Dynamic Layer Pruning",
+        "2.91+1.80×",
+        "85.33"
+      ],
+      [
+        "w/o Hybrid Network",
+        "2.48+2.11×",
+        "83.57"
+      ],
+      [
+        "w/o Adaptive Guidance",
+        "3.92+1.33×",
+        "83.42"
+      ],
+      [
+        "FFN Pruning Only",
+        "3.84+1.36×",
+        "84.27"
+      ]
+    ]
+  },
+  {
+    "id": "A0.T6",
+    "caption": "Table 6: Latency Comparison on DPG-Bench [23]. Results in gray correspond to vanilla Show-o2. Subscripts indicate the speedup of FlashU. Latency is reported in seconds (s), averaged per sample.",
+    "rows": [
+      [
+        "Method",
+        "# Params.",
+        "Global",
+        "Entity",
+        "Attribute",
+        "Relation",
+        "Overall↑",
+        "Latency (s)↓"
+      ],
+      [
+        "Hunyuan-DiT [34]",
+        "1.5B",
+        "84.59",
+        "80.59",
+        "88.01",
+        "74.36",
+        "78.87",
+        "20.1"
+      ],
+      [
+        "Playground v2.5 [32]",
+        "-",
+        "83.06",
+        "82.59",
+        "81.20",
+        "84.08",
+        "75.47",
+        "7.67"
+      ],
+      [
+        "TokenFlow-t2i [48]",
+        "7B",
+        "72.64",
+        "74.72",
+        "77.67",
+        "83.80",
+        "67.44",
+        "0.97"
+      ],
+      [
+        "JanusFlow [46]",
+        "1.5B",
+        "81.16",
+        "85.16",
+        "85.32",
+        "91.05",
+        "77.57",
+        "1.09"
+      ],
+      [
+        "VILA-U [70]",
+        "7B",
+        "89.92",
+        "82.73",
+        "80.80",
+        "87.83",
+        "74.26",
+        "9.78"
+      ],
+      [
+        "Liquid [69]",
+        "8B",
+        "79.64",
+        "87.61",
+        "85.24",
+        "91.01",
+        "80.26",
+        "37.05"
+      ],
+      [
+        "Emu3-DPO [62]",
+        "8B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "81.60",
+        "124.8"
+      ],
+      [
+        "Show-o2 [72]",
+        "1.5B",
+        "87.53",
+        "90.38",
+        "91.34",
+        "90.30",
+        "85.02",
+        "5.23"
+      ],
+      [
+        "+ FlashU (Ours)",
+        "1.5B",
+        "84.19",
+        "89.48",
+        "90.98",
+        "90.38",
+        "84.12",
+        "2.82+1.85×"
+      ],
+      [
+        "Show-o2 [72]",
+        "7B",
+        "89.00",
+        "91.78",
+        "89.96",
+        "91.81",
+        "86.14",
+        "11.30"
+      ],
+      [
+        "+ FlashU (Ours)",
+        "7B",
+        "87.79",
+        "90.30",
+        "89.29",
+        "90.30",
+        "84.39",
+        "5.89+1.92×"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T7",
+    "caption": "Table 7: Hyperparameters for Generation Tasks.",
+    "rows": [
+      [
+        "Hyperparameter",
+        "Symbol",
+        "Value"
+      ],
+      [
+        "Total Inference Steps",
+        "T",
+        "0.7​T0"
+      ],
+      [
+        "Hybrid Threshold",
+        "τ",
+        "0.3"
+      ],
+      [
+        "FFN Pruning Ratio",
+        "rp",
+        "0.20"
+      ],
+      [
+        "Layer Skipping Ratio",
+        "rL​S",
+        "0.20"
+      ],
+      [
+        "Recalculation Interval",
+        "TL​S",
+        "10"
+      ],
+      [
+        "Diffusion Head Cache Interval",
+        "𝒯c​a​c​h​e",
+        "5"
+      ],
+      [
+        "Switching Timestep",
+        "ts​w​i​t​c​h",
+        "0.3​T"
+      ],
+      [
+        "Low Guidance Scale",
+        "sl​o​w",
+        "0.75​s0"
+      ],
+      [
+        "High Guidance Scale",
+        "sh​i​g​h",
+        "s0"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T8",
+    "caption": "Table 8: Hyperparameters for Multimodal Understanding Tasks.",
+    "rows": [
+      [
+        "Hyperparameter",
+        "Symbol",
+        "Value"
+      ],
+      [
+        "Max Generated Tokens",
+        "Nm​a​x",
+        "128"
+      ],
+      [
+        "Hybrid Threshold",
+        "τ",
+        "0.3"
+      ],
+      [
+        "FFN Pruning Ratio",
+        "rp",
+        "0.10"
+      ],
+      [
+        "Layer Skipping Ratio",
+        "rL​S",
+        "0.10"
+      ],
+      [
+        "Calibration Samples",
+        "Nc​a​l​i​b",
+        "20"
+      ],
+      [
+        "Recalculation Interval",
+        "TL​S",
+        "10"
+      ],
+      [
+        "Shallow layer to prune",
+        "Lp​r​u​n​e",
+        "2"
+      ],
+      [
+        "Token Pruning Ratio",
+        "ρ",
+        "0.50"
+      ]
+    ]
+  }
+]

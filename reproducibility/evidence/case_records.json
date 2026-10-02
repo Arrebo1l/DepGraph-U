@@ -1,0 +1,264 @@
+[
+  {
+    "id": "geneval_00206",
+    "prompt_index": 206,
+    "seed": 0,
+    "dataset": "GenEval",
+    "model": "Show-o2-1.5B",
+    "resolution": [
+      432,
+      432
+    ],
+    "configured_steps": 70,
+    "prompt_full": "a photo of two sheep.   a high-resolution, realistic photo of two sheep standing in a lush, green pasture under soft, natural sunlight. One sheep is slightly closer to the foreground, while the other stands a bit further back, creating a sense of depth. Their wool is fluffy and textured, with earthy tones of white and cream. The backdrop features gentle rolling hills and scattered wildflowers, with a few distant trees swaying lightly in the breeze. The sky is a brilliant blue with a few wispy white clouds, adding to the serene rural atmosphere.",
+    "prompt_short": "a photo of two sheep",
+    "tag": "counting",
+    "metadata": {
+      "tag": "counting",
+      "include": [
+        {
+          "class": "sheep",
+          "count": 2
+        }
+      ],
+      "exclude": [
+        {
+          "class": "sheep",
+          "count": 3
+        }
+      ],
+      "prompt": "a photo of two sheep.   a high-resolution, realistic photo of two sheep standing in a lush, green pasture under soft, natural sunlight. One sheep is slightly closer to the foreground, while the other stands a bit further back, creating a sense of depth. Their wool is fluffy and textured, with earthy tones of white and cream. The backdrop features gentle rolling hills and scattered wildflowers, with a few distant trees swaying lightly in the breeze. The sky is a brilliant blue with a few wispy white clouds, adding to the serene rural atmosphere."
+    },
+    "paired_sha256": "cf3fd2bb58dc844696162d05d49ea4e13b8c828699f84fe41ff4318281ff8a3e",
+    "byte_equal": true,
+    "outcomes": {
+      "original": {
+        "tag": "counting",
+        "prompt": "a photo of two sheep.   a high-resolution, realistic photo of two sheep standing in a lush, green pasture under soft, natural sunlight. One sheep is slightly closer to the foreground, while the other stands a bit further back, creating a sense of depth. Their wool is fluffy and textured, with earthy tones of white and cream. The backdrop features gentle rolling hills and scattered wildflowers, with a few distant trees swaying lightly in the breeze. The sky is a brilliant blue with a few wispy white clouds, adding to the serene rural atmosphere.",
+        "correct": true,
+        "reason": "",
+        "metadata": "{\"tag\": \"counting\", \"include\": [{\"class\": \"sheep\", \"count\": 2}], \"exclude\": [{\"class\": \"sheep\", \"count\": 3}], \"prompt\": \"a photo of two sheep.   a high-resolution, realistic photo of two sheep standing in a lush, green pasture under soft, natural sunlight. One sheep is slightly closer to the foreground, while the other stands a bit further back, creating a sense of depth. Their wool is fluffy and textured, with earthy tones of white and cream. The backdrop features gentle rolling hills and scattered wildflowers, with a few distant trees swaying lightly in the breeze. The sky is a brilliant blue with a few wispy white clouds, adding to the serene rural atmosphere.\"}",
+        "details": "{\"sheep\": [[27.0, 103.0, 219.0, 385.0, 0.9653834104537964], [218.0, 107.0, 354.0, 371.0, 0.9563897252082825]]}"
+      },
+      "full": {
+        "tag": "counting",
+        "prompt": "a photo of two sheep.   a high-resolution, realistic photo of two sheep standing in a lush, green pasture under soft, natural sunlight. One sheep is slightly closer to the foreground, while the other stands a bit further back, creating a sense of depth. Their wool is fluffy and textured, with earthy tones of white and cream. The backdrop features gentle rolling hills and scattered wildflowers, with a few distant trees swaying lightly in the breeze. The sky is a brilliant blue with a few wispy white clouds, adding to the serene rural atmosphere.",
+        "correct": true,
+        "reason": "",
+        "metadata": "{\"tag\": \"counting\", \"include\": [{\"class\": \"sheep\", \"count\": 2}], \"exclude\": [{\"class\": \"sheep\", \"count\": 3}], \"prompt\": \"a photo of two sheep.   a high-resolution, realistic photo of two sheep standing in a lush, green pasture under soft, natural sunlight. One sheep is slightly closer to the foreground, while the other stands a bit further back, creating a sense of depth. Their wool is fluffy and textured, with earthy tones of white and cream. The backdrop features gentle rolling hills and scattered wildflowers, with a few distant trees swaying lightly in the breeze. The sky is a brilliant blue with a few wispy white clouds, adding to the serene rural atmosphere.\"}",
+        "details": "{\"sheep\": [[27.0, 103.0, 219.0, 385.0, 0.9653834104537964], [218.0, 107.0, 354.0, 371.0, 0.9563897252082825]]}"
+      }
+    },
+    "images": {
+      "original": {
+        "file": "cases/original/geneval_00206.png",
+        "sha256": "cf3fd2bb58dc844696162d05d49ea4e13b8c828699f84fe41ff4318281ff8a3e",
+        "width": 432,
+        "height": 432
+      },
+      "full": {
+        "file": "cases/full/geneval_00206.png",
+        "sha256": "cf3fd2bb58dc844696162d05d49ea4e13b8c828699f84fe41ff4318281ff8a3e",
+        "width": 432,
+        "height": 432
+      }
+    }
+  },
+  {
+    "id": "geneval_00514",
+    "prompt_index": 514,
+    "seed": 0,
+    "dataset": "GenEval",
+    "model": "Show-o2-1.5B",
+    "resolution": [
+      432,
+      432
+    ],
+    "configured_steps": 70,
+    "prompt_full": "a photo of a green cup and a yellow bowl.   A high-resolution photograph featuring a vibrant green ceramic cup with a smooth, glossy finish, placed beside a sunny, bright yellow round bowl on a natural wooden table. The scene is lit by soft, natural sunlight streaming in from a nearby window, casting gentle shadows and highlights that accentuate the sheen of the ceramic surfaces. The background is slightly blurred, suggesting a cozy, homey indoor space with hints of warm, neutral tones, allowing the vibrant colors of the cup and bowl to stand out prominently.",
+    "prompt_short": "a photo of a green cup and a yellow bowl",
+    "tag": "color_attr",
+    "metadata": {
+      "tag": "color_attr",
+      "include": [
+        {
+          "class": "cup",
+          "count": 1,
+          "color": "green"
+        },
+        {
+          "class": "bowl",
+          "count": 1,
+          "color": "yellow"
+        }
+      ],
+      "prompt": "a photo of a green cup and a yellow bowl.   A high-resolution photograph featuring a vibrant green ceramic cup with a smooth, glossy finish, placed beside a sunny, bright yellow round bowl on a natural wooden table. The scene is lit by soft, natural sunlight streaming in from a nearby window, casting gentle shadows and highlights that accentuate the sheen of the ceramic surfaces. The background is slightly blurred, suggesting a cozy, homey indoor space with hints of warm, neutral tones, allowing the vibrant colors of the cup and bowl to stand out prominently."
+    },
+    "paired_sha256": "5aca5237386e8921d77b5bf068ad03021e24c2cb4ddb5207de8b9666cddb0acd",
+    "byte_equal": true,
+    "outcomes": {
+      "original": {
+        "tag": "color_attr",
+        "prompt": "a photo of a green cup and a yellow bowl.   A high-resolution photograph featuring a vibrant green ceramic cup with a smooth, glossy finish, placed beside a sunny, bright yellow round bowl on a natural wooden table. The scene is lit by soft, natural sunlight streaming in from a nearby window, casting gentle shadows and highlights that accentuate the sheen of the ceramic surfaces. The background is slightly blurred, suggesting a cozy, homey indoor space with hints of warm, neutral tones, allowing the vibrant colors of the cup and bowl to stand out prominently.",
+        "correct": true,
+        "reason": "",
+        "metadata": "{\"tag\": \"color_attr\", \"include\": [{\"class\": \"cup\", \"count\": 1, \"color\": \"green\"}, {\"class\": \"bowl\", \"count\": 1, \"color\": \"yellow\"}], \"prompt\": \"a photo of a green cup and a yellow bowl.   A high-resolution photograph featuring a vibrant green ceramic cup with a smooth, glossy finish, placed beside a sunny, bright yellow round bowl on a natural wooden table. The scene is lit by soft, natural sunlight streaming in from a nearby window, casting gentle shadows and highlights that accentuate the sheen of the ceramic surfaces. The background is slightly blurred, suggesting a cozy, homey indoor space with hints of warm, neutral tones, allowing the vibrant colors of the cup and bowl to stand out prominently.\"}",
+        "details": "{\"cup\": [[26.0, 148.0, 251.0, 338.0, 0.9827955961227417]], \"bowl\": [[231.0, 170.0, 432.0, 326.0, 0.9800382852554321]], \"dining table\": [[0.0, 237.0, 432.0, 432.0, 0.849815309047699], [0.0, 149.0, 432.0, 432.0, 0.8476079702377319]]}"
+      },
+      "full": {
+        "tag": "color_attr",
+        "prompt": "a photo of a green cup and a yellow bowl.   A high-resolution photograph featuring a vibrant green ceramic cup with a smooth, glossy finish, placed beside a sunny, bright yellow round bowl on a natural wooden table. The scene is lit by soft, natural sunlight streaming in from a nearby window, casting gentle shadows and highlights that accentuate the sheen of the ceramic surfaces. The background is slightly blurred, suggesting a cozy, homey indoor space with hints of warm, neutral tones, allowing the vibrant colors of the cup and bowl to stand out prominently.",
+        "correct": true,
+        "reason": "",
+        "metadata": "{\"tag\": \"color_attr\", \"include\": [{\"class\": \"cup\", \"count\": 1, \"color\": \"green\"}, {\"class\": \"bowl\", \"count\": 1, \"color\": \"yellow\"}], \"prompt\": \"a photo of a green cup and a yellow bowl.   A high-resolution photograph featuring a vibrant green ceramic cup with a smooth, glossy finish, placed beside a sunny, bright yellow round bowl on a natural wooden table. The scene is lit by soft, natural sunlight streaming in from a nearby window, casting gentle shadows and highlights that accentuate the sheen of the ceramic surfaces. The background is slightly blurred, suggesting a cozy, homey indoor space with hints of warm, neutral tones, allowing the vibrant colors of the cup and bowl to stand out prominently.\"}",
+        "details": "{\"cup\": [[26.0, 148.0, 251.0, 338.0, 0.9827955961227417]], \"bowl\": [[231.0, 170.0, 432.0, 326.0, 0.9800382852554321]], \"dining table\": [[0.0, 237.0, 432.0, 432.0, 0.849815309047699], [0.0, 149.0, 432.0, 432.0, 0.8476079702377319]]}"
+      }
+    },
+    "images": {
+      "original": {
+        "file": "cases/original/geneval_00514.png",
+        "sha256": "5aca5237386e8921d77b5bf068ad03021e24c2cb4ddb5207de8b9666cddb0acd",
+        "width": 432,
+        "height": 432
+      },
+      "full": {
+        "file": "cases/full/geneval_00514.png",
+        "sha256": "5aca5237386e8921d77b5bf068ad03021e24c2cb4ddb5207de8b9666cddb0acd",
+        "width": 432,
+        "height": 432
+      }
+    }
+  },
+  {
+    "id": "geneval_00210",
+    "prompt_index": 210,
+    "seed": 0,
+    "dataset": "GenEval",
+    "model": "Show-o2-1.5B",
+    "resolution": [
+      432,
+      432
+    ],
+    "configured_steps": 70,
+    "prompt_full": "a photo of four apples.   A high-resolution photograph of four ripe, fresh apples placed on a rustic wooden surface. The apples vary slightly in color but share a vibrant mix of red, green, and yellow hues that glisten under soft, natural lighting. Each apple has a smooth texture, and their stems and small leaves are still intact, adding a touch of natural authenticity. The surrounding surface is weathered with faint grain patterns and subtle scratches, evoking a farmhouse aesthetic. Shadows are gentle and well-defined, suggesting the image was taken during golden hour, creating a warm and inviting atmosphere.",
+    "prompt_short": "a photo of four apples",
+    "tag": "counting",
+    "metadata": {
+      "tag": "counting",
+      "include": [
+        {
+          "class": "apple",
+          "count": 4
+        }
+      ],
+      "exclude": [
+        {
+          "class": "apple",
+          "count": 5
+        }
+      ],
+      "prompt": "a photo of four apples.   A high-resolution photograph of four ripe, fresh apples placed on a rustic wooden surface. The apples vary slightly in color but share a vibrant mix of red, green, and yellow hues that glisten under soft, natural lighting. Each apple has a smooth texture, and their stems and small leaves are still intact, adding a touch of natural authenticity. The surrounding surface is weathered with faint grain patterns and subtle scratches, evoking a farmhouse aesthetic. Shadows are gentle and well-defined, suggesting the image was taken during golden hour, creating a warm and inviting atmosphere."
+    },
+    "paired_sha256": "686335e8a013dba6fe2880203ec1ee47864fdd1cf260f88cc1a021fbde128684",
+    "byte_equal": true,
+    "outcomes": {
+      "original": {
+        "tag": "counting",
+        "prompt": "a photo of four apples.   A high-resolution photograph of four ripe, fresh apples placed on a rustic wooden surface. The apples vary slightly in color but share a vibrant mix of red, green, and yellow hues that glisten under soft, natural lighting. Each apple has a smooth texture, and their stems and small leaves are still intact, adding a touch of natural authenticity. The surrounding surface is weathered with faint grain patterns and subtle scratches, evoking a farmhouse aesthetic. Shadows are gentle and well-defined, suggesting the image was taken during golden hour, creating a warm and inviting atmosphere.",
+        "correct": false,
+        "reason": "expected apple>=4, found 3",
+        "metadata": "{\"tag\": \"counting\", \"include\": [{\"class\": \"apple\", \"count\": 4}], \"exclude\": [{\"class\": \"apple\", \"count\": 5}], \"prompt\": \"a photo of four apples.   A high-resolution photograph of four ripe, fresh apples placed on a rustic wooden surface. The apples vary slightly in color but share a vibrant mix of red, green, and yellow hues that glisten under soft, natural lighting. Each apple has a smooth texture, and their stems and small leaves are still intact, adding a touch of natural authenticity. The surrounding surface is weathered with faint grain patterns and subtle scratches, evoking a farmhouse aesthetic. Shadows are gentle and well-defined, suggesting the image was taken during golden hour, creating a warm and inviting atmosphere.\"}",
+        "details": "{\"apple\": [[216.0, 170.0, 395.0, 343.0, 0.9478354454040527], [35.0, 124.0, 218.0, 314.0, 0.9386340379714966], [222.0, 68.0, 368.0, 187.0, 0.9067807793617249]]}"
+      },
+      "full": {
+        "tag": "counting",
+        "prompt": "a photo of four apples.   A high-resolution photograph of four ripe, fresh apples placed on a rustic wooden surface. The apples vary slightly in color but share a vibrant mix of red, green, and yellow hues that glisten under soft, natural lighting. Each apple has a smooth texture, and their stems and small leaves are still intact, adding a touch of natural authenticity. The surrounding surface is weathered with faint grain patterns and subtle scratches, evoking a farmhouse aesthetic. Shadows are gentle and well-defined, suggesting the image was taken during golden hour, creating a warm and inviting atmosphere.",
+        "correct": false,
+        "reason": "expected apple>=4, found 3",
+        "metadata": "{\"tag\": \"counting\", \"include\": [{\"class\": \"apple\", \"count\": 4}], \"exclude\": [{\"class\": \"apple\", \"count\": 5}], \"prompt\": \"a photo of four apples.   A high-resolution photograph of four ripe, fresh apples placed on a rustic wooden surface. The apples vary slightly in color but share a vibrant mix of red, green, and yellow hues that glisten under soft, natural lighting. Each apple has a smooth texture, and their stems and small leaves are still intact, adding a touch of natural authenticity. The surrounding surface is weathered with faint grain patterns and subtle scratches, evoking a farmhouse aesthetic. Shadows are gentle and well-defined, suggesting the image was taken during golden hour, creating a warm and inviting atmosphere.\"}",
+        "details": "{\"apple\": [[216.0, 170.0, 395.0, 343.0, 0.9478354454040527], [35.0, 124.0, 218.0, 314.0, 0.9386340379714966], [222.0, 68.0, 368.0, 187.0, 0.9067807793617249]]}"
+      }
+    },
+    "images": {
+      "original": {
+        "file": "cases/original/geneval_00210.png",
+        "sha256": "686335e8a013dba6fe2880203ec1ee47864fdd1cf260f88cc1a021fbde128684",
+        "width": 432,
+        "height": 432
+      },
+      "full": {
+        "file": "cases/full/geneval_00210.png",
+        "sha256": "686335e8a013dba6fe2880203ec1ee47864fdd1cf260f88cc1a021fbde128684",
+        "width": 432,
+        "height": 432
+      }
+    }
+  },
+  {
+    "id": "geneval_00353",
+    "prompt_index": 353,
+    "seed": 0,
+    "dataset": "GenEval",
+    "model": "Show-o2-1.5B",
+    "resolution": [
+      432,
+      432
+    ],
+    "configured_steps": 70,
+    "prompt_full": "a photo of a dog right of a teddy bear. A high-resolution photograph featuring a friendly, medium-sized dog seated to the right of a soft, plush teddy bear. The dog has a shiny coat, expressive eyes, and a joyful demeanor, possibly with its tongue playfully sticking out. The teddy bear sits upright, showcasing its fluffy texture, classic button eyes, and stitched smile, radiating warmth and comfort. Both are positioned on a cozy surface, such as a soft carpet or a cushioned bench, with warm natural lighting streaming from the side, casting gentle shadows. The background is softly blurred to emphasize the subjects, creating a peaceful and inviting atmosphere.",
+    "prompt_short": "a photo of a dog right of a teddy bear",
+    "tag": "position",
+    "metadata": {
+      "tag": "position",
+      "include": [
+        {
+          "class": "teddy bear",
+          "count": 1
+        },
+        {
+          "class": "dog",
+          "count": 1,
+          "position": [
+            "right of",
+            0
+          ]
+        }
+      ],
+      "prompt": "a photo of a dog right of a teddy bear. A high-resolution photograph featuring a friendly, medium-sized dog seated to the right of a soft, plush teddy bear. The dog has a shiny coat, expressive eyes, and a joyful demeanor, possibly with its tongue playfully sticking out. The teddy bear sits upright, showcasing its fluffy texture, classic button eyes, and stitched smile, radiating warmth and comfort. Both are positioned on a cozy surface, such as a soft carpet or a cushioned bench, with warm natural lighting streaming from the side, casting gentle shadows. The background is softly blurred to emphasize the subjects, creating a peaceful and inviting atmosphere."
+    },
+    "paired_sha256": "df20719c5832ccee8fd8c05a2a5ba81ff429b6369576459702fb3d0622a42bc8",
+    "byte_equal": true,
+    "outcomes": {
+      "original": {
+        "tag": "position",
+        "prompt": "a photo of a dog right of a teddy bear. A high-resolution photograph featuring a friendly, medium-sized dog seated to the right of a soft, plush teddy bear. The dog has a shiny coat, expressive eyes, and a joyful demeanor, possibly with its tongue playfully sticking out. The teddy bear sits upright, showcasing its fluffy texture, classic button eyes, and stitched smile, radiating warmth and comfort. Both are positioned on a cozy surface, such as a soft carpet or a cushioned bench, with warm natural lighting streaming from the side, casting gentle shadows. The background is softly blurred to emphasize the subjects, creating a peaceful and inviting atmosphere.",
+        "correct": false,
+        "reason": "expected dog right of target, found left of target",
+        "metadata": "{\"tag\": \"position\", \"include\": [{\"class\": \"teddy bear\", \"count\": 1}, {\"class\": \"dog\", \"count\": 1, \"position\": [\"right of\", 0]}], \"prompt\": \"a photo of a dog right of a teddy bear. A high-resolution photograph featuring a friendly, medium-sized dog seated to the right of a soft, plush teddy bear. The dog has a shiny coat, expressive eyes, and a joyful demeanor, possibly with its tongue playfully sticking out. The teddy bear sits upright, showcasing its fluffy texture, classic button eyes, and stitched smile, radiating warmth and comfort. Both are positioned on a cozy surface, such as a soft carpet or a cushioned bench, with warm natural lighting streaming from the side, casting gentle shadows. The background is softly blurred to emphasize the subjects, creating a peaceful and inviting atmosphere.\"}",
+        "details": "{\"dog\": [[33.0, 45.0, 215.0, 373.0, 0.9763225317001343]], \"couch\": [[0.0, 201.0, 432.0, 432.0, 0.8119338154792786], [0.0, 200.0, 432.0, 401.0, 0.8080050945281982], [362.0, 213.0, 432.0, 402.0, 0.5804234147071838], [0.0, 44.0, 432.0, 432.0, 0.34746912121772766]], \"teddy bear\": [[155.0, 83.0, 421.0, 405.0, 0.9775353670120239]]}"
+      },
+      "full": {
+        "tag": "position",
+        "prompt": "a photo of a dog right of a teddy bear. A high-resolution photograph featuring a friendly, medium-sized dog seated to the right of a soft, plush teddy bear. The dog has a shiny coat, expressive eyes, and a joyful demeanor, possibly with its tongue playfully sticking out. The teddy bear sits upright, showcasing its fluffy texture, classic button eyes, and stitched smile, radiating warmth and comfort. Both are positioned on a cozy surface, such as a soft carpet or a cushioned bench, with warm natural lighting streaming from the side, casting gentle shadows. The background is softly blurred to emphasize the subjects, creating a peaceful and inviting atmosphere.",
+        "correct": false,
+        "reason": "expected dog right of target, found left of target",
+        "metadata": "{\"tag\": \"position\", \"include\": [{\"class\": \"teddy bear\", \"count\": 1}, {\"class\": \"dog\", \"count\": 1, \"position\": [\"right of\", 0]}], \"prompt\": \"a photo of a dog right of a teddy bear. A high-resolution photograph featuring a friendly, medium-sized dog seated to the right of a soft, plush teddy bear. The dog has a shiny coat, expressive eyes, and a joyful demeanor, possibly with its tongue playfully sticking out. The teddy bear sits upright, showcasing its fluffy texture, classic button eyes, and stitched smile, radiating warmth and comfort. Both are positioned on a cozy surface, such as a soft carpet or a cushioned bench, with warm natural lighting streaming from the side, casting gentle shadows. The background is softly blurred to emphasize the subjects, creating a peaceful and inviting atmosphere.\"}",
+        "details": "{\"dog\": [[33.0, 45.0, 215.0, 373.0, 0.9763225317001343]], \"couch\": [[0.0, 201.0, 432.0, 432.0, 0.8119338154792786], [0.0, 200.0, 432.0, 401.0, 0.8080050945281982], [362.0, 213.0, 432.0, 402.0, 0.5804234147071838], [0.0, 44.0, 432.0, 432.0, 0.34746912121772766]], \"teddy bear\": [[155.0, 83.0, 421.0, 405.0, 0.9775353670120239]]}"
+      }
+    },
+    "images": {
+      "original": {
+        "file": "cases/original/geneval_00353.png",
+        "sha256": "df20719c5832ccee8fd8c05a2a5ba81ff429b6369576459702fb3d0622a42bc8",
+        "width": 432,
+        "height": 432
+      },
+      "full": {
+        "file": "cases/full/geneval_00353.png",
+        "sha256": "df20719c5832ccee8fd8c05a2a5ba81ff429b6369576459702fb3d0622a42bc8",
+        "width": 432,
+        "height": 432
+      }
+    }
+  }
+]

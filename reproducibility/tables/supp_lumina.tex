@@ -1,0 +1,20 @@
+\begingroup
+\TGformat
+\begin{tabular}{>{\raggedright\arraybackslash}m{64pt}>{\raggedleft\arraybackslash}m{34pt}>{\raggedleft\arraybackslash}m{37pt}>{\raggedleft\arraybackslash}m{35pt}}
+\toprule
+\textbf{Method} & \textbf{Quality} & \textbf{Time (s)} $\downarrow$ & \textbf{Speedup} $\uparrow$ \\
+\midrule
+\rowcolor{TGsection}
+\multicolumn{4}{c}{\textit{GenEval}} \\
+ML-Cache & 0.87753 & 29.311 & 1.000$\times$ \\
+\rowcolor{TGshade}
+\textbf{+VocabBypass} & 0.87753 & \textbf{27.599} & \TGspeed{1.062} \\
+\midrule
+\rowcolor{TGsection}
+\multicolumn{4}{c}{\textit{DPG-Bench}} \\
+ML-Cache & 84.140 & 29.598 & 1.000$\times$ \\
+\rowcolor{TGshade}
+\textbf{+VocabBypass} & 84.140 & \textbf{27.888} & \TGspeed{1.061} \\
+\bottomrule
+\end{tabular}
+\endgroup

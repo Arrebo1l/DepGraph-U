@@ -1,0 +1,2 @@
+load checkpoint from local path: ${EXPERIMENT_ROOT}/TaskGraph_omnigen2_cadd_geneval_20260919/scorer_models/mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco.pth
+Function 'load_models' executed in 8.370s

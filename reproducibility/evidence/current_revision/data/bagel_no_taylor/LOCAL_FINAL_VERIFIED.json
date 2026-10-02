@@ -1,0 +1,31 @@
+{
+  "verified_raw_aggregate": true,
+  "formal_calls": 144,
+  "unique_prompts": 12,
+  "process_repeats": 3,
+  "mean_s": {
+    "native": 36.52072178779377,
+    "rewrite_only": 36.515824286784564,
+    "policy_only": 33.03139730832643,
+    "depgraphu": 32.989770527411665
+  },
+  "diagnostic_subset_quality": {
+    "native": 0.75,
+    "rewrite_only": 0.75,
+    "policy_only": 0.8333333333333334,
+    "depgraphu": 0.8333333333333334
+  },
+  "core_on_native": 1.0001341199631901,
+  "core_on_fixed_policy": 1.001261808744022,
+  "full_without_taylor": 1.1070317011586421,
+  "scope": "Saved hashes and raw records; not full GenEval; tensors not re-executed locally. Image/source archive hashes require separate transport verification.",
+  "backup_complete": true,
+  "archive_sha256": "0fd43f1637cb080e055cdef46afb14075a6e2860bedf742324b570091d4c8412",
+  "archive_file_count": 730,
+  "formal_png_and_pixel_hashes_recomputed": 144,
+  "gpu_idle_at_check": true,
+  "completed_at_utc": "2026-09-23T07:38:34+00:00",
+  "frozen_files_verified": 167,
+  "all_three_process_repeat_means_and_SD_verified": true,
+  "cross_repeat_pixels_consistent": true
+}

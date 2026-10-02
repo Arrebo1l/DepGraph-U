@@ -1,0 +1,60 @@
+{
+  "experiment": "Guard boundary validation: generation execution rewrites",
+  "model": "Show-o2-7B",
+  "phases": [
+    "standard",
+    "conditional",
+    "zero_hit"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "prompt_indices": [
+    0,
+    256,
+    391,
+    409,
+    493,
+    1011
+  ],
+  "calibration_warmup_index": 0,
+  "selection": "fixed SHA256 rank before results",
+  "steps": 35,
+  "model_calls": 34,
+  "ffn_pruning": 0.2,
+  "layer_skipping": 0.2,
+  "T_LS": 10,
+  "T_cache": 5,
+  "zero_hit_T_cache": 1,
+  "final_full_steps": 11,
+  "resolution": 432,
+  "batch": 1,
+  "guidance": 10,
+  "conditional_trigger": {
+    "threshold": -1,
+    "min_step": 5,
+    "patience": 1
+  },
+  "conditional_note": "Deliberately forced branch coverage, not a proposed quality policy; same conditional reference in each pair.",
+  "guard_cases": [
+    "cache_empty",
+    "accepted_hit",
+    "cache_refresh",
+    "DLS_recalibration",
+    "full_network_fallback",
+    "conditional_only"
+  ],
+  "comparison": "Each real denoise step replayed from identical tensor/cache/layer/RNG state against original FlashU; reference state and prediction advance trajectory. Record every step for CADD-only, Vocab-only, and combined. Finite branch test, not a universal equivalence proof.",
+  "correctness": "Exact prediction tensor equality, diffusion cache and layer/AG future-state equality, CPU/CUDA/Python/NumPy RNG equality, observed trunk/vocab call counts and bypass counts; stop and retain on any mismatch.",
+  "zero_hit_measurement": "Paired synchronized model-call wall time, restoring state before interval; no observation hooks, hashing or IO inside interval. Alternating order. Calibration trajectory excluded. Includes DLS selection and guidance. Not end-to-end pipeline latency.",
+  "no_positive_speed_gate": true,
+  "scope": "New real-model tests cover generation guards and specified text/Qwen labels APIs. Understanding KV/gather/mask/EOS evidence is separate; no claim of universal interface coverage.",
+  "source_entrypoint_sha256": "98dc5722ae498f685848aa7217223e2b9a8c39121e7bfe81c79f49375e02595b",
+  "text_API_cases": [
+    "text_logits_retained_with_environment_bypass",
+    "direct_Qwen_loss_projection_retained",
+    "direct_Qwen_explicit_skip_and_labels_rejected"
+  ]
+}

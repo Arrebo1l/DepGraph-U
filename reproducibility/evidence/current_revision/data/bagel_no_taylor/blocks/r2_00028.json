@@ -1,0 +1,148 @@
+{
+  "repeat": 2,
+  "index": 28,
+  "order": [
+    "depgraphu",
+    "native",
+    "rewrite_only",
+    "policy_only"
+  ],
+  "arms": {
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 2,
+      "label": "formal/r2/depgraphu/00028",
+      "prompt": "a photo of a tie",
+      "seed": 42,
+      "seconds": 33.063632506877184,
+      "pixel_sha256": "ee9b355137de8ed47186df52efbbbf92e9c9fd96713e71ba3a3b4edfcd0a00c2",
+      "png_sha256": "fbb771ef315e2b1cd8f423cfaa55160d2b44194ae80412edaf398bc2fcbf1187",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617271296
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 2,
+      "label": "formal/r2/native/00028",
+      "prompt": "a photo of a tie",
+      "seed": 42,
+      "seconds": 36.48252656683326,
+      "pixel_sha256": "379819ae98128217e9beba9bc673956eb42af59228e479c2c35c7c57c7ec3d05",
+      "png_sha256": "21f58d1c8d932c4138e659beeea1790d8511bfa4fc97a8bc1cdd21409e9b40c4",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42617740288
+    },
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 2,
+      "label": "formal/r2/rewrite_only/00028",
+      "prompt": "a photo of a tie",
+      "seed": 42,
+      "seconds": 36.54848226159811,
+      "pixel_sha256": "379819ae98128217e9beba9bc673956eb42af59228e479c2c35c7c57c7ec3d05",
+      "png_sha256": "21f58d1c8d932c4138e659beeea1790d8511bfa4fc97a8bc1cdd21409e9b40c4",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617271296
+    },
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 2,
+      "label": "formal/r2/policy_only/00028",
+      "prompt": "a photo of a tie",
+      "seed": 42,
+      "seconds": 33.07674573734403,
+      "pixel_sha256": "ee9b355137de8ed47186df52efbbbf92e9c9fd96713e71ba3a3b4edfcd0a00c2",
+      "png_sha256": "fbb771ef315e2b1cd8f423cfaa55160d2b44194ae80412edaf398bc2fcbf1187",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42617740288
+    }
+  }
+}

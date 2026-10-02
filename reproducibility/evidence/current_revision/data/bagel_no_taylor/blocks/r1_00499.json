@@ -1,0 +1,148 @@
+{
+  "repeat": 1,
+  "index": 499,
+  "order": [
+    "depgraphu",
+    "native",
+    "rewrite_only",
+    "policy_only"
+  ],
+  "arms": {
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 1,
+      "label": "formal/r1/depgraphu/00499",
+      "prompt": "a photo of a white boat and an orange hot dog",
+      "seed": 42,
+      "seconds": 32.864598017185926,
+      "pixel_sha256": "a7bbc5e86996f2d02651139777820bd3745850a0d92a0dfbe8d4c66c061dadf4",
+      "png_sha256": "285a66180da12e6018a2a5fd4091698b34c72cb0f668205e80b175532f24f8d1",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617615360
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 1,
+      "label": "formal/r1/native/00499",
+      "prompt": "a photo of a white boat and an orange hot dog",
+      "seed": 42,
+      "seconds": 36.37629138305783,
+      "pixel_sha256": "d981ae9da214ac7f95965dacfdc8d4d548581abd92e2e3ccc90146c009436cd9",
+      "png_sha256": "dee16f44e9220d0b077a37544b09cf971ed1735dd1b9304ce18b325b3904e5d3",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618428416
+    },
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 1,
+      "label": "formal/r1/rewrite_only/00499",
+      "prompt": "a photo of a white boat and an orange hot dog",
+      "seed": 42,
+      "seconds": 36.497269209474325,
+      "pixel_sha256": "d981ae9da214ac7f95965dacfdc8d4d548581abd92e2e3ccc90146c009436cd9",
+      "png_sha256": "dee16f44e9220d0b077a37544b09cf971ed1735dd1b9304ce18b325b3904e5d3",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617615360
+    },
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 1,
+      "label": "formal/r1/policy_only/00499",
+      "prompt": "a photo of a white boat and an orange hot dog",
+      "seed": 42,
+      "seconds": 33.02409066259861,
+      "pixel_sha256": "a7bbc5e86996f2d02651139777820bd3745850a0d92a0dfbe8d4c66c061dadf4",
+      "png_sha256": "285a66180da12e6018a2a5fd4091698b34c72cb0f668205e80b175532f24f8d1",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618428416
+    }
+  }
+}

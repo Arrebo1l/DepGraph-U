@@ -1,0 +1,46 @@
+[
+  {
+    "file": "paper_rewrite_20260908/tables_all_latest_cadd_dpg_20260921/data/Tables_1_2_DISPLAYED_DATA.json",
+    "sha256": "3260d762dbb1237eae85844e32874b3f750ed12f62abcf5b2fdafd4d38b6e545"
+  },
+  {
+    "file": "paper_rewrite_20260908/tables_all_latest_cadd_dpg_20260921/data/Tables_3_4_DISPLAYED_DATA.json",
+    "sha256": "39f1cf47f72e68280a00762c23fd2971c88af1a5fb6a9f97171404e1a4eebf37"
+  },
+  {
+    "file": "remote_experiments/execution_cost_20260922/attempt03/evidence_final/LOCAL_VERIFIED.json",
+    "sha256": "b94b4b9c54a1452ede80c426be0523fb56f1748d5d905b30f11da38a8b5c8820"
+  },
+  {
+    "file": "remote_experiments/guard_boundaries_20260922/evidence_final/LOCAL_VERIFIED.json",
+    "sha256": "1b4b74bd01b0d3a627fd93dc196eff0b5b52a7b37985226fe006610a3edc08b8"
+  },
+  {
+    "file": "paper_rewrite_20260908/evidence/FlashU_generation_matched_7b_geneval_showo_20260908/AGGREGATE_RESULTS.json",
+    "sha256": "e6b5a9530ef9a1e5e5b3bfa5a44f2a4a12aa30ba4db06b365c396ddbbd745022"
+  },
+  {
+    "file": "paper_rewrite_20260908/evidence/FlashU_generation_matched_repeats_1p5b_dpg_20260906/AGGREGATE_RESULTS.json",
+    "sha256": "3fc68e4fcce7ad3abe6d6a3aa857fbb005a99d7d33c9a8e654bbee7dd230269d"
+  },
+  {
+    "file": "paper_rewrite_20260908/evidence/FlashU_generation_matched_repeats_1p5b_dpg_20260906/dpg_showo_official_quality_20260908/showo-results.txt",
+    "sha256": "38495359f4dd8358dd7a411668e0890681be7838be696dc1effb2f29c26e607e"
+  },
+  {
+    "file": "paper_rewrite_20260908/evidence/dpg_1p5b_reference_score.txt",
+    "sha256": "960a2aa2511d0744d589934357a4e14e4e50d18b7206be5d7d8154aae57611ef"
+  },
+  {
+    "file": "paper_rewrite_20260908/evidence/FlashU_generation_matched_repeats_7b_dpg_20260907/AGGREGATE_RESULTS.json",
+    "sha256": "2d70eb3209312e1308ba8200c43fd22ada7d8e864d5fed1f1b0c8362f2c3d090"
+  },
+  {
+    "file": "paper_rewrite_20260908/evidence/FlashU_generation_matched_repeats_7b_dpg_20260907/dpg_official_quality_20260908/showo-results.txt",
+    "sha256": "52225ad200a7108b618db6d82a0e0bb13d54eda5545ae260e471d49676bf8b3f"
+  },
+  {
+    "file": "paper_rewrite_20260908/evidence/FlashU_generation_matched_repeats_7b_dpg_20260907/dpg_official_quality_20260908/original-results.txt",
+    "sha256": "bfde0542bd1b244778e9a6bd9cc1a222479dee12446b0f9f9d26c5e725e98ac1"
+  }
+]

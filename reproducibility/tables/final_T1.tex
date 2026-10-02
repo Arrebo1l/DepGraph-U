@@ -1,0 +1,30 @@
+\begingroup
+\resizebox{\linewidth}{!}{\begin{minipage}{560pt}
+\DGtableformat
+\begin{tabular}{>{\raggedright\arraybackslash}p{99pt}>{\centering\arraybackslash}p{35pt}>{\centering\arraybackslash}p{46pt}>{\centering\arraybackslash}p{42pt}>{\centering\arraybackslash}p{33pt}>{\centering\arraybackslash}p{34pt}>{\centering\arraybackslash}p{39pt}>{\centering\arraybackslash}p{46pt}>{\centering\arraybackslash}p{47pt}>{\centering\arraybackslash}p{75pt}}
+\toprule
+\textbf{Model} & \textbf{Params.} & \textbf{\mbox{Single obj.}} & \textbf{\mbox{Two obj.}} & \textbf{Count} & \textbf{Colors} & \textbf{Position} & \textbf{\mbox{Color attr.}} & \textbf{Overall $\uparrow$} & \textbf{Latency (s) $\downarrow$} \\
+\midrule
+SEED-X~\citeyearpar{ge2024seedx} & 13B & 0.96 & 0.65 & 0.31 & 0.80 & 0.18 & 0.14 & 0.51 & --- \\
+LWM~\citeyearpar{liu2024lwm} & 7B & 0.93 & 0.41 & 0.46 & 0.79 & 0.09 & 0.15 & 0.47 & --- \\
+ILLUME~\citeyearpar{wang2025illume} & 7B & 0.99 & 0.86 & 0.45 & 0.71 & 0.39 & 0.28 & 0.61 & --- \\
+Show-o~\citeyearpar{xie2024showo} & 1.3B & 0.98 & 0.80 & 0.66 & 0.84 & 0.31 & 0.50 & 0.68 & --- \\
+JanusFlow~\citeyearpar{ma2024janusflow} & 1.3B & 0.97 & 0.59 & 0.45 & 0.83 & 0.53 & 0.42 & 0.63 & --- \\
+Janus-Pro~\citeyearpar{chen2025januspro} & 7B & 0.99 & 0.89 & 0.59 & 0.90 & 0.79 & 0.66 & 0.80 & --- \\
+VILA-U~\citeyearpar{wu2025vilau} & 7B & 0.89 & 0.62 & 0.36 & 0.79 & 0.20 & 0.23 & 0.47 & 13.58 \\
+\midrule
+Show-o2~\citeyearpar{xie2025showo2} & 1.5B & 0.994 & 0.831 & 0.566 & 0.867 & 0.470 & 0.605 & 0.722 & 10.629 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U} & 1.5B & 0.984 & 0.806 & 0.516 & 0.856 & 0.388 & 0.605 & 0.692 & \TGlatratio{3.312}{3.209} \\
+Show-o2~\citeyearpar{xie2025showo2} & 7B & 0.978 & 0.760 & 0.478 & 0.819 & 0.237 & 0.512 & 0.631 & 11.514 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U} & 7B & 0.959 & 0.679 & 0.422 & 0.787 & 0.142 & 0.343 & 0.555 & \TGlatratio{3.718}{3.097} \\
+\midrule
+\rowcolor{TGband}\multicolumn{10}{c}{\textbf{Supplementary second model: BAGEL} --- GenEval subset (12 prompts; 2 per category)} \\
+BAGEL~\citeyearpar{deng2025bagel} & 7B & 1.000 & 1.000 & 0.500 & 1.000 & 0.500 & 0.500 & 0.750 & 36.521 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U} & 7B & 1.000 & 1.000 & 1.000 & 1.000 & 0.500 & 0.500 & 0.833 & \TGlatratio{32.990}{1.107} \\
+\bottomrule
+\end{tabular}\par
+\end{minipage}}
+\endgroup

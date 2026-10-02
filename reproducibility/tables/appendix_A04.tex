@@ -1,0 +1,25 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{Category-wise GenEval scores.} Six category rates and their macro average for both Show-o2 model scales.}
+\label{tab:genevalcats}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{L{82pt}C{26pt}|*{6}{R}|R}
+\toprule
+\textbf{Method} & \textbf{Size} & \textbf{\tcell[c]{Single\\obj.}} & \textbf{\tcell[c]{Two\\obj.}} & \textbf{Count} & \textbf{Color} & \textbf{Position} & \textbf{\tcell[c]{Color\\attr.}} & \textbf{Overall} \\
+\midrule
+\rowcolor{tgray}
+Show-o2 & 1.5B & 0.994 & 0.831 & 0.566 & 0.867 & 0.470 & 0.605 & 0.72203 \\
+Policy reference & 1.5B & 0.984 & 0.806 & 0.516 & 0.856 & 0.388 & 0.605 & 0.69241 \\
+\rowcolor{tblue}
+\textbf{+ DepGraph-U} & 1.5B & 0.984 & 0.806 & 0.516 & 0.856 & 0.388 & 0.605 & 0.69241 \\
+\midrule
+\rowcolor{tgray}
+Show-o2 & 7B & 0.978 & 0.760 & 0.478 & 0.819 & 0.237 & 0.512 & 0.63092 \\
+Policy reference & 7B & 0.959 & 0.679 & 0.422 & 0.787 & 0.142 & 0.343 & 0.55546 \\
+\rowcolor{tblue}
+\textbf{+ DepGraph-U} & 7B & 0.959 & 0.679 & 0.422 & 0.787 & 0.142 & 0.343 & 0.55546 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

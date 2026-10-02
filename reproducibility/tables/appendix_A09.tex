@@ -1,0 +1,19 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{Fixed-policy component control.} ``Rewrites'' denotes CADD and VocabBypass. Quality and latency retain their three-seed variation.}
+\label{tab:interval}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{C{34pt}|RR|R|R}
+\toprule
+\textbf{\tcell[c]{Cache\\interval}} & \textbf{\tcell[c]{Rewrites off\\latency (s)}} & \textbf{\tcell[c]{Rewrites on\\latency (s)}} & \textbf{\tcell[c]{Speedup\\on vs. off}} & \textbf{\tcell[c]{GenEval\\score}} \\
+\midrule
+1 & $6.986\pm0.013$ & \cellcolor{tblue}$6.028\pm0.018$ & 1.159$\times$ & $0.717\pm0.014$ \\
+2 & $6.180\pm0.008$ & \cellcolor{tblue}$4.294\pm0.004$ & 1.439$\times$ & $0.719\pm0.017$ \\
+3 & $5.939\pm0.011$ & \cellcolor{tblue}$3.685\pm0.010$ & 1.612$\times$ & $0.714\pm0.035$ \\
+5 & $5.785\pm0.017$ & \cellcolor{tblue}$3.323\pm0.004$ & 1.741$\times$ & $0.728\pm0.017$ \\
+8 & $5.780\pm0.016$ & \cellcolor{tblue}$3.335\pm0.006$ & 1.733$\times$ & $0.717\pm0.030$ \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

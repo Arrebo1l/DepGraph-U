@@ -1,0 +1,26 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{MMMU standard-KV control.} Native Show-o2 and Policy reference use their own paired no-KV references.}
+\label{tab:standardkv}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{L{122pt}|RRRR}
+\toprule
+\textbf{Implementation} & \textbf{Score (\%)} & \textbf{Latency (s)} & \textbf{Speedup} & \textbf{Match (\%)} \\
+\midrule
+\multicolumn{5}{l}{\textit{Native Show-o2-7B}} \\
+\rowcolor{tgray}
+No KV & 48.111 & 1.687 & 1.000$\times$ & -- \\
++ Standard KV & 48.111 & 0.789 & 2.139$\times$ & 100.00 \\
+\midrule
+\multicolumn{5}{l}{\textit{Selected policy: fixed pruning; DLS varies}} \\
+\rowcolor{tgray}
+No KV & 46.111 & 1.183 & 1.000$\times$ & -- \\
+\rowcolor{tblue}
++ Exact-DLS KV & 46.111 & 0.865 & 1.367$\times$ & 100.00 \\
+\rowcolor{tblue}
++ Stable-Graph KV & 47.111 & 0.491 & 2.408$\times$ & 86.22 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

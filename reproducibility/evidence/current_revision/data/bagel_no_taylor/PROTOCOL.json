@@ -1,0 +1,50 @@
+{
+  "authorization": "User explicitly requests fresh native BAGEL + DepGraph-U without TaylorSeer; small component control. Prior definition includes attributed FlashU-style FFN policy where applicable.",
+  "model": {
+    "repo": "ByteDance-Seed/BAGEL-7B-MoT",
+    "revision": "5019f57d168e5816e8f3f701b17cc816bb7cf24b",
+    "code_revision": "a2fa77dd8caeefc41e6607ae0ec17408d3f4ee9f",
+    "precision": "bfloat16",
+    "batch_size": 1
+  },
+  "task": "generation only; understanding unchanged",
+  "arms": {
+    "native": "Full original FFN; CADD off; native KV; TaylorSeer off",
+    "rewrite_only": "Full original FFN; output-dependent native dispatch elides unused image-CFG prompt producer/metadata; no Taylor provider; native live KV preserved",
+    "policy_only": "Fixed attributed Wanda/FlashU-style generation FFN pruning; CADD off; TaylorSeer off",
+    "depgraphu": "Same fixed inherited FFN policy + native output-dependent dead-CFG producer dispatch; TaylorSeer off"
+  },
+  "interpretation": "native versus depgraphu is the requested assembled system without TaylorSeer; rewrite_only/native and depgraphu/policy_only isolate added execution dispatch. Fixed FFN pruning is inherited, approximate, not claimed new.",
+  "non_applicable": "BAGEL has no Show-o2 Head-A/B split. Vocab projection is already absent and native KV retained. DLS/Taylor/last-layer-history optimization off. Existing Taylor-CADD fast-return branch gets no hits; native CFG producer pruning is measured separately.",
+  "settings": {
+    "image_shapes": [
+      1024,
+      1024
+    ],
+    "num_timesteps": 50,
+    "cfg_text_scale": 4.0,
+    "cfg_img_scale": 1.0,
+    "cfg_interval": [
+      0.4,
+      1.0
+    ],
+    "cfg_renorm_type": "global",
+    "timestep_shift": 3.0
+  },
+  "prompts": 12,
+  "sampling": "2 prompts per GenEval category, predetermined SHA256 ranking of dgu-notaylor-v1|index|prompt; no score consultation",
+  "seed": 42,
+  "process_repeats": 3,
+  "formal_calls": 144,
+  "order": "Four cyclic Latin-square rotations, round offset; every arm occupies each position 3 times per repeat",
+  "calibration": "same two synthetic disjoint prompts, native full generation, seeds600/601, separately repeated and retained-index hashes checked across processes",
+  "correctness": "Two synthetic prompts x4 arms, same-policy velocity/x_t/initial-noise/live-prefix-KV/RNG/pixel equality; unused image-CFG state deliberately not preserved. Check text prefills2->1 and CFG metadata2->1;49flowsteps and0vocab. Guard fallback unit checks. Separate warmups and no trace/hooks in formal timing.",
+  "taylor_exclusion": "Pass enable_taylorseer=False explicitly; all Taylor entry functions patched to fail closed; assert model/layer flags false before and after all calls. Set last-layer-history optimization flag false.",
+  "timing": "CUDA-synchronized wall time from prompt processing through VAE decode, excludes hashes/hooks/image writes/loading/calibration; all arms native prefix KV unchanged; retain per-call timing and peak memory",
+  "quality": "After all144 formal generations, score12 images per arm from first repeat independently; require exact cross-repeat image hashes before reusing r0 scores. Small diagnostic subset, NOT full GenEval or leaderboard result.",
+  "stop_conditions": "Source/weight/GPU identity/correctness/Taylor-entry failure; never stop or select on favorable speed or quality. Preserve all failures.",
+  "scope": "No full553 rerun, no prior results overwritten, no table/manuscript edit, no periodic app polling.",
+  "version": 2,
+  "prior_unlaunched_version": "v1 disabled Taylor-only CADD, never launched; preserved. v2 includes native dead-CFG producer dispatch found before any new measurements.",
+  "native_dispatch": "For stateless text-only generation with cfg_img_scale exactly1, text CFG>1 and no think/understanding/image/history input: omit the unused image-CFG context prefill and associated latent metadata. All unsupported requests delegate unchanged. No new approximate caching; this is a BAGEL-specific application of the dependency-liveness rule."
+}

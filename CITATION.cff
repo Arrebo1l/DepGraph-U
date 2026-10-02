@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "Please cite the manuscript and the underlying models/policies when using these artifacts."
+type: software
+title: "DepGraph-U: Dependency-Aware Execution Pruning for Unified Multimodal Inference"
+authors:
+  - family-names: Li
+    given-names: Wentai
+  - family-names: Huang
+    given-names: Jia-Bin
+repository-code: "https://github.com/Arrebo1l/DepGraph-U"
+url: "https://github.com/Arrebo1l/DepGraph-U"
+version: "0.1.0"
+date-released: 2026-10-02
+abstract: "Research code, model-specific execution rewrites, and compact evidence for dependency-aware multimodal inference."
+keywords:
+  - multimodal inference
+  - execution pruning
+  - cache reuse
+  - efficient inference

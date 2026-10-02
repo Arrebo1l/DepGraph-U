@@ -1,0 +1,60 @@
+{
+  "all_trace_rows": 24769,
+  "all_scatter_rows": 1500,
+  "bar_counts": [
+    {
+      "benchmark": "Overall",
+      "no_reuse": 20014,
+      "reuse": 4755
+    },
+    {
+      "benchmark": "MMMU",
+      "no_reuse": 740,
+      "reuse": 160
+    },
+    {
+      "benchmark": "MMStar",
+      "no_reuse": 940,
+      "reuse": 560
+    },
+    {
+      "benchmark": "AI2D",
+      "no_reuse": 2895,
+      "reuse": 193
+    },
+    {
+      "benchmark": "MME",
+      "no_reuse": 1980,
+      "reuse": 394
+    },
+    {
+      "benchmark": "MMB-EN",
+      "no_reuse": 3701,
+      "reuse": 628
+    },
+    {
+      "benchmark": "GQA",
+      "no_reuse": 9758,
+      "reuse": 2820
+    }
+  ],
+  "bin_counts": [
+    940,
+    121,
+    298,
+    141
+  ],
+  "bin_medians": [
+    1.0663961193518765,
+    1.8803029425522353,
+    2.6098157662749903,
+    3.7946095733310345
+  ],
+  "font_budget_pt": {
+    "title": 9,
+    "axis": 7.2,
+    "tick": 6.5
+  },
+  "omitted_scatter_rows": 0,
+  "jitter": false
+}

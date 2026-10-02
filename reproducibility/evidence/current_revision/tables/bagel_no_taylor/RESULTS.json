@@ -1,0 +1,146 @@
+{
+  "timing": {
+    "native": {
+      "mean_s": 36.52072178779377,
+      "sd_repeat_means_s": 0.07678922841546239,
+      "repeat_means_s": [
+        36.57595145547142,
+        36.55318064584086,
+        36.433033262069024
+      ],
+      "timed_calls": 36
+    },
+    "rewrite_only": {
+      "mean_s": 36.515824286784564,
+      "sd_repeat_means_s": 0.014649676514202277,
+      "repeat_means_s": [
+        36.514563460213445,
+        36.53106362745166,
+        36.50184577268859
+      ],
+      "timed_calls": 36
+    },
+    "policy_only": {
+      "mean_s": 33.03139730832643,
+      "sd_repeat_means_s": 0.06398022991693966,
+      "repeat_means_s": [
+        33.03910580743104,
+        33.09117405830572,
+        32.963912059242524
+      ],
+      "timed_calls": 36
+    },
+    "depgraphu": {
+      "mean_s": 32.989770527411665,
+      "sd_repeat_means_s": 0.08702527880549177,
+      "repeat_means_s": [
+        33.02687470832219,
+        33.05209401405106,
+        32.890342859861754
+      ],
+      "timed_calls": 36
+    }
+  },
+  "comparisons": {
+    "core_on_native": {
+      "denominator_reference": "native",
+      "candidate": "rewrite_only",
+      "ratio_of_mean_times": 1.0001341199631901,
+      "repeat_speedups": [
+        1.0016811920899689,
+        1.0006054304526897,
+        0.99811482106828
+      ],
+      "sd_repeat_speedups": 0.0018293623875681154
+    },
+    "inherited_ffn_policy": {
+      "denominator_reference": "native",
+      "candidate": "policy_only",
+      "ratio_of_mean_times": 1.1056365992300228,
+      "repeat_speedups": [
+        1.1070502836443255,
+        1.1046202404736436,
+        1.1052399726280004
+      ],
+      "sd_repeat_speedups": 0.0012626957756026688
+    },
+    "core_on_fixed_policy": {
+      "denominator_reference": "policy_only",
+      "candidate": "depgraphu",
+      "ratio_of_mean_times": 1.001261808744022,
+      "repeat_speedups": [
+        1.0003703377693733,
+        1.0011823772568857,
+        1.0022368024466706
+      ],
+      "sd_repeat_speedups": 0.0009358517512343527
+    },
+    "requested_full_without_taylor": {
+      "denominator_reference": "native",
+      "candidate": "depgraphu",
+      "ratio_of_mean_times": 1.1070317011586421,
+      "repeat_speedups": [
+        1.1074602661769546,
+        1.1059263183234753,
+        1.107712176102933
+      ],
+      "sd_repeat_speedups": 0.0009665870056069566
+    }
+  },
+  "diagnostic_quality": {
+    "native": {
+      "overall": 0.75,
+      "categories": {
+        "single_object": 1.0,
+        "two_object": 1.0,
+        "counting": 0.5,
+        "colors": 1.0,
+        "position": 0.5,
+        "color_attr": 0.5
+      },
+      "n": 12
+    },
+    "rewrite_only": {
+      "overall": 0.75,
+      "categories": {
+        "single_object": 1.0,
+        "two_object": 1.0,
+        "counting": 0.5,
+        "colors": 1.0,
+        "position": 0.5,
+        "color_attr": 0.5
+      },
+      "n": 12
+    },
+    "policy_only": {
+      "overall": 0.8333333333333334,
+      "categories": {
+        "single_object": 1.0,
+        "two_object": 1.0,
+        "counting": 1.0,
+        "colors": 1.0,
+        "position": 0.5,
+        "color_attr": 0.5
+      },
+      "n": 12
+    },
+    "depgraphu": {
+      "overall": 0.8333333333333334,
+      "categories": {
+        "single_object": 1.0,
+        "two_object": 1.0,
+        "counting": 1.0,
+        "colors": 1.0,
+        "position": 0.5,
+        "color_attr": 0.5
+      },
+      "n": 12
+    }
+  },
+  "scope": "12 frozen prompts,3 timing repeats; subset quality is not a full GenEval result",
+  "taylorseer_enabled": false,
+  "taylor_cache_hits": 0,
+  "dead_cfg_producer_elided_per_rewrite_request": 1,
+  "same_policy_pixel_rng_pairs": 72,
+  "interpretation": "Use core_on_native/core_on_fixed_policy for new execution-rewrite contribution; full-system gain may be entirely from inherited approximate FFN pruning."
+}

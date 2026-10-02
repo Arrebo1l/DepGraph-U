@@ -1,0 +1,58 @@
+{
+  "stage": "COMPLETE",
+  "n_pairs": 1500,
+  "score_definition": "unweighted mean of L2 category accuracies, percentage",
+  "output_matches": 1157,
+  "policy_changes_outputs": true,
+  "native": {
+    "score": 68.01346894053638,
+    "mean_s": 0.27120617061356705,
+    "total_s": 406.80925592035055,
+    "l2_counts": {
+      "image scene and topic": 141,
+      "image emotion": 31,
+      "image style & quality": 78,
+      "recognition": 118,
+      "object counting": 92,
+      "localization": 40,
+      "cross-instance attribute reasoning": 89,
+      "single-instance reasoning": 99,
+      "cross-instance relation reasoning": 62,
+      "common reasoning": 101,
+      "diagram reasoning": 110,
+      "code & sequence reasoning": 39,
+      "geometry": 116,
+      "numeric commonsense and calculation": 48,
+      "statistical reasoning": 86,
+      "biology & chemistry & physics": 146,
+      "electronics & energy & mechanical eng.": 46,
+      "geography & earth science & agriculture": 58
+    }
+  },
+  "ours": {
+    "score": 66.69248037091121,
+    "mean_s": 0.23510631915926933,
+    "total_s": 352.659478738904,
+    "l2_counts": {
+      "image scene and topic": 141,
+      "image emotion": 31,
+      "image style & quality": 78,
+      "recognition": 118,
+      "object counting": 92,
+      "localization": 40,
+      "cross-instance attribute reasoning": 89,
+      "single-instance reasoning": 99,
+      "cross-instance relation reasoning": 62,
+      "common reasoning": 101,
+      "diagram reasoning": 110,
+      "code & sequence reasoning": 39,
+      "geometry": 116,
+      "numeric commonsense and calculation": 48,
+      "statistical reasoning": 86,
+      "biology & chemistry & physics": 146,
+      "electronics & energy & mechanical eng.": 46,
+      "geography & earth science & agriculture": 58
+    }
+  },
+  "speedup": 1.1535469211690665
+}

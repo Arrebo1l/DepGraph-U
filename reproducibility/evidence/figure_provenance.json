@@ -1,0 +1,75 @@
+{
+  "files": [
+    {
+      "file": "figs/figure1_final.pdf",
+      "sha256": "479fa7b2d95cde1a996fc4472f5148ad19d7165da39a13947dd9cd66eb280226",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure2_final.pdf",
+      "sha256": "1a131ab6f3160e55334899828e5a1182f56195e459e863620ceeebf640bae8c4",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure3_final.pdf",
+      "sha256": "4e2a0e18ed60874a8e2b6988e92d63103be0b30cfcd2cd02e6de44ff8bd61544",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure4_final.pdf",
+      "sha256": "ec24e5182312f43ec109ac4c2eb869f08071f66809b909fdeaf44356c1508d44",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure5_final.pdf",
+      "sha256": "78ab44b0d0e2503017512182b46f84a4ea3797b872d39be087e4ca555c1955c2",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure6_final.pdf",
+      "sha256": "7a276f70e06ba9fb6bd8c4cecbb9df8611f98118f97625653d272e3d3fa265fe",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure6a_final.pdf",
+      "sha256": "69fc5ce673fd113ca21f5afc8c88f8a157d85b0ada4b36864fc6eac9088f8461",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure6b_final.pdf",
+      "sha256": "f052b573d4c63445f149b68918fd66494dea42b3530ad55d8e9dacd169212136",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure7_final.pdf",
+      "sha256": "a9595462e472d146aace88deb77ed0de199855925c591929954805a58916d575",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figure8_final.pdf",
+      "sha256": "b69634e0fe78824a3a37fbee4216059cc19afe8bd246eff7b303676f114492ef",
+      "provenance": "Unchanged accepted main-text PPTX export / vector crop."
+    },
+    {
+      "file": "figs/figureA1.pdf",
+      "sha256": "85d46c5bbed82dd8768e1db7ab773a60403af9d8187ec4992dd1a787d479d5a5",
+      "provenance": "Latest appendix PPTX, native PowerPoint export; see current_revision/APPENDIX_FIGURE_MANIFEST.json."
+    },
+    {
+      "file": "figs/figureA2.pdf",
+      "sha256": "2dcf9b0d87cc52935df5dda62eb8dadd5e5b2993044edd0375125aaefb6e469e",
+      "provenance": "Latest appendix PPTX, native PowerPoint export; see current_revision/APPENDIX_FIGURE_MANIFEST.json."
+    },
+    {
+      "file": "figs/figureA3.pdf",
+      "sha256": "20edf2e5aed81471157df715c7534085a9bd3f13834b74a62cbe19bb39a3d91b",
+      "provenance": "Latest appendix PPTX, native PowerPoint export; see current_revision/APPENDIX_FIGURE_MANIFEST.json."
+    },
+    {
+      "file": "figs/figureA4.pdf",
+      "sha256": "c9395221380d29de9d96ea03067738dc15aef54587a15bd303359521727747a1",
+      "provenance": "Latest appendix PPTX, native PowerPoint export; see current_revision/APPENDIX_FIGURE_MANIFEST.json."
+    }
+  ],
+  "selection_manifest": "current_revision/FIGURE_SOURCE_MANIFEST.json"
+}

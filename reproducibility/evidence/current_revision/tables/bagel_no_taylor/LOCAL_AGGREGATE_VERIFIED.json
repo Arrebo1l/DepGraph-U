@@ -1,0 +1,22 @@
+{
+  "verified_raw_aggregate": true,
+  "formal_calls": 144,
+  "unique_prompts": 12,
+  "process_repeats": 3,
+  "mean_s": {
+    "native": 36.52072178779377,
+    "rewrite_only": 36.515824286784564,
+    "policy_only": 33.03139730832643,
+    "depgraphu": 32.989770527411665
+  },
+  "diagnostic_subset_quality": {
+    "native": 0.75,
+    "rewrite_only": 0.75,
+    "policy_only": 0.8333333333333334,
+    "depgraphu": 0.8333333333333334
+  },
+  "core_on_native": 1.0001341199631901,
+  "core_on_fixed_policy": 1.001261808744022,
+  "full_without_taylor": 1.1070317011586421,
+  "scope": "Saved hashes and raw records; not full GenEval; tensors not re-executed locally. Image/source archive hashes require separate transport verification."
+}

@@ -1,0 +1,148 @@
+{
+  "repeat": 2,
+  "index": 506,
+  "order": [
+    "rewrite_only",
+    "policy_only",
+    "depgraphu",
+    "native"
+  ],
+  "arms": {
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 2,
+      "label": "formal/r2/rewrite_only/00506",
+      "prompt": "a photo of a purple computer keyboard and a blue scissors",
+      "seed": 42,
+      "seconds": 36.341124664992094,
+      "pixel_sha256": "9f141abedcdbed12c6a0c7945435edb71e0ff143f7b9da10f1eecd6ecdc61ea4",
+      "png_sha256": "1b8e9be7a5a46c35a41438630a2686ddb1569e1ffd4f17931ddf5d0870295155",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617615360
+    },
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 2,
+      "label": "formal/r2/policy_only/00506",
+      "prompt": "a photo of a purple computer keyboard and a blue scissors",
+      "seed": 42,
+      "seconds": 32.95525109022856,
+      "pixel_sha256": "57dfc8755ec958a8a5899c4f166b3313f4e84e7346b5bc894b5b08e4d8968cbe",
+      "png_sha256": "28f90be81618b0d4be69cb9d71cc6b1576785b6712347a9a5772514ff5f3af89",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618428416
+    },
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 2,
+      "label": "formal/r2/depgraphu/00506",
+      "prompt": "a photo of a purple computer keyboard and a blue scissors",
+      "seed": 42,
+      "seconds": 32.61997567117214,
+      "pixel_sha256": "57dfc8755ec958a8a5899c4f166b3313f4e84e7346b5bc894b5b08e4d8968cbe",
+      "png_sha256": "28f90be81618b0d4be69cb9d71cc6b1576785b6712347a9a5772514ff5f3af89",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617615360
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 2,
+      "label": "formal/r2/native/00506",
+      "prompt": "a photo of a purple computer keyboard and a blue scissors",
+      "seed": 42,
+      "seconds": 36.12278598546982,
+      "pixel_sha256": "9f141abedcdbed12c6a0c7945435edb71e0ff143f7b9da10f1eecd6ecdc61ea4",
+      "png_sha256": "1b8e9be7a5a46c35a41438630a2686ddb1569e1ffd4f17931ddf5d0870295155",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618428416
+    }
+  }
+}

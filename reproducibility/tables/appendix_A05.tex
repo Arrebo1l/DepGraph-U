@@ -1,0 +1,22 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{Exact-DLS KV latency and equality.} Includes last-position projection under the preserved Policy reference policy.}
+\label{tab:full}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{L{84pt}|*{6}{R}}
+\toprule
+\textbf{Method / statistic} & \textbf{MMMU} & \textbf{MMStar} & \textbf{AI2D} & \textbf{MME} & \textbf{\tcell[c]{MMBench\\EN}} & \textbf{GQA} \\
+\midrule
+\multicolumn{7}{l}{\textit{Mean model latency (s/sample)}} \\
+\rowcolor{tgray}
+Policy reference & 1.183 & 2.541 & 1.032 & 0.823 & 1.081 & 0.848 \\
+\rowcolor{tblue}
+\textbf{Exact-DLS KV} & 0.865 & 1.087 & 0.781 & 0.718 & 0.817 & 0.715 \\
+\midrule
+Speedup vs. R & 1.367$\times$ & 2.338$\times$ & 1.321$\times$ & 1.147$\times$ & 1.323$\times$ & 1.185$\times$ \\
+Response match & 100\% & 100\% & 100\% & 100\% & 100\% & 100\% \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

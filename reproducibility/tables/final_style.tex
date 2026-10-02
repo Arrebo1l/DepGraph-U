@@ -1,0 +1,20 @@
+% Compact main-text tables; body and official style remain unchanged.
+\definecolor{TGshade}{RGB}{229,239,249}
+\definecolor{TGsection}{RGB}{245,245,245}
+\definecolor{TGband}{gray}{0.94}
+\definecolor{TGmuted}{gray}{0.32}
+\newcommand{\TGformat}{\fontsize{7.5}{8.5}\selectfont
+\setlength{\tabcolsep}{2pt}\renewcommand{\arraystretch}{1.10}
+\setlength{\aboverulesep}{1.5pt}\setlength{\belowrulesep}{1.5pt}
+\setlength{\heavyrulewidth}{.65pt}\setlength{\lightrulewidth}{.32pt}}
+\newcommand{\TGmatrixformat}{\TGformat\fontsize{8.5}{9.5}\selectfont}
+\newcommand{\TGnote}[1]{\par\vspace{3pt}{\fontsize{7.5}{8.5}\selectfont\color{TGmuted}\raggedright#1\par}}
+\newcommand{\TGspeed}[1]{\textbf{#1}$\times$}
+\newcommand{\TGsection}[1]{\rowcolor{TGband}\multicolumn{7}{c}{\textit{#1}}\\}
+
+\newcommand{\DGtableformat}{\fontsize{9.5}{11.1}\selectfont
+\setlength{\tabcolsep}{3.2pt}\renewcommand{\arraystretch}{1.10}
+\setlength{\aboverulesep}{1.7pt}\setlength{\belowrulesep}{1.7pt}
+\setlength{\heavyrulewidth}{.65pt}\setlength{\lightrulewidth}{.32pt}\setlength{\parindent}{0pt}}
+\newcommand{\TGcell}[2][c]{\begin{tabular}[c]{@{}#1@{}}#2\end{tabular}}
+\newcommand{\TGlatratio}[2]{\mbox{#1\kern.5pt\raisebox{-1.5pt}{\fontsize{7.3}{8}\selectfont\textbf{#2}$\times$}}}

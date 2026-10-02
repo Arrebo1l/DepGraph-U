@@ -1,0 +1,19 @@
+\TGformat\TGtitle{3}{\textbf{Understanding quality and MMMU latency.} Gray Show-o2: reported; blue rows: local. Latencies are not comparable across sources. Exact matches its selected-policy reference; Stable may change outputs.}
+\begin{tabular}{>{\raggedright\arraybackslash}p{125.1260pt}>{\centering\arraybackslash}p{36.0211pt}>{\centering\arraybackslash}p{51.1879pt}>{\centering\arraybackslash}p{44.5525pt}>{\centering\arraybackslash}p{51.1879pt}>{\centering\arraybackslash}p{44.5525pt}>{\centering\arraybackslash}p{45.5004pt}>{\centering\arraybackslash}p{43.6045pt}>{\centering\arraybackslash}p{60.6672pt}}
+\toprule
+\textbf{Model / policy} & \textbf{Params.} & \textbf{MME-P} & \textbf{GQA} & \textbf{MMB-EN} & \textbf{MMMU} & \textbf{MMStar} & \textbf{AI2D} & \textbf{\TGcell{Latency (s) $\downarrow$\\(MMMU)}} \\
+\midrule
+ILLUME & 7B & 1445.3 & --- & 75.1 & 38.2 & --- & 71.4 & --- \\
+Show-o & 1.3B & 1097.2 & 58.0 & --- & 26.7 & --- & --- & --- \\
+JanusFlow & 1.3B & 1333.1 & 60.3 & 74.9 & 29.3 & --- & --- & --- \\
+Janus-Pro & 7B & 1567.1 & 62.0 & 79.2 & 41.0 & --- & --- & --- \\
+Emu3 & 8B & 1243.8 & 60.3 & 58.5 & 31.6 & --- & 70.0 & 1.29 \\
+VILA-U & 7B & 1317.4 & 58.5 & 63.5 & 30.7 & 37.2 & 48.9 & 0.12 \\
+\midrule
+\textcolor{gray}{Show-o2} & 7B & \textcolor{gray}{1620.5} & \textcolor{gray}{63.1} & \textcolor{gray}{79.3} & \textcolor{gray}{48.9} & \textcolor{gray}{56.6} & \textcolor{gray}{78.6} & \textcolor{gray}{1.71} \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U (Exact)} & 7B & 1593.54 & 60.693 & 75.172 & 46.111 & 51.737 & 74.644 & 0.865 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U (Stable)} & 7B & 1592.39 & 60.677 & 77.234 & 47.111 & 51.919 & 76.490 & 0.491 \\
+\bottomrule
+\end{tabular}\par

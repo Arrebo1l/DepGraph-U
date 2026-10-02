@@ -1,0 +1,17 @@
+\TGformat\TGtitle{7}{\textbf{BAGEL as an independent second model.} Adapted system; outputs may change. Subscripts give speedup over native BAGEL. MMStar uses the frozen mean over 18 L2 categories. GenEval will be scored after all 553 image pairs finish.}
+\begin{tabular}{>{\raggedright\arraybackslash}p{260.7429pt}>{\centering\arraybackslash}p{115.8857pt}>{\centering\arraybackslash}p{164.1714pt}}
+\toprule
+\textbf{Model} & \textbf{Quality} & \textbf{Latency (s) $\downarrow$} \\
+\midrule
+\multicolumn{3}{l}{\textit{(a) GenEval (0--1): 553 original prompts; seed 42; 1,024$\times$1,024; generation in progress}} \\
+BAGEL-7B-MoT & Pending & Pending \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U (adapted)} & Pending & Pending \\
+\midrule
+\multicolumn{3}{l}{\textit{(b) MMStar (\%): all 1,500 examples; greedy decoding; cap 128}} \\
+BAGEL-7B-MoT & 68.013 & 0.271 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U (adapted)} & 66.692 & \TGlatratio{0.235}{1.154} \\
+\bottomrule
+\end{tabular}\par
+\TGnote{MMStar: $-1.321$ percentage points; 1,157/1,500 responses match. Latency includes changes in generated sequence length.}

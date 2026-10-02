@@ -1,0 +1,30 @@
+{
+  "tables": [
+    {
+      "table": 1,
+      "independent_pdf_text_identical": true,
+      "independent_png_pixels_identical": true,
+      "visual_review": "passed"
+    },
+    {
+      "table": 2,
+      "independent_pdf_text_identical": true,
+      "independent_png_pixels_identical": true,
+      "visual_review": "passed"
+    },
+    {
+      "table": 3,
+      "independent_pdf_text_identical": true,
+      "independent_png_pixels_identical": true,
+      "visual_review": "passed"
+    }
+  ],
+  "tabular_data_and_style_unchanged": true,
+  "bottom_notes_removed": true,
+  "necessary_notes_in_captions": true,
+  "stale_table5_cross_reference_removed": true,
+  "no_overfull_boxes": true,
+  "prior_accepted_files_unchanged": 81,
+  "table4_table5_unchanged": true,
+  "manuscript_imported": false
+}

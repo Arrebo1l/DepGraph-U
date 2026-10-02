@@ -1,0 +1,12 @@
+\TGformat\TGtitle{4}{\textbf{Generation ablation.} Mean latency over 3 runs; fixed policy, matched outputs.}
+\begin{tabular}{>{\raggedright\arraybackslash}p{104.80pt}>{\centering\arraybackslash}p{73.00pt}>{\centering\arraybackslash}p{73.00pt}}
+\toprule
+\textbf{Configuration} & \textbf{Show-o2-1.5B} & \textbf{Show-o2-7B} \\
+\midrule
+Reference & $2.903\,\mathrm{s}$ & $6.521\,\mathrm{s}$ \\
++ CADD & $2.053\,\mathrm{s}$ & $4.330\,\mathrm{s}$ \\
++ VocabBypass & $2.429\,\mathrm{s}$ & $5.398\,\mathrm{s}$ \\
+\rowcolor{TGshade}
+\textbf{+ Both (DepGraph-U)} & $1.771\,\mathrm{s}$ & $3.671\,\mathrm{s}$ \\
+\bottomrule
+\end{tabular}\par

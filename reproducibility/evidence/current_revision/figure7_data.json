@@ -1,0 +1,229 @@
+{
+  "models": {
+    "1p5b": {
+      "values": {
+        "original": [
+          1.7107200857515137,
+          0.47638365845680236,
+          0.7224784782851735
+        ],
+        "cadd": [
+          1.060810153577725,
+          0.2802666326681773,
+          0.7250398804207643
+        ],
+        "vocab": [
+          1.7093655549533666,
+          0.0,
+          0.7183901986273626
+        ],
+        "full": [
+          1.0624672085789342,
+          0.0,
+          0.7255317029607793
+        ]
+      },
+      "totals_s": [
+        2.9095822224934897,
+        2.066116666666667,
+        2.4277557535807293,
+        1.7879989115397135
+      ],
+      "repeat_sd_s": [
+        0.0012093639810891812,
+        0.0018319647073081356,
+        0.003662771331699611,
+        0.0036734364074947445
+      ],
+      "profile_speedup": 1.6272841128230544
+    },
+    "7b": {
+      "values": {
+        "original": [
+          4.628010819798211,
+          1.1562559147516887,
+          0.7481204887573918
+        ],
+        "cadd": [
+          2.915566833951076,
+          0.6801245359420777,
+          0.7491299598594506
+        ],
+        "vocab": [
+          4.640209422410528,
+          0.0,
+          0.7585583510269721
+        ],
+        "full": [
+          2.9216056674639383,
+          0.0,
+          0.7541437588055928
+        ]
+      },
+      "totals_s": [
+        6.532387223307292,
+        4.344821329752604,
+        5.3987677734375,
+        3.6757494262695314
+      ],
+      "repeat_sd_s": [
+        0.020593386068678752,
+        0.011502317278315957,
+        0.021392373675070808,
+        0.01029134438813286
+      ],
+      "profile_speedup": 1.777157925026713
+    }
+  },
+  "arms": [
+    "original",
+    "cadd",
+    "vocab",
+    "full"
+  ],
+  "zero_hit": [
+    {
+      "seed": "42",
+      "prompt_index": "1",
+      "prompt_file": "midjourney23",
+      "reference_s": 6.986669857054949,
+      "cadd_s": 6.989306390285492,
+      "overhead_percent": 0.03773662251811416,
+      "pair": 1
+    },
+    {
+      "seed": "42",
+      "prompt_index": "2",
+      "prompt_file": "70",
+      "reference_s": 6.983308926224709,
+      "cadd_s": 6.9755889140069485,
+      "overhead_percent": -0.11054948734644521,
+      "pair": 2
+    },
+    {
+      "seed": "42",
+      "prompt_index": "3",
+      "prompt_file": "COCOval2014000000542910",
+      "reference_s": 6.96968450397253,
+      "cadd_s": 6.9766930639743805,
+      "overhead_percent": 0.10055777988020598,
+      "pair": 3
+    },
+    {
+      "seed": "42",
+      "prompt_index": "4",
+      "prompt_file": "72",
+      "reference_s": 6.982284523546696,
+      "cadd_s": 6.983616456389427,
+      "overhead_percent": 0.019075888962127863,
+      "pair": 4
+    },
+    {
+      "seed": "42",
+      "prompt_index": "5",
+      "prompt_file": "246",
+      "reference_s": 7.002872981131077,
+      "cadd_s": 7.004669386893511,
+      "overhead_percent": 0.025652411050058888,
+      "pair": 5
+    },
+    {
+      "seed": "43",
+      "prompt_index": "1",
+      "prompt_file": "midjourney23",
+      "reference_s": 7.009241223335266,
+      "cadd_s": 7.004283122718334,
+      "overhead_percent": -0.07073662410740367,
+      "pair": 6
+    },
+    {
+      "seed": "43",
+      "prompt_index": "2",
+      "prompt_file": "70",
+      "reference_s": 7.0363815650343895,
+      "cadd_s": 7.045401059091091,
+      "overhead_percent": 0.12818369744929115,
+      "pair": 7
+    },
+    {
+      "seed": "43",
+      "prompt_index": "3",
+      "prompt_file": "COCOval2014000000542910",
+      "reference_s": 7.044662833213806,
+      "cadd_s": 7.048660598695278,
+      "overhead_percent": 0.05674885478725855,
+      "pair": 8
+    },
+    {
+      "seed": "43",
+      "prompt_index": "4",
+      "prompt_file": "72",
+      "reference_s": 7.053493954241276,
+      "cadd_s": 7.0448032058775425,
+      "overhead_percent": -0.12321196303722859,
+      "pair": 9
+    },
+    {
+      "seed": "43",
+      "prompt_index": "5",
+      "prompt_file": "246",
+      "reference_s": 7.0544879995286465,
+      "cadd_s": 7.058867245912552,
+      "overhead_percent": 0.06207745174700019,
+      "pair": 10
+    },
+    {
+      "seed": "44",
+      "prompt_index": "1",
+      "prompt_file": "midjourney23",
+      "reference_s": 7.014253105968237,
+      "cadd_s": 7.014384672045708,
+      "overhead_percent": 0.0018756961786658977,
+      "pair": 11
+    },
+    {
+      "seed": "44",
+      "prompt_index": "2",
+      "prompt_file": "70",
+      "reference_s": 7.034317817538977,
+      "cadd_s": 7.038994558155537,
+      "overhead_percent": 0.0664846362912197,
+      "pair": 12
+    },
+    {
+      "seed": "44",
+      "prompt_index": "3",
+      "prompt_file": "COCOval2014000000542910",
+      "reference_s": 7.011329863220453,
+      "cadd_s": 7.018102403730154,
+      "overhead_percent": 0.09659423592702776,
+      "pair": 13
+    },
+    {
+      "seed": "44",
+      "prompt_index": "4",
+      "prompt_file": "72",
+      "reference_s": 7.007614832371473,
+      "cadd_s": 7.0036906488239765,
+      "overhead_percent": -0.055998847558935694,
+      "pair": 14
+    },
+    {
+      "seed": "44",
+      "prompt_index": "5",
+      "prompt_file": "246",
+      "reference_s": 6.980690658092499,
+      "cadd_s": 6.97948856279254,
+      "overhead_percent": -0.017220291785391417,
+      "pair": 15
+    }
+  ],
+  "overall_overhead_percent": 0.014505521653096487,
+  "source_hashes": {
+    "${PRIVATE_WORKSPACE}/remote_experiments/execution_cost_20260922/attempt03/evidence_final/PLOT_COST_COMPONENTS.csv": "e5916624fdb3066997ed45af17b46a871a30a1a8aa7651171315219f8f1360c8",
+    "${PRIVATE_WORKSPACE}/remote_experiments/execution_cost_20260922/attempt03/evidence_final/LOCAL_VERIFIED.json": "b94b4b9c54a1452ede80c426be0523fb56f1748d5d905b30f11da38a8b5c8820",
+    "${PRIVATE_WORKSPACE}/remote_experiments/guard_boundaries_20260922/evidence_final/ZERO_HIT_PAIRED_TIMINGS.csv": "297aa6696f08e2db919640a01a5ab66edb18d9f7f0769d0f913ca71f9e523b12",
+    "${PRIVATE_WORKSPACE}/remote_experiments/guard_boundaries_20260922/evidence_final/LOCAL_VERIFIED.json": "1b4b74bd01b0d3a627fd93dc196eff0b5b52a7b37985226fe006610a3edc08b8"
+  },
+  "scope": "Exclusive CUDA-stream intervals include launch gaps. All four arms share the frozen selected pruning/cache policy. Mean of 20 fixed prompts and three fresh-process repeats per scale. Zero-hit data cover 15 prompt-seed groups and 510 synchronized paired model calls, not end-to-end generation latency."
+}

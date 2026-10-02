@@ -1,0 +1,36 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{UQP selection and cross-seed transfer.} Historical candidate-bank results, separate from the main study.}
+\label{tab:uqp}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{L{138pt}|RRRR}
+\toprule
+\multicolumn{5}{c}{\textbf{(a) Seed 0: candidate evaluation and offline selection}} \\
+\midrule
+\textbf{Configuration} & \textbf{Steps} & \textbf{DPG $\uparrow$} & \textbf{Latency (s)} & \textbf{Speedup} \\
+\midrule
+\rowcolor{tgray}
+35-step policy & 35 & 83.119 & 2.9651 & 1.000$\times$ \\
+UQP-quality & 18 & 78.671 & 1.6764 & 1.769$\times$ \\
+UQP-speed & 16 & 77.336 & 1.5503 & 1.913$\times$ \\
+Offline oracle & Mixed & 86.554 & 1.9916 & 1.489$\times$ \\
+\rowcolor{tblue}
+Oracle + rewrites & Mixed & 86.554 & 1.3525 & 2.192$\times$ \\
+\bottomrule
+\end{tabularx}
+\par\vspace{9pt}
+\begin{tabularx}{\linewidth}{L{138pt}|RRRR}
+\toprule
+\multicolumn{5}{c}{\textbf{(b) Seed 1: frozen routes on the same prompts}} \\
+\midrule
+\textbf{Configuration} & \textbf{DPG $\uparrow$} & \textbf{$\Delta$ DPG} & \textbf{Latency (s)} & \textbf{Speedup} \\
+\midrule
+\rowcolor{tgray}
+35-step + rewrites & 83.711 & 0.000 & 1.8369 & 1.000$\times$ \\
+\rowcolor{tblue}
+Frozen routes + rewrites & 80.421 & -3.290 & 1.3512 & 1.359$\times$ \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

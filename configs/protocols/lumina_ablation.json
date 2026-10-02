@@ -1,0 +1,94 @@
+{
+  "name": "Lumina VocabBypass 2x2 ablation",
+  "frozen_at": "2026-09-21T07:28:36.976891+00:00",
+  "dpg_protocol_sha256": "87ec9c48b9a36e651f7622aa448cf3506bba56b2c39934a20491ce9cb9e6fc55",
+  "source_revision": "81344e60545ae8d70f11039d3450717d974f831b",
+  "weight_revision": "f014549e17679e41b119959754cdd9320af9bdc8",
+  "sampling": {
+    "timesteps": 64,
+    "cfg_scale": 4.0,
+    "temperature": 1.0,
+    "cache_ratio": 0.9,
+    "warmup_ratio": 0.3,
+    "refresh_interval": 5,
+    "text_vocab_size": 126356
+  },
+  "resolution": [
+    1024,
+    1024
+  ],
+  "batch_size": 1,
+  "backbone_precision": "bfloat16",
+  "vqvae_precision": "float32",
+  "hardware": {
+    "gpu": "NVIDIA A800-SXM4-80GB",
+    "power_limit_watts": 400,
+    "driver": "580.126.09",
+    "cpu": "Xeon Platinum 8358",
+    "cpu_quota": 16,
+    "memory_gib": 120
+  },
+  "prompt_indices": [
+    0,
+    152,
+    304,
+    456,
+    608,
+    760,
+    912,
+    1064
+  ],
+  "warmup_index": 532,
+  "seed": 42,
+  "repeats": 3,
+  "timed_images": 96,
+  "arms": {
+    "A": {
+      "ml_cache": false,
+      "vocab_bypass": false
+    },
+    "B": {
+      "ml_cache": false,
+      "vocab_bypass": true
+    },
+    "C": {
+      "ml_cache": true,
+      "vocab_bypass": false
+    },
+    "D": {
+      "ml_cache": true,
+      "vocab_bypass": true
+    }
+  },
+  "orders": [
+    [
+      "A",
+      "B",
+      "C",
+      "D"
+    ],
+    [
+      "D",
+      "C",
+      "B",
+      "A"
+    ],
+    [
+      "B",
+      "A",
+      "D",
+      "C"
+    ],
+    [
+      "C",
+      "D",
+      "A",
+      "B"
+    ]
+  ],
+  "time_scope": "CUDA-synchronized wall time: prompt preparation + generation + VQ decode; excludes model loading, warmups, artifact saving, equality checks and scoring.",
+  "reset": "Clear model KV/logit cache and reset Python/NumPy/TorchCPU/CUDA RNG to42 before each image. generate_image also resets cache at entry, unchanged.",
+  "equality": "Check A/B and C/D separately: tokens, pixels and PNG bytes; no cache-off vs cache-on identity assumption.",
+  "stop": "Any equality failure/runtime failure/disk<2GiB stops, preserving all evidence. No favorable-speed gate or outcome-based retry.",
+  "boundary": "Eight predeclared DPG prompts, three repeats each, one fixed seed. Small performance/compatibility ablation, not a full quality benchmark; warmups excluded. Report B/A and D/C separately, all slower cases retained."
+}

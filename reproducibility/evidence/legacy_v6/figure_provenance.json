@@ -1,0 +1,105 @@
+{
+  "files": [
+    {
+      "file": "figs/figure1_final.pdf",
+      "sha256": "6ac6cc1501b47ddded770f5addab8589dd0774689422ccbb0fca073174f808f5",
+      "provenance": "User-selected PowerPoint export, with paper-white margins cropped in vector PDF; no measurements changed.",
+      "previous_export_sha256": "019918e7685627d5655734a3979ba81d763e93b9c0bb0fe4cb0916b50aba6b5c"
+    },
+    {
+      "file": "figs/figure2_final.pdf",
+      "sha256": "ae655f51aa8c13c4b518fd3cd6c71e3853bb02996a60c8d82c244bb5f3d436e3",
+      "provenance": "User-selected PowerPoint export, with paper-white margins cropped in vector PDF; no measurements changed.",
+      "previous_export_sha256": "e65509bef18deb4a2d28aaa439c0cda098ea25b1781f6215170913ec99291553"
+    },
+    {
+      "file": "figs/figure3_final.pdf",
+      "sha256": "ee170bc009cee075178b2b52c622a08bb910b6228d66026384d61757c2158f72",
+      "provenance": "User-selected PowerPoint export, with paper-white margins cropped in vector PDF; no measurements changed.",
+      "previous_export_sha256": "2ebd30a7776952850512e5efba4028d478bf29b7e8c630105395014691d2ad77"
+    },
+    {
+      "file": "figs/figure4_final.pdf",
+      "sha256": "00ed5be9983b92d721cf490c58ca91eb1a34102a54a2e4733e2c98df730d29f1",
+      "provenance": "User-selected PowerPoint export, with paper-white margins cropped in vector PDF; no measurements changed.",
+      "previous_export_sha256": "c218ba8e606e91e2d8b8269e509c778fe1b8c3447f49d63f6da4853961ea4660"
+    },
+    {
+      "file": "figs/figure5_final.pdf",
+      "sha256": "dafdf51f5e8ce7bbcbd574e262500bd8da40202d973f5e1dad137b02ae0ebdf3",
+      "provenance": "User-selected PowerPoint export, with paper-white margins cropped in vector PDF; no measurements changed.",
+      "previous_export_sha256": "5233979f75a587a32b08bd894ced8876e584049f19b3faa4ca9a6d6348686b1e"
+    },
+    {
+      "file": "figs/figure6_final.pdf",
+      "sha256": "24fba8a926c98900e169ebe7bc6067f86a090d4fa5ca66c7b4df5a8d8b2a889f",
+      "provenance": "Combined source of the compact vector Figure 6 panels. The main text embeds its two clipped panels independently at 50% text width, with full-width prose between them. Plot heights are reduced without compressing fonts. All 24,769 trace rows and all 1,500 MMStar pairs remain; none omitted, jittered, or smoothed.",
+      "previous_export_sha256": "5cf1cbc24193c0413d773f1c62e1a421c5d5a22d1ce77c6447685f27610347fc",
+      "previous_layout_sha256": "98b36bbd28acdd66544a2560b0f0d3ebce1f44944531b2d71f6a95fb2d4131da"
+    },
+    {
+      "file": "figs/figureA1.pdf",
+      "sha256": "d61dfc6a33e1f5b5c550bdeb8cdfc38987f12320908648033cff3ac34a9c4c5e",
+      "provenance": "Preserved native Figma PDF"
+    },
+    {
+      "file": "figs/figureA2.pdf",
+      "sha256": "654f8b5c432aee5a20d837a3b9525ee460b8e7f5f3305e9b579f0dd0c770f30c",
+      "provenance": "Preserved native Figma PDF"
+    },
+    {
+      "file": "figs/figureA3.pdf",
+      "sha256": "d4cca2b2c24ecdefee6576c35e4f369b9013010a8e1b04579e22d9148d0e6e6e",
+      "provenance": "Preserved native Figma PDF"
+    },
+    {
+      "file": "figs/figureA4.pdf",
+      "sha256": "7f9b54a65292c98d430867be905d15c0f14a5267d7ce4543dd4d3af634a7f142",
+      "provenance": "Preserved native Figma PDF"
+    },
+    {
+      "file": "figs/figure6a_final.pdf",
+      "sha256": "0dd813dfb29cb8f1c55e348419f6d310797e8f46b0502d9ffcc956e863a9c7e2",
+      "provenance": "Vector panel (a) clipped from the included combined Figure 6 source, preserving all panel text and observations; inserted independently in the main text."
+    },
+    {
+      "file": "figs/figure6b_final.pdf",
+      "sha256": "2ee4cbb0d12dc5312c2b80e78a1e92c7c3f434a404f52453fe6a58ea1c8237a4",
+      "provenance": "Vector panel (b) clipped from the included combined Figure 6 source, preserving all panel text and observations; inserted independently in the main text."
+    }
+  ],
+  "appendix_exports": [
+    {
+      "figure": "A1",
+      "nodeId": "4407:3",
+      "file": "FigureA1.pdf",
+      "bytes": 825122,
+      "sha256": "d61dfc6a33e1f5b5c550bdeb8cdfc38987f12320908648033cff3ac34a9c4c5e",
+      "source": "Native Figma PDF export"
+    },
+    {
+      "figure": "A2",
+      "nodeId": "4448:2",
+      "file": "FigureA2.pdf",
+      "bytes": 120002,
+      "sha256": "654f8b5c432aee5a20d837a3b9525ee460b8e7f5f3305e9b579f0dd0c770f30c",
+      "source": "Native Figma PDF export"
+    },
+    {
+      "figure": "A3",
+      "nodeId": "4451:3",
+      "file": "FigureA3.pdf",
+      "bytes": 478070,
+      "sha256": "d4cca2b2c24ecdefee6576c35e4f369b9013010a8e1b04579e22d9148d0e6e6e",
+      "source": "Native Figma PDF export"
+    },
+    {
+      "figure": "A4",
+      "nodeId": "4428:2",
+      "file": "FigureA4.pdf",
+      "bytes": 273763,
+      "sha256": "7f9b54a65292c98d430867be905d15c0f14a5267d7ce4543dd4d3af634a7f142",
+      "source": "Native Figma PDF export"
+    }
+  ]
+}

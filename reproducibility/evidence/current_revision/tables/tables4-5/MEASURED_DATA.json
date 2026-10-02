@@ -1,0 +1,676 @@
+{
+  "geneval": [
+    {
+      "scale": "1.5B",
+      "arm": "native",
+      "categories": [
+        0.99375,
+        0.8308080808080808,
+        0.565625,
+        0.8670212765957447,
+        0.47,
+        0.605
+      ],
+      "quality": 0.7220340595673043,
+      "latency_s": 10.628905069568884,
+      "speedup": 1.0
+    },
+    {
+      "scale": "1.5B",
+      "arm": "ours",
+      "categories": [
+        0.984375,
+        0.8055555555555556,
+        0.515625,
+        0.8563829787234043,
+        0.3875,
+        0.605
+      ],
+      "quality": 0.6924064223798266,
+      "latency_s": 3.3123500000000003,
+      "speedup": 3.2088713661203925
+    },
+    {
+      "scale": "7B",
+      "arm": "native",
+      "categories": [
+        0.978125,
+        0.76010101010101,
+        0.478125,
+        0.8191489361702128,
+        0.2375,
+        0.5125
+      ],
+      "quality": 0.6309166577118704,
+      "latency_s": 11.51363101148087,
+      "speedup": 1.0
+    },
+    {
+      "scale": "7B",
+      "arm": "ours",
+      "categories": [
+        0.959375,
+        0.6792929292929293,
+        0.421875,
+        0.7872340425531915,
+        0.1425,
+        0.3425
+      ],
+      "quality": 0.5554628286410201,
+      "latency_s": 3.7176734292204827,
+      "speedup": 3.0969990319711953
+    }
+  ],
+  "dpg": [
+    {
+      "scale": "1.5B",
+      "arm": "native",
+      "categories": {
+        "other": 77.60000000000001,
+        "attribute": 89.9800796812749,
+        "entity": 90.93548387096774,
+        "relation": 93.6367142306209,
+        "global": 81.7629179331307
+      },
+      "quality": 85.05531741012355,
+      "latency_s": 5.309652527920286,
+      "speedup": 1.0
+    },
+    {
+      "scale": "1.5B",
+      "arm": "ours",
+      "categories": {
+        "attribute": 89.58167330677291,
+        "entity": 89.64516129032259,
+        "relation": 93.0582337061319,
+        "global": 81.45896656534954,
+        "other": 73.6
+      },
+      "quality": 83.66612484101384,
+      "latency_s": 1.8437702120993669,
+      "speedup": 2.8797799709946346
+    },
+    {
+      "scale": "7B",
+      "arm": "native",
+      "categories": {
+        "entity": 91.87096774193549,
+        "relation": 93.7524103355187,
+        "attribute": 89.80079681274901,
+        "other": 80.4,
+        "global": 82.37082066869301
+      },
+      "quality": 86.53197064711878,
+      "latency_s": 11.538164270551581,
+      "speedup": 1.0
+    },
+    {
+      "scale": "7B",
+      "arm": "ours",
+      "categories": {
+        "attribute": 89.02390438247012,
+        "entity": 90.25806451612904,
+        "other": 79.60000000000001,
+        "relation": 93.25106054762823,
+        "global": 84.19452887537993
+      },
+      "quality": 84.35472363973385,
+      "latency_s": 3.722657030163552,
+      "speedup": 3.099443267822247
+    }
+  ],
+  "understanding": [
+    {
+      "table": 3,
+      "arm": "baseline",
+      "benchmark": "MME",
+      "score": "1593.54",
+      "latency_s": 0.823382063425933,
+      "latency_display": "0.823",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "MME perception",
+      "cognition_in_prose": "347.86",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "baseline",
+      "benchmark": "GQA",
+      "score": "60.693",
+      "latency_s": 0.8476143154540892,
+      "latency_display": "0.848",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "GQA",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "baseline",
+      "benchmark": "MMBench-EN",
+      "score": "75.172",
+      "latency_s": 1.0805499757069739,
+      "latency_display": "1.081",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 128,
+      "legacy_diagnostic": false,
+      "score_metric": "MMBench-EN",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "baseline",
+      "benchmark": "MMMU",
+      "score": "46.111",
+      "latency_s": 1.1829385700118211,
+      "latency_display": "1.183",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "MMMU",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "baseline",
+      "benchmark": "MMStar",
+      "score": "51.737",
+      "latency_s": 2.5408948834910987,
+      "latency_display": "2.541",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 128,
+      "legacy_diagnostic": false,
+      "score_metric": "MMStar",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "baseline",
+      "benchmark": "AI2D",
+      "score": "74.644",
+      "latency_s": 1.032403577407436,
+      "latency_display": "1.032",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "AI2D",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "ours",
+      "benchmark": "MME",
+      "score": "1593.54",
+      "latency_s": 0.7180314573781799,
+      "latency_display": "0.718",
+      "speedup": 1.1467214353427222,
+      "speedup_display": "1.147",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "MME perception",
+      "cognition_in_prose": "347.86",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "ours",
+      "benchmark": "GQA",
+      "score": "60.693",
+      "latency_s": 0.7151163172561454,
+      "latency_display": "0.715",
+      "speedup": 1.1852817436837826,
+      "speedup_display": "1.185",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "GQA",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "ours",
+      "benchmark": "MMBench-EN",
+      "score": "75.172",
+      "latency_s": 0.8169850044961021,
+      "latency_display": "0.817",
+      "speedup": 1.322606865193851,
+      "speedup_display": "1.323",
+      "cap": 128,
+      "legacy_diagnostic": false,
+      "score_metric": "MMBench-EN",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "ours",
+      "benchmark": "MMMU",
+      "score": "46.111",
+      "latency_s": 0.8653004739599095,
+      "latency_display": "0.865",
+      "speedup": 1.3670841581748956,
+      "speedup_display": "1.367",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "MMMU",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "ours",
+      "benchmark": "MMStar",
+      "score": "51.737",
+      "latency_s": 1.0867759574825564,
+      "latency_display": "1.087",
+      "speedup": 2.3380116812456095,
+      "speedup_display": "2.338",
+      "cap": 128,
+      "legacy_diagnostic": false,
+      "score_metric": "MMStar",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 3,
+      "arm": "ours",
+      "benchmark": "AI2D",
+      "score": "74.644",
+      "latency_s": 0.781345672735346,
+      "latency_display": "0.781",
+      "speedup": 1.3213147694197664,
+      "speedup_display": "1.321",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "AI2D",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 4,
+      "arm": "baseline",
+      "benchmark": "MME",
+      "score": "1593.54",
+      "latency_s": 0.823382063425933,
+      "latency_display": "0.823",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "MME perception",
+      "cognition_in_prose": "347.86",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 4,
+      "arm": "baseline",
+      "benchmark": "GQA",
+      "score": "60.693",
+      "latency_s": 0.8476143154540892,
+      "latency_display": "0.848",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "GQA",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 4,
+      "arm": "baseline",
+      "benchmark": "MMBench-EN",
+      "score": "74.914",
+      "latency_s": 1.1089509283053693,
+      "latency_display": "1.109",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 128,
+      "legacy_diagnostic": false,
+      "score_metric": "MMBench-EN",
+      "baseline_speedup_displayed": false,
+      "fresh_paired_run": true,
+      "source": "data/cap128_LOCAL_VERIFIED.json",
+      "identical_responses": 3722,
+      "n": 4329
+    },
+    {
+      "table": 4,
+      "arm": "baseline",
+      "benchmark": "MMMU",
+      "score": "46.111",
+      "latency_s": 1.1829385700118211,
+      "latency_display": "1.183",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "MMMU",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 4,
+      "arm": "baseline",
+      "benchmark": "MMStar",
+      "score": "51.665",
+      "latency_s": 2.4549301160772643,
+      "latency_display": "2.455",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 128,
+      "legacy_diagnostic": false,
+      "score_metric": "MMStar",
+      "baseline_speedup_displayed": false,
+      "fresh_paired_run": true,
+      "source": "data/cap128_LOCAL_VERIFIED.json",
+      "identical_responses": 1021,
+      "n": 1500
+    },
+    {
+      "table": 4,
+      "arm": "baseline",
+      "benchmark": "AI2D",
+      "score": "74.644",
+      "latency_s": 1.032403577407436,
+      "latency_display": "1.032",
+      "speedup": 1.0,
+      "speedup_display": "1.000",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "AI2D",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 4,
+      "arm": "ours",
+      "benchmark": "MME",
+      "score": "1592.39",
+      "latency_s": 0.4338261743249543,
+      "latency_display": "0.434",
+      "speedup": 1.897953862989338,
+      "speedup_display": "1.898",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "MME perception",
+      "cognition_in_prose": "362.86",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 4,
+      "arm": "ours",
+      "benchmark": "GQA",
+      "score": "60.677",
+      "latency_s": 0.43399034579867807,
+      "latency_display": "0.434",
+      "speedup": 1.9530718221259358,
+      "speedup_display": "1.953",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "GQA",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 4,
+      "arm": "ours",
+      "benchmark": "MMBench-EN",
+      "score": "77.234",
+      "latency_s": 0.4647672379475029,
+      "latency_display": "0.465",
+      "speedup": 2.386035068226193,
+      "speedup_display": "2.386",
+      "cap": 128,
+      "legacy_diagnostic": false,
+      "score_metric": "MMBench-EN",
+      "baseline_speedup_displayed": false,
+      "fresh_paired_run": true,
+      "source": "data/cap128_LOCAL_VERIFIED.json",
+      "identical_responses": 3722,
+      "n": 4329
+    },
+    {
+      "table": 4,
+      "arm": "ours",
+      "benchmark": "MMMU",
+      "score": "47.111",
+      "latency_s": 0.4913235401776102,
+      "latency_display": "0.491",
+      "speedup": 2.4076570188031226,
+      "speedup_display": "2.408",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "MMMU",
+      "baseline_speedup_displayed": false
+    },
+    {
+      "table": 4,
+      "arm": "ours",
+      "benchmark": "MMStar",
+      "score": "51.919",
+      "latency_s": 0.4688309730415543,
+      "latency_display": "0.469",
+      "speedup": 5.236279719641463,
+      "speedup_display": "5.236",
+      "cap": 128,
+      "legacy_diagnostic": false,
+      "score_metric": "MMStar",
+      "baseline_speedup_displayed": false,
+      "fresh_paired_run": true,
+      "source": "data/cap128_LOCAL_VERIFIED.json",
+      "identical_responses": 1021,
+      "n": 1500
+    },
+    {
+      "table": 4,
+      "arm": "ours",
+      "benchmark": "AI2D",
+      "score": "76.490",
+      "latency_s": 0.4409914989581747,
+      "latency_display": "0.441",
+      "speedup": 2.341096324637662,
+      "speedup_display": "2.341",
+      "cap": 16,
+      "legacy_diagnostic": false,
+      "score_metric": "AI2D",
+      "baseline_speedup_displayed": false
+    }
+  ],
+  "cost": {
+    "passed": true,
+    "utc": "2026-09-22T20:04:21.856990+00:00",
+    "integrity": {
+      "downloaded_files": 440,
+      "frozen_files": 72,
+      "fresh_remote_png_hashes": 1056,
+      "archive_sha256": "1d57ca6c554f0adbc63b3605d2653644f0648fb04b148c9201584d1aa1026d0d"
+    },
+    "formal_generations": 960,
+    "timing_generations": 480,
+    "profile_generations": 480,
+    "nonreference_formal_hash_comparisons": 840,
+    "repeat_count": 3,
+    "formal_prompts": 20,
+    "timing_results": [
+      {
+        "model": "1p5b",
+        "arm": "original",
+        "mean_s": 2.903152330716451,
+        "repeat_sd_s": 0.0023604503321125268,
+        "speedup_vs_selected_reference": 1.0,
+        "latency_reduction_percent": 0.0,
+        "profile_wall_time_s": 2.909880518913269,
+        "profile_overhead_percent": 0.23175456987327703
+      },
+      {
+        "model": "1p5b",
+        "arm": "cadd",
+        "mean_s": 2.0527506868044534,
+        "repeat_sd_s": 0.004672771921766558,
+        "speedup_vs_selected_reference": 1.4142741977282347,
+        "latency_reduction_percent": 29.29235351911873,
+        "profile_wall_time_s": 2.0656199216842652,
+        "profile_overhead_percent": 0.6269263463185348
+      },
+      {
+        "model": "1p5b",
+        "arm": "vocab",
+        "mean_s": 2.4294003129005435,
+        "repeat_sd_s": 0.0025112725409469627,
+        "speedup_vs_selected_reference": 1.1950078030780686,
+        "latency_reduction_percent": 16.318538052703325,
+        "profile_wall_time_s": 2.4275568882624308,
+        "profile_overhead_percent": -0.0758798222064816
+      },
+      {
+        "model": "1p5b",
+        "arm": "full",
+        "mean_s": 1.7708029667536418,
+        "repeat_sd_s": 0.003681460238895172,
+        "speedup_vs_selected_reference": 1.6394553122071567,
+        "latency_reduction_percent": 39.004131887332406,
+        "profile_wall_time_s": 1.787978216012319,
+        "profile_overhead_percent": 0.9699130609750473
+      },
+      {
+        "model": "7b",
+        "arm": "original",
+        "mean_s": 6.520616714159647,
+        "repeat_sd_s": 0.036552962254185466,
+        "speedup_vs_selected_reference": 1.0,
+        "latency_reduction_percent": 0.0,
+        "profile_wall_time_s": 6.533486676216126,
+        "profile_overhead_percent": 0.19737338691494521
+      },
+      {
+        "model": "7b",
+        "arm": "cadd",
+        "mean_s": 4.3297157168388365,
+        "repeat_sd_s": 0.01853392351667197,
+        "speedup_vs_selected_reference": 1.5060149766415627,
+        "latency_reduction_percent": 33.599597911701,
+        "profile_wall_time_s": 4.344763934612274,
+        "profile_overhead_percent": 0.3475567163662374
+      },
+      {
+        "model": "7b",
+        "arm": "vocab",
+        "mean_s": 5.398063405354818,
+        "repeat_sd_s": 0.021599970108026053,
+        "speedup_vs_selected_reference": 1.207954820925458,
+        "latency_reduction_percent": 17.21544691266983,
+        "profile_wall_time_s": 5.398450108369191,
+        "profile_overhead_percent": 0.0071637360537391
+      },
+      {
+        "model": "7b",
+        "arm": "full",
+        "mean_s": 3.670731182893117,
+        "repeat_sd_s": 0.016120820640642082,
+        "speedup_vs_selected_reference": 1.7763808868783384,
+        "latency_reduction_percent": 43.70576674255287,
+        "profile_wall_time_s": 3.6756329139073687,
+        "profile_overhead_percent": 0.13353554836963433
+      }
+    ],
+    "call_counts": {
+      "original": {
+        "trunk": 34,
+        "vocab": 34,
+        "head_b": 34
+      },
+      "cadd": {
+        "trunk": 20,
+        "vocab": 20,
+        "head_b": 34
+      },
+      "vocab": {
+        "trunk": 34,
+        "vocab": 0,
+        "head_b": 34
+      },
+      "full": {
+        "trunk": 20,
+        "vocab": 0,
+        "head_b": 34
+      }
+    },
+    "notes": [
+      "Reference is frozen FlashU configuration, not native Show-o2.",
+      "Three fresh-process runtime repeats with the same generation seed 42; SD is across repeat means.",
+      "Formal outputs, recorded tensor/RNG hashes and pruning topology match within each model/repeat group.",
+      "PNG files freshly rehashed remotely; PNG bytes not downloaded. Recorded intermediate hashes were compared locally; tensors were not recomputed.",
+      "Profile CSV uses exclusive CUDA stream intervals including launch gaps, not pure GPU-kernel duration. Headline latency is uninstrumented wall time."
+    ]
+  },
+  "guard": {
+    "passed": true,
+    "utc": "2026-09-22T20:04:21.938009+00:00",
+    "integrity": {
+      "downloaded_files": 140,
+      "frozen_files": 69,
+      "fresh_remote_png_hashes": 0,
+      "archive_sha256": "c351b2075b5fc33db2177a3cc6f337bdc6f5e92787f55132422d431675a66d5d"
+    },
+    "formal_paired_step_checks": 3570,
+    "formal_step_checks_by_phase": {
+      "standard": 1530,
+      "conditional": 1530,
+      "zero_hit": 510
+    },
+    "all_recorded_checks_passed": true,
+    "max_abs_prediction_difference": 0.0,
+    "coverage_record_counts_overlapping": {
+      "cache_empty": 1575,
+      "DLS_recalibration": 270,
+      "cache_refresh": 360,
+      "accepted_hit": 420,
+      "full_network_fallback": 900,
+      "conditional_only": 1305
+    },
+    "text_api_records": 9,
+    "zero_hit": {
+      "model_calls": 510,
+      "reference_seconds": 105.17129464447498,
+      "cadd_seconds": 105.18655028939247,
+      "point_estimate_overhead_percent": 0.014505521653096487,
+      "absolute_total_difference_ms": 15.255644917488098,
+      "per_call_difference_ms": 0.02991302924997666,
+      "order_counts": {
+        "original/cadd": 255,
+        "cadd/original": 255
+      },
+      "seed_results": [
+        {
+          "seed": 42,
+          "reference_s": 34.92482079192996,
+          "cadd_s": 34.92987421154976,
+          "overhead_percent": 0.014469421761398316
+        },
+        {
+          "seed": 43,
+          "reference_s": 35.198267575353384,
+          "cadd_s": 35.2020152322948,
+          "overhead_percent": 0.010647276697328678
+        },
+        {
+          "seed": 44,
+          "reference_s": 35.04820627719164,
+          "cadd_s": 35.054660845547915,
+          "overhead_percent": 0.018416258752940173
+        }
+      ],
+      "prompt_seed_overhead_min_percent": -0.12321196303722859,
+      "prompt_seed_overhead_max_percent": 0.12818369744929115
+    },
+    "notes": [
+      "3570 comparisons are real model-step replays, not 3570 independent images.",
+      "Coverage counts overlap; accepted-hit count includes CADD-only and combined on the same reference steps.",
+      "Local audit compares saved prediction/future-state hashes and branch counts. RNG equality is an in-process recorded check, not a locally rehashed RNG dump.",
+      "Conditional-only phase intentionally forces the branch in both arms; not a proposed quality policy.",
+      "Zero-hit time is paired synchronized model-call wall time, not end-to-end generation. Tiny aggregate difference is not a statistically established nonzero overhead.",
+      "Generation guards and specified text/Qwen labels APIs only; understanding KV/gather/mask/EOS boundaries not covered."
+    ]
+  }
+}

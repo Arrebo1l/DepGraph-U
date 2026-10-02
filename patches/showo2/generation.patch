@@ -1,0 +1,1953 @@
+--- a/evaluation/inference_dpg_accelerated.py
++++ b/evaluation/inference_dpg_accelerated.py
+@@ -49,20 +49,40 @@
+ from accelerate import PartialState
+ from torch.nn.attention.flex_attention import flex_attention, create_block_mask
+ 
+-from models import Showo2Qwen2_5
++from models import Showo2Qwen2_5, omni_attn_mask_naive
+ from models import omni_attn_mask
+ from models.misc import get_text_tokenizer, prepare_gen_input
+ from utils import (
+     get_config, denorm, get_hyper_params,
+     path_to_llm_name, load_state_dict, save_images_as_grid,
++    set_seed,
+ )
+ from transport import Sampler, create_transport
++from transport.tada_sampler import FlashUTADASampler, TADAConfig
+ 
+ from flashu import apply_flashu_patch, FlashUConfig
++from flashu.patch import RouterProbeComplete
+ from flashu.wanda_pruner import WandaPruner
+ from flashu.structural_pruning import apply_structural_pruning
+ 
+ logger = get_logger(__name__, log_level="INFO")
++
++
++def get_torch_device():
++    """Select the CUDA device used by the server evaluation."""
++    return torch.device("cuda" if torch.cuda.is_available() else "cpu")
++
++
++def synchronize_device(device):
++    """Synchronize CUDA for accurate wall-clock measurements."""
++    if torch.device(device).type == "cuda":
++        torch.cuda.synchronize(device)
++
++
++def empty_device_cache(device):
++    """Release cached CUDA allocations between evaluation phases."""
++    if torch.device(device).type == "cuda":
++        torch.cuda.empty_cache()
+ 
+ if torch.cuda.is_available():
+     flex_attention = torch.compile(flex_attention)
+@@ -72,18 +92,19 @@
+ # Simple wall-clock profiler
+ # ---------------------------------------------------------------------------
+ class SimpleProfiler:
+-    """Measures wall-clock time of named code sections (with CUDA sync)."""
+-
+-    def __init__(self):
++    """Measures wall-clock time with synchronization for the active device."""
++
++    def __init__(self, device):
++        self.device = device
+         self.timings: dict[str, float] = {}
+         self.start_times: dict[str, float] = {}
+ 
+     def start(self, name: str):
+-        torch.cuda.synchronize()
++        synchronize_device(self.device)
+         self.start_times[name] = time.time()
+ 
+     def stop(self, name: str):
+-        torch.cuda.synchronize()
++        synchronize_device(self.device)
+         elapsed = time.time() - self.start_times.pop(name, time.time())
+         self.timings[name] = self.timings.get(name, 0.0) + elapsed
+ 
+@@ -141,6 +162,7 @@
+     adaptive_guidance_config: Optional[dict] = None,
+     hybrid_network_final_steps: int = 0,
+     num_inference_steps: int = 50,
++    tada_config: Optional[TADAConfig] = None,
+ ) -> float:
+     """Run the full evaluation loop over *prompts_data* and return avg time.
+ 
+@@ -161,9 +183,27 @@
+     filenames = [item["prompt_file_name"] for item in prompts_data]
+     run_times: list[float] = []
+ 
++    tada_sampler = None
++    if tada_config is not None:
++        setup_start = time.time()
++        tada_sampler = FlashUTADASampler(tada_config, device)
++        logger.info(
++            "TADA scheduler ready: "
++            f"nominal_steps={tada_config.nominal_steps}, "
++            f"model_evaluations={tada_config.model_evaluations}, "
++            f"nd={tada_config.nd}, k={tada_config.k}, "
++            f"order={tada_config.solver_order}, "
++            f"benchmark={int(tada_config.benchmark)}, "
++            f"flow_shift={tada_config.flow_shift}, "
++            f"one_time_setup={time.time() - setup_start:.4f}s"
++        )
++
+     for step in tqdm(range(len(filenames)), desc=f"Running {run_name}", file=sys.stdout):
+         is_warmup = step == 0
+-        is_profiling = step == 9  # profile the 10th image
++        is_profiling = (
++            step == 9
++            and os.environ.get("FLASHU_ROUTER_PROBE_ONLY") != "1"
++        )  # profile the 10th image unless this is a feature-only probe
+ 
+         fn = filenames[step]
+         prompts = [validation_prompts[step]] * batch_size
+@@ -176,12 +216,19 @@
+             adaptive_guidance_config=adaptive_guidance_config,
+             hybrid_network_final_steps=hybrid_network_final_steps,
+         )
++        # Optional trajectory-router instrumentation.  These fields are only
++        # consumed when FLASHU_ROUTER_FEATURE_PATH is set; normal FlashU runs
++        # remain unchanged.
++        model_instance._flashu_router_prompt_index = step
++        model_instance._flashu_router_prompt_file_name = fn
++        model_instance._flashu_router_prompt = validation_prompts[step]
++        model_instance._flashu_router_run_name = run_name
+ 
+         current_profiler = profiler if is_profiling else None
+         if is_profiling:
+             profiler.reset()
+ 
+-        torch.cuda.synchronize()
++        synchronize_device(device)
+         t_start = time.time()
+ 
+         with torch.no_grad():
+@@ -193,13 +240,25 @@
+                 pad, img_pad, max_text, device,
+             )
+ 
+-            z = torch.randn(
+-                (len(prompts), latent_dim, lat_h * patch_sz, lat_w * patch_sz),
+-                device=device, dtype=weight_type,
++            latent_shape = (
++                len(prompts), latent_dim,
++                lat_h * patch_sz, lat_w * patch_sz,
+             )
++            if tada_sampler is None:
++                z = torch.randn(
++                    latent_shape,
++                    device=device, dtype=weight_type,
++                )
++                if guidance_scale > 0:
++                    z = torch.cat([z, z], dim=0)
++            else:
++                z = tada_sampler.prepare_initial_latent(
++                    latent_shape,
++                    dtype=weight_type,
++                    duplicate_for_cfg=guidance_scale > 0,
++                )
+ 
+             if guidance_scale > 0:
+-                z = torch.cat([z, z], dim=0)
+                 text_tokens = torch.cat(
+                     [batch_text_tokens, batch_text_tokens_null], dim=0
+                 )
+@@ -210,11 +269,16 @@
+                 text_tokens = batch_text_tokens
+                 modality_positions = batch_modality_positions
+ 
+-            omni_mask_fn = omni_attn_mask(modality_positions)
+-            block_mask = create_block_mask(
+-                omni_mask_fn, B=z.size(0), H=None,
+-                Q_LEN=max_seq, KV_LEN=max_seq, device=device,
+-            )
++            if os.environ.get("SHOWO2_NAIVE_ATTENTION") == "1":
++                block_mask = omni_attn_mask_naive(
++                    text_tokens.size(0), max_seq, modality_positions, device,
++                ).to(weight_type)
++            else:
++                omni_mask_fn = omni_attn_mask(modality_positions)
++                block_mask = create_block_mask(
++                    omni_mask_fn, B=z.size(0), H=None,
++                    Q_LEN=max_seq, KV_LEN=max_seq, device=device,
++                )
+ 
+             model_kwargs = dict(
+                 text_tokens=text_tokens,
+@@ -231,17 +295,28 @@
+                 image_latents=x, t=t, **kw
+             )[0]
+ 
+-            sample_fn = sampler_instance.sample_ode(
+-                sampling_method=config.transport.sampling_method,
+-                num_steps=num_inference_steps,
+-                atol=config.transport.atol,
+-                rtol=config.transport.rtol,
+-                time_shifting_factor=config.transport.time_shifting_factor,
+-            )
+-
+             if current_profiler:
+                 current_profiler.start("Sampler (Total ODE Steps)")
+-            samples_history = sample_fn(z, model_fn, **model_kwargs)
++            if tada_sampler is None:
++                sample_fn = sampler_instance.sample_ode(
++                    sampling_method=config.transport.sampling_method,
++                    num_steps=num_inference_steps,
++                    atol=config.transport.atol,
++                    rtol=config.transport.rtol,
++                    time_shifting_factor=config.transport.time_shifting_factor,
++                )
++                try:
++                    samples_history = sample_fn(z, model_fn, **model_kwargs)
++                except RouterProbeComplete:
++                    # Feature-only mode intentionally stops after the shared
++                    # prefix.  No image decode or timing claim is produced.
++                    continue
++            else:
++                samples_history = tada_sampler.sample(
++                    z,
++                    model_fn,
++                    **model_kwargs,
++                )
+             if current_profiler:
+                 current_profiler.stop("Sampler (Total ODE Steps)")
+ 
+@@ -268,8 +343,31 @@
+         grid_size = grid_map.get(batch_size, (1, 1))
+         save_images_as_grid(pil_images, fn, output_dir, grid_size=grid_size)
+ 
+-        torch.cuda.synchronize()
++        synchronize_device(device)
+         iter_time = time.time() - t_start
++
++        trajectory_timing_file = os.environ.get("FLASHU_TRAJECTORY_TIMING_FILE")
++        if trajectory_timing_file:
++            timing_path = pathlib.Path(trajectory_timing_file)
++            timing_path.parent.mkdir(parents=True, exist_ok=True)
++            with timing_path.open("a", encoding="utf-8") as timing_handle:
++                timing_handle.write(
++                    json.dumps(
++                        {
++                            "trajectory_id": os.environ.get(
++                                "FLASHU_TRAJECTORY_ID", run_name
++                            ),
++                            "prompt_index": step,
++                            "prompt_file_name": fn,
++                            "prompt": validation_prompts[step],
++                            "seconds": iter_time,
++                            "warmup": is_warmup,
++                            "output_dir": output_dir,
++                        },
++                        ensure_ascii=False,
++                    )
++                    + "\n"
++                )
+ 
+         if not is_warmup:
+             run_times.append(iter_time)
+@@ -310,6 +408,18 @@
+         help="Layer-skipping ratio r_LS (Paper Sec. 3.3).",
+     )
+     parser.add_argument(
++        "--layer_skip_interval", type=int, default=None,
++        help="Override dynamic layer-skip recalculation interval T_LS.",
++    )
++    parser.add_argument(
++        "--diffusion_cache_interval", type=int, default=None,
++        help="Override diffusion-head cache interval T_cache; -1 disables it.",
++    )
++    parser.add_argument(
++        "--hybrid_final_steps", type=int, default=None,
++        help="Override the number of final denoising steps using the full FFN.",
++    )
++    parser.add_argument(
+         "--num_inference_steps", type=int, default=None,
+         help="Override total diffusion steps (default: sum of guidance schedule).",
+     )
+@@ -317,6 +427,55 @@
+         "--benchmark", type=str, default="dpg",
+         choices=["dpg"],
+         help="Benchmark to run (currently only 'dpg' is implemented).",
++    )
++    parser.add_argument(
++        "--skip-baseline",
++        action="store_true",
++        help=(
++            "Skip baseline image generation and run only the FlashU phase. "
++            "This changes evaluation orchestration only, not FlashU outputs."
++        ),
++    )
++    parser.add_argument(
++        "--baseline-only",
++        action="store_true",
++        help="Run only the unpruned/unskipped baseline phase and exit.",
++    )
++    parser.add_argument(
++        "--tada",
++        action="store_true",
++        help="Use TADA for the accelerated FlashU phase only.",
++    )
++    parser.add_argument("--tada-nd", type=int, default=2)
++    parser.add_argument("--tada-k", type=float, default=1.0)
++    parser.add_argument("--tada-order", type=int, default=2)
++    parser.add_argument(
++        "--tada-benchmark",
++        action="store_true",
++        help="Condition TADA on the same ordinary initial latent (weaker mode).",
++    )
++    parser.add_argument(
++        "--tada-fast",
++        action="store_true",
++        help=(
++            "Use the precomputed N=2/order=2 benchmark TADA update path. "
++            "Requires --tada-benchmark with the default nd/order settings."
++        ),
++    )
++    parser.add_argument(
++        "--tada-flow-shift",
++        type=float,
++        default=None,
++        help="TADA flow shift (default: config transport.time_shifting_factor).",
++    )
++    parser.add_argument(
++        "--scale-flashu-schedule",
++        action="store_true",
++        help=(
++            "Scale FlashU's final full-network/high-CFG phase to 30%% of the "
++            "requested inference-step count. Intended for reduced-step TADA "
++            "experiments; the default 35-step baseline is unchanged."
++        ),
+     )
+     args, _ = parser.parse_known_args()
+ 
+@@ -338,17 +497,13 @@
+ 
+     # -- Config & device -----------------------------------------------------
+     config = get_config()
+-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
++    seed = int(config.get("seed", 42))
++    device = get_torch_device()
++    logger.info(f"Using device: {device}")
+     weight_type = torch.bfloat16
+     outdir = config.get("outdir", "flashu_dpg_results")
+ 
+     # -- Model, tokenizer, VAE -----------------------------------------------
+-    from models import WanVAE
+-
+-    vae_model = WanVAE(
+-        vae_pth=config.model.vae_model.pretrained_model_path,
+-        dtype=weight_type, device=device,
+-    )
+     text_tokenizer, showo_token_ids = get_text_tokenizer(
+         config.model.showo.llm_model_path,
+         add_showo_tokens=True,
+@@ -359,14 +514,23 @@
+     # Load baseline model (not accelerated variant)
+     if config.model.showo.get("load_from_showo", False):
+         model = Showo2Qwen2_5.from_pretrained(
+-            config.model.showo.pretrained_model_path, use_safetensors=False,
++            config.model.showo.pretrained_model_path,
++            use_safetensors=False,
++            torch_dtype=weight_type,
+         ).to(device)
+     else:
+         model = Showo2Qwen2_5(**config.model.showo).to(device)
+         state_dict = load_state_dict(config.model_path)
+         model.load_state_dict(state_dict)
+ 
+-    model.to(weight_type).eval()
++    model.eval()
++
++    # Load the VAE after the main checkpoint to reduce peak unified-memory use.
++    from models import WanVAE
++    vae_model = WanVAE(
++        vae_pth=config.model.vae_model.pretrained_model_path,
++        dtype=weight_type, device=device,
++    )
+ 
+     # -- Hyper-parameters tuple -----------------------------------------------
+     if config.model.showo.add_time_embeds:
+@@ -423,6 +587,33 @@
+         r_LS=args.layer_skipping_ratio,
+         num_inference_steps=args.num_inference_steps,
+     )
++    if args.layer_skip_interval is not None:
++        flashu_config.T_LS = args.layer_skip_interval
++    if args.diffusion_cache_interval is not None:
++        flashu_config.T_cache = args.diffusion_cache_interval
++    if args.hybrid_final_steps is not None:
++        flashu_config.tau = args.hybrid_final_steps
++
++    if args.scale_flashu_schedule:
++        scaled_total_steps = flashu_config.total_steps
++        scaled_final_steps = max(1, round(0.30 * scaled_total_steps))
++        flashu_config.tau = scaled_final_steps
++        flashu_config.adaptive_guidance_schedule = [
++            (
++                scaled_total_steps - scaled_final_steps,
++                0.75 * guidance_scale,
++            ),
++            (scaled_final_steps, guidance_scale),
++        ]
++        logger.info(
++            "Scaled FlashU schedule: total_steps=%d, early_steps=%d, "
++            "final_steps=%d, guidance=(%.4f, %.4f)",
++            scaled_total_steps,
++            scaled_total_steps - scaled_final_steps,
++            scaled_final_steps,
++            0.75 * guidance_scale,
++            guidance_scale,
++        )
+ 
+     ffn_pruning_ratio = flashu_config.r_p
+     layer_skipping_ratio = flashu_config.r_LS
+@@ -432,12 +623,29 @@
+     adaptive_guidance_schedule = flashu_config.adaptive_guidance_schedule
+     total_steps = flashu_config.total_steps
+ 
++    tada_config = None
++    if args.tada:
++        tada_flow_shift = (
++            args.tada_flow_shift
++            if args.tada_flow_shift is not None
++            else float(config.transport.time_shifting_factor)
++        )
++        tada_config = TADAConfig(
++            nominal_steps=total_steps,
++            flow_shift=tada_flow_shift,
++            nd=args.tada_nd,
++            k=args.tada_k,
++            solver_order=args.tada_order,
++            benchmark=args.tada_benchmark,
++            fast_path=args.tada_fast,
++        )
++
+     adaptive_guidance_config = flashu_config.adaptive_guidance_config
+     if adaptive_guidance_config is not None:
+         adaptive_guidance_config["original_gs"] = guidance_scale
+ 
+     # -- Shared evaluation arguments ------------------------------------------
+-    profiler = SimpleProfiler()
++    profiler = SimpleProfiler(device)
+     common_eval_args = dict(
+         prompts_data=meta_data_subset,
+         config_params=hyper_params,
+@@ -453,40 +661,90 @@
+     # ======================================================================
+     # 1. Baseline (no acceleration)
+     # ======================================================================
+-    logger.info("\n" + "=" * 60)
+-    logger.info("PHASE 1: Baseline (no acceleration)")
+-    logger.info("=" * 60)
+-
+-    # Apply FlashU patch for baseline run (needed for reset_acceleration_state)
+-    apply_flashu_patch(model, FlashUConfig(
+-        r_p=0.0, r_LS=0.0, T_LS=-1, T_cache=-1, tau=0,
+-        adaptive_guidance_schedule=None,
+-    ))
+-
+-    baseline_outdir = os.path.join(outdir, "Baseline")
+-    avg_time = run_test_strategy(
+-        model_instance=model,
+-        output_dir=baseline_outdir,
+-        run_name="Baseline",
+-        layer_skipping_ratio=0.0,
+-        diffusion_head_cache_interval=-1,
+-        layer_skip_recalc_interval=-1,
+-        adaptive_guidance_config=None,
+-        hybrid_network_final_steps=0,
+-        num_inference_steps=config.num_inference_steps,
+-        **common_eval_args,
+-    )
+-    if avg_time > 0:
+-        results["Baseline"] = avg_time
+-
+-    del model
+-    torch.cuda.empty_cache()
++    if args.skip_baseline:
++        logger.info("\n" + "=" * 60)
++        logger.info("PHASE 1: Baseline generation skipped by --skip-baseline")
++        logger.info("Running one untimed baseline compile warm-up prompt")
++        logger.info("=" * 60)
++
++        # FlexAttention in PyTorch 2.5 needs its doubled-batch path compiled
++        # before AG changes the batch from two CFG branches to one. All paired
++        # 50/200-prompt experiments naturally received this warm-up from the
++        # baseline phase. Preserve that compile path with one untimed prompt,
++        # while still skipping the other baseline images.
++        apply_flashu_patch(model, FlashUConfig(
++            r_p=0.0, r_LS=0.0, T_LS=-1, T_cache=-1, tau=0,
++            adaptive_guidance_schedule=None,
++        ))
++        warmup_args = dict(common_eval_args)
++        warmup_args["prompts_data"] = meta_data_subset[:1]
++        set_seed(seed)
++        run_test_strategy(
++            model_instance=model,
++            output_dir=os.path.join(outdir, "_baseline_compile_warmup"),
++            run_name="BaselineCompileWarmup",
++            layer_skipping_ratio=0.0,
++            diffusion_head_cache_interval=-1,
++            layer_skip_recalc_interval=-1,
++            adaptive_guidance_config=None,
++            hybrid_network_final_steps=0,
++            num_inference_steps=config.num_inference_steps,
++            **warmup_args,
++        )
++        del model
++        empty_device_cache(device)
++    else:
++        logger.info("\n" + "=" * 60)
++        logger.info("PHASE 1: Baseline (no acceleration)")
++        logger.info("=" * 60)
++
++        # Apply FlashU patch for baseline run (needed for reset state).
++        apply_flashu_patch(model, FlashUConfig(
++            r_p=0.0, r_LS=0.0, T_LS=-1, T_cache=-1, tau=0,
++            adaptive_guidance_schedule=None,
++        ))
++
++        baseline_outdir = os.path.join(outdir, "Baseline")
++        set_seed(seed)
++        logger.info(f"Baseline random seed: {seed}")
++        avg_time = run_test_strategy(
++            model_instance=model,
++            output_dir=baseline_outdir,
++            run_name="Baseline",
++            layer_skipping_ratio=0.0,
++            diffusion_head_cache_interval=-1,
++            layer_skip_recalc_interval=-1,
++            adaptive_guidance_config=None,
++            hybrid_network_final_steps=0,
++            num_inference_steps=config.num_inference_steps,
++            **common_eval_args,
++        )
++        if avg_time > 0:
++            results["Baseline"] = avg_time
++
++        del model
++        empty_device_cache(device)
++
++    if args.baseline_only:
++        logger.info("Baseline-only run complete; skipping FlashU phase.")
++        raise SystemExit(0)
+ 
+     # ======================================================================
+     # 2. FlashU accelerated (single config from Paper Table 7)
+     # ======================================================================
+     logger.info("\n" + "=" * 60)
+-    logger.info("PHASE 2: FlashU Accelerated")
++    cadd_enabled = os.environ.get("FLASHU_CACHE_AWARE_BYPASS") == "1"
++    method_parts = ["FlashU"]
++    if cadd_enabled:
++        method_parts.append("CADD")
++    if tada_config is not None:
++        method_parts.append("TADA")
++    logit_bypass_enabled = os.environ.get("FLASHU_SKIP_UNUSED_LOGITS") == "1"
++    if logit_bypass_enabled:
++        method_parts.append("LogitBypass")
++    method_name = "+".join(method_parts)
++
++    logger.info(f"PHASE 2: {method_name}")
+     logger.info(
+         f"  r_p={ffn_pruning_ratio}, r_LS={layer_skipping_ratio}, "
+         f"T_LS={layer_skip_recalc_interval}, T_cache={diffusion_head_cache_interval}, "
+@@ -494,17 +752,20 @@
+     )
+     logger.info("=" * 60)
+ 
+-    # Reload a clean baseline model for pruning.
++    # Reload a clean model because the baseline or compile-warm-up phase
++    # monkey-patched its instance.
+     if config.model.showo.get("load_from_showo", False):
+         pruned_model = Showo2Qwen2_5.from_pretrained(
+-            config.model.showo.pretrained_model_path, use_safetensors=False,
++            config.model.showo.pretrained_model_path,
++            use_safetensors=False,
++            torch_dtype=weight_type,
+         ).to(device)
+     else:
+         pruned_model = Showo2Qwen2_5(**config.model.showo).to(device)
+         sd = load_state_dict(config.model_path)
+         pruned_model.load_state_dict(sd)
+ 
+-    pruned_model.to(weight_type).eval()
++    pruned_model.eval()
+ 
+     # -- Wanda calibration (Paper Sec. 3.2) ----------------------------------
+     logger.info("Preparing calibration batch for Wanda pruning...")
+@@ -546,7 +807,7 @@
+     )
+     logger.info("Wanda structural pruning applied.")
+     del pruner, scores
+-    torch.cuda.empty_cache()
++    empty_device_cache(device)
+ 
+     # Apply FlashU patch to the pruned model
+     apply_flashu_patch(pruned_model, flashu_config)
+@@ -555,25 +816,31 @@
+     flashu_outdir = os.path.join(
+         outdir,
+         f"FlashU_rp{int(ffn_pruning_ratio*100)}_rLS{int(layer_skipping_ratio*100)}"
+-        f"_T{total_steps}_HN{hybrid_network_final_steps}",
+-    )
++        f"_T{total_steps}_HN{hybrid_network_final_steps}"
++        f"{'_CADD' if cadd_enabled else ''}"
++        f"{'_TADA' if tada_config is not None else ''}"
++        f"{'_LOGBYPASS' if logit_bypass_enabled else ''}",
++    )
++    set_seed(seed)
++    logger.info(f"{method_name} random seed: {seed}")
+     avg_time = run_test_strategy(
+         model_instance=pruned_model,
+         output_dir=flashu_outdir,
+-        run_name="FlashU",
++        run_name=method_name,
+         layer_skipping_ratio=layer_skipping_ratio,
+         diffusion_head_cache_interval=diffusion_head_cache_interval,
+         layer_skip_recalc_interval=layer_skip_recalc_interval,
+         adaptive_guidance_config=adaptive_guidance_config,
+         hybrid_network_final_steps=hybrid_network_final_steps,
+         num_inference_steps=total_steps,
++        tada_config=tada_config,
+         **common_eval_args,
+     )
+     if avg_time > 0:
+-        results["FlashU"] = avg_time
++        results[method_name] = avg_time
+ 
+     del pruned_model
+-    torch.cuda.empty_cache()
++    empty_device_cache(device)
+ 
+     # ======================================================================
+     # 3. Comparison summary
+@@ -588,7 +855,7 @@
+     logger.info(sep)
+ 
+     baseline_time = results.get("Baseline", 0.0)
+-    for name in ["Baseline", "FlashU"]:
++    for name in ["Baseline", method_name]:
+         if name not in results:
+             continue
+         t = results[name]
+--- a/flashu/layer_skipping.py
++++ b/flashu/layer_skipping.py
+@@ -97,6 +97,7 @@
+         cache_position: Optional[torch.LongTensor] = None,
+         layers_to_skip: Optional[List[int]] = None,
+         use_full_network: bool = False,
++        skip_lm_head: bool = False,
+         num_logits_to_keep: int = 0,
+         **loss_kwargs,
+     ) -> Union[Tuple, CausalLMOutputWithPast]:
+@@ -174,7 +175,12 @@
+         if output_hidden_states:
+             all_hidden_states += (hidden_states,)
+ 
+-        logits = self.lm_head(hidden_states[:, -num_logits_to_keep:, :])
++        if skip_lm_head:
++            if labels is not None:
++                raise ValueError("skip_lm_head cannot be used when labels are provided")
++            logits = None
++        else:
++            logits = self.lm_head(hidden_states[:, -num_logits_to_keep:, :])
+ 
+         loss = None
+         if labels is not None:
+--- a/flashu/patch.py
++++ b/flashu/patch.py
+@@ -10,7 +10,9 @@
+     apply_flashu_patch(model, config)
+ """
+ 
++import json
+ import logging
++import os
+ from typing import Dict, List, Optional, Tuple
+ 
+ import torch
+@@ -34,8 +36,13 @@
+ 
+ logger = logging.getLogger(__name__)
+ 
+-# Expected hidden_size for Showo2Qwen2_5 1.5B
+-_EXPECTED_HIDDEN_SIZE = 1536
++# Explicitly supported Show-o2 scales.  The 3584-channel path was
++# validated in the preserved 7B port before this matched experiment.
++_SUPPORTED_HIDDEN_SIZES = frozenset({1536, 3584})
++
++
++class RouterProbeComplete(RuntimeError):
++    """Internal control signal used by feature-only trajectory probing."""
+ 
+ 
+ def apply_flashu_patch(model, config: Optional[FlashUConfig] = None):
+@@ -65,11 +72,10 @@
+ 
+     # --- 1. Validate model ---
+     hidden_size = getattr(model.config, 'hidden_size', None)
+-    if hidden_size != _EXPECTED_HIDDEN_SIZE:
++    if hidden_size not in _SUPPORTED_HIDDEN_SIZES:
+         raise ValueError(
+-            f"FlashU is designed for Showo2Qwen2_5 1.5B (hidden_size={_EXPECTED_HIDDEN_SIZE}), "
+-            f"but got hidden_size={hidden_size}. "
+-            f"Use at your own risk or adjust _EXPECTED_HIDDEN_SIZE."
++            f"Unsupported Showo2Qwen2_5 hidden_size={hidden_size}; "
++            f"supported hidden sizes are {sorted(_SUPPORTED_HIDDEN_SIZES)}."
+         )
+ 
+     logger.info(
+@@ -91,6 +97,11 @@
+     model._flashu_layers_to_skip_cache = None
+     model._flashu_total_inference_steps = config.total_steps
+     model._flashu_adaptive_guidance_config = config.adaptive_guidance_config
++    model._flashu_cfg_ag_active = False
++    model._flashu_cfg_ag_hits = 0
++    model._flashu_cfg_ag_trigger_step = None
++    model._flashu_cfg_ag_attention_mask = None
++    model._flashu_cache_aware_bypass_hits = 0
+ 
+     # Save originals for reversibility
+     if not hasattr(model, '_original_forward'):
+@@ -106,6 +117,12 @@
+     model.calculate_and_select_layers_to_skip = types.MethodType(
+         _calculate_and_select_layers_to_skip, model
+     )
++
++    shape_trace_path = os.environ.get("FLASHU_SHAPE_TRACE_PATH")
++    if shape_trace_path and config.r_p > 0.0:
++        from .shape_trace import install_shape_trace
++
++        install_shape_trace(model, shape_trace_path)
+ 
+     logger.info("[FlashU] All patches applied successfully.")
+     return model
+@@ -141,7 +158,9 @@
+     for attr in [
+         '_flashu_config', '_flashu_current_step', '_flashu_diffusion_cache',
+         '_flashu_layers_to_skip_cache', '_flashu_total_inference_steps',
+-        '_flashu_adaptive_guidance_config',
++        '_flashu_adaptive_guidance_config', '_flashu_cfg_ag_active',
++        '_flashu_cfg_ag_hits', '_flashu_cfg_ag_trigger_step',
++        '_flashu_cfg_ag_attention_mask', '_flashu_cache_aware_bypass_hits',
+     ]:
+         if hasattr(model, attr):
+             delattr(model, attr)
+@@ -178,6 +197,19 @@
+     self._flashu_total_inference_steps = num_inference_steps
+     self._flashu_adaptive_guidance_config = adaptive_guidance_config
+     self._flashu_hybrid_network_final_steps = hybrid_network_final_steps
++    self._flashu_cfg_ag_active = False
++    self._flashu_cfg_ag_hits = 0
++    self._flashu_cfg_ag_trigger_step = None
++    self._flashu_cfg_ag_attention_mask = None
++    self._flashu_cache_aware_bypass_hits = 0
++    self._flashu_router_feature_rows = []
++    self._flashu_router_feature_written = False
++    # Optional tail-only trajectory switch. Disabled unless
++    # FLASHU_TAIL_SWITCH_STEP is explicitly set by an experiment runner.
++    self._flashu_tail_switched = False
++    self._flashu_probe_generation_index = (
++        getattr(self, "_flashu_probe_generation_index", -1) + 1
++    )
+ 
+ 
+ def _calculate_and_select_layers_to_skip(
+@@ -201,6 +233,7 @@
+     max_seq_len=None, device='cuda:0',
+     profiler=None,
+     use_full_network: bool = False,
++    cache_aware_bypass: bool = False,
+     **kwargs,
+ ):
+     """Accelerated forward pass with diffusion head caching.
+@@ -219,6 +252,86 @@
+             layers_to_skip=layers_to_skip,
+             use_full_network=use_full_network,
+         )
++
++    # FlashU's diffusion-head cache replaces ``processed_hidden_states`` with
++    # a previously cached tensor.  On a cache-reuse step the freshly computed
++    # feature extractor and Qwen outputs therefore cannot affect ``v_pred``.
++    # When the caller confirms that this is not a layer-skip recalibration
++    # boundary, bypass those provably dead computations and execute exactly
++    # the same diffusion_head_b path as the original implementation.
++    T_cache = getattr(self, '_flashu_diffusion_head_cache_interval', -1)
++    current_step = getattr(self, '_flashu_current_step', 0)
++    cache = getattr(self, '_flashu_diffusion_cache', None)
++    bypass_now = bool(
++        cache_aware_bypass
++        and should_use_diffusion_cache(
++            current_step, T_cache, use_full_network, cache
++        )
++    )
++    if bypass_now:
++        from einops import rearrange
++
++        if len(image_latents.shape) != 4:
++            _, c, T, h, w = image_latents.shape
++        else:
++            _, c, h, w = image_latents.shape
++            T = 0
++
++        dtype = self.showo.model.embed_tokens.weight.dtype
++        time_embeds = self.time_embed(t, dtype)
++
++        if profiler:
++            profiler.start('4. Diffusion Head')
++        processed_cache = cache
++        perturb_eps_raw = os.environ.get("FLASHU_CACHE_POSITIVE_CONTROL_EPS")
++        perturb_step_raw = os.environ.get("FLASHU_CACHE_POSITIVE_CONTROL_STEP")
++        perturb_step = int(perturb_step_raw) if perturb_step_raw else current_step
++        if perturb_eps_raw and current_step == perturb_step:
++            perturb_eps = float(perturb_eps_raw)
++            feature_pattern = torch.linspace(
++                -1.0,
++                1.0,
++                processed_cache.shape[-1],
++                device=processed_cache.device,
++                dtype=processed_cache.dtype,
++            ).view(1, 1, -1)
++            processed_cache = processed_cache + perturb_eps * feature_pattern
++            self._flashu_cache_positive_control_hits = (
++                getattr(self, "_flashu_cache_positive_control_hits", 0) + 1
++            )
++        v_pred = self.diffusion_head_b(processed_cache, time_embeds, modality_positions)
++        if profiler:
++            profiler.stop('4. Diffusion Head')
++
++        v_pred_ = []
++        num_imgs = 0
++        for i, modality_batch in enumerate(modality_positions):
++            for _, (offset, length) in enumerate(modality_batch):
++                if length > 0:
++                    v_pred_.append(v_pred[i, offset:offset + length])
++                    num_imgs += 1
++        v_pred_ = torch.stack(v_pred_)
++
++        if self.config.add_time_embeds:
++            v_pred_ = v_pred_[:, 1:, :]
++
++        p = self.config.patch_size
++        h_, w_ = h // p, w // p
++        v_pred_ = self.unpatchify(v_pred_, h_, w_, T=T)
++        if T == 0:
++            v_pred_ = rearrange(v_pred_, 'i j k -> i k j')
++            v_pred_ = v_pred_.reshape(num_imgs, c, h, w)
++        else:
++            v_pred_ = rearrange(v_pred_, 'b t l c -> b c t l')
++            v_pred_ = v_pred_.reshape(num_imgs, c, T, h, w)
++
++        self._flashu_cache_aware_bypass_hits += 1
++        if getattr(self, '_flashu_probe_generation_index', -1) == 0:
++            logger.info(
++                '[CacheAwareBypass] skipped feature extractor and Qwen at step=%d',
++                current_step,
++            )
++        return None, v_pred_, None
+ 
+     # --- 1. Feature Extraction ---
+     if profiler:
+@@ -298,6 +411,7 @@
+         output_hidden_states=True,
+         layers_to_skip=layers_to_skip,
+         use_full_network=use_full_network,
++        skip_lm_head=os.environ.get("FLASHU_SKIP_UNUSED_LOGITS") == "1",
+     )
+     if profiler:
+         profiler.stop('2. LLM Forward Pass')
+@@ -322,6 +436,22 @@
+ 
+     if use_cache:
+         processed_hidden_states = cache
++        perturb_eps_raw = os.environ.get("FLASHU_CACHE_POSITIVE_CONTROL_EPS")
++        perturb_step_raw = os.environ.get("FLASHU_CACHE_POSITIVE_CONTROL_STEP")
++        perturb_step = int(perturb_step_raw) if perturb_step_raw else current_step
++        if perturb_eps_raw and current_step == perturb_step:
++            perturb_eps = float(perturb_eps_raw)
++            feature_pattern = torch.linspace(
++                -1.0,
++                1.0,
++                processed_hidden_states.shape[-1],
++                device=processed_hidden_states.device,
++                dtype=processed_hidden_states.dtype,
++            ).view(1, 1, -1)
++            processed_hidden_states = processed_hidden_states + perturb_eps * feature_pattern
++            self._flashu_cache_positive_control_hits = (
++                getattr(self, "_flashu_cache_positive_control_hits", 0) + 1
++            )
+     else:
+         processed_hidden_states = diff_head_input
+         full_attention_mask = create_block_mask(
+@@ -402,6 +532,41 @@
+     is_recalc_step = False
+     final_layers_to_skip = layers_to_skip
+ 
++    # All candidate trajectories may share an identical conservative prefix,
++    # then change only the remaining cache/full-network schedule.  Switching
++    # after the prefix makes the decision observable before trajectories
++    # diverge. Normal FlashU behavior is unchanged when the env var is absent.
++    tail_switch_raw = os.environ.get("FLASHU_TAIL_SWITCH_STEP")
++    if tail_switch_raw:
++        tail_switch_step = int(tail_switch_raw)
++        if (
++            current_step == tail_switch_step + 1
++            and not getattr(self, "_flashu_tail_switched", False)
++        ):
++            old_t_cache = getattr(self, "_flashu_diffusion_head_cache_interval", -1)
++            old_tau = getattr(self, "_flashu_hybrid_network_final_steps", 0)
++            new_t_cache = int(
++                os.environ.get("FLASHU_TAIL_CACHE_INTERVAL", str(old_t_cache))
++            )
++            new_tau = int(os.environ.get("FLASHU_TAIL_FINAL_STEPS", str(old_tau)))
++            if new_t_cache != old_t_cache:
++                # A feature cached under the prefix schedule must not cross a
++                # schedule boundary with a different reuse interval.
++                self._flashu_diffusion_cache = None
++            self._flashu_diffusion_head_cache_interval = new_t_cache
++            self._flashu_hybrid_network_final_steps = new_tau
++            self._flashu_tail_switched = True
++            logger.info(
++                "[TailRouter] generation=%d switched after step=%d: "
++                "T_cache %d->%d, tau %d->%d",
++                getattr(self, "_flashu_probe_generation_index", -1),
++                tail_switch_step,
++                old_t_cache,
++                new_t_cache,
++                old_tau,
++                new_tau,
++            )
++
+     total_steps = getattr(self, '_flashu_total_inference_steps', 50)
+     tau = getattr(self, '_flashu_hybrid_network_final_steps', 0)
+     T_LS = getattr(self, '_flashu_layer_skip_recalc_interval', -1)
+@@ -410,6 +575,32 @@
+     adaptive_cfg = getattr(self, '_flashu_adaptive_guidance_config', None)
+     effective_guidance_scale = compute_adaptive_guidance_scale(
+         current_step, adaptive_cfg, guidance_scale
++    )
++
++    # Optional true Adaptive Guidance (AG). Once conditional and
++    # unconditional predictions converge, subsequent steps evaluate only the
++    # conditional half of the doubled CFG batch. It is disabled by default.
++    cfg_ag_threshold_raw = os.environ.get("FLASHU_CFG_AG_THRESHOLD")
++    cfg_ag_config = getattr(self, "_flashu_config", None)
++    cfg_ag_is_flashu = cfg_ag_config is not None and cfg_ag_config.r_p > 0.0
++    cfg_ag_threshold = (
++        float(cfg_ag_threshold_raw)
++        if cfg_ag_threshold_raw and cfg_ag_is_flashu
++        else None
++    )
++    cfg_ag_min_step = int(os.environ.get("FLASHU_CFG_AG_MIN_STEP", "1"))
++    cfg_ag_patience = max(
++        1, int(os.environ.get("FLASHU_CFG_AG_PATIENCE", "1"))
++    )
++    cfg_ag_max_step_raw = os.environ.get("FLASHU_CFG_AG_MAX_STEP")
++    cfg_ag_max_step = (
++        int(cfg_ag_max_step_raw) if cfg_ag_max_step_raw else None
++    )
++    cfg_ag_conditional_only = bool(
++        cfg_ag_threshold is not None
++        and effective_guidance_scale > 0.0
++        and getattr(self, "_flashu_cfg_ag_active", False)
++        and (cfg_ag_max_step is None or current_step <= cfg_ag_max_step)
+     )
+ 
+     # --- Hybrid FFN Network switching (Eq. 4, threshold tau) ---
+@@ -432,13 +623,194 @@
+                 )
+ 
+     # --- Forward Pass ---
++    # Keep the ODE state doubled so its shape never changes. After AG
++    # triggers, only the first (conditional) half enters the network; the
++    # prediction is duplicated again before returning to the solver.
++    forward_text_tokens = text_tokens
++    forward_image_latents = image_latents
++    forward_t = t
++    forward_attention_mask = attention_mask
++    forward_modality_positions = modality_positions
++    if cfg_ag_conditional_only:
++        cfg_batch = image_latents.shape[0]
++        if cfg_batch % 2 != 0:
++            raise ValueError(
++                "CFG Adaptive Guidance requires an even doubled batch, "
++                f"but received batch size {cfg_batch}."
++            )
++        conditional_batch = cfg_batch // 2
++        forward_text_tokens = text_tokens[:conditional_batch]
++        forward_image_latents = image_latents[:conditional_batch]
++        forward_t = t[:conditional_batch]
++        forward_modality_positions = modality_positions[:conditional_batch]
++
++        forward_attention_mask = getattr(
++            self, "_flashu_cfg_ag_attention_mask", None
++        )
++        if forward_attention_mask is None:
++            from models.omni_attention import omni_attn_mask
++
++            forward_attention_mask = create_block_mask(
++                omni_attn_mask(forward_modality_positions),
++                B=conditional_batch,
++                H=None,
++                Q_LEN=max_seq_len,
++                KV_LEN=max_seq_len,
++                device=forward_image_latents.device,
++            )
++            self._flashu_cfg_ag_attention_mask = forward_attention_mask
++
+     _, v, all_hidden_states_tuple = self(
+-        text_tokens=text_tokens, image_latents=image_latents, t=t,
+-        attention_mask=attention_mask, modality_positions=modality_positions,
++        text_tokens=forward_text_tokens,
++        image_latents=forward_image_latents,
++        t=forward_t,
++        attention_mask=forward_attention_mask,
++        modality_positions=forward_modality_positions,
+         max_seq_len=max_seq_len, layers_to_skip=final_layers_to_skip,
+         profiler=profiler, use_full_network=use_full,
++        cache_aware_bypass=bool(
++            os.environ.get('FLASHU_CACHE_AWARE_BYPASS') == '1'
++            and getattr(self, '_flashu_config', None) is not None
++            and self._flashu_config.r_p > 0.0
++            and not is_recalc_step
++            and not cfg_ag_conditional_only
++        ),
+         **kwargs,
+     )
++
++    # Optional low-overhead early-trajectory instrumentation for the mentor
++    # scheduler.  It observes computations that Original FlashU already
++    # performs and never changes the returned prediction.  GPU scalars are
++    # kept on-device for steps 1..K and synchronized only once at step K.
++    router_feature_path = os.environ.get("FLASHU_ROUTER_FEATURE_PATH")
++    router_decision_step = int(os.environ.get("FLASHU_ROUTER_DECISION_STEP", "5"))
++    if router_feature_path and current_step <= router_decision_step:
++        latent_probe = image_latents[: max(1, image_latents.shape[0] // 2)].float()
++        v_probe = v.float()
++        row = {
++            "step": torch.tensor(float(current_step), device=v.device),
++            "t": t.float().mean(),
++            "latent_mean": latent_probe.mean(),
++            "latent_rms": latent_probe.square().mean().sqrt(),
++            "latent_std": latent_probe.std(unbiased=False),
++            "latent_absmax": latent_probe.abs().amax(),
++        }
++        if effective_guidance_scale > 0.0 and v_probe.shape[0] % 2 == 0:
++            v_cond_probe, v_uncond_probe = torch.chunk(v_probe, 2)
++            v_delta_probe = v_cond_probe - v_uncond_probe
++            v_cfg_probe = v_uncond_probe + effective_guidance_scale * v_delta_probe
++            cond_flat = v_cond_probe.flatten(1)
++            uncond_flat = v_uncond_probe.flatten(1)
++            row.update(
++                {
++                    "v_cond_rms": v_cond_probe.square().mean().sqrt(),
++                    "v_uncond_rms": v_uncond_probe.square().mean().sqrt(),
++                    "v_delta_rms": v_delta_probe.square().mean().sqrt(),
++                    "v_cfg_rms": v_cfg_probe.square().mean().sqrt(),
++                    "v_cond_uncond_cos": F.cosine_similarity(
++                        cond_flat, uncond_flat, dim=1, eps=1e-8
++                    ).mean(),
++                    "v_delta_to_cond": v_delta_probe.square().mean().sqrt()
++                    / v_cond_probe.square().mean().sqrt().clamp_min(1e-8),
++                    "latent_v_cos": F.cosine_similarity(
++                        latent_probe.flatten(1), v_cond_probe.flatten(1),
++                        dim=1, eps=1e-8,
++                    ).mean(),
++                    "v_spatial_dx_rms": (
++                        v_cond_probe[..., 1:] - v_cond_probe[..., :-1]
++                    ).square().mean().sqrt(),
++                    "v_spatial_dy_rms": (
++                        v_cond_probe[..., 1:, :] - v_cond_probe[..., :-1, :]
++                    ).square().mean().sqrt(),
++                }
++            )
++
++        if current_step in (1, router_decision_step) and all_hidden_states_tuple:
++            layer_cosines = []
++            for hidden_in, hidden_out in zip(
++                all_hidden_states_tuple[:-1], all_hidden_states_tuple[1:]
++            ):
++                # At most 64 evenly strided tokens are enough for a stable
++                # layer-similarity summary and keep the probe inexpensive.
++                stride = max(1, hidden_in.shape[1] // 64)
++                hidden_in_probe = hidden_in[:, ::stride, :].float()
++                hidden_out_probe = hidden_out[:, ::stride, :].float()
++                layer_cosines.append(
++                    F.cosine_similarity(
++                        hidden_in_probe, hidden_out_probe, dim=-1, eps=1e-8
++                    ).mean()
++                )
++            if layer_cosines:
++                layer_cosines = torch.stack(layer_cosines)
++                prefix = f"layer_cos_s{current_step}"
++                row.update(
++                    {
++                        f"{prefix}_mean": layer_cosines.mean(),
++                        f"{prefix}_std": layer_cosines.std(unbiased=False),
++                        f"{prefix}_min": layer_cosines.amin(),
++                        f"{prefix}_max": layer_cosines.amax(),
++                        f"{prefix}_q25": torch.quantile(layer_cosines, 0.25),
++                        f"{prefix}_median": torch.quantile(layer_cosines, 0.50),
++                        f"{prefix}_q75": torch.quantile(layer_cosines, 0.75),
++                    }
++                )
++
++        self._flashu_router_feature_rows.append(row)
++
++        if (
++            current_step == router_decision_step
++            and not self._flashu_router_feature_written
++        ):
++            feature_record = {
++                "run_name": getattr(self, "_flashu_router_run_name", None),
++                "prompt_index": getattr(self, "_flashu_router_prompt_index", None),
++                "prompt_file_name": getattr(
++                    self, "_flashu_router_prompt_file_name", None
++                ),
++                "prompt": getattr(self, "_flashu_router_prompt", None),
++                "decision_step": router_decision_step,
++                "features": {},
++            }
++            for step_row in self._flashu_router_feature_rows:
++                step_number = int(step_row["step"].item())
++                for key, value in step_row.items():
++                    if key == "step":
++                        continue
++                    feature_record["features"][f"s{step_number}_{key}"] = float(
++                        value.detach().float().cpu().item()
++                    )
++            feature_parent = os.path.dirname(router_feature_path)
++            if feature_parent:
++                os.makedirs(feature_parent, exist_ok=True)
++            with open(router_feature_path, "a", encoding="utf-8") as feature_file:
++                feature_file.write(
++                    json.dumps(feature_record, ensure_ascii=False, sort_keys=True)
++                    + "\n"
++                )
++            self._flashu_router_feature_written = True
++            if os.environ.get("FLASHU_ROUTER_PROBE_ONLY") == "1":
++                raise RouterProbeComplete
++
++    gate_trace_path = os.environ.get("FLASHU_GATE_TRACE_PATH")
++    if gate_trace_path:
++        gate_trace_parent = os.path.dirname(gate_trace_path)
++        if gate_trace_parent:
++            os.makedirs(gate_trace_parent, exist_ok=True)
++        T_cache = getattr(self, "_flashu_diffusion_head_cache_interval", -1)
++        gate_record = {
++            "step": current_step,
++            "use_full": use_full,
++            "is_recalc_step": is_recalc_step,
++            "layers_to_skip": final_layers_to_skip,
++            "T_cache": T_cache,
++            "cache_present_after": self._flashu_diffusion_cache is not None,
++            "effective_guidance_scale": effective_guidance_scale,
++            "cfg_ag_conditional_only": cfg_ag_conditional_only,
++            "cadd_enabled": os.environ.get("FLASHU_CACHE_AWARE_BYPASS") == "1",
++            "cadd_hits_after": getattr(self, "_flashu_cache_aware_bypass_hits", 0),
++        }
++        with open(gate_trace_path, "a", encoding="utf-8") as gate_trace_file:
++            gate_trace_file.write(json.dumps(gate_record, sort_keys=True) + "\n")
+ 
+     # Update layer importance cache on recalculation steps
+     if is_recalc_step:
+@@ -450,9 +822,97 @@
+     if effective_guidance_scale > 0.0:
+         if profiler:
+             profiler.start('Guidance Calculation')
++
++        if cfg_ag_conditional_only:
++            v_doubled = torch.cat([v, v], dim=0)
++            if profiler:
++                profiler.stop('Guidance Calculation')
++            return v_doubled, all_hidden_states_tuple
++
+         v_cond, v_uncond = torch.chunk(v, 2)
+-        v = v_uncond + effective_guidance_scale * (v_cond - v_uncond)
+-        v_doubled = torch.cat([v, v], dim=0)
++        v_cfg = v_uncond + effective_guidance_scale * (v_cond - v_uncond)
++
++        # AG uses the original paper's convergence signal: cosine similarity
++        # between conditional and unconditional predictions. Switching starts
++        # on the next step because the current step computed both branches.
++        cos_cond_uncond = None
++        if (
++            cfg_ag_threshold is not None
++            and not getattr(self, "_flashu_cfg_ag_active", False)
++        ):
++            cos_cond_uncond = F.cosine_similarity(
++                v_cond.float().flatten(1),
++                v_uncond.float().flatten(1),
++                dim=1,
++                eps=1e-8,
++            ).mean()
++            gamma = float(cos_cond_uncond.item())
++            if current_step >= cfg_ag_min_step and gamma >= cfg_ag_threshold:
++                self._flashu_cfg_ag_hits += 1
++            else:
++                self._flashu_cfg_ag_hits = 0
++
++            if self._flashu_cfg_ag_hits >= cfg_ag_patience:
++                self._flashu_cfg_ag_active = True
++                self._flashu_cfg_ag_trigger_step = current_step
++                # A two-branch cache cannot be reused by the one-branch pass.
++                self._flashu_diffusion_cache = None
++                logger.info(
++                    "[CFG-AG] generation=%d triggered after step=%d "
++                    "(gamma=%.6f, threshold=%.6f, min_step=%d, patience=%d); "
++                    "conditional-only from step=%d%s",
++                    getattr(self, "_flashu_probe_generation_index", -1),
++                    current_step,
++                    gamma,
++                    cfg_ag_threshold,
++                    cfg_ag_min_step,
++                    cfg_ag_patience,
++                    current_step + 1,
++                    (
++                        f" through step={cfg_ag_max_step}"
++                        if cfg_ag_max_step is not None
++                        else ""
++                    ),
++                )
++
++        # Read-only validation probe. It never changes the generated velocity.
++        probe_path = os.environ.get("FLASHU_CFG_PROBE_PATH")
++        probe_config = getattr(self, "_flashu_config", None)
++        if probe_path and probe_config is not None and probe_config.r_p > 0.0:
++            cond_flat = v_cond.float().flatten(1)
++            uncond_flat = v_uncond.float().flatten(1)
++            cfg_flat = v_cfg.float().flatten(1)
++            record = {
++                "generation_index": int(
++                    getattr(self, "_flashu_probe_generation_index", -1)
++                ),
++                "step": int(current_step),
++                "guidance_scale": float(effective_guidance_scale),
++                "cos_cfg_cond": float(F.cosine_similarity(
++                    cfg_flat, cond_flat, dim=1, eps=1e-8
++                ).mean().item()),
++                "cos_cond_uncond": float((
++                    cos_cond_uncond
++                    if cos_cond_uncond is not None
++                    else F.cosine_similarity(
++                        cond_flat, uncond_flat, dim=1, eps=1e-8
++                    ).mean()
++                ).item()),
++                "relative_cfg_delta": float((
++                    torch.linalg.vector_norm(cfg_flat - cond_flat, dim=1)
++                    / torch.linalg.vector_norm(cfg_flat, dim=1).clamp_min(1e-8)
++                ).mean().item()),
++                "use_full_network": bool(use_full),
++                "num_skipped_layers": len(final_layers_to_skip or []),
++            }
++            probe_parent = os.path.dirname(probe_path)
++            if probe_parent:
++                os.makedirs(probe_parent, exist_ok=True)
++            with open(probe_path, "a", encoding="utf-8") as probe_file:
++                probe_file.write(json.dumps(record) + "\n")
++
++        v = v_cfg
++        v_doubled = torch.cat([v_cfg, v_cfg], dim=0)
+         if profiler:
+             profiler.stop('Guidance Calculation')
+         return v_doubled, all_hidden_states_tuple
+--- /dev/null
++++ b/flashu/shape_trace.py
+@@ -0,0 +1,115 @@
++"""Low-overhead Linear shape tracing for PTQ kernel preflight.
++
++Enabled through ``FLASHU_SHAPE_TRACE_PATH``.  The tracer records aggregate
++GEMM shapes instead of every invocation so a one-prompt generation run stays
++small enough to inspect and archive.
++"""
++
++from __future__ import annotations
++
++import atexit
++import json
++import math
++import os
++from collections import Counter
++from typing import Dict
++
++import torch
++import torch.nn as nn
++
++
++def _component(name: str) -> str:
++    if name.startswith("showo.model.layers"):
++        if ".mlp." in name:
++            return "qwen_ffn_pruned" if name.endswith("_pruned") else "qwen_ffn_full"
++        if ".self_attn." in name:
++            return "qwen_attention"
++        return "qwen_other"
++    if name.startswith("diffusion_head_a"):
++        return "diffusion_head_a"
++    if name.startswith("diffusion_head_b"):
++        return "diffusion_head_b"
++    if name.startswith("diff_proj"):
++        return "diffusion_projection"
++    if name.startswith("fusion_proj"):
++        return "fusion_projection"
++    if name.startswith("und_trans") or name.startswith("image_embedder_und"):
++        return "understanding_vision"
++    return "other"
++
++
++class LinearShapeTracer:
++    def __init__(self, model: nn.Module, output_path: str):
++        self.model = model
++        self.output_path = output_path
++        self.counts: Counter[str] = Counter()
++        self._handles = []
++        self._flushed = False
++
++        for name, module in model.named_modules():
++            if isinstance(module, nn.Linear):
++                self._handles.append(
++                    module.register_forward_pre_hook(self._make_hook(name, module))
++                )
++        atexit.register(self.flush)
++
++    def _make_hook(self, name: str, module: nn.Linear):
++        def hook(_module, inputs):
++            if not inputs or not torch.is_tensor(inputs[0]):
++                return
++            tensor = inputs[0]
++            if tensor.ndim == 0:
++                return
++            record = {
++                "component": _component(name),
++                "module": name,
++                "input_shape": list(tensor.shape),
++                "M": int(math.prod(tensor.shape[:-1])) if tensor.ndim > 1 else 1,
++                "K": int(tensor.shape[-1]),
++                "N": int(module.out_features),
++                "dtype": str(tensor.dtype).replace("torch.", ""),
++                "step": int(getattr(self.model, "_flashu_current_step", 0)),
++            }
++            self.counts[json.dumps(record, sort_keys=True)] += 1
++
++        return hook
++
++    def flush(self):
++        if self._flushed:
++            return
++        self._flushed = True
++        parent = os.path.dirname(self.output_path)
++        if parent:
++            os.makedirs(parent, exist_ok=True)
++        records = []
++        for encoded, count in self.counts.items():
++            record: Dict[str, object] = json.loads(encoded)
++            record["calls"] = count
++            records.append(record)
++        records.sort(
++            key=lambda item: (
++                item["component"], item["module"], item["step"], item["M"]
++            )
++        )
++        with open(self.output_path, "w", encoding="utf-8") as output_file:
++            json.dump(
++                {
++                    "format": "flashu-linear-shapes-v1",
++                    "unique_records": len(records),
++                    "total_linear_calls": sum(self.counts.values()),
++                    "records": records,
++                },
++                output_file,
++                indent=2,
++                sort_keys=True,
++            )
++
++
++def install_shape_trace(model: nn.Module, output_path: str) -> LinearShapeTracer:
++    """Install one tracer per model and return it."""
++    existing = getattr(model, "_flashu_linear_shape_tracer", None)
++    if existing is not None:
++        return existing
++    tracer = LinearShapeTracer(model, output_path)
++    model._flashu_linear_shape_tracer = tracer
++    return tracer
+--- /dev/null
++++ b/flashu/viditq_head.py
+@@ -0,0 +1,113 @@
++"""Selective ViDiT-Q W8A8 deployment for Show-o2 Diffusion Head A.
++
++The CUDA kernel produces FP16. To avoid destroying its gain with a cast at
++every Linear, the complete Head A runs in FP16 and crosses the BF16 boundary
++only once on entry and once before Head B. AdaLN and small K/V projections
++remain floating point because their traced shapes are unsupported or slower.
++"""
++
++from __future__ import annotations
++
++import gc
++
++import torch
++import torch.nn as nn
++
++
++class ViDiTQHeadLinear(nn.Module):
++    def __init__(self, linear: nn.Linear):
++        super().__init__()
++        from viditq_extension.nn.qlinear import (
++            W8A8OF16LinearDynamicInputScale,
++        )
++
++        device = linear.weight.device
++        cpu_linear = nn.Linear(
++            linear.in_features,
++            linear.out_features,
++            bias=linear.bias is not None,
++            dtype=torch.float16,
++            device="cpu",
++        )
++        with torch.no_grad():
++            cpu_linear.weight.copy_(linear.weight.detach().cpu().half())
++            if linear.bias is not None:
++                cpu_linear.bias.copy_(linear.bias.detach().cpu().half())
++        self.quant_linear = (
++            W8A8OF16LinearDynamicInputScale.from_linear(
++                cpu_linear, weight_sym=False
++            )
++            .to(device)
++            .eval()
++        )
++        # The upstream asymmetric CUDA entry point always requires a bias
++        # tensor even though its Python module permits ``bias=None``.
++        if self.quant_linear.bias is None:
++            self.quant_linear.bias = nn.Parameter(
++                torch.zeros(
++                    linear.out_features, device=device, dtype=torch.float16
++                ),
++                requires_grad=False,
++            )
++        self.in_features = linear.in_features
++        self.out_features = linear.out_features
++        self._quant_params = {}
++        del cpu_linear
++
++    def _params(self, rows, device):
++        from viditq_extension.nn.base import QuantParams
++
++        key = (rows, device.index)
++        params = self._quant_params.get(key)
++        if params is None:
++            params = QuantParams(rows, has_sum_input=True, device=device)
++            self._quant_params[key] = params
++        return params
++
++    def forward(self, input_tensor):
++        import viditq_extension.fused as fused_kernels
++
++        if input_tensor.dtype != torch.float16:
++            raise TypeError(
++                "ViDiTQHeadLinear expects the Head A FP16 boundary, got "
++                f"{input_tensor.dtype}"
++            )
++        shape = input_tensor.shape
++        flat = input_tensor.reshape(-1, shape[-1]).contiguous()
++        params = self._params(flat.shape[0], flat.device)
++        quantized = fused_kernels.quant_sum(
++            flat, params.sum_input, params.scale_input
++        )
++        output = self.quant_linear(quantized, params)
++        return output.view(*shape[:-1], self.out_features)
++
++
++def _replace_compatible_linears(module, prefix, replaced):
++    for name, child in list(module.named_children()):
++        full_name = f"{prefix}.{name}" if prefix else name
++        if isinstance(child, nn.Linear):
++            compatible = (
++                "adaLN_modulation" not in full_name
++                and child.in_features % 128 == 0
++                and child.out_features % 128 == 0
++                and child.out_features >= 1024
++            )
++            if compatible:
++                setattr(module, name, ViDiTQHeadLinear(child))
++                replaced.append(full_name)
++        else:
++            _replace_compatible_linears(child, full_name, replaced)
++
++
++def apply_viditq_head_w8a8(model):
++    """Quantize only profitable, kernel-compatible Head A Linear modules."""
++    model.diffusion_head_a.half()
++    replaced = []
++    _replace_compatible_linears(
++        model.diffusion_head_a, "diffusion_head_a", replaced
++    )
++    model._flashu_viditq_head_enabled = True
++    model._flashu_viditq_replaced_modules = tuple(replaced)
++    gc.collect()
++    torch.cuda.empty_cache()
++    return replaced
+--- a/models/modeling_showo2_qwen2_5.py
++++ b/models/modeling_showo2_qwen2_5.py
+@@ -13,11 +13,14 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
++import os
++
+ import torch
+ import torch.nn as nn
+ import torch.nn.functional as F
+ from einops import rearrange
+ from transformers import AutoConfig
++from transformers.cache_utils import DynamicCache
+ from torch.nn.attention.flex_attention import BlockMask
+ from .misc import velocity_prediction, next_token_prediction, interpolate_pos_encoding
+ from .modeling_siglip import SiglipModel
+@@ -171,6 +174,11 @@
+             output_hidden_states=True,
+             max_seq_len=None,
+             device='cuda:0',
++            past_key_values=None,
++            use_cache=False,
++            cache_position=None,
++            num_logits_to_keep=0,
++            return_model_outputs=False,
+             **kwargs,
+     ):
+         T = 0
+@@ -241,8 +249,16 @@
+             inputs_embeds=input_embeds,
+             attention_mask=attention_mask,
+             # position_ids=position_ids,
+-            output_hidden_states=output_hidden_states
++            past_key_values=past_key_values,
++            use_cache=use_cache,
++            cache_position=cache_position,
++            num_logits_to_keep=num_logits_to_keep,
++            output_hidden_states=output_hidden_states,
++            return_dict=True,
+         )
++
++        if return_model_outputs:
++            return outputs
+ 
+         logits, last_hidden_states = outputs['logits'], outputs['hidden_states'][-1]
+ 
+@@ -530,12 +546,38 @@
+         device = input_embeds.device
+         dtype = input_embeds.dtype
+         result = []
+-        for _ in range(max_new_tokens):
++        use_kv_cache = os.getenv("FLASHU_UNDERSTANDING_KV_CACHE", "0") == "1"
++        kv_cache = DynamicCache() if use_kv_cache else None
++        for decode_step in range(max_new_tokens):
+             # if the sequence context is growing too long we must crop it at block_size
+             # idx_cond = idx if idx.size(1) <= self.config.block_size else idx[:, -self.config.block_size:]
+             # forward the model to get the logits for the index in the sequence
+             # logits, _ = self(idx_cond)
+-            logits = self.showo(inputs_embeds=input_embeds, attention_mask=attention_mask.to(dtype))['logits']
++            if use_kv_cache:
++                if decode_step == 0:
++                    cached_input_embeds = input_embeds
++                    cached_attention_mask = attention_mask.to(dtype)
++                else:
++                    cached_input_embeds = input_embeds[:, -1:, :]
++                    cached_attention_mask = attention_mask.squeeze()[-1:, :].reshape(
++                        1, 1, 1, -1
++                    ).to(dtype)
++                outputs = self.showo(
++                    inputs_embeds=cached_input_embeds,
++                    attention_mask=cached_attention_mask,
++                    past_key_values=kv_cache,
++                    use_cache=True,
++                    output_hidden_states=False,
++                    return_dict=True,
++                    num_logits_to_keep=1,
++                )
++                kv_cache = outputs.past_key_values
++                logits = outputs.logits
++            else:
++                logits = self.showo(
++                    inputs_embeds=input_embeds,
++                    attention_mask=attention_mask.to(dtype),
++                )['logits']
+ 
+             L = attention_mask.shape[-1]
+             attention_mask = attention_mask.squeeze()
+@@ -666,18 +708,56 @@
+         """
+         generated_tokens = input_ids
+         output_tokens = []
++        use_kv_cache = os.getenv("FLASHU_UNDERSTANDING_KV_CACHE", "0") == "1"
++        kv_cache = DynamicCache() if use_kv_cache else None
+         if attention_mask is not None and type(attention_mask) == BlockMask:
+             raise NotImplementedError
+ 
+-        for _ in range(max_new_tokens):
++        for decode_step in range(max_new_tokens):
+             # Generate the next token
+-            logits = self.forward_und_only(
+-                text_tokens=torch.tensor([generated_tokens]).to(device),
+-                image_latents=image_latents,
+-                t=t,
+-                attention_mask=attention_mask,
+-                modality_positions=modality_positions,
+-            )
++            if use_kv_cache and decode_step > 0:
++                # The prefix (including visual features) is already cached.  Only
++                # the token sampled on the preceding iteration is new.
++                cached_mask = attention_mask.squeeze()[-1:, :].reshape(
++                    1, 1, 1, -1
++                )
++                outputs = self.showo(
++                    input_ids=torch.tensor(
++                        [[generated_tokens[-1]]], device=device
++                    ),
++                    attention_mask=cached_mask.to(image_latents.dtype),
++                    past_key_values=kv_cache,
++                    use_cache=True,
++                    output_hidden_states=False,
++                    return_dict=True,
++                    num_logits_to_keep=1,
++                )
++            elif use_kv_cache:
++                outputs = self.forward_und_only(
++                    text_tokens=torch.tensor([generated_tokens]).to(device),
++                    image_latents=image_latents,
++                    t=t,
++                    attention_mask=attention_mask,
++                    modality_positions=modality_positions,
++                    past_key_values=kv_cache,
++                    use_cache=True,
++                    num_logits_to_keep=1,
++                    output_hidden_states=False,
++                    return_model_outputs=True,
++                )
++            else:
++                outputs = None
++                logits = self.forward_und_only(
++                    text_tokens=torch.tensor([generated_tokens]).to(device),
++                    image_latents=image_latents,
++                    t=t,
++                    attention_mask=attention_mask,
++                    modality_positions=modality_positions,
++                )
++
++            if use_kv_cache:
++                kv_cache = outputs.past_key_values
++                logits = outputs.logits
+ 
+             next_token_logits = logits[:, -1, :]  # Get logits for the last token
+ 
+@@ -736,4 +816,4 @@
+             # Decode the generated tokens
+         generated_text = tokenizer.decode(output_tokens, skip_special_tokens=False)
+ 
+-        return generated_text
+\ No newline at end of file
++        return generated_text
+--- /dev/null
++++ b/transport/tada_sampler.py
+@@ -0,0 +1,299 @@
++"""Adapter between FlashU's forward-time velocity model and Apple TADA.
++
++FlashU trains the linear path ``x(t) = (1-t) noise + t data`` and predicts
++``dx/dt = data - noise``.  The upstream diffusers-style TADA scheduler uses
++the reverse noise coordinate ``sigma = 1-t`` and expects flow prediction in
++the opposite direction.  Consequently the adapter calls FlashU at
++``t = 1-sigma`` and passes ``-velocity`` to TADA.
++"""
++
++from dataclasses import dataclass
++from typing import Callable
++
++import torch
++
++from third_party.tada.tada_utils.solvers.scheduling_deis_multistep_momentum import (
++    momentumDEISMultistepScheduler,
++)
++from third_party.tada.tada_utils.tada_dynamics import apply_cholesky_transform
++
++
++@dataclass(frozen=True)
++class TADAConfig:
++    """TADA settings for one FlashU evaluation run."""
++
++    nominal_steps: int
++    flow_shift: float = 3.0
++    nd: int = 2
++    k: float = 1.0
++    solver_order: int = 2
++    benchmark: bool = False
++    fast_path: bool = False
++
++    @property
++    def model_evaluations(self) -> int:
++        # FlashU's existing torchdiffeq Euler path receives ``nominal_steps``
++        # time points and therefore makes nominal_steps - 1 model calls.
++        return self.nominal_steps - 1
++
++
++class FlashUTADASampler:
++    """Stateful TADA sampler with the same model-call budget as FlashU Euler."""
++
++    def __init__(self, config: TADAConfig, device: torch.device):
++        if config.nominal_steps < 2:
++            raise ValueError("TADA requires at least two nominal time points")
++        if config.nd < 1:
++            raise ValueError("TADA nd must be positive")
++        if config.solver_order < 2:
++            raise ValueError("The upstream TADA scheduler requires solver_order >= 2")
++
++        self.config = config
++        self.device = torch.device(device)
++        self.scheduler = momentumDEISMultistepScheduler(
++            use_flow_sigmas=True,
++            prediction_type="flow_prediction",
++            flow_shift=config.flow_shift,
++            nd=config.nd,
++            k=config.k,
++            benchmark=int(config.benchmark),
++            solver_order=config.solver_order,
++        )
++        self.scheduler.set_timesteps(
++            config.model_evaluations,
++            device=self.device,
++        )
++        self._fast_prev_force = None
++        self._fast_constants = None
++        if config.fast_path:
++            if not (
++                config.benchmark
++                and config.nd == 2
++                and config.solver_order == 2
++            ):
++                raise ValueError(
++                    "TADA fast path requires benchmark=True, nd=2, order=2"
++                )
++            self._fast_constants = self._precompute_fast_constants()
++
++    def reset(self) -> None:
++        """Reset per-image scheduler state while reusing static DEIS weights."""
++        self.scheduler._step_index = None
++        self.scheduler._begin_index = None
++        self.scheduler._Xs = None
++        self.scheduler.prev_force = [None] * (self.config.solver_order - 1)
++        self.scheduler.lower_order_nums = 0
++        self._fast_prev_force = None
++
++    @torch.no_grad()
++    def _precompute_fast_constants(self) -> dict[str, torch.Tensor]:
++        """Precompute the scalar/matrix terms reused by the fixed N=2 path."""
++        projection_weights = []
++        one_minus_t = []
++        force_scales = []
++        phi_dt = []
++        current_force_coefs = []
++        previous_force_coefs = []
++
++        dyn = self.scheduler.dyn
++        for index in range(self.config.model_evaluations):
++            current_t = self.scheduler.tada_ts[index].reshape(-1).to(
++                device=self.device,
++                dtype=torch.float32,
++            )
++            next_t = self.scheduler.tada_ts[index + 1].reshape(-1).to(
++                device=self.device,
++                dtype=torch.float32,
++            )
++
++            kappa = dyn.tadat_to_kappa(next_t)
++            covariance = dyn.cov_fn(next_t)
++            covariance_inv = torch.linalg.inv(covariance)
++            means = dyn.mean_fn(next_t, 1).to(torch.float32)
++            weights = (covariance_inv @ means.unsqueeze(-1)).squeeze(-1)
++            mean_norm = (weights * means).sum(-1, keepdim=True)
++            signal_scale = self.scheduler.kappa_to_alpha(kappa).reshape(-1, 1)
++            projection_weights.append(
++                (weights / mean_norm * signal_scale).squeeze(0)
++            )
++
++            one_minus = 1.0 - current_t.squeeze(0)
++            one_minus_t.append(one_minus)
++            force_scales.append(2.0 / one_minus.square())
++            phi_dt.append((next_t - current_t).squeeze(0))
++
++            current_coef = self.scheduler.coef[index][0].to(
++                device=self.device,
++                dtype=torch.float32,
++            )
++            current_force_coefs.append(current_coef[:, -1].reshape(-1))
++            if index == 0:
++                previous_force_coefs.append(torch.zeros_like(current_force_coefs[-1]))
++            else:
++                previous_coef = self.scheduler.coef[index][1].to(
++                    device=self.device,
++                    dtype=torch.float32,
++                )
++                previous_force_coefs.append(previous_coef[:, -1].reshape(-1))
++
++        return {
++            "projection_weights": torch.stack(projection_weights),
++            "one_minus_t": torch.stack(one_minus_t),
++            "force_scales": torch.stack(force_scales),
++            "phi_dt": torch.stack(phi_dt),
++            "current_force_coefs": torch.stack(current_force_coefs),
++            "previous_force_coefs": torch.stack(previous_force_coefs),
++        }
++
++    @torch.no_grad()
++    def _fast_step(
++        self,
++        model_output: torch.Tensor,
++        sample: torch.Tensor,
++        step_index: int,
++    ) -> torch.Tensor:
++        """Algebraically equivalent N=2/order=2 benchmark TADA update."""
++        if self.scheduler._Xs is None:
++            self.scheduler._init_Xs(sample)
++            self.scheduler._Xs = self.scheduler._Xs.to(torch.float32)
++
++        constants = self._fast_constants
++        sigma = self.scheduler.sigmas[step_index].to(
++            device=sample.device,
++            dtype=torch.float32,
++        )
++        estimated_data = sample.to(torch.float32) - sigma * model_output.to(
++            torch.float32
++        )
++
++        state = self.scheduler._Xs.reshape(
++            sample.shape[0],
++            2,
++            sample.shape[1],
++            *sample.shape[2:],
++        )
++        one_minus = constants["one_minus_t"][step_index]
++        series_sum = state[:, 0] + one_minus * state[:, 1]
++        force = constants["force_scales"][step_index] * (
++            estimated_data - series_sum
++        )
++
++        spatial_ones = (1,) * (force.ndim - 1)
++        current_coef = constants["current_force_coefs"][step_index].reshape(
++            1, 2, *spatial_ones
++        )
++        multistep_force = force.unsqueeze(1) * current_coef
++        if self._fast_prev_force is not None:
++            previous_coef = constants["previous_force_coefs"][step_index].reshape(
++                1, 2, *spatial_ones
++            )
++            multistep_force = (
++                multistep_force
++                + self._fast_prev_force.unsqueeze(1) * previous_coef
++            )
++
++        dt = constants["phi_dt"][step_index]
++        next_state_0 = state[:, 0] + dt * state[:, 1] + multistep_force[:, 0]
++        next_state_1 = state[:, 1] + multistep_force[:, 1]
++        next_state = torch.stack([next_state_0, next_state_1], dim=1)
++        self.scheduler._Xs = next_state.flatten(start_dim=1, end_dim=2)
++        self._fast_prev_force = force
++
++        if step_index == self.config.model_evaluations - 1:
++            self.scheduler._Xs = None
++            self._fast_prev_force = None
++            return estimated_data
++
++        projection = constants["projection_weights"][step_index]
++        projection = projection.reshape(1, 2, *spatial_ones)
++        return (next_state * projection).sum(dim=1)
++
++    def _init_augmented_latent(
++        self,
++        shape: tuple[int, ...],
++        dtype: torch.dtype,
++    ) -> torch.Tensor:
++        """Sample TADA's augmented state and collapse it to the model input."""
++        batch_size, *spatial_dims = shape
++        nd = self.config.nd
++        kappa0 = self.scheduler.init_kappa().to(self.device)
++        tada_t0 = self.scheduler.dyn.kappa_to_tadat(
++            kappa0,
++            device=self.device,
++        )
++        covariance = self.scheduler.dyn.cov_fn(tada_t0)
++        iid_gaussian = torch.randn(
++            batch_size,
++            nd,
++            *spatial_dims,
++            device=self.device,
++            dtype=covariance.dtype,
++        )
++        augmented = apply_cholesky_transform(
++            iid_gaussian,
++            covariance,
++            nd,
++        ).reshape(batch_size, -1, *spatial_dims[1:])
++        latent, _ = self.scheduler.dyn.prepare_network_input(
++            augmented,
++            tada_t0,
++            kappa_to_mu_fn=self.scheduler.kappa_to_alpha,
++        )
++        self.scheduler._Xs = augmented
++        return latent.to(dtype=dtype)
++
++    def prepare_initial_latent(
++        self,
++        shape: tuple[int, ...],
++        dtype: torch.dtype,
++        duplicate_for_cfg: bool,
++    ) -> torch.Tensor:
++        """Create the initial latent and keep CFG branches exactly paired."""
++        self.reset()
++        if self.config.benchmark:
++            latent = torch.randn(shape, device=self.device, dtype=dtype)
++        else:
++            latent = self._init_augmented_latent(shape, dtype)
++
++        if duplicate_for_cfg:
++            latent = torch.cat([latent, latent], dim=0)
++            if self.scheduler._Xs is not None:
++                self.scheduler._Xs = torch.cat(
++                    [self.scheduler._Xs, self.scheduler._Xs],
++                    dim=0,
++                )
++        return latent
++
++    @torch.no_grad()
++    def sample(
++        self,
++        initial_latent: torch.Tensor,
++        model: Callable,
++        **model_kwargs,
++    ) -> list[torch.Tensor]:
++        """Run TADA and return a one-element history compatible with FlashU."""
++        sample = initial_latent
++        for step_index, timestep in enumerate(self.scheduler.timesteps):
++            sigma = self.scheduler.sigmas[step_index].to(
++                device=sample.device,
++                dtype=torch.float32,
++            )
++            model_time = (1.0 - sigma).expand(sample.shape[0])
++            flashu_velocity = model(sample, model_time, **model_kwargs)
++            tada_flow_prediction = -flashu_velocity
++            if self.config.fast_path:
++                sample = self._fast_step(
++                    tada_flow_prediction,
++                    sample,
++                    step_index,
++                )
++            else:
++                sample = self.scheduler.step(
++                    tada_flow_prediction,
++                    timestep,
++                    sample,
++                ).prev_sample
++
++        if not torch.isfinite(sample).all():
++            raise FloatingPointError("TADA produced NaN or Inf values")
++        return [sample]

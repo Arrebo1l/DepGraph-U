@@ -1,0 +1,41 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{Show-o2 understanding settings.} Current caps match the main tables; legacy cap 1,024 applies only to Table~\ref{tab:stablefull}.}
+\label{tab:undprotocol}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{L{83pt}L{45pt}R|Y}
+\toprule
+\multicolumn{4}{c}{\textbf{(a) Evaluation datasets}} \\
+\midrule
+\textbf{Dataset} & \textbf{Split} & \textbf{Test cases} & \textbf{Metric} \\
+\midrule
+MMMU & validation & 900 & Official accuracy \\
+MMStar & val & 1,500 & Overall accuracy \\
+AI2D & test & 3,088 & Exact match \\
+MME & test & 2,374 & Perception / cognition \\
+MMBench-EN & dev v1.0 & 4,329 & CircularEval \\
+GQA & testdev & 12,578 & Exact match \\
+\bottomrule
+\end{tabularx}
+\par\vspace{9pt}
+\begin{tabularx}{\linewidth}{L{142pt}C{31pt}|ZZ}
+\toprule
+\multicolumn{4}{c}{\textbf{(b) Decoding and pruning hyperparameters}} \\
+\midrule
+\textbf{Hyperparameter} & \textbf{Symbol} & \textbf{Exact-DLS KV} & \textbf{Stable-Graph KV} \\
+\midrule
+Token cap: MMMU / AI2D / MME / GQA & $N_{\max}$ & 16 & 16 \\
+Token cap: MMStar / MMBench (current) & $N_{\max}$ & 128 & 128 \\
+Historical MMStar / MMBench cap & $N_{\max}$ & -- & 1,024 \\
+DLS ratio & $r_{\rm DLS}$ & 0.10 & 0 \\
+DLS period & $T_{\rm DLS}$ & 10 & -- \\
+FFN pruning ratio & $r_p$ & 0.10 & 0.10 \\
+Visual-token pruning ratio & $\rho$ & 0.50 & 0.50 \\
+Visual pruning layer & $L_p$ & 2 & 2 \\
+Calibration images & $N_{\rm calib}$ & 20 & 20 \\
+Vocabulary projection & -- & Last position & Last position \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

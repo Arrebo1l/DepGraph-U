@@ -1,0 +1,215 @@
+{
+  "scope": "Hashes identify preserved upstream records, which are separate from this compact package. Anonymous IDs deliberately omit machine paths.",
+  "sources": {
+    "record_001": {
+      "sha256": "7531b4740755785f0d9830eb29ffabc11801e3b9b67b5b20ecfb3203a6ac81c1",
+      "role": "Approved unrounded table data"
+    },
+    "record_002": {
+      "sha256": "7626f14ac034e9ed46d2aed58c366bdda6747a3229ceabb93a9fdd1163aac7e5",
+      "role": "24,769 per-example trace summaries"
+    },
+    "record_003": {
+      "sha256": "670e50e2f7b66f6fbb46f6ae589dfee3dda9d7bba53492e7932c1735b1febd38",
+      "role": "Measured length-group summaries"
+    },
+    "record_004": {
+      "sha256": "9bc0291c9cf2ff2125d25fbf8b89b91d4247ed17f0bfcbc3e27c6fb192cf6633",
+      "role": "30 seed/method/interval summaries"
+    },
+    "record_005": {
+      "sha256": "7673a28b2f0f58969c0a7671cf047fc9aa03e5e735212ee0f3783ea79387db64",
+      "role": "Upstream table evidence: TABLE_DATA.json"
+    },
+    "record_006": {
+      "sha256": "beab8f9241c4ef87a198480a3c470d4a506459ae69e2601490e7d3a36d3fefa2",
+      "role": "Upstream table evidence: MACHINE_RECOMPUTATION.json"
+    },
+    "record_007": {
+      "sha256": "7249336286e544d7c0f03e46004f9968ab8343b19068c2725d915a8aa03b734d",
+      "role": "Upstream table evidence: STABLE_RESULTS.csv"
+    },
+    "record_008": {
+      "sha256": "21b93d4726800faa82724849476b76a303f95571b2bdcabcc8312e5a6b4af3b6",
+      "role": "Upstream table evidence: ZERO_INCREMENTAL_SAMPLE_AUDIT.json"
+    },
+    "record_009": {
+      "sha256": "68bf411ef188f079387f53eb2b82112d05993412941565974cc6fa8a714cb8b2",
+      "role": "Upstream table evidence: VERIFIED_SUMMARY.csv"
+    },
+    "record_010": {
+      "sha256": "9bc0291c9cf2ff2125d25fbf8b89b91d4247ed17f0bfcbc3e27c6fb192cf6633",
+      "role": "Upstream table evidence: VERIFIED_SEED_METRICS.csv"
+    },
+    "record_011": {
+      "sha256": "f109f7df700e113e104070d5e2dc4b18a95c532a3ce7796db68c8a946a911941",
+      "role": "Upstream table evidence: UQP_EVIDENCE_RECHECK.json"
+    },
+    "record_012": {
+      "sha256": "d58f1c5d0d6abb96b04a30f3a11cf05855cb8e766063cb77463de4e714f295bf",
+      "role": "Upstream table evidence: PLOT_POINTS.json"
+    },
+    "record_013": {
+      "sha256": "17e7176393033b36ebc1405d9db2bec574860ec936925df4117ea6fdf269b8d7",
+      "role": "Upstream table evidence: appendix.tex"
+    },
+    "record_014": {
+      "sha256": "ccc94fb0db7bf940f332e2a7cb8954025759afc3b9cf10ef7b86a93b54429ae9",
+      "role": "Upstream table evidence: geneval_categories.tex"
+    },
+    "record_015": {
+      "sha256": "edff2d179262e054e4eec094cb08b701b2a17644c79934ac3edabfb606c8134d",
+      "role": "Upstream table evidence: generation_main.tex"
+    },
+    "record_016": {
+      "sha256": "473dffefd89c5317ab7cecf83edea8c07afb83305e8221a6c37be1867eaa2417",
+      "role": "Upstream table evidence: understanding_main.tex"
+    },
+    "record_017": {
+      "sha256": "12105124db1b3c533f51bd7c7b1784bb338c0d08e73b5646f823ba1f1e69651a",
+      "role": "Upstream table evidence: generation_ablation.tex"
+    },
+    "record_018": {
+      "sha256": "93c71e662abd2ac31f1a8ec22867c7829f434ade7c8f77c604a686a24d203224",
+      "role": "Upstream table evidence: REFERENCE_MANIFEST.json"
+    },
+    "record_019": {
+      "sha256": "d3719211650c7bfdc6c8be9da5b1979ceae00d71fd326aa85e6f383af4e8773a",
+      "role": "Upstream table evidence: timing.jsonl"
+    },
+    "record_020": {
+      "sha256": "13ff1dcc4545485d6000a425f299b683da937bad3e3ae5766310ff6b74a19317",
+      "role": "Upstream table evidence: timing.jsonl"
+    },
+    "record_021": {
+      "sha256": "ffa0daa659ca78ed6088a65e3aa65cfbab85412aaec1572ae282ecd9c350c127",
+      "role": "Upstream table evidence: timing.jsonl"
+    },
+    "record_022": {
+      "sha256": "b6e9c2b55c5338a0f26b1d27517dc258dc8f26bab377eb390e5db535155628af",
+      "role": "Upstream table evidence: timing.jsonl"
+    },
+    "record_023": {
+      "sha256": "bfee8f9df787f8932ffdabed23d7881226093625e807a58a601ea7df2a37debd",
+      "role": "Upstream table evidence: exact_dls_kv_timing.jsonl"
+    },
+    "record_024": {
+      "sha256": "16caf0d5c77d45419f95fa5468be17850616904afd0159cb09d2eda001fe2956",
+      "role": "Upstream table evidence: timing.jsonl"
+    },
+    "record_025": {
+      "sha256": "a37585fd9ed6ad68693e7268955cead7180d82d5d0dd142a18de7e96fe236e37",
+      "role": "Upstream table evidence: 20260903_202559_results.json"
+    },
+    "record_026": {
+      "sha256": "18e4ef58f5d4398fc115f0038e3bc9946b8f7662757b9e9baa1e903140bc93c9",
+      "role": "Upstream table evidence: 20260905_182427_results.json"
+    },
+    "record_027": {
+      "sha256": "775dbacd77da023419dc907ec32a658e62b815c2d65bc72f0e390bd42c6b22a1",
+      "role": "Upstream table evidence: 20260904_044437_results.json"
+    },
+    "record_028": {
+      "sha256": "6df20e0244c52e6ad926897ebbf768d1e8e8d673f290b4fce25f62520e775d8e",
+      "role": "Upstream table evidence: 20260904_181103_results.json"
+    },
+    "record_029": {
+      "sha256": "cc861e20315af563fd7d9c62d187eee22eafe9679c1e7c9b94dfd5b23b3e7ef3",
+      "role": "Upstream table evidence: 20260905_202128_results.json"
+    },
+    "record_030": {
+      "sha256": "d9351716761b8a5820f4ff5e56dbac89db107f98d46ae4cc653e275650e2db09",
+      "role": "Upstream table evidence: 20260905_124916_results.json"
+    },
+    "record_031": {
+      "sha256": "94d708db7a9c187ed6c2ef5270ce62ed8a7d6221b2b7cab778b256a382ebce11",
+      "role": "Upstream table evidence: PROTOCOL.md"
+    },
+    "record_032": {
+      "sha256": "bd71284b484b4819f41716c9aa5c59bd09377367f630c65ddb694b024eaa624e",
+      "role": "Upstream table evidence: PROTOCOL.md"
+    },
+    "record_033": {
+      "sha256": "085a4dcbbb388fce86964dd358d2b98e28186f062cb6f420726a1e9eee75623b",
+      "role": "Upstream table evidence: 20260904_162348_results.json"
+    },
+    "record_034": {
+      "sha256": "44f7c84f0b72594ab8787c8f05a4a47d626c0477ec852189eb093ec078d5d1b9",
+      "role": "Upstream table evidence: 20260904_184431_results.json"
+    },
+    "record_035": {
+      "sha256": "647397c8652a965feef68fa9a52601afb67db1956267d902f26c07e08fe6ffcc",
+      "role": "Upstream table evidence: 20260904_215253_results.json"
+    },
+    "record_036": {
+      "sha256": "602990e24dae9aa83481fac38d9eeaeefa7bc37defcfb794129757f872ceb4eb",
+      "role": "Upstream table evidence: 20260905_020731_results.json"
+    },
+    "record_037": {
+      "sha256": "ad1daf990189c6d3df75cc8de73d4432bf9eccbc8672bb5ebad4d2b00103b7a4",
+      "role": "Candidate prompts, official scores, and paired image hashes"
+    },
+    "record_038": {
+      "sha256": "b8f44fa80c4dc990a1fdcc79679006b4562dd9e7fb872d3e424fe670f69706c0",
+      "role": "Official outcomes of 2,212 paired FlashU/TaskGraph images"
+    },
+    "record_039": {
+      "sha256": "25b7b9e6f8653a9efff6f3932cf463a60d5a1f2ea40becc86806f39d88bc0af1",
+      "role": "1,065 frozen-route quality pairs; 1,064 latency pairs"
+    },
+    "record_040": {
+      "sha256": "5e2d75575298aab8c8d2f311a58911496a712218a15b34deb06d8c94c5dd1d07",
+      "role": "Frozen offline selector and source candidate hashes"
+    },
+    "record_041": {
+      "sha256": "9e6e0eff5e10a3140722b77cc2fe67809f2758910e79dc08df9076d15b7025c2",
+      "role": "Executed UQP profile configuration"
+    },
+    "record_042": {
+      "sha256": "50ef82bd2fda9596dd473b823cfd03209c7885e7a35506eef1667136759b8d1a",
+      "role": "Generation scorer and image-bank provenance"
+    },
+    "record_043": {
+      "sha256": "cba6024114943a999681fc6655c630762640602caa58445edff53b0a530c9761",
+      "role": "Generation scorer and image-bank provenance"
+    },
+    "record_044": {
+      "sha256": "6ca5d5dabd54a2282f90031e6d74201a8d76737dff316ac24bb542275c8bb341",
+      "role": "Generation scorer and image-bank provenance"
+    }
+  },
+  "derived_artifacts": {
+    "table_data.json": [
+      "record_001"
+    ],
+    "trace_examples.csv": [
+      "record_002"
+    ],
+    "trace_length_timing.csv": [
+      "record_003"
+    ],
+    "interval_seed_details.csv": [
+      "record_004"
+    ],
+    "case_records.json": [
+      "record_037"
+    ],
+    "geneval_paired_outcomes.csv": [
+      "record_038"
+    ],
+    "uqp_paired_records.csv": [
+      "record_039"
+    ],
+    "uqp_frozen_routes.json": [
+      "record_040"
+    ],
+    "uqp_profiles.json": [
+      "record_041"
+    ],
+    "generation_provenance.json": [
+      "record_042",
+      "record_043",
+      "record_044"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+\begingroup
+\resizebox{\linewidth}{!}{\begin{minipage}{560pt}
+\DGtableformat
+\begin{tabular}{>{\raggedright\arraybackslash}p{112.7242pt}>{\centering\arraybackslash}p{35.9551pt}>{\centering\arraybackslash}p{42.7574pt}>{\centering\arraybackslash}p{42.7574pt}>{\centering\arraybackslash}p{46.6445pt}>{\centering\arraybackslash}p{46.6445pt}>{\centering\arraybackslash}p{38.8704pt}>{\centering\arraybackslash}p{47.6162pt}>{\centering\arraybackslash}p{88.4302pt}}
+\toprule
+\textbf{Model} & \textbf{Params.} & \textbf{Global} & \textbf{Entity} & \textbf{Attribute} & \textbf{Relation} & \textbf{Other} & \textbf{Overall $\uparrow$} & \textbf{Latency (s) $\downarrow$} \\
+\midrule
+Show-o~\citeyearpar{xie2024showo} & 1.3B & 79.33 & 75.44 & 78.02 & 84.45 & 60.80 & 67.27 & --- \\
+JanusFlow~\citeyearpar{ma2024janusflow} & 1.3B & 87.03 & 87.31 & 87.39 & 89.79 & 88.10 & 80.09 & --- \\
+Emu3-DPO~\citeyearpar{wang2024emu3} & 8B & 87.54 & 87.17 & 86.33 & 90.61 & 89.75 & 81.60 & 124.8 \\
+Janus-Pro~\citeyearpar{chen2025januspro} & 7B & 86.90 & 88.90 & 89.40 & 89.32 & 89.48 & 84.19 & --- \\
+\midrule
+Show-o2~\citeyearpar{xie2025showo2} & 1.5B & 81.76 & 90.94 & 89.98 & 93.64 & 77.60 & 85.055 & 5.310 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U} & 1.5B & 81.46 & 89.65 & 89.58 & 93.06 & 73.60 & 83.666 & \TGlatratio{1.844}{2.880} \\
+Show-o2~\citeyearpar{xie2025showo2} & 7B & 82.37 & 91.87 & 89.80 & 93.75 & 80.40 & 86.532 & 11.538 \\
+\rowcolor{TGshade}
+\textbf{+ DepGraph-U} & 7B & 84.19 & 90.26 & 89.02 & 93.25 & 79.60 & 84.355 & \TGlatratio{3.723}{3.099} \\
+\bottomrule
+\end{tabular}\par
+\end{minipage}}
+\endgroup

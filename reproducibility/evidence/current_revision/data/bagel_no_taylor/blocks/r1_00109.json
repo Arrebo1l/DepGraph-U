@@ -1,0 +1,148 @@
+{
+  "repeat": 1,
+  "index": 109,
+  "order": [
+    "depgraphu",
+    "native",
+    "rewrite_only",
+    "policy_only"
+  ],
+  "arms": {
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 1,
+      "label": "formal/r1/depgraphu/00109",
+      "prompt": "a photo of a pizza and a bench",
+      "seed": 42,
+      "seconds": 33.25242006778717,
+      "pixel_sha256": "862419cc01718f4863cb11e8dbcc557daec2127f7dbe944c412626c22a73f4b1",
+      "png_sha256": "db894998524e1da737cc3dc378240228583f993c79d14d14ab49d9e45d4c3913",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617443328
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 1,
+      "label": "formal/r1/native/00109",
+      "prompt": "a photo of a pizza and a bench",
+      "seed": 42,
+      "seconds": 36.79101516678929,
+      "pixel_sha256": "d07d73e43c2fc644ac84436a7f4f8425e76f364881f419ad57cc68f17286942d",
+      "png_sha256": "37868d77c06e1d9436c78d411cc0e9f1b6d69c27d4208e367038bd4f91aceb6c",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618084352
+    },
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 1,
+      "label": "formal/r1/rewrite_only/00109",
+      "prompt": "a photo of a pizza and a bench",
+      "seed": 42,
+      "seconds": 36.63486746326089,
+      "pixel_sha256": "d07d73e43c2fc644ac84436a7f4f8425e76f364881f419ad57cc68f17286942d",
+      "png_sha256": "37868d77c06e1d9436c78d411cc0e9f1b6d69c27d4208e367038bd4f91aceb6c",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617443328
+    },
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 1,
+      "label": "formal/r1/policy_only/00109",
+      "prompt": "a photo of a pizza and a bench",
+      "seed": 42,
+      "seconds": 33.12334632873535,
+      "pixel_sha256": "862419cc01718f4863cb11e8dbcc557daec2127f7dbe944c412626c22a73f4b1",
+      "png_sha256": "db894998524e1da737cc3dc378240228583f993c79d14d14ab49d9e45d4c3913",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618084352
+    }
+  }
+}

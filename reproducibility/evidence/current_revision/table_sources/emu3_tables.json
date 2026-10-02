@@ -1,0 +1,1300 @@
+[
+  {
+    "id": "S2.T2",
+    "caption": "Table 1: Emu3 vision tokenizer configurations.",
+    "rows": [
+      [
+        "Configurations",
+        "VisionTokenizer"
+      ],
+      [
+        "Pretrained Weights",
+        "SBER-MoVQGAN-270M4"
+      ],
+      [
+        "Codebook Size",
+        "32768"
+      ],
+      [
+        "Latent Size",
+        "4"
+      ],
+      [
+        "Compression",
+        "4 × 8 × 8"
+      ],
+      [
+        "Video Resolution",
+        "LPIPS↓",
+        "PSNR↑",
+        "SSIM↑"
+      ],
+      [
+        "128 × 128",
+        "0.099",
+        "21.71",
+        "0.630"
+      ],
+      [
+        "256 × 256",
+        "0.109",
+        "21.59",
+        "0.622"
+      ],
+      [
+        "512 × 512",
+        "0.112",
+        "22.69",
+        "0.690"
+      ],
+      [
+        "720 × 720",
+        "0.110",
+        "24.30",
+        "0.771"
+      ]
+    ]
+  },
+  {
+    "id": "S2.T3",
+    "caption": "Table 3: Model configurations.",
+    "rows": [
+      [
+        "Configurations",
+        "Emu3"
+      ],
+      [
+        "Parameters",
+        "8B"
+      ],
+      [
+        "Layers",
+        "32"
+      ],
+      [
+        "Hidden Size",
+        "4096"
+      ],
+      [
+        "Intermediate Size",
+        "14336"
+      ],
+      [
+        "Heads",
+        "32"
+      ],
+      [
+        "KV Heads",
+        "8"
+      ],
+      [
+        "Vocabulary Size",
+        "184622"
+      ],
+      [
+        "RoPE Base",
+        "1000000"
+      ],
+      [
+        "Context Length",
+        "131072"
+      ]
+    ]
+  },
+  {
+    "id": "S3.T4",
+    "caption": "Table 4: Comparison with state-of-the-art models on text-to-image benchmarks. We evaluate on MSCOCO-30K [15]; GenEval [26]; T2I-CompBench [32] and DPG-Bench [31]. † result is with rewriting.",
+    "rows": [
+      [
+        "",
+        "",
+        "MSCOCO",
+        "GenEval",
+        "T2I-CompBench",
+        "DPG-Bench"
+      ],
+      [
+        "Method",
+        "Text Pretrain",
+        "CLIP-I",
+        "CLIP-T",
+        "FID",
+        "Overall",
+        "Color",
+        "Shape",
+        "Texture",
+        "Average"
+      ],
+      [
+        "Diffusion-based",
+        ""
+      ],
+      [
+        "SDv1.5 [73]",
+        "CLIP ViT-L/14",
+        "0.667",
+        "0.302",
+        "9.93",
+        "0.43",
+        "0.3730",
+        "0.3646",
+        "0.4219",
+        "63.18"
+      ],
+      [
+        "DALL-E 2 [70]",
+        "CLIP ViT-H/16",
+        "-",
+        "0.314",
+        "10.93",
+        "0.52",
+        "0.5750",
+        "0.5464",
+        "0.6374",
+        "-"
+      ],
+      [
+        "SDv2.1 [73]",
+        "CLIP ViT-H/14",
+        "-",
+        "-",
+        "-",
+        "0.50",
+        "0.5694",
+        "0.4495",
+        "0.4982",
+        "-"
+      ],
+      [
+        "SDXL [66]",
+        "CLIP ViT-bigG",
+        "0.674",
+        "0.310",
+        "-",
+        "0.55",
+        "0.6369",
+        "0.5408",
+        "0.5637",
+        "74.65"
+      ],
+      [
+        "PixArt-alpha [13]",
+        "Flan-T5-XXL",
+        "-",
+        "-",
+        "7.32",
+        "0.48",
+        "0.6886",
+        "0.5582",
+        "0.7044",
+        "71.11"
+      ],
+      [
+        "DALL-E 3 [5]",
+        "Flan-T5-XXL",
+        "-",
+        "0.320",
+        "-",
+        "0.67†",
+        "0.8110",
+        "0.6750",
+        "0.8070",
+        "83.50"
+      ],
+      [
+        "SD3 [22]",
+        "Flan-T5-XXL",
+        "-",
+        "-",
+        "-",
+        "0.74",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Autoregressive meets diffusion",
+        ""
+      ],
+      [
+        "Emu [82]",
+        "LLaMA-7B",
+        "0.656",
+        "0.286",
+        "11.6",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Show-o [92]",
+        "Phi-1.5",
+        "-",
+        "-",
+        "9.24",
+        "0.53",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Transfusion [108]",
+        "-",
+        "-",
+        "-",
+        "6.78",
+        "0.63",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Autoregressive-based",
+        ""
+      ],
+      [
+        "Chameleon [83]",
+        "-",
+        "-",
+        "-",
+        "26.74",
+        "0.39",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "LlamaGen [80]",
+        "FLAN-T5 XL",
+        "-",
+        "-",
+        "-",
+        "0.32",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Emu3",
+        "-",
+        "0.689",
+        "0.313",
+        "12.8",
+        "0.66†",
+        "0.7913†",
+        "0.5846†",
+        "0.7422†",
+        "80.60"
+      ],
+      [
+        "Emu3-DPO",
+        "-",
+        "0.680",
+        "0.312",
+        "19.3",
+        "0.64†",
+        "0.7544†",
+        "0.5706†",
+        "0.7164†",
+        "81.60"
+      ]
+    ]
+  },
+  {
+    "id": "S3.T5",
+    "caption": "Table 5: Comparison with state-of-the-art text-to-video models on VBench [33] benchmark.. We selected 11 out of the 16 evaluation dimensions from VBench, along with the final score, for presentation. Except for Emu3, which is an autoregressive (AR) model, all other publicly comparable method are diffusion (Diff) models. The higher metrics indicate the better results.",
+    "rows": [
+      [
+        "Models",
+        "Type",
+        "Total score",
+        "Motion smoothness",
+        "Dynamic degree",
+        "Aesthetic quality",
+        "Object class",
+        "Multiple objects",
+        "Human action",
+        "Spatial relationship",
+        "Scene",
+        "Appearance style",
+        "Subject consistency",
+        "Background consistency"
+      ],
+      [
+        "ModelScope [87]",
+        "Diff",
+        "75.75",
+        "95.79",
+        "66.39",
+        "56.39",
+        "82.25",
+        "38.98",
+        "92.4",
+        "33.68",
+        "39.26",
+        "25.67",
+        "89.87",
+        "95.29"
+      ],
+      [
+        "LaVie [88]",
+        "Diff",
+        "77.08",
+        "96.38",
+        "49.72",
+        "54.94",
+        "91.82",
+        "33.32",
+        "96.8",
+        "34.09",
+        "52.69",
+        "23.56",
+        "91.41",
+        "97.47"
+      ],
+      [
+        "OpenSoraPlan V1.1 [41]",
+        "Diff",
+        "78.00",
+        "98.28",
+        "47.72",
+        "56.85",
+        "76.3",
+        "40.35",
+        "86.80",
+        "53.11",
+        "27.17",
+        "22.90",
+        "95.73",
+        "96.73"
+      ],
+      [
+        "Show-1 [102]",
+        "Diff",
+        "78.93",
+        "98.24",
+        "44.44",
+        "57.35",
+        "93.07",
+        "45.47",
+        "95.60",
+        "53.50",
+        "47.03",
+        "23.06",
+        "95.53",
+        "98.02"
+      ],
+      [
+        "OpenSora V1.2 [107]",
+        "Diff",
+        "79.76",
+        "98.50",
+        "42.39",
+        "56.85",
+        "82.22",
+        "51.83",
+        "91.20",
+        "68.56",
+        "42.44",
+        "23.95",
+        "96.75",
+        "97.61"
+      ],
+      [
+        "AnimateDiff-V2 [28]",
+        "Diff",
+        "80.27",
+        "97.76",
+        "40.83",
+        "67.16",
+        "90.90",
+        "36.88",
+        "92.60",
+        "34.60",
+        "50.19",
+        "22.42",
+        "95.30",
+        "97.68"
+      ],
+      [
+        "Gen-2 [74]",
+        "Diff",
+        "80.58",
+        "99.58",
+        "18.89",
+        "66.96",
+        "90.92",
+        "55.47",
+        "89.20",
+        "66.91",
+        "48.91",
+        "19.34",
+        "97.61",
+        "97.61"
+      ],
+      [
+        "Pika [42]",
+        "Diff",
+        "80.69",
+        "99.50",
+        "47.50",
+        "62.04",
+        "88.72",
+        "43.08",
+        "86.20",
+        "61.03",
+        "49.83",
+        "22.26",
+        "96.94",
+        "97.36"
+      ],
+      [
+        "VideoCrafter-2.0 [11]",
+        "Diff",
+        "80.44",
+        "97.73",
+        "42.50",
+        "63.13",
+        "92.55",
+        "40.66",
+        "95.00",
+        "35.86",
+        "55.29",
+        "25.13",
+        "96.85",
+        "98.22"
+      ],
+      [
+        "T2V-Turbo (VC2) [47]",
+        "Diff",
+        "81.01",
+        "97.34",
+        "49.17",
+        "63.04",
+        "93.96",
+        "54.65",
+        "95.20",
+        "38.67",
+        "55.58",
+        "24.42",
+        "96.28",
+        "97.02"
+      ],
+      [
+        "CogVideoX-5B [94]",
+        "Diff",
+        "81.61",
+        "96.92",
+        "70.97",
+        "61.98",
+        "85.23",
+        "62.11",
+        "99.40",
+        "66.35",
+        "53.20",
+        "24.91",
+        "96.23",
+        "96.52"
+      ],
+      [
+        "Kling (2024-07) [39]",
+        "Diff",
+        "81.85",
+        "99.40",
+        "46.94",
+        "61.21",
+        "87.24",
+        "68.05",
+        "93.40",
+        "73.03",
+        "50.86",
+        "19.62",
+        "98.33",
+        "97.60"
+      ],
+      [
+        "Gen-3 [75]",
+        "Diff",
+        "82.32",
+        "99.23",
+        "60.14",
+        "63.34",
+        "87.81",
+        "53.64",
+        "96.4",
+        "65.09",
+        "54.57",
+        "24.31",
+        "97.10",
+        "96.62"
+      ],
+      [
+        "Emu3 (Ours)",
+        "AR",
+        "80.96",
+        "98.93",
+        "79.27",
+        "59.64",
+        "86.17",
+        "44.64",
+        "77.71",
+        "68.73",
+        "37.11",
+        "20.92",
+        "95.32",
+        "97.69"
+      ]
+    ]
+  },
+  {
+    "id": "S3.T6",
+    "caption": "Table 6: Comparison on vision-language benchmarks. We collect evaluations including: SEEDB: SEEDBench-Img [45]; OCRB: OCRBench [59]; MMV: MMVet [98]; POPE [51]; VQAv2 [27]; GQA [34]; SQA: ScienceQA-Img [60]; TVQA: TextVQA [78]; CQA: ChartQA [61]; DVQA: DocVQA [63]; IVQA: InfoVQA [62]; AI2D [36]; RWQA: RealWorldQA [91]; MMMU [99]; MMB: MMBench [58]. * The images of related training datasets are observed during training.",
+    "rows": [
+      [
+        "Method",
+        "Pretrained-LLM",
+        "SEEDB",
+        "OCRB",
+        "MMV",
+        "POPE",
+        "VQAv2",
+        "GQA",
+        "SQA",
+        "TQA",
+        "CQA",
+        "DVQA",
+        "IVQA",
+        "AI2D",
+        "RWQA",
+        "MMMU",
+        "MMB"
+      ],
+      [
+        "Encoder-based",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "InstructBLIP [18]",
+        "Vicuna-7B",
+        "53.4",
+        "276",
+        "26.2",
+        "–",
+        "–",
+        "49.2",
+        "60.5",
+        "50.1",
+        "12.5",
+        "13.9",
+        "–",
+        "33.8",
+        "37.4",
+        "30.6",
+        "36.0"
+      ],
+      [
+        "IDEFICS-9B [35]",
+        "LLaMA-7B",
+        "–",
+        "252",
+        "–",
+        "–",
+        "50.9",
+        "38.4",
+        "–",
+        "25.9",
+        "–",
+        "–",
+        "–",
+        "42.2",
+        "42.1",
+        "18.4",
+        "48.2"
+      ],
+      [
+        "QwenVL-Chat [3]",
+        "Qwen-7B",
+        "58.2",
+        "488",
+        "–",
+        "–",
+        "78.2*",
+        "57.5*",
+        "68.2",
+        "61.5",
+        "49.8",
+        "66.3",
+        "–",
+        "45.9",
+        "49.3",
+        "35.9",
+        "60.6"
+      ],
+      [
+        "LLaVA-1.5 [55]",
+        "Vicuna-7B",
+        "64.3",
+        "318",
+        "30.5",
+        "85.9",
+        "78.5*",
+        "62.0*",
+        "66.8",
+        "46.1",
+        "18.2",
+        "28.1",
+        "25.8",
+        "54.8",
+        "54.8",
+        "35.3",
+        "64.3"
+      ],
+      [
+        "InternVL-Chat [16]",
+        "Vicuna-7B",
+        "–",
+        "–",
+        "–",
+        "86.4",
+        "79.3*",
+        "62.9*",
+        "–",
+        "57.0",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "mPLUG-Owl2 [95]",
+        "LLaMA2-7B",
+        "57.8",
+        "255",
+        "36.5",
+        "86.2",
+        "79.4*",
+        "56.1*",
+        "68.7",
+        "58.2",
+        "22.8",
+        "–",
+        "–",
+        "55.7",
+        "50.3",
+        "32.7",
+        "64.5"
+      ],
+      [
+        "ShareGPT4V [14]",
+        "Vicuna-7B",
+        "–",
+        "371",
+        "37.6",
+        "–",
+        "80.6*",
+        "63.3*",
+        "68.4",
+        "60.4",
+        "21.3",
+        "–",
+        "–",
+        "58.0",
+        "54.9",
+        "37.2",
+        "68.8"
+      ],
+      [
+        "LLaVA-1.6(HD) [56]",
+        "Vicuna-7B",
+        "64.7",
+        "532",
+        "43.9",
+        "86.5",
+        "81.8*",
+        "64.2*",
+        "70.2",
+        "64.9",
+        "54.8*",
+        "74.4*",
+        "37.1",
+        "66.6*",
+        "57.8",
+        "35.1",
+        "67.4"
+      ],
+      [
+        "VILA [53]",
+        "LLaMA2-7B",
+        "61.1",
+        "–",
+        "34.9",
+        "85.5",
+        "80.8*",
+        "63.3*",
+        "73.7",
+        "66.6",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "68.9"
+      ],
+      [
+        "Encoder-free",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      [
+        "Fuyu-8B(HD) [4]",
+        "Persimmon-8B",
+        "–",
+        "–",
+        "21.4",
+        "74.1",
+        "74.2",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "64.5",
+        "–",
+        "27.9",
+        "10.7"
+      ],
+      [
+        "Chameleon-MT-34B [83]",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "69.6",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Show-o [92]",
+        "Phi-1.5-1.3B",
+        "–",
+        "–",
+        "–",
+        "73.8",
+        "59.3*",
+        "48.7*",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "25.1",
+        "–"
+      ],
+      [
+        "EVE-7B(HD) [19]",
+        "Vicuna-7B",
+        "56.8",
+        "–",
+        "25.7",
+        "85.0",
+        "78.6*",
+        "62.6*",
+        "64.9",
+        "56.8",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "52.3"
+      ],
+      [
+        "Emu3",
+        "–",
+        "68.2",
+        "687",
+        "37.2",
+        "85.2",
+        "75.1*",
+        "60.3*",
+        "89.2*",
+        "64.7",
+        "68.6*",
+        "76.3*",
+        "43.8*",
+        "70.0*",
+        "57.4",
+        "31.6",
+        "58.5"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T7",
+    "caption": "Table 7: Comparison with state-of-the-art models on GenEval and T2I CompBench. Obj.: Object. Attri.: Attribute.",
+    "rows": [
+      [
+        "",
+        "GenEval",
+        "T2I-CompBench"
+      ],
+      [
+        "Method",
+        "Overall",
+        "Single Obj.",
+        "Two Obj.",
+        "Counting",
+        "Colors",
+        "Position",
+        "Color Attri.",
+        "Color",
+        "Shape",
+        "Texture"
+      ],
+      [
+        "Diffusion-based",
+        "",
+        ""
+      ],
+      [
+        "DALL-E 2 [70]",
+        "0.52",
+        "0.94",
+        "0.66",
+        "0.49",
+        "0.77",
+        "0.10",
+        "0.19",
+        "0.5750",
+        "0.5464",
+        "0.6374"
+      ],
+      [
+        "SDv1.5 [73]",
+        "0.43",
+        "0.97",
+        "0.38",
+        "0.35",
+        "0.76",
+        "0.04",
+        "0.06",
+        "0.3730",
+        "0.3646",
+        "0.4219"
+      ],
+      [
+        "SDv2.1 [73]",
+        "0.50",
+        "0.98",
+        "0.51",
+        "0.44",
+        "0.85",
+        "0.07",
+        "0.17",
+        "0.5694",
+        "0.4495",
+        "0.4982"
+      ],
+      [
+        "SDXL [66]",
+        "0.55",
+        "0.98",
+        "0.74",
+        "0.39",
+        "0.85",
+        "0.15",
+        "0.23",
+        "0.6369",
+        "0.5408",
+        "0.5637"
+      ],
+      [
+        "PixArt-alpha [13]",
+        "0.48",
+        "0.98",
+        "0.50",
+        "0.44",
+        "0.80",
+        "0.08",
+        "0.07",
+        "0.6886",
+        "0.5582",
+        "0.7044"
+      ],
+      [
+        "DALL-E 3 [5]",
+        "0.67",
+        "0.96",
+        "0.87",
+        "0.47",
+        "0.83",
+        "0.43",
+        "0.45",
+        "0.8110",
+        "0.6750",
+        "0.8070"
+      ],
+      [
+        "SD3 [22]",
+        "0.74",
+        "0.99",
+        "0.94",
+        "0.72",
+        "0.89",
+        "0.33",
+        "0.60",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Autoregressive meets diffusion",
+        "",
+        ""
+      ],
+      [
+        "Show-o [92]",
+        "0.53",
+        "0.95",
+        "0.52",
+        "0.49",
+        "0.82",
+        "0.11",
+        "0.28",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Transfusion [108]",
+        "0.63",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Autoregressive-based",
+        "",
+        ""
+      ],
+      [
+        "Chameleon [83]",
+        "0.39",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "LlamaGen [80]",
+        "0.32",
+        "0.71",
+        "0.34",
+        "0.21",
+        "0.58",
+        "0.07",
+        "0.04",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Emu3",
+        "0.54",
+        "0.98",
+        "0.71",
+        "0.34",
+        "0.81",
+        "0.17",
+        "0.21",
+        "0.6107",
+        "0.4734",
+        "0.6178"
+      ],
+      [
+        "+ Rewriter",
+        "0.66",
+        "0.99",
+        "0.81",
+        "0.42",
+        "0.80",
+        "0.49",
+        "0.45",
+        "0.7913",
+        "0.5846",
+        "0.7422"
+      ],
+      [
+        "Emu3-DPO",
+        "0.52",
+        "0.98",
+        "0.69",
+        "0.33",
+        "0.78",
+        "0.15",
+        "0.16",
+        "0.5514",
+        "0.4641",
+        "0.5476"
+      ],
+      [
+        "+ Rewriter",
+        "0.64",
+        "0.99",
+        "0.76",
+        "0.38",
+        "0.85",
+        "0.45",
+        "0.40",
+        "0.7544",
+        "0.5706",
+        "0.7164"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T8",
+    "caption": "Table 8: Comparison with state-of-the-art models on DPG-bench",
+    "rows": [
+      [
+        "Method",
+        "Overvall",
+        "Global",
+        "Entity",
+        "Attribute",
+        "Relation",
+        "Other"
+      ],
+      [
+        "Diffusion-based"
+      ],
+      [
+        "SDv1.5 [73]",
+        "63.18",
+        "74.63",
+        "74.23",
+        "75.39",
+        "73.49",
+        "67.81"
+      ],
+      [
+        "SDXL [66]",
+        "74.65",
+        "83.27",
+        "82.43",
+        "80.91",
+        "86.76",
+        "80.41"
+      ],
+      [
+        "PixArt-alpha [13]",
+        "71.11",
+        "74.97",
+        "79.32",
+        "78.60",
+        "82.57",
+        "76.96"
+      ],
+      [
+        "Playground v2.5 [46]",
+        "75.47",
+        "83.06",
+        "82.59",
+        "81.20",
+        "84.08",
+        "83.50"
+      ],
+      [
+        "Lumina-Next [110]",
+        "74.63",
+        "82.82",
+        "88.65",
+        "86.44",
+        "80.53",
+        "81.82"
+      ],
+      [
+        "Hunyuan-DiT [52]",
+        "78.87",
+        "84.59",
+        "80.59",
+        "88.01",
+        "74.36",
+        "86.41"
+      ],
+      [
+        "PixArt-Sigma [12]",
+        "80.54",
+        "86.89",
+        "82.89",
+        "88.94",
+        "86.59",
+        "87.68"
+      ],
+      [
+        "DALLE 3 [5]",
+        "83.50",
+        "90.97",
+        "89.61",
+        "88.39",
+        "90.58",
+        "89.83"
+      ],
+      [
+        "SD3-Medium [22]",
+        "84.08",
+        "87.90",
+        "91.01",
+        "88.83",
+        "80.70",
+        "88.68"
+      ],
+      [
+        "Playground v3 [54]",
+        "87.04",
+        "91.94",
+        "85.71",
+        "90.90",
+        "90.00",
+        "92.72"
+      ],
+      [
+        "Autoregressive-based"
+      ],
+      [
+        "Emu3",
+        "80.60",
+        "85.21",
+        "86.68",
+        "86.84",
+        "90.22",
+        "83.15"
+      ],
+      [
+        "Emu3-DPO",
+        "81.60",
+        "87.54",
+        "87.17",
+        "86.33",
+        "90.61",
+        "89.75"
+      ]
+    ]
+  },
+  {
+    "id": "A3.tab1",
+    "caption": "",
+    "rows": [
+      [
+        "Example"
+      ],
+      [
+        "",
+        ""
+      ],
+      [
+        "User",
+        "Describe the landmark."
+      ],
+      [
+        "Emu3",
+        "The image showcases the Brooklyn Bridge, a prominent suspension bridge in New York City, recognized by its distinctive towers and the web of cables that support it. This iconic structure connects the boroughs of Brooklyn and Manhattan."
+      ],
+      [
+        "Example"
+      ],
+      [
+        "",
+        ""
+      ],
+      [
+        "User",
+        "Please write out the expression of the formula in the image using LaTeX format."
+      ],
+      [
+        "Emu3",
+        "SΔ=2⋅72=142"
+      ],
+      [
+        "Example"
+      ],
+      [
+        "",
+        ""
+      ],
+      [
+        "User",
+        "According to the given food chain what would happen if phytoplankton decreases? A. Seal population will become extinct B. Fish population would decrease. C. Whale population would decrease. D. Penguin population would increase. Answer with the option’s letter from the given choices directly."
+      ],
+      [
+        "Emu3",
+        "B"
+      ]
+    ]
+  },
+  {
+    "id": "A3.tab2",
+    "caption": "",
+    "rows": [
+      [
+        "Example"
+      ],
+      [
+        "",
+        ""
+      ],
+      [
+        "User",
+        "Please describe the image in detail"
+      ],
+      [
+        "Emu3",
+        "The image is the cover of a magazine titled \"Parktakes,\" which is the Fall 2017 issue. The cover features two individuals in a white kayak, paddling on a body of water. The kayak is positioned diagonally, with the two individuals seated towards the front. Both individuals are wearing life jackets, which are red with black straps, and they are holding paddles with orange blades. The person on the left is a woman with long dark hair, wearing sunglasses and a black top. The person on the right is a man with short hair, wearing a green shirt and a light-colored cap. They both appear to be smiling and enjoying their time on the water. The background shows a natural setting with trees and greenery, indicating that they are likely in a park or natural reserve. The water is calm, and the sky is not visible, suggesting a serene and peaceful environment. The magazine cover includes several text elements: 1. **Title**: \"Parktakes\" is prominently displayed at the top in large, bold, blue letters. 2. **Fall 2017 Issue**: The issue is marked in the top right corner in a smaller, white font. 3. **Main Feature**: \"Enjoy Fall Adventures in Parks\" is written in a large, bold, orange font, emphasizing the theme of outdoor activities. 4. **Additional Features**: The cover lists several topics covered in the magazine: - \"Birding, Boating, and Hiking\" - \"Seasonal Festivals\" - \"New Attractions\" 5. **Registration Information**: At the bottom, there is a call to action to \"Registration begins Aug. 1 for full classes\" and a website link: \"www.fairfaxcounty.gov/parks.\" Analysis and Description The cover of \"Parktakes\" effectively conveys the theme of outdoor recreational activities, particularly in parks. The image of the two individuals in a kayak suggests that the magazine features content related to kayaking, canoeing, and other water sports. The inclusion of life jackets indicates a focus on safety and preparedness for water activities. The mention of seasonal festivals and new attractions implies that the magazine includes information on various events and attractions within the parks. The cover also highlights the magazine’s commitment to providing a comprehensive guide to outdoor activities, with a clear emphasis on safety and accessibility. The registration information suggests that the magazine is a resource for planning and participating in various outdoor activities, likely targeting a wide audience interested in parks and recreational activities. In summary, the magazine cover is designed to attract readers interested in outdoor adventures, safety, and seasonal events within parks. The use of a kayak and life jackets emphasizes the magazine’s focus on water sports and safety, while the inclusion of various features and registration information suggests a well-rounded resource for park visitors."
+      ]
+    ]
+  }
+]

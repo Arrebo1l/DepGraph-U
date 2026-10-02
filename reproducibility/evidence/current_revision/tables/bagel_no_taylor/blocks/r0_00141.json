@@ -1,0 +1,148 @@
+{
+  "repeat": 0,
+  "index": 141,
+  "order": [
+    "depgraphu",
+    "native",
+    "rewrite_only",
+    "policy_only"
+  ],
+  "arms": {
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 0,
+      "label": "formal/r0/depgraphu/00141",
+      "prompt": "a photo of a horse and a train",
+      "seed": 42,
+      "seconds": 33.07238641753793,
+      "pixel_sha256": "5a40e811d63988f8e969cbdefcbb67bd8268b2d4eb7c036c347ffc0dfa582908",
+      "png_sha256": "4d4e8fd6ead04af7cd25fb97fe51fde47762874c37a3a4c72e055d729fcbb1cb",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617443328
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 0,
+      "label": "formal/r0/native/00141",
+      "prompt": "a photo of a horse and a train",
+      "seed": 42,
+      "seconds": 36.59809446707368,
+      "pixel_sha256": "9fbb22a43dd96e037c602fe925c6ad393bc43b15caa6e0fd0b30bb5b8a4425cc",
+      "png_sha256": "755f640c44cb125cd245ca25dd027f26ab9d416d955dec65d0c5e04f23d622cb",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618084352
+    },
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 0,
+      "label": "formal/r0/rewrite_only/00141",
+      "prompt": "a photo of a horse and a train",
+      "seed": 42,
+      "seconds": 36.55611154437065,
+      "pixel_sha256": "9fbb22a43dd96e037c602fe925c6ad393bc43b15caa6e0fd0b30bb5b8a4425cc",
+      "png_sha256": "755f640c44cb125cd245ca25dd027f26ab9d416d955dec65d0c5e04f23d622cb",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617443328
+    },
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 0,
+      "label": "formal/r0/policy_only/00141",
+      "prompt": "a photo of a horse and a train",
+      "seed": 42,
+      "seconds": 33.03553311154246,
+      "pixel_sha256": "5a40e811d63988f8e969cbdefcbb67bd8268b2d4eb7c036c347ffc0dfa582908",
+      "png_sha256": "4d4e8fd6ead04af7cd25fb97fe51fde47762874c37a3a4c72e055d729fcbb1cb",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618084352
+    }
+  }
+}

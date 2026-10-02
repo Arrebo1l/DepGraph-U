@@ -1,0 +1,1036 @@
+[
+  {
+    "id": "S3.T1",
+    "caption": "Table 1: Performance evaluation across language tasks, comparing Llama-2 7B (4K context window) and context-expanded variants of LWM-Text (32K to 1M). The results demonstrate that increasing context length does not significantly degrade performance on tasks with shorter contexts.",
+    "rows": [
+      [
+        "",
+        "",
+        "LWM-Text"
+      ],
+      [
+        "Task / Metric",
+        "Llama-2 7B",
+        "32k",
+        "128k",
+        "256k",
+        "512k",
+        "1M"
+      ],
+      [
+        "arc_challenge/acc",
+        "0.40",
+        "0.43",
+        "0.45",
+        "0.44",
+        "0.44",
+        "0.43"
+      ],
+      [
+        "arc_challenge/acc_norm",
+        "0.43",
+        "0.47",
+        "0.47",
+        "0.46",
+        "0.46",
+        "0.46"
+      ],
+      [
+        "hellaswag/acc",
+        "0.57",
+        "0.57",
+        "0.57",
+        "0.57",
+        "0.56",
+        "0.57"
+      ],
+      [
+        "hellaswag/acc_norm",
+        "0.77",
+        "0.76",
+        "0.76",
+        "0.76",
+        "0.75",
+        "0.75"
+      ],
+      [
+        "mmlu",
+        "0.39",
+        "0.4",
+        "0.41",
+        "0.41",
+        "0.36",
+        "0.35"
+      ],
+      [
+        "openbookqa/acc",
+        "0.32",
+        "0.33",
+        "0.31",
+        "0.32",
+        "0.33",
+        "0.30"
+      ],
+      [
+        "openbookqa/acc_norm",
+        "0.44",
+        "0.44",
+        "0.44",
+        "0.43",
+        "0.41",
+        "0.41"
+      ]
+    ]
+  },
+  {
+    "id": "S3.T2",
+    "caption": "Table 2: Multi Needle in a Haystack. * denotes models after the completion of this paper.",
+    "rows": [
+      [
+        "Context Length",
+        "Model",
+        "N=2,R=2",
+        "N=4,R=1",
+        "N=4,R=2"
+      ],
+      [
+        "32K",
+        "Gemini Pro (02/23)",
+        "0.34",
+        "0.44",
+        "0.6"
+      ],
+      [
+        "GPT-4-1106",
+        "0.97",
+        "0.95",
+        "0.9"
+      ],
+      [
+        "Llama-3.1-8B-Instruct*",
+        "0.87",
+        "0.95",
+        "0.93"
+      ],
+      [
+        "",
+        "Qwen2.5-7B-Instruct*",
+        "1.0",
+        "1.0",
+        "0.97"
+      ],
+      [
+        "",
+        "Mistral-7B-Instruct-v0.3*",
+        "0.98",
+        "0.85",
+        "0.83"
+      ],
+      [
+        "",
+        "LWM-Text-1M (Ours)",
+        "0.84",
+        "0.97",
+        "0.84"
+      ],
+      [
+        "128K",
+        "Gemini Pro (02/23)",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "GPT-4-1106",
+        "0.92",
+        "0.8",
+        "0.82"
+      ],
+      [
+        "Llama-3.1-8B-Instruct*",
+        "0.98",
+        "0.91",
+        "0.87"
+      ],
+      [
+        "",
+        "Qwen2.5-7B-Instruct*",
+        "0.98",
+        "0.80",
+        "0.90"
+      ],
+      [
+        "",
+        "Mistral-7B-Instruct-v0.3*",
+        "0.85",
+        "0.75",
+        "0.68"
+      ],
+      [
+        "",
+        "LWM-Text-1M (Ours)",
+        "0.83",
+        "0.98",
+        "0.83"
+      ],
+      [
+        "1M",
+        "Gemini Pro (02/23)",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "GPT-4-1106",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Llama-3.1-8B-Instruct*",
+        "0.27",
+        "0.32",
+        "0.18"
+      ],
+      [
+        "",
+        "Qwen2.5-7B-Instruct*",
+        "0.0",
+        "0.0",
+        "0.0"
+      ],
+      [
+        "",
+        "Mistral-7B-Instruct-v0.3*",
+        "0.05",
+        "0.13",
+        "0.10"
+      ],
+      [
+        "",
+        "LWM-Text-1M (Ours)",
+        "0.67",
+        "0.84",
+        "0.69"
+      ]
+    ]
+  },
+  {
+    "id": "S3.T3",
+    "caption": "Table 3: Evaluations on some benchmarks in the LOFT dataset.",
+    "rows": [
+      [
+        "Setting: 512K Context",
+        "LWM (512K)",
+        "GPT-4o (128K)",
+        "Claude 3 Opus (200K)"
+      ],
+      [
+        "Quora",
+        "0.38",
+        "0.23",
+        "0.37"
+      ],
+      [
+        "NQ",
+        "0.37",
+        "0.22",
+        "0.37"
+      ],
+      [
+        "HotPotQA",
+        "0.72",
+        "0.21",
+        "0.32"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T4",
+    "caption": "Table 4: Long Video-MME Benchmark. * denotes models after the completion of this paper.",
+    "rows": [
+      [
+        "Method",
+        "Parameters",
+        "Frames",
+        "Medium (4min-15min)",
+        "Long (30min-60min)"
+      ],
+      [
+        "Gemini 1.5 Pro*",
+        "Unknown",
+        "≤1800",
+        "74.3",
+        "67.4"
+      ],
+      [
+        "GPT-4o*",
+        "Unknown",
+        "384",
+        "70.3",
+        "65.3"
+      ],
+      [
+        "LLaVA-Video*",
+        "72B",
+        "64",
+        "68.9",
+        "61.5"
+      ],
+      [
+        "VideoLLaMA 2*",
+        "72B",
+        "32",
+        "59.9",
+        "57.6"
+      ],
+      [
+        "Long-LLaVA*",
+        "7B",
+        "64",
+        "51.4",
+        "45.4"
+      ],
+      [
+        "Video-LLaVA",
+        "7B",
+        "8",
+        "38.1",
+        "36.2"
+      ],
+      [
+        "LWM-1M",
+        "7B",
+        "≤1800",
+        "63.7",
+        "60.8"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T5",
+    "caption": "Table 5: Image Understanding Benchmarks (left) and Video Understanding Benchmarks (right)",
+    "rows": [
+      [
+        "Method Visual Token VQAv2 GQA SQA MiniGPT-4 CLIP - 30.8 25.4 Otter CLIP - 38.1 27.2 InstructBLIP CLIP - 49.2 60.5 LLaVA-1.5 CLIP 78.5 62.0 66.8 LWM (ours) VQGAN 55.8 44.8 47.7",
+        "Method MSVD MSRVTT TGIF VideoChat 56.3 45 34.4 LLaMA-Adapte 54.9 43.8 - Video-LLaMA 51.6 29.6 - Video-ChatGPT 64.9 49.3 51.4 LWM (ours) 55.9 44.1 40.9"
+      ],
+      [
+        "Method",
+        "Visual Token",
+        "VQAv2",
+        "GQA",
+        "SQA"
+      ],
+      [
+        "MiniGPT-4",
+        "CLIP",
+        "-",
+        "30.8",
+        "25.4"
+      ],
+      [
+        "Otter",
+        "CLIP",
+        "-",
+        "38.1",
+        "27.2"
+      ],
+      [
+        "InstructBLIP",
+        "CLIP",
+        "-",
+        "49.2",
+        "60.5"
+      ],
+      [
+        "LLaVA-1.5",
+        "CLIP",
+        "78.5",
+        "62.0",
+        "66.8"
+      ],
+      [
+        "LWM (ours)",
+        "VQGAN",
+        "55.8",
+        "44.8",
+        "47.7"
+      ],
+      [
+        "Method",
+        "MSVD",
+        "MSRVTT",
+        "TGIF"
+      ],
+      [
+        "VideoChat",
+        "56.3",
+        "45",
+        "34.4"
+      ],
+      [
+        "LLaMA-Adapte",
+        "54.9",
+        "43.8",
+        "-"
+      ],
+      [
+        "Video-LLaMA",
+        "51.6",
+        "29.6",
+        "-"
+      ],
+      [
+        "Video-ChatGPT",
+        "64.9",
+        "49.3",
+        "51.4"
+      ],
+      [
+        "LWM (ours)",
+        "55.9",
+        "44.1",
+        "40.9"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T6",
+    "caption": "Table 6: LWM-Text Training Stages",
+    "rows": [
+      [
+        "",
+        "32K",
+        "128K",
+        "256K",
+        "512K",
+        "1M"
+      ],
+      [
+        "Parameters",
+        "7B",
+        "7B",
+        "7B",
+        "7B",
+        "7B"
+      ],
+      [
+        "Sequence Length",
+        "215",
+        "217",
+        "218",
+        "219",
+        "220"
+      ],
+      [
+        "RoPE θ",
+        "1M",
+        "10M",
+        "10M",
+        "25M",
+        "50M"
+      ],
+      [
+        "Tokens per Batch",
+        "4M",
+        "4M",
+        "4M",
+        "4M",
+        "4M"
+      ],
+      [
+        "Total Tokens",
+        "4.8B",
+        "12B",
+        "12B",
+        "3B",
+        "1.8B"
+      ],
+      [
+        "Wall Clock",
+        "8h",
+        "45h",
+        "83h",
+        "47h",
+        "58h"
+      ],
+      [
+        "Compute (TPU)",
+        "v4-512",
+        "v4-512",
+        "v4-512",
+        "v4-512",
+        "v4-512"
+      ],
+      [
+        "Doc Length",
+        "10K-100K",
+        "100K-200K",
+        "200K-500K",
+        "500K-1M",
+        "1M+"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T7",
+    "caption": "Table 7: LWM-Text-Chat Training Details",
+    "rows": [
+      [
+        "",
+        "128K",
+        "256K",
+        "512K",
+        "1M"
+      ],
+      [
+        "Parameters",
+        "7B",
+        "7B",
+        "7B",
+        "7B"
+      ],
+      [
+        "Sequence Length",
+        "217",
+        "218",
+        "219",
+        "220"
+      ],
+      [
+        "RoPE θ",
+        "10M",
+        "10M",
+        "25M",
+        "50M"
+      ],
+      [
+        "Tokens per Batch",
+        "4M",
+        "4M",
+        "4M",
+        "4M"
+      ],
+      [
+        "Total Tokens",
+        "1.2B",
+        "1.2B",
+        "1.2B",
+        "1.2B"
+      ],
+      [
+        "Wall Clock",
+        "6h",
+        "10h",
+        "20h",
+        "40h"
+      ],
+      [
+        "Compute (TPU)",
+        "v4-512",
+        "v4-512",
+        "v4-512",
+        "v4-512"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T8",
+    "caption": "Table 8: LWM and LWM-Chat Training Stages",
+    "rows": [
+      [
+        "",
+        "1K",
+        "8K",
+        "Chat-32K",
+        "Chat-128K",
+        "Chat-1M"
+      ],
+      [
+        "Parameters",
+        "7B",
+        "7B",
+        "7B",
+        "7B",
+        "7B"
+      ],
+      [
+        "Sequence Length",
+        "210",
+        "213",
+        "215",
+        "217",
+        "220"
+      ],
+      [
+        "RoPE θ",
+        "50M",
+        "50M",
+        "50M",
+        "50M",
+        "50M"
+      ],
+      [
+        "Tokens per Batch",
+        "8M",
+        "8M",
+        "8M",
+        "8M",
+        "8M"
+      ],
+      [
+        "Total Tokens",
+        "363B",
+        "107B",
+        "10B",
+        "3.5B",
+        "0.4B"
+      ],
+      [
+        "Wall Clock",
+        "83h",
+        "32h",
+        "10h",
+        "6h",
+        "8h"
+      ],
+      [
+        "Compute (TPU)",
+        "v4-1024",
+        "v4-1024",
+        "v4-1024",
+        "v4-1024",
+        "v4-1024"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T9",
+    "caption": "Table 9: Ablation study comparing standard independent packing and our masked sequence packing mechanisms across three tasks. Results show that masked sequence packing significantly improves performance across all tasks.",
+    "rows": [
+      [
+        "",
+        "VQAv2",
+        "SQA",
+        "POPE"
+      ],
+      [
+        "Standard independent packing",
+        "48.3",
+        "34.8",
+        "62.5"
+      ],
+      [
+        "Masked sequence packing (Ours)",
+        "55.8",
+        "47.7",
+        "75.2"
+      ]
+    ]
+  },
+  {
+    "id": "A2.T11",
+    "caption": "Table 10: Results on MT-Bench across different context sizes. Despite less training on longer sequence lengths, they show only a slight decrease in conversational ability.",
+    "rows": [
+      [
+        "Model",
+        "MT-Bench"
+      ],
+      [
+        "LWM-Text-Chat-128k",
+        "4.62"
+      ],
+      [
+        "LWM-Text-Chat-256k",
+        "5"
+      ],
+      [
+        "LWM-Text-Chat-512k",
+        "4.83"
+      ],
+      [
+        "LWM-Text-Chat-1M",
+        "4.19"
+      ],
+      [
+        "Chat / QA Mix",
+        "MT-Bench",
+        "Needle Acc"
+      ],
+      [
+        "0% / 100%",
+        "2.42",
+        "100%"
+      ],
+      [
+        "40% / 60%",
+        "4.14",
+        "100%"
+      ],
+      [
+        "70% / 30%",
+        "4.62",
+        "96%"
+      ],
+      [
+        "90% / 10%",
+        "5.1",
+        "55%"
+      ],
+      [
+        "100% / 0%",
+        "5.8",
+        "31%"
+      ]
+    ]
+  },
+  {
+    "id": "A10.T12",
+    "caption": "Table 12: LWM-Text Training Stages",
+    "rows": [
+      [
+        "",
+        "32K",
+        "128K",
+        "256K",
+        "512K",
+        "1M"
+      ],
+      [
+        "Parameters",
+        "7B",
+        "7B",
+        "7B",
+        "7B",
+        "7B"
+      ],
+      [
+        "Initialize From",
+        "LLaMA-2 7B",
+        "Text-32K",
+        "Text-128K",
+        "Text-256K",
+        "Text-512K"
+      ],
+      [
+        "Precision",
+        "float32",
+        "float32",
+        "float32",
+        "float32",
+        "float32"
+      ],
+      [
+        "Sequence Length",
+        "215",
+        "217",
+        "218",
+        "219",
+        "220"
+      ],
+      [
+        "RoPE θ",
+        "1M",
+        "10M",
+        "10M",
+        "25M",
+        "50M"
+      ],
+      [
+        "Tokens per Batch",
+        "4M",
+        "4M",
+        "4M",
+        "4M",
+        "4M"
+      ],
+      [
+        "Total Tokens",
+        "4.8B",
+        "12B",
+        "12B",
+        "3B",
+        "1.8B"
+      ],
+      [
+        "Total Steps",
+        "1200",
+        "3000",
+        "3000",
+        "720",
+        "450"
+      ],
+      [
+        "LR Schedule",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant"
+      ],
+      [
+        "LR Warmup Steps",
+        "100",
+        "200",
+        "200",
+        "50",
+        "25"
+      ],
+      [
+        "LR",
+        "4×10−5",
+        "4×10−5",
+        "4×10−5",
+        "4×10−5",
+        "4×10−5"
+      ],
+      [
+        "Compute (TPU)",
+        "v4-512",
+        "v4-512",
+        "v4-512",
+        "v4-512",
+        "v4-512"
+      ],
+      [
+        "Mesh Sharding",
+        "1,-1,4,1",
+        "1,-1,8,1",
+        "1,-1,16,1",
+        "1,-1,16,2",
+        "1,-1,16,4"
+      ]
+    ]
+  },
+  {
+    "id": "A10.T13",
+    "caption": "Table 13: LWM-Text-Chat Training Details",
+    "rows": [
+      [
+        "",
+        "128K",
+        "256K",
+        "512K",
+        "1M"
+      ],
+      [
+        "Parameters",
+        "7B",
+        "7B",
+        "7B",
+        "7B"
+      ],
+      [
+        "Initialize From",
+        "Text-128K",
+        "Text-256K",
+        "Text-512K",
+        "Text-1M"
+      ],
+      [
+        "Precision",
+        "float32",
+        "float32",
+        "float32",
+        "float32"
+      ],
+      [
+        "Sequence Length",
+        "217",
+        "218",
+        "219",
+        "220"
+      ],
+      [
+        "RoPE θ",
+        "10M",
+        "10M",
+        "25M",
+        "50M"
+      ],
+      [
+        "Tokens per Batch",
+        "4M",
+        "4M",
+        "4M",
+        "4M"
+      ],
+      [
+        "Total Tokens",
+        "1.2B",
+        "1.2B",
+        "1.2B",
+        "1.2B"
+      ],
+      [
+        "Total Steps",
+        "300",
+        "300",
+        "300",
+        "300"
+      ],
+      [
+        "LR Schedule",
+        "Constant",
+        "Constant",
+        "Constant",
+        "Constant"
+      ],
+      [
+        "LR Warmup Steps",
+        "25",
+        "25",
+        "25",
+        "25"
+      ],
+      [
+        "LR",
+        "4×10−5",
+        "4×10−5",
+        "4×10−5",
+        "4×10−5"
+      ],
+      [
+        "Compute (TPU)",
+        "v4-512",
+        "v4-512",
+        "v4-512",
+        "v4-512"
+      ],
+      [
+        "Mesh Sharding",
+        "1,-1,4,1",
+        "1,-1,8,1",
+        "1,-1,16,1",
+        "1,-1,16,2"
+      ]
+    ]
+  },
+  {
+    "id": "A10.T14",
+    "caption": "Table 14: LWM / LWM-Chat Training Stages",
+    "rows": [
+      [
+        "",
+        "1K",
+        "8K",
+        "32K",
+        "128K",
+        "1M"
+      ],
+      [
+        "Parameters",
+        "7B",
+        "7B",
+        "7B",
+        "7B",
+        "7B"
+      ],
+      [
+        "Initialize From",
+        "Text-1M",
+        "1K",
+        "8K",
+        "32K",
+        "128K"
+      ],
+      [
+        "Precision",
+        "float32",
+        "float32",
+        "float32",
+        "float32",
+        "float32"
+      ],
+      [
+        "Sequence Length",
+        "210",
+        "213",
+        "215",
+        "217",
+        "220"
+      ],
+      [
+        "RoPE θ",
+        "50M",
+        "50M",
+        "50M",
+        "50M",
+        "50M"
+      ],
+      [
+        "Tokens per Batch",
+        "8M",
+        "8M",
+        "8M",
+        "8M",
+        "8M"
+      ],
+      [
+        "Total Tokens",
+        "363B",
+        "107B",
+        "10B",
+        "3.5B",
+        "0.4B"
+      ],
+      [
+        "Total Steps",
+        "45000",
+        "14000",
+        "1200",
+        "450",
+        "50"
+      ],
+      [
+        "LR Schedule",
+        "Cosine",
+        "Cosine",
+        "Cosine",
+        "Cosine",
+        "Cosine"
+      ],
+      [
+        "LR Warmup Steps",
+        "1000",
+        "500",
+        "100",
+        "50",
+        "5"
+      ],
+      [
+        "Max LR",
+        "6×10−4",
+        "6×10−4",
+        "8×10−5",
+        "8×10−5",
+        "8×10−5"
+      ],
+      [
+        "Min LR",
+        "6×10−5",
+        "6×10−5",
+        "8×10−5",
+        "8×10−5",
+        "8×10−5"
+      ],
+      [
+        "Compute (TPU)",
+        "v4-1024",
+        "v4-1024",
+        "v4-1024",
+        "v4-1024",
+        "v4-1024"
+      ],
+      [
+        "Mesh Sharding",
+        "1,-1,1,1",
+        "1,-1,1,1",
+        "1.-1.4,1",
+        "1.-1.8,1",
+        "1,-1,16,4"
+      ]
+    ]
+  }
+]

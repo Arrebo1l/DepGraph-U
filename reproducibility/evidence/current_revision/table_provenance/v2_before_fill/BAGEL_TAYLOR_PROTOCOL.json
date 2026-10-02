@@ -1,0 +1,40 @@
+{
+  "authorization": "User requests native BAGEL versus DepGraph-U using GPU2/GPU3 and explicitly permits architecture-specific adaptation, reporting actual speed and quality with non-applicable components disclosed.",
+  "model": {"repo":"ByteDance-Seed/BAGEL-7B-MoT","revision":"5019f57d168e5816e8f3f701b17cc816bb7cf24b","code_revision":"a2fa77dd8caeefc41e6607ae0ec17408d3f4ee9f","precision":"bfloat16","batch_size":1},
+  "generation": {
+    "gpu":2,"benchmark":"GenEval","prompts":553,"images_per_prompt":1,"seed":42,
+    "scope":"Auxiliary one-image-per-prompt evaluation, not the standard four-image-per-prompt leaderboard protocol",
+    "image_size":[1024,1024],"sampler_timepoints":50,"actual_flow_calls":49,
+    "cfg_text_scale":4.0,"cfg_img_scale":1.0,"cfg_interval":[0.4,1.0],"cfg_renorm":"global","timestep_shift":3.0,
+    "native":"Native BAGEL, TaylorSeer off, full original weights, native prefix KV enabled",
+    "ours":"BAGEL-adapted DepGraph-U: fixed Wanda-style structured FFN pruning in generation expert, native TaylorSeer cache policy, PR307-equivalent last-layer history optimization, CADD early dependency dispatch",
+    "pruning_ratio_requested":0.2,"retained_dimension_multiple":128,
+    "calibration":"Two frozen synthetic prompts, native full forwards, seeds600/601; no benchmark labels or quality scores used",
+    "non_applicable":"Show-o2 Head-A/Head-B split is absent. Generation vocabulary projection is already absent in native BAGEL and receives no new credit. DLS and hybrid FFN switching are not introduced into the Taylor history.",
+    "correctness":"Two disjoint same-policy cases compare pruned TaylorSeer policy-only with CADD: exact velocity/scheduler traces, pixels, initial noise, RNG; native versus combined is approximate and scored independently",
+    "timing":"Synchronized wall time, prompt processing through VAE decode, excludes loading, calibration, trace/hashes and PNG I/O; alternate native/ours order across prompts; diagnostic timing excluded",
+    "scoring":"Independent official GenEval scorer invocation for each arm; require553 unique outputs and six category macro scores"
+  },
+  "understanding": {
+    "gpu":3,"benchmark":"MMStar","examples":1500,"seed":42,"max_sequence_iterations":128,"do_sample":false,
+    "native":"Official BAGEL model.chat API, native incremental KV, full original weights; do not disable KV or use redundant high-level CFG contexts as baseline",
+    "ours":"BAGEL-adapted stable-graph DepGraph-U: fixed Wanda-style understanding-FFN pruning, native incremental KV plus guarded append-only cache buffer; no dynamic layer skipping",
+    "pruning_ratio_requested":0.2,"retained_dimension_multiple":128,
+    "calibration":"Four fixed synthetic448px colored square/black circle images; no MMStar calibration",
+    "image_transform":{"max_image_size":980,"min_image_size":378,"image_stride":14,"max_pixels":2007040},
+    "correctness":"Two synthetic same-pruned-policy cases compare native KV storage and guarded buffer; exact logits, layer-stack outputs, all visible key/value states and RNG; require actual guarded append calls",
+    "score":"Official-style option prefix extraction; unweighted L2 category accuracy mean, percentage; retain raw answers for independent reaggregation",
+    "timing":"Synchronized official chat including image transform/ViT/prefill/decode; alternate paired order; input decoding/file I/O and hashes excluded"
+  },
+  "attribution": [
+    "FlashU structured FFN ranking/pruning principle; adapted to separate BAGEL MoT experts",
+    "BAGEL official implementation and native KV/vocabulary behavior",
+    "TaylorSeer native BAGEL cache provider; not relabeled as FlashU diffusion-head caching or as new work",
+    "Public BAGEL PR307-equivalent last-layer cache optimization; credited, not claimed as a new contribution",
+    "DepGraph-U CADD early dispatch; prior validated BAGEL port",
+    "New bounded BAGEL fixed-graph append-buffer adaptation; distinct from original Exact-DLS rebuilding experiments"
+  ],
+  "gates":"Stop on source/weight/identity/correctness errors; no gate on favorable latency or quality, no score-based parameter tuning, no hidden retries; retain setup failures and negative outcomes",
+  "comparison_boundary":"Full-system gains over native include inherited pruning/cache policy gains. Same-policy equality never implies equality or losslessness versus native BAGEL.",
+  "scope_limit":"This tests the stated BAGEL adaptations, not every Show-o2 component or the original complete FlashU stack. Missing or already-native components must remain explicit in Table7 and the protocol."
+}

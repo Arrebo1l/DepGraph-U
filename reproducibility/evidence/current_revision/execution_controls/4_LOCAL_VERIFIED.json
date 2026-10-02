@@ -1,0 +1,69 @@
+{
+  "passed": true,
+  "utc": "2026-09-22T20:04:21.938009+00:00",
+  "integrity": {
+    "downloaded_files": 140,
+    "frozen_files": 69,
+    "fresh_remote_png_hashes": 0,
+    "archive_sha256": "c351b2075b5fc33db2177a3cc6f337bdc6f5e92787f55132422d431675a66d5d"
+  },
+  "formal_paired_step_checks": 3570,
+  "formal_step_checks_by_phase": {
+    "standard": 1530,
+    "conditional": 1530,
+    "zero_hit": 510
+  },
+  "all_recorded_checks_passed": true,
+  "max_abs_prediction_difference": 0.0,
+  "coverage_record_counts_overlapping": {
+    "cache_empty": 1575,
+    "DLS_recalibration": 270,
+    "cache_refresh": 360,
+    "accepted_hit": 420,
+    "full_network_fallback": 900,
+    "conditional_only": 1305
+  },
+  "text_api_records": 9,
+  "zero_hit": {
+    "model_calls": 510,
+    "reference_seconds": 105.17129464447498,
+    "cadd_seconds": 105.18655028939247,
+    "point_estimate_overhead_percent": 0.014505521653096487,
+    "absolute_total_difference_ms": 15.255644917488098,
+    "per_call_difference_ms": 0.02991302924997666,
+    "order_counts": {
+      "original/cadd": 255,
+      "cadd/original": 255
+    },
+    "seed_results": [
+      {
+        "seed": 42,
+        "reference_s": 34.92482079192996,
+        "cadd_s": 34.92987421154976,
+        "overhead_percent": 0.014469421761398316
+      },
+      {
+        "seed": 43,
+        "reference_s": 35.198267575353384,
+        "cadd_s": 35.2020152322948,
+        "overhead_percent": 0.010647276697328678
+      },
+      {
+        "seed": 44,
+        "reference_s": 35.04820627719164,
+        "cadd_s": 35.054660845547915,
+        "overhead_percent": 0.018416258752940173
+      }
+    ],
+    "prompt_seed_overhead_min_percent": -0.12321196303722859,
+    "prompt_seed_overhead_max_percent": 0.12818369744929115
+  },
+  "notes": [
+    "3570 comparisons are real model-step replays, not 3570 independent images.",
+    "Coverage counts overlap; accepted-hit count includes CADD-only and combined on the same reference steps.",
+    "Local audit compares saved prediction/future-state hashes and branch counts. RNG equality is an in-process recorded check, not a locally rehashed RNG dump.",
+    "Conditional-only phase intentionally forces the branch in both arms; not a proposed quality policy.",
+    "Zero-hit time is paired synchronized model-call wall time, not end-to-end generation. Tiny aggregate difference is not a statistically established nonzero overhead.",
+    "Generation guards and specified text/Qwen labels APIs only; understanding KV/gather/mask/EOS boundaries not covered."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "official_rewritten_metadata_sha256": "ac97a64424c755e99e2b70b8ace2ba14ed06376f92d3e9f308792e2e001f4979",
+  "evaluator_commit": "af4902f24d3ca90ebbb446dd9891a59e0f82725f",
+  "evaluator_file_hashes": [
+    {
+      "sha256": "c0fdeb8315f7d3ed72b56f466652afba5216f854109c6eeea339f9982474ea46",
+      "file": "evaluate_images.py"
+    },
+    {
+      "sha256": "302212beb80359b03fde980f4a71e76e44e41969bd917af6345310a715761aae",
+      "file": "summary_scores.py"
+    },
+    {
+      "sha256": "608f6a0e5c8ca1c7a92b818430141fe268c85b7930b50f4160f1d65893b5bacd",
+      "file": "object_names.txt"
+    },
+    {
+      "sha256": "743b7d99015f1224c6d57fd4b14d04b15cc8ec72ae7ee7831e7c71d8873b7a54",
+      "file": "mask2former_swin-s-p4-w7-224_lsj_8x2_50e_coco.pth"
+    }
+  ],
+  "quality_bank": "Newly timed native Show-o2-1.5B GenEval bank; 2,212 images",
+  "latency_non_warmup_images": 2208,
+  "latency_mean_seconds": 10.628905069568884
+}

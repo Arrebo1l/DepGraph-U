@@ -1,0 +1,70 @@
+{
+  "name": "Execution-cost decomposition; generation diagnostic, not new benchmark quality",
+  "models": [
+    "1p5b",
+    "7b"
+  ],
+  "arms": [
+    "original",
+    "cadd",
+    "vocab",
+    "full"
+  ],
+  "modes": [
+    "timing",
+    "profile"
+  ],
+  "repeats": 3,
+  "seed": 42,
+  "steps": 35,
+  "expected_model_calls": 34,
+  "sampler_note": "Unchanged original Euler grid: 35 time points and 34 drift/model evaluations",
+  "resolution": [
+    432,
+    432
+  ],
+  "batch_size": 1,
+  "guidance_scale": 10,
+  "ffn_pruning_ratio": 0.2,
+  "layer_skipping_ratio": 0.2,
+  "T_LS": 10,
+  "T_cache": 5,
+  "final_full_steps": 11,
+  "formal_prompt_indices": [
+    13,
+    101,
+    125,
+    137,
+    153,
+    207,
+    220,
+    259,
+    327,
+    375,
+    402,
+    443,
+    503,
+    514,
+    632,
+    653,
+    947,
+    1016,
+    1026,
+    1040
+  ],
+  "smoke_prompt_indices": [
+    340,
+    886
+  ],
+  "calibration_warmup_index": 0,
+  "selection": "SHA256-ranked original DPG indices; selected before results; calibration/warmup separate",
+  "formal_image_calls": 960,
+  "formal_timing_calls": 480,
+  "formal_profile_calls": 480,
+  "timing": "Synchronized wall time: prompt input construction through VAE decode; excludes load/calibration/warmup/hashes/image save. No profiler or module hooks in timing mode.",
+  "profiling": "CUDA stream intervals, nested exclusive aggregation; separately recorded; do not substitute for uninstrumented time. Cache-predicate CPU durations are not total guard overhead.",
+  "correctness": "Every arm/mode paired by identical seed and prompt order; record latent,decoded,PNG,RNG equality; any mismatch stops and remains in evidence; no positive-speed gate.",
+  "repeat_scope": "Independent fresh processes with same seed; uncertainty is timing repeat variation, not quality seed variation.",
+  "source": "${EXPERIMENT_ROOT}/FlashU_generation_matched_7b_geneval_original_full_20260906_v2/source_snapshot",
+  "source_entrypoint_sha256": "98dc5722ae498f685848aa7217223e2b9a8c39121e7bfe81c79f49375e02595b"
+}

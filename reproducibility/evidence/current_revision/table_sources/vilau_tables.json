@@ -1,0 +1,697 @@
+[
+  {
+    "id": "S4.T1",
+    "caption": "Table 1: The reconstruction FID (rFID) and Top-1 accuracy for zero-shot image classification of our unified vision tower on ImageNet.",
+    "rows": [
+      [
+        "Model",
+        "Pretrained Weights",
+        "Resolution",
+        "Shape of Code",
+        "rFID↓",
+        "Top-1 Accuracy↑"
+      ],
+      [
+        "VQ-GAN [22]",
+        "–",
+        "256 × 256",
+        "16 × 16",
+        "4.98",
+        "–"
+      ],
+      [
+        "RQ-VAE [33]",
+        "–",
+        "256 × 256",
+        "8 × 8 × 4",
+        "3.20",
+        "–"
+      ],
+      [
+        "RQ-VAE [33]",
+        "–",
+        "256 × 256",
+        "16 × 16 × 4",
+        "1.30",
+        "–"
+      ],
+      [
+        "Ours",
+        "SigLIP-Large",
+        "256 × 256",
+        "16 × 16 × 4",
+        "1.80",
+        "73.3"
+      ],
+      [
+        "Ours",
+        "SigLIP-SO400M",
+        "384 × 384",
+        "27 × 27 × 16",
+        "1.25",
+        "78.0"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T2",
+    "caption": "Table 2: Comparison with leading methods on image-based visual language benchmarks. Our performance is close to leading VLMs, surpassing many methods by a large margin under the same LLM size, even with a discrete visual token type. * indicates that images in the training split of these datasets are observed during VLM training.",
+    "rows": [
+      [
+        "Method",
+        "LLM",
+        "Visual Token",
+        "Res.",
+        "VQAv2",
+        "GQA",
+        "TextVQA",
+        "POPE",
+        "MME",
+        "SEED",
+        "MM-Vet"
+      ],
+      [
+        "LLaVA-1.5 [51]",
+        "Vicuna-1.5-7B",
+        "Continuous",
+        "336",
+        "78.5∗",
+        "62.0∗",
+        "58.2",
+        "85.9",
+        "1510.7",
+        "58.6",
+        "30.5"
+      ],
+      [
+        "VILA [45]",
+        "LLaMA-2-7B",
+        "Continuous",
+        "336",
+        "79.9∗",
+        "62.3∗",
+        "64.4",
+        "85.5",
+        "1533.0",
+        "61.1",
+        "34.9"
+      ],
+      [
+        "Unified-IO 2 [52]",
+        "6.8B from scratch",
+        "Continuous",
+        "384",
+        "79.4∗",
+        "–",
+        "–",
+        "87.7",
+        "–",
+        "61.8",
+        "–"
+      ],
+      [
+        "InstructBLIP [15]",
+        "Vicuna-7B",
+        "Continuous",
+        "224",
+        "–",
+        "49.2",
+        "50.1",
+        "–",
+        "–",
+        "53.4",
+        "26.2"
+      ],
+      [
+        "IDEFICS-9B [32]",
+        "LLaMA-7B",
+        "Continuous",
+        "224",
+        "50.9",
+        "38.4",
+        "25.9",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "Emu [64]",
+        "LLaMA-13B",
+        "Continuous",
+        "224",
+        "52.0",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "LaVIT [31]",
+        "LLaMA-7B",
+        "Continuous",
+        "224",
+        "66.0",
+        "46.8",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "DreamLLM [19]",
+        "Vicuna-7B",
+        "Continuous",
+        "224",
+        "72.9∗",
+        "–",
+        "41.8",
+        "–",
+        "–",
+        "–",
+        "36.6"
+      ],
+      [
+        "Video-LaVIT [30]",
+        "LLaMA-2-7B",
+        "Continuous",
+        "224",
+        "80.2∗",
+        "63.6∗",
+        "–",
+        "–",
+        "1581.5",
+        "64.4",
+        "35.0"
+      ],
+      [
+        "CM3Leon-7B [75]",
+        "7B from scratch",
+        "Discrete",
+        "256",
+        "47.6",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–",
+        "–"
+      ],
+      [
+        "LWM [48]",
+        "LLaMA-2-7B",
+        "Discrete",
+        "256",
+        "55.8",
+        "44.8",
+        "18.8",
+        "75.2",
+        "–",
+        "–",
+        "9.6"
+      ],
+      [
+        "Show-o [70]",
+        "Phi-1.5-1.3B",
+        "Discrete",
+        "256",
+        "59.3∗",
+        "48.7∗",
+        "–",
+        "73.8",
+        "948.4",
+        "–",
+        "–"
+      ],
+      [
+        "Ours",
+        "LLaMA-2-7B",
+        "Discrete",
+        "256",
+        "75.3∗",
+        "58.3∗",
+        "48.3",
+        "83.9",
+        "1336.2",
+        "56.3",
+        "27.7"
+      ],
+      [
+        "Ours",
+        "LLaMA-2-7B",
+        "Discrete",
+        "384",
+        "79.4∗",
+        "60.8∗",
+        "60.8",
+        "85.8",
+        "1401.8",
+        "59.0",
+        "33.5"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T3",
+    "caption": "Table 3: Comparison with leading methods on video-based visual language benchmarks. The performance of our method is close to state-of-the-art VLMs, surpassing many methods under the same LLM size, even with a discrete visual token type.",
+    "rows": [
+      [
+        "Method",
+        "LLM",
+        "Visual Token",
+        "Res.",
+        "MSVD-QA",
+        "MSRVTT-QA",
+        "TGIF-QA",
+        "Activity Net-QA"
+      ],
+      [
+        "Unified-IO 2 [52]",
+        "6.8B from scratch",
+        "Continuous",
+        "384",
+        "52.1",
+        "42.5",
+        "–",
+        "–"
+      ],
+      [
+        "Emu [64]",
+        "LLaMA-13B",
+        "Continuous",
+        "224",
+        "–",
+        "18.8",
+        "8.3",
+        "–"
+      ],
+      [
+        "VideoChat [40]",
+        "Vicuna-7B",
+        "Continuous",
+        "224",
+        "56.3",
+        "45",
+        "34.4",
+        "–"
+      ],
+      [
+        "Video-LLaMA [78]",
+        "LLaMA-2-7B",
+        "Continuous",
+        "224",
+        "51.6",
+        "29.6",
+        "–",
+        "–"
+      ],
+      [
+        "Video-ChatGPT [53]",
+        "LLaMA-2-7B",
+        "Continuous",
+        "224",
+        "64.9",
+        "49.3",
+        "51.4",
+        "35.2"
+      ],
+      [
+        "Video-LLava [44]",
+        "Vicuna-7B",
+        "Continuous",
+        "224",
+        "70.7",
+        "59.2",
+        "70.0",
+        "45.3"
+      ],
+      [
+        "Video-LaVIT [30]",
+        "LLaMA-2-7B",
+        "Continuous",
+        "224",
+        "73.5",
+        "59.5",
+        "–",
+        "50.2"
+      ],
+      [
+        "LWM [48]",
+        "LLaMA-2-7B",
+        "Discrete",
+        "256",
+        "55.9",
+        "44.1",
+        "40.9",
+        "–"
+      ],
+      [
+        "Ours",
+        "LLaMA-2-7B",
+        "Discrete",
+        "256",
+        "73.4",
+        "58.9",
+        "51.3",
+        "51.6"
+      ],
+      [
+        "Ours",
+        "LLaMA-2-7B",
+        "Discrete",
+        "384",
+        "75.3",
+        "60.0",
+        "51.9",
+        "52.7"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T4",
+    "caption": "Table 4: Comparison with other visual generation methods on MJHQ-30K evaluation benchmark.",
+    "rows": [
+      [
+        "Method",
+        "Type",
+        "#Images",
+        "FID↓"
+      ],
+      [
+        "SD-XL [57]",
+        "Diffusion",
+        "2000M",
+        "9.55"
+      ],
+      [
+        "PixArt [9]",
+        "Diffusion",
+        "25M",
+        "6.14"
+      ],
+      [
+        "Playground v2.5 [35]",
+        "Diffusion",
+        "–",
+        "4.48"
+      ],
+      [
+        "Show-o [70]",
+        "Discrete Diff.",
+        "36M",
+        "15.18"
+      ],
+      [
+        "LWM [48]",
+        "Autoregressive",
+        "–",
+        "17.77"
+      ],
+      [
+        "Ours (256)",
+        "Autoregressive",
+        "15M",
+        "12.81"
+      ],
+      [
+        "Ours (384)",
+        "Autoregressive",
+        "15M",
+        "7.69"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T5",
+    "caption": "Table 5: Comparison with other visual generation methods on GenAI-Bench [46]. The results show that our method outperforms previous autoregressive visual generation methods. For advanced prompts that require better text following ability to generate, our method can have a relatively small performance gap with diffusion-based methods, even with much less training data and time.",
+    "rows": [
+      [
+        "Method",
+        "Type",
+        "#Training Images",
+        "Attribute↑",
+        "Scene↑",
+        "Relation↑",
+        "Overall↑"
+      ],
+      [
+        "Spatial",
+        "Action",
+        "Part"
+      ],
+      [
+        "SD v2.1 [60]",
+        "Diffusion",
+        "2000M",
+        "0.80",
+        "0.79",
+        "0.76",
+        "0.77",
+        "0.80",
+        "0.78"
+      ],
+      [
+        "SD-XL [57]",
+        "Diffusion",
+        "2000M",
+        "0.84",
+        "0.84",
+        "0.82",
+        "0.83",
+        "0.89",
+        "0.83"
+      ],
+      [
+        "Midjourney v6 [59]",
+        "Diffusion",
+        "–",
+        "0.88",
+        "0.87",
+        "0.87",
+        "0.87",
+        "0.91",
+        "0.87"
+      ],
+      [
+        "DALL-E 3 [47]",
+        "Diffusion",
+        "–",
+        "0.91",
+        "0.90",
+        "0.92",
+        "0.89",
+        "0.91",
+        "0.90"
+      ],
+      [
+        "Show-o [70]",
+        "Discrete Diff.",
+        "36M",
+        "0.72",
+        "0.72",
+        "0.70",
+        "0.70",
+        "0.75",
+        "0.70"
+      ],
+      [
+        "LWM [48]",
+        "Autoregressive",
+        "–",
+        "0.63",
+        "0.62",
+        "0.65",
+        "0.63",
+        "0.70",
+        "0.63"
+      ],
+      [
+        "Ours (256)",
+        "Autoregressive",
+        "15M",
+        "0.78",
+        "0.78",
+        "0.77",
+        "0.78",
+        "0.79",
+        "0.76"
+      ],
+      [
+        "Ours (384)",
+        "Autoregressive",
+        "15M",
+        "0.75",
+        "0.76",
+        "0.75",
+        "0.73",
+        "0.75",
+        "0.73"
+      ],
+      [
+        "Method",
+        "Type",
+        "#Training Images",
+        "Count↑",
+        "Differ↑",
+        "Compare↑",
+        "Logical↑",
+        "Overall↑"
+      ],
+      [
+        "Negate",
+        "Universal"
+      ],
+      [
+        "SD v2.1 [60]",
+        "Diffusion",
+        "2000M",
+        "0.68",
+        "0.70",
+        "0.68",
+        "0.54",
+        "0.64",
+        "0.62"
+      ],
+      [
+        "SD-XL [57]",
+        "Diffusion",
+        "2000M",
+        "0.71",
+        "0.73",
+        "0.69",
+        "0.50",
+        "0.66",
+        "0.63"
+      ],
+      [
+        "Midjourney v6 [59]",
+        "Diffusion",
+        "–",
+        "0.78",
+        "0.78",
+        "0.79",
+        "0.50",
+        "0.76",
+        "0.69"
+      ],
+      [
+        "DALL-E 3 [47]",
+        "Diffusion",
+        "–",
+        "0.82",
+        "0.78",
+        "0.82",
+        "0.48",
+        "0.80",
+        "0.70"
+      ],
+      [
+        "Show-o [70]",
+        "Discrete Diff.",
+        "36M",
+        "0.70",
+        "0.62",
+        "0.71",
+        "0.51",
+        "0.65",
+        "0.60"
+      ],
+      [
+        "LWM [48]",
+        "Autoregressive",
+        "–",
+        "0.59",
+        "0.58",
+        "0.54",
+        "0.49",
+        "0.52",
+        "0.53"
+      ],
+      [
+        "Ours (256)",
+        "Autoregressive",
+        "15M",
+        "0.70",
+        "0.71",
+        "0.74",
+        "0.53",
+        "0.66",
+        "0.64"
+      ],
+      [
+        "Ours (384)",
+        "Autoregressive",
+        "15M",
+        "0.68",
+        "0.67",
+        "0.71",
+        "0.51",
+        "0.64",
+        "0.61"
+      ]
+    ]
+  },
+  {
+    "id": "S5.T6",
+    "caption": "Table 6: Impact of contrastive loss to visual understanding.",
+    "rows": [
+      [
+        "Pretrained Weights",
+        "Data size",
+        "Loss Type",
+        "Top-1 Accuracy",
+        "VQAv2",
+        "POPE",
+        "MME",
+        "SEED",
+        "MM-Vet"
+      ],
+      [
+        "SigLIP-Large",
+        "25M",
+        "Recon.",
+        "–",
+        "57.7",
+        "75.1",
+        "937.7",
+        "38.7",
+        "15.3"
+      ],
+      [
+        "SigLIP-Large",
+        "25M",
+        "Recon. + Contra.",
+        "62.9",
+        "68.0",
+        "83.7",
+        "1219",
+        "50.4",
+        "20.8"
+      ],
+      [
+        "SigLIP-Large",
+        "700M",
+        "Recon. + Contra.",
+        "73.3",
+        "75.3",
+        "83.9",
+        "1336.2",
+        "56.3",
+        "27.7"
+      ]
+    ]
+  },
+  {
+    "id": "S5.T7",
+    "caption": "Table 7: Impact of contrastive loss to visual generation.",
+    "rows": []
+  },
+  {
+    "id": "S5.T8",
+    "caption": "Table 8: Impact of CFG.",
+    "rows": []
+  }
+]

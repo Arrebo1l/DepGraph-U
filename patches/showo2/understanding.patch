@@ -1,0 +1,320 @@
+--- a/models/modeling_showo2_qwen2_5.py
++++ b/models/modeling_showo2_qwen2_5.py
+@@ -13,12 +13,15 @@
+ # See the License for the specific language governing permissions and
+ # limitations under the License.
+ 
++import os
++
+ import torch
+ import torch.nn as nn
+ import torch.nn.functional as F
+ from einops import rearrange
+ from transformers import AutoConfig
+-from torch.nn.attention.flex_attention import BlockMask
++from transformers.cache_utils import DynamicCache
++
+ from .misc import velocity_prediction, next_token_prediction, interpolate_pos_encoding
+ from .modeling_siglip import SiglipModel
+ from .modeling_utils import ConfigMixin, ModelMixin, register_to_config
+@@ -112,7 +115,7 @@
+ 
+     def reset_parameters(self):
+ 
+-        # Initialize image embedders
++        # Initialize image emebedders
+         w1 = self.image_embedder_und.proj.weight.data
+         nn.init.xavier_uniform_(w1.view([w1.shape[0], -1]))
+         nn.init.constant_(self.image_embedder_und.proj.bias, 0)
+@@ -157,7 +160,7 @@
+             imgs = x.reshape(shape=(x.shape[0], T, h * p * w * p, c))
+         return imgs
+ 
+-    def forward_und_only(
++    def forward_und_siglip_only(
+             self,
+             text_tokens=None,
+             image_latents=None,
+@@ -196,40 +199,20 @@
+             image_embeds_gen = image_embeds_gen.reshape(b, T, -1, self.config.hidden_size)
+             image_embeds_gen = rearrange(image_embeds_gen, 'b t l d -> b (t l) d')
+ 
+-        # go through semantic layers
+-        p = self.config.patch_size
+-        h_, w_ = h // p, w // p
+-        # specific for fixed resolution of 432x432
+-        if self.position_embedding.weight.shape[0] == self.image_position_ids.shape[-1]:
+-            image_embeds_und = image_embeds_und + self.position_embedding(self.image_position_ids)
+-            image_embeds_und = self.und_trans(image_embeds_und)['last_hidden_state']
+-        # interpolate position embeddings for dynamic resolution
+-        else:
+-            image_embeds_und = image_embeds_und + interpolate_pos_encoding(
+-                self.config.clip_latent_dim,
+-                self.position_embedding,
+-                h_,
+-                w_,
+-                1,
+-            )
+-            image_embeds_und = self.und_trans(image_embeds_und)['last_hidden_state']
++        image_embeds_und = image_embeds_und + self.position_embedding(self.image_position_ids)
++        image_embeds_und = self.und_trans(image_embeds_und)['last_hidden_state']
+         if T != 0:
+             image_embeds_und = image_embeds_und.reshape(b, T, image_embeds_und.shape[1], -1)
+             image_embeds_und = rearrange(image_embeds_und, 'b t l d -> b (t l) d')
+-
+-        # spatial (-temporal) fusion
+         image_embeds = self.fusion_proj(torch.cat([image_embeds_und, image_embeds_gen], dim=-1))
+ 
+-        time_embeds = self.time_embed(t, dtype)
+-        if hasattr(self, 'time_embed_proj'):
+-            time_embeds_proj = self.time_embed_proj(time_embeds)
+-        else:
+-            time_embeds_proj = time_embeds
++        if self.config.add_time_embeds:
++            time_embeds = self.time_embed(t.squeeze(), dtype)
+ 
+         for i, modality_batch in enumerate(modality_positions):
+             for j, (offset, length) in enumerate(modality_batch):
+                 if self.config.add_time_embeds:
+-                    input_embeds[i, offset] = time_embeds_proj[i * modality_positions.size(1) + j]
++                    input_embeds[i, offset] = time_embeds[i * modality_positions.size(1) + j]
+                     # length - 1 because we add 1 to the num_image_tokens when add_time_embeds=True
+                     # it's necessary to include :length-1, as sometimes we may skip some idle images when length=0
+                     input_embeds[i, offset + 1:offset + 1 + length - 1] = \
+@@ -305,7 +288,7 @@
+             p = self.config.patch_size
+             h_, w_ = h // p, w // p
+             # specific for fixed resolution of 432x432
+-            if self.position_embedding.weight.shape[0] == self.image_position_ids.shape[-1]:
++            if self.position_embedding.weight.shape[-1] == self.image_position_ids.shape[-1]:
+                 image_embeds_und = image_embeds_und + self.position_embedding(self.image_position_ids)
+                 image_embeds_und = self.und_trans(image_embeds_und)['last_hidden_state']
+             # interpolate position embeddings for dynamic resolution
+@@ -530,12 +513,99 @@
+         device = input_embeds.device
+         dtype = input_embeds.dtype
+         result = []
+-        for _ in range(max_new_tokens):
++        use_kv_cache = os.getenv("FLASHU_UNDERSTANDING_KV_CACHE", "0") == "1"
++        # Isolated attribution experiment: vary output projection independently
++        # of caching. Do not deploy this experiment file into the source repo.
++        attribution_logits = os.environ["FLASHU_ATTRIBUTION_LOGITS_MODE"]
++        if attribution_logits not in ("all", "last"):
++            raise ValueError(f"Invalid attribution logits mode: {attribution_logits}")
++        attribution_logits_to_keep = 1 if attribution_logits == "last" else 0
++        kv_cache = DynamicCache() if use_kv_cache else None
++        step_profile = []
++        step_events = []
++        for decode_step in range(max_new_tokens):
+             # if the sequence context is growing too long we must crop it at block_size
+             # idx_cond = idx if idx.size(1) <= self.config.block_size else idx[:, -self.config.block_size:]
+             # forward the model to get the logits for the index in the sequence
+             # logits, _ = self(idx_cond)
+-            logits = self.showo(inputs_embeds=input_embeds, attention_mask=attention_mask.to(dtype))['logits']
++            if use_kv_cache:
++                flashu_config = getattr(self.showo, "_flashu_und_config", None)
++                # A DLS cycle needs two rebuilds.  Phase 0 computes every
++                # layer and selects the skip set.  Phase 1 rebuilds the prefix
++                # under that newly selected execution graph; only then are
++                # its per-layer K/V states reusable for phases 2..T_LS-1.
++                dls_enabled = bool(
++                    flashu_config is not None
++                    and flashu_config.layer_skip_ratio > 0.0
++                    and flashu_config.layer_skip_interval > 0
++                )
++                flashu_phase = (
++                    decode_step % flashu_config.layer_skip_interval
++                    if dls_enabled
++                    else None
++                )
++                # Rebuilds are required only when DLS actually changes the
++                # execution graph.  Previously, r_LS=0 still rebuilt the full
++                # prefix at decode step 1, erasing most of KV caching's gain.
++                flashu_rebuild = dls_enabled and flashu_phase in (0, 1)
++                if decode_step == 0 or flashu_rebuild:
++                    # FlashU DLS must periodically recompute all layers.  Start
++                    # a fresh heterogeneous cache on those steps so layers that
++                    # were skipped between rebuilds do not retain cache gaps.
++                    kv_cache = DynamicCache()
++                    cached_input_embeds = input_embeds
++                    cached_attention_mask = attention_mask.to(dtype)
++                else:
++                    cached_input_embeds = input_embeds[:, -1:, :]
++                    cached_attention_mask = attention_mask.squeeze()[-1:, :].reshape(
++                        1, 1, 1, -1
++                    ).to(dtype)
++                step_start = torch.cuda.Event(enable_timing=True)
++                step_end = torch.cuda.Event(enable_timing=True)
++                step_start.record()
++                outputs = self.showo(
++                    inputs_embeds=cached_input_embeds,
++                    attention_mask=cached_attention_mask,
++                    past_key_values=kv_cache,
++                    use_cache=True,
++                    output_hidden_states=False,
++                    return_dict=True,
++                    num_logits_to_keep=attribution_logits_to_keep,
++                )
++                step_end.record()
++                step_events.append((step_start, step_end))
++                step_profile.append({
++                    "decode_step": int(decode_step),
++                    "flashu_phase": int(flashu_phase) if flashu_phase is not None else None,
++                    "rebuild": bool(decode_step == 0 or flashu_rebuild),
++                    "input_seq_len": int(cached_input_embeds.shape[1]),
++                    "mask_key_len": int(cached_attention_mask.shape[-1]),
++                })
++                kv_cache = outputs.past_key_values
++                logits = outputs.logits
++            else:
++                step_start = torch.cuda.Event(enable_timing=True)
++                step_end = torch.cuda.Event(enable_timing=True)
++                step_start.record()
++                logits = self.showo(
++                    inputs_embeds=input_embeds,
++                    attention_mask=attention_mask.to(dtype),
++                    num_logits_to_keep=attribution_logits_to_keep,
++                )["logits"]
++                step_end.record()
++                step_events.append((step_start, step_end))
++                step_profile.append({
++                    "decode_step": int(decode_step),
++                    "flashu_phase": None,
++                    "rebuild": True,
++                    "input_seq_len": int(input_embeds.shape[1]),
++                    "mask_key_len": int(attention_mask.shape[-1]),
++                })
++
++            step_profile[-1]["logits_seq_len"] = int(logits.shape[1])
++            step_profile[-1]["logits_mode"] = attribution_logits
++            if attribution_logits == "last" and logits.shape[1] != 1:
++                raise AssertionError("Last-token logits optimization did not engage")
+ 
+             L = attention_mask.shape[-1]
+             attention_mask = attention_mask.squeeze()
+@@ -551,7 +621,7 @@
+                     torch.hstack([attention_mask[-1, :], torch.tensor([0]).to(device)]).unsqueeze(0),
+                 ]
+             )
+-            attention_mask = attention_mask_b
++            attention_mask = attention_mask_b.to(dtype)
+ 
+             # pluck the logits at the final step and scale by desired temperature
+             logits = logits[:, -1, :] / temperature
+@@ -566,11 +636,15 @@
+             result.append(idx_next[0][0])
+             # append sampled index to the running sequence and continue
+             idx_next_embeds = self.showo.model.embed_tokens(idx_next)
+-            input_embeds = torch.cat([input_embeds, idx_next_embeds], dim=1).to(dtype)
++            input_embeds = torch.cat([input_embeds, idx_next_embeds], dim=1)
+ 
+             if eos_token is not None and idx_next.cpu() == eos_token:
+                 break
+ 
++        torch.cuda.synchronize()
++        for row, (step_start, step_end) in zip(step_profile, step_events):
++            row["qwen_ms"] = float(step_start.elapsed_time(step_end))
++        self.showo._flashu_und_last_step_profile = step_profile
+         return result
+ 
+     @torch.no_grad()
+@@ -642,98 +716,3 @@
+         generated_text = tokenizer.decode(output_tokens, skip_special_tokens=False)
+ 
+         return generated_text
+-
+-    @torch.no_grad()
+-    def mm_generate(
+-            self,
+-            input_ids=None,
+-            image_latents=None,
+-            t=None,
+-            modality_positions=None,
+-            attention_mask=None,
+-            tokenizer=None,
+-            max_new_tokens=100,
+-            boi_token=None,
+-            temperature=1.0,
+-            top_k=None,
+-            top_p=None,
+-            device=None,
+-    ):
+-        """
+-        Take a conditioning sequence of indices idx (LongTensor of shape (b,t)) and complete
+-        the sequence max_new_tokens times, feeding the predictions back into the model each time.
+-        Most likely you'll want to make sure to be in model.eval() mode of operation for this.
+-        """
+-        generated_tokens = input_ids
+-        output_tokens = []
+-        if attention_mask is not None and type(attention_mask) == BlockMask:
+-            raise NotImplementedError
+-
+-        for _ in range(max_new_tokens):
+-            # Generate the next token
+-            logits = self.forward_und_only(
+-                text_tokens=torch.tensor([generated_tokens]).to(device),
+-                image_latents=image_latents,
+-                t=t,
+-                attention_mask=attention_mask,
+-                modality_positions=modality_positions,
+-            )
+-
+-            next_token_logits = logits[:, -1, :]  # Get logits for the last token
+-
+-            # Apply temperature scaling
+-            next_token_logits = next_token_logits / temperature
+-
+-            # Apply top-k sampling
+-            if top_k is not None:
+-                top_k_values, _ = torch.topk(next_token_logits, top_k)
+-                min_top_k_value = top_k_values[:, -1].unsqueeze(-1)
+-                next_token_logits = torch.where(
+-                    next_token_logits < min_top_k_value,
+-                    torch.full_like(next_token_logits, float("-inf")),
+-                    next_token_logits,
+-                )
+-
+-            # Apply top-p (nucleus) sampling
+-            if top_p is not None:
+-                sorted_logits, sorted_indices = torch.sort(next_token_logits, descending=True)
+-                cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
+-                sorted_indices_to_remove = cumulative_probs > top_p
+-                sorted_indices_to_remove[:, 1:] = sorted_indices_to_remove[:, :-1].clone()
+-                sorted_indices_to_remove[:, 0] = 0
+-                next_token_logits[sorted_indices[sorted_indices_to_remove]] = float("-inf")
+-
+-            # Convert logits to probabilities
+-            probs = F.softmax(next_token_logits, dim=-1)
+-
+-            # Sample the next token
+-            next_token = torch.multinomial(probs, num_samples=1).item()
+-
+-            # Append the next token to the sequence
+-            generated_tokens.append(next_token)
+-            output_tokens.append(next_token)
+-
+-            # Check if the `eos_token_id` is generated
+-            if next_token == tokenizer.eos_token_id or next_token == boi_token:  # EOS token ID
+-                break
+-
+-            L = attention_mask.shape[-1]
+-            attention_mask = attention_mask.squeeze()
+-            attention_mask_a = torch.hstack(
+-                [
+-                    attention_mask,  # L, L
+-                    torch.zeros((L, 1)).to(device) + torch.finfo(next_token_logits.dtype).min,
+-                ]
+-            )
+-            attention_mask_b = torch.vstack(
+-                [
+-                    attention_mask_a,  # L, L + 1
+-                    torch.hstack([attention_mask[-1, :], torch.tensor([0]).to(device)]).unsqueeze(0),
+-                ]
+-            )
+-            attention_mask = attention_mask_b.to(image_latents.dtype)
+-
+-            # Decode the generated tokens
+-        generated_text = tokenizer.decode(output_tokens, skip_special_tokens=False)
+-
+-        return generated_text
+\ No newline at end of file

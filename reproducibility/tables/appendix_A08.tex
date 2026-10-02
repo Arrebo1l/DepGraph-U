@@ -1,0 +1,20 @@
+\begin{table}[H]
+\centering
+\caption{\textbf{Exact-DLS costs by answer length.} Recorded rebuild costs are per example; incremental costs are per call.}
+\label{tab:tracecost}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{C{45pt}R|RRRR}
+\toprule
+\textbf{\tcell[c]{Generated\\tokens}} & \textbf{\tcell[c]{Test\\cases}} & \textbf{\tcell[c]{LM gen.\\(s)}} & \textbf{\tcell[c]{Rebuild\\(ms/ex.)}} & \textbf{\tcell[c]{Incremental\\(ms/call)}} & \textbf{\tcell[c]{Rebuild /\\trace (\%)}} \\
+\midrule
+\rowcolor{tgray}
+2 & 20,014 & 0.656 & 654.2 & -- & 100.00 \\
+3--9 & 4,290 & 0.681 & 648.6 & 21.01 & 95.65 \\
+10--19 & 351 & 1.536 & 1294.6 & 20.96 & 84.89 \\
+20--49 & 76 & 2.896 & 2369.3 & 21.02 & 82.45 \\
+50--128 & 38 & 9.695 & 7992.0 & 21.26 & 83.03 \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

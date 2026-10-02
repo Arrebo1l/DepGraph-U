@@ -1,0 +1,23 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+/third_party/
+/checkpoints/
+/datasets/
+/runs/
+/outputs/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+# Curated reproducibility evidence, including historical logs, remains tracked.

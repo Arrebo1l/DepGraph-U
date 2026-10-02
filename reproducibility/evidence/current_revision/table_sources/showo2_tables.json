@@ -1,0 +1,1838 @@
+[
+  {
+    "id": "S1.T1",
+    "caption": "Table 1: Comparative analysis of selected unified multimodal models based on the type of visual representations and unified modeling for multimodal understanding and generation. In this context, native und. & gen. refers to the direct decoding of output sequences into texts, images, and videos, as opposed to serving as conditions for decoding using external pre-trained decoders like Stable Diffusion. ∗ indicates the method adopts two distinct models for multimodal understanding and generation, respectively. Diff. means the diffusion modeling. Please refer to the complete table in the appendix.",
+    "rows": [
+      [
+        "Methods",
+        "Und. & Gen. Representation",
+        "Type of Unified Modeling"
+      ],
+      [
+        "Unified",
+        "Decoupled",
+        "Support Video",
+        "Native Und. & Gen.",
+        "Assembling Tailored Models",
+        "Paradigm"
+      ],
+      [
+        "Chameleon [89]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Transfusion [121]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "Show-o [108]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "VILA-U [105]",
+        "✓",
+        "",
+        "✓",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Emu3 [98]",
+        "✓",
+        "",
+        "✓",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "✓",
+        "",
+        "✓",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "Janus-Series [24, 71, 25]",
+        "",
+        "✓",
+        "",
+        "✓",
+        "",
+        "AR (+Diff)"
+      ],
+      [
+        "UnidFluid [35]",
+        "",
+        "✓",
+        "",
+        "✓",
+        "",
+        "AR + MAR"
+      ],
+      [
+        "Mogao [60]",
+        "",
+        "✓",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "Bagel [29]",
+        "",
+        "✓",
+        "✓",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "NExT-GPT [103]",
+        "",
+        "✓",
+        "✓",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "SEED-X [37]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "ILLUME [96]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "MetaMorph [91]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "TokenFlow∗ [79]",
+        "✓",
+        "",
+        "",
+        "",
+        "✓",
+        "AR"
+      ],
+      [
+        "LlamaFusion [84]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ]
+    ]
+  },
+  {
+    "id": "S3.T2",
+    "caption": "Table 2: Trainable components and datasets in the training stages.",
+    "rows": [
+      [
+        "",
+        "Trainable Components",
+        "Datasets"
+      ],
+      [
+        "",
+        "# Image-Text",
+        "# Video-Text",
+        "# Interleaved Data"
+      ],
+      [
+        "Stage-1",
+        "Projector",
+        "66M",
+        "WebVid [7] Pandas [21]",
+        "OmniCorpus [55]"
+      ],
+      [
+        "Spatial (-Temporal) Fusion"
+      ],
+      [
+        "Flow Head"
+      ],
+      [
+        "Stage-2",
+        "Full Model (w/o VAE)",
+        "9M HQ Und.",
+        "OpenVid-1M [72]",
+        "VIST [43]"
+      ],
+      [
+        "16M HQ Gen.",
+        "1.5M Internal Data",
+        "CoMM [22]"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T3",
+    "caption": "Table 3: Evaluation on multimodal understanding benchmarks. # Params. indicates the number of parameters of base LLM. * indicates the method uses two distinct models or sets of parameters for multimodal understanding and generation, respectively. Und. indicates “understanding”.",
+    "rows": [
+      [
+        "Types",
+        "Models",
+        "# Params.",
+        "MME ↑",
+        "GQA↑",
+        "SEED ↑",
+        "MMB↑",
+        "MMMU ↑",
+        "MMStar ↑",
+        "AI2D ↑"
+      ],
+      [
+        "(p)",
+        "",
+        "(all)",
+        "(en)",
+        "(val)",
+        "",
+        ""
+      ],
+      [
+        "Und. Only",
+        "LLaVA-v1.5 [63]",
+        "7B",
+        "1510.7",
+        "62.0",
+        "58.6",
+        "64.3",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Qwen-VL-Chat [5]",
+        "7B",
+        "1487.6",
+        "57.5",
+        "58.2",
+        "60.6",
+        "-",
+        "-",
+        "57.7"
+      ],
+      [
+        "Unify via",
+        "NExT-GPT [108]",
+        "13B",
+        "-",
+        "-",
+        "57.5",
+        "58.0",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Assembling",
+        "SEED-X [37]",
+        "17B",
+        "1457.0",
+        "49.1",
+        "66.5",
+        "70.1",
+        "35.6",
+        "-",
+        "-"
+      ],
+      [
+        "Tailored",
+        "MetaMorph [91]",
+        "8B",
+        "-",
+        "-",
+        "71.8",
+        "75.2",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Models",
+        "TokenFlow-XL∗ [79]",
+        "14B",
+        "1551.1",
+        "62.5",
+        "72.6",
+        "76.8",
+        "43.2",
+        "-",
+        "75.9"
+      ],
+      [
+        "",
+        "ILLUME [96]",
+        "7B",
+        "1445.3",
+        "-",
+        "72.9",
+        "75.1",
+        "38.2",
+        "-",
+        "71.4"
+      ],
+      [
+        "Native Unified",
+        "Show-o [108]",
+        "1.3B",
+        "1097.2",
+        "58.0",
+        "51.5",
+        "-",
+        "27.4",
+        "-",
+        "-"
+      ],
+      [
+        "JanusFlow [71]",
+        "1.5B",
+        "1333.1",
+        "60.3",
+        "70.5",
+        "74.9",
+        "29.3",
+        "-",
+        "-"
+      ],
+      [
+        "SynerGen-VL [53]",
+        "2.4B",
+        "1381.0",
+        "-",
+        "-",
+        "53.7",
+        "34.2",
+        "-",
+        "-"
+      ],
+      [
+        "Janus-Pro [24]",
+        "1.5B",
+        "1444.0",
+        "59.3",
+        "68.3",
+        "75.5",
+        "36.3",
+        "-",
+        "-"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "1.5B",
+        "1450.9",
+        "60.0",
+        "65.6",
+        "67.4",
+        "37.1",
+        "43.4",
+        "69.0"
+      ],
+      [
+        "Emu3 [98]",
+        "8B",
+        "-",
+        "60.3",
+        "68.2",
+        "58.5",
+        "31.6",
+        "-",
+        "70.0"
+      ],
+      [
+        "VILA-U [105]",
+        "7B",
+        "1401.8",
+        "60.8",
+        "59.0",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "MUSE-VL [109]",
+        "7B",
+        "-",
+        "-",
+        "69.1",
+        "72.1",
+        "39.7",
+        "49.6",
+        "69.8"
+      ],
+      [
+        "Liquid [101]",
+        "8B",
+        "1448.0",
+        "61.1",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Janus-Pro [24]",
+        "7B",
+        "1567.1",
+        "62.0",
+        "72.1",
+        "79.2",
+        "41.0",
+        "-",
+        "-"
+      ],
+      [
+        "Mogao [60]",
+        "7B",
+        "1592.0",
+        "60.9",
+        "74.6",
+        "75.0",
+        "44.2",
+        "-",
+        "-"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "7B",
+        "1620.5",
+        "63.1",
+        "69.8",
+        "79.3",
+        "48.9",
+        "56.6",
+        "78.6"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T4",
+    "caption": "Table 4: Evaluation on the GenEval [38] benchmark. Gen. denotes “generation”. # Params. indicates the number of parameters of base LLM. # Data. indicates the number of image-text pairs used for visual generation during training. * indicates the method uses two distinct models or sets of parameters for multimodal understanding and generation, respectively. Obj.: Object. Attri.: Attribute. Our results are obtained based on the rewritten dense prompts.",
+    "rows": [
+      [
+        "Type",
+        "Method",
+        "# Params.",
+        "# Data",
+        "Single Obj.",
+        "Two Obj.",
+        "Counting",
+        "Colors",
+        "Position",
+        "Color Attri.",
+        "Overall↑"
+      ],
+      [
+        "Gen. Only",
+        "SD3 (d=24) [34]",
+        "",
+        "-",
+        "0.98",
+        "0.74",
+        "0.63",
+        "0.67",
+        "0.34",
+        "0.36",
+        "0.62"
+      ],
+      [
+        "SD3-Medium [34]",
+        "-",
+        "-",
+        "0.99",
+        "0.94",
+        "0.72",
+        "0.89",
+        "0.33",
+        "0.60",
+        "0.74"
+      ],
+      [
+        "Unifying via",
+        "SEED-X [37]",
+        "17B",
+        "158M",
+        "0.97",
+        "0.58",
+        "0.26",
+        "0.80",
+        "0.19",
+        "0.14",
+        "0.49"
+      ],
+      [
+        "Tailored",
+        "TokenFlow-XL∗ [79]",
+        "14B",
+        "60M",
+        "0.95",
+        "0.60",
+        "0.41",
+        "0.81",
+        "0.16",
+        "0.24",
+        "0.55"
+      ],
+      [
+        "Models",
+        "ILLUME [96]",
+        "7B",
+        "15M",
+        "0.99",
+        "0.86",
+        "0.45",
+        "0.71",
+        "0.39",
+        "0.28",
+        "0.61"
+      ],
+      [
+        "Native Unified",
+        "Show-o [108]",
+        "1.3B",
+        "2.0B",
+        "0.98",
+        "0.80",
+        "0.66",
+        "0.84",
+        "0.31",
+        "0.50",
+        "0.68"
+      ],
+      [
+        "Emu3 [98]",
+        "8B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "0.66"
+      ],
+      [
+        "MUSE-VL [109]",
+        "7B",
+        "24M",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "0.57"
+      ],
+      [
+        "Transfusion [121]",
+        "7B",
+        "3.5B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "0.63"
+      ],
+      [
+        "D-DiT [58]",
+        "2B",
+        "40M",
+        "0.97",
+        "0.80",
+        "0.54",
+        "0.76",
+        "0.32",
+        "0.50",
+        "0.65"
+      ],
+      [
+        "Janus-Pro [24]",
+        "7B",
+        "144M",
+        "0.99",
+        "0.89",
+        "0.59",
+        "0.90",
+        "0.79",
+        "0.66",
+        "0.80"
+      ],
+      [
+        "Mogao [60]",
+        "7B",
+        "-",
+        "1.00",
+        "0.97",
+        "0.83",
+        "0.93",
+        "0.84",
+        "0.80",
+        "0.89"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "1.5B",
+        "66M",
+        "0.99",
+        "0.86",
+        "0.55",
+        "0.86",
+        "0.46",
+        "0.63",
+        "0.73"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "7B",
+        "66M",
+        "1.00",
+        "0.87",
+        "0.58",
+        "0.92",
+        "0.52",
+        "0.62",
+        "0.76"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T5",
+    "caption": "Table 5: Evaluation on the DPG-Bench [41] benchmark. Gen. denotes “generation”. # Params. indicates the number of parameters of base LLM. # Data. indicates the number of image-text pairs used for visual generation during training.",
+    "rows": [
+      [
+        "Type",
+        "Method",
+        "# Params.",
+        "# Data",
+        "Global",
+        "Entity",
+        "Attribute",
+        "Relation",
+        "Other",
+        "Overall↑"
+      ],
+      [
+        "Gen. Only",
+        "Hunyuan-DiT [59]",
+        "1.5B",
+        "-",
+        "84.59",
+        "80.59",
+        "88.01",
+        "74.36",
+        "86.41",
+        "78.87"
+      ],
+      [
+        "Playground v2.5 [52]",
+        "-",
+        "-",
+        "83.06",
+        "82.59",
+        "81.20",
+        "84.08",
+        "83.50",
+        "75.47"
+      ],
+      [
+        "PixArt-Σ [15]",
+        "-",
+        "-",
+        "86.89",
+        "82.89",
+        "88.94",
+        "86.59",
+        "87.68",
+        "80.54"
+      ],
+      [
+        "DALL-E 3 [9]",
+        "-",
+        "-",
+        "90.97",
+        "89.61",
+        "88.39",
+        "90.58",
+        "89.83",
+        "83.50"
+      ],
+      [
+        "SD3-Medium [34]",
+        "2B",
+        "-",
+        "87.90",
+        "91.01",
+        "88.83",
+        "80.70",
+        "88.68",
+        "84.08"
+      ],
+      [
+        "Native Unified",
+        "Emu3-DPO [98]",
+        "8B",
+        "-",
+        "-",
+        "-",
+        "",
+        "-",
+        "-",
+        "81.60"
+      ],
+      [
+        "Janus-Pro [24]",
+        "7B",
+        "144M",
+        "86.90",
+        "88.90",
+        "89.40",
+        "89.32",
+        "89.48",
+        "84.19"
+      ],
+      [
+        "Mogao [60]",
+        "7B",
+        "-",
+        "82.37",
+        "90.03",
+        "88.26",
+        "93.18",
+        "85.40",
+        "84.33"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "1.5B",
+        "66M",
+        "87.53",
+        "90.38",
+        "91.34",
+        "90.30",
+        "91.21",
+        "85.02"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "7B",
+        "66M",
+        "89.00",
+        "91.78",
+        "89.96",
+        "91.81",
+        "91.64",
+        "86.14"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T6",
+    "caption": "Table 6: Comparison with text-to-video models on the VBench [44] benchmark. # Params. indicates the number of total parameters for video generation including the base LLM and flow head. QS: Quality Score, SS: Semantic Score, SC: Subject Consistency, BC: Background Consistency, TF: Temporal Flickering, MS: Motion Smoothness, DD: Dynamic Degree, AQ: Aesthetic Quality, IQ: Imaging Quality, OC: Object Class, MO: Multiple Objects, HA: Human Action, C: Color, SR: Spatial Relationship, S: Scene, AS: Appearance style, TS: Temporal Style, OC’: Overall Consistency.",
+    "rows": [
+      [
+        "Models",
+        "# Params.",
+        "Total",
+        "QS",
+        "SS",
+        "SC",
+        "BC",
+        "TF",
+        "MS",
+        "DD",
+        "AQ",
+        "IQ",
+        "OC",
+        "MO",
+        "HA",
+        "C",
+        "SR",
+        "S",
+        "AS",
+        "TS",
+        "OC’"
+      ],
+      [
+        "ModelScope [97]",
+        "1.7B",
+        "75.75",
+        "78.05",
+        "66.54",
+        "89.87",
+        "95.29",
+        "98.28",
+        "95.79",
+        "66.39",
+        "52.06",
+        "58.57",
+        "82.25",
+        "38.98",
+        "92.40",
+        "81.72",
+        "33.68",
+        "39.26",
+        "23.39",
+        "25.37",
+        "25.67"
+      ],
+      [
+        "LaVie [99]",
+        "3B",
+        "77.08",
+        "78.78",
+        "70.31",
+        "91.41",
+        "97.47",
+        "98.30",
+        "96.38",
+        "49.72",
+        "54.94",
+        "61.90",
+        "91.82",
+        "33.32",
+        "96.80",
+        "86.39",
+        "34.09",
+        "52.69",
+        "23.56",
+        "25.93",
+        "26.41"
+      ],
+      [
+        "OpenSoraPlan V1.3 [61]",
+        "-",
+        "77.23",
+        "80.14",
+        "65.62",
+        "97.79",
+        "97.24",
+        "99.20",
+        "99.05",
+        "30.28",
+        "60.42",
+        "56.21",
+        "85.56",
+        "43.58",
+        "86.80",
+        "79.30",
+        "51.61",
+        "36.73",
+        "20.03",
+        "22.47",
+        "24.47"
+      ],
+      [
+        "Show-1 [117]",
+        "6B",
+        "78.93",
+        "80.42",
+        "72.98",
+        "95.53",
+        "98.02",
+        "99.12",
+        "98.24",
+        "44.44",
+        "57.35",
+        "58.66",
+        "93.07",
+        "45.47",
+        "95.60",
+        "86.35",
+        "53.50",
+        "47.03",
+        "23.06",
+        "25.28",
+        "27.46"
+      ],
+      [
+        "AnimateDiff-V2 [40]",
+        "-",
+        "80.27",
+        "82.90",
+        "69.75",
+        "95.30",
+        "97.68",
+        "98.75",
+        "97.76",
+        "40.83",
+        "67.16",
+        "70.10",
+        "90.90",
+        "36.88",
+        "92.60",
+        "87.47",
+        "34.60",
+        "50.19",
+        "22.42",
+        "26.03",
+        "27.04"
+      ],
+      [
+        "Gen-2 [1]",
+        "-",
+        "80.58",
+        "82.47",
+        "73.03",
+        "97.61",
+        "97.61",
+        "99.56",
+        "99.58",
+        "18.89",
+        "66.96",
+        "67.42",
+        "90.92",
+        "55.47",
+        "89.20",
+        "89.49",
+        "66.91",
+        "48.91",
+        "19.34",
+        "24.12",
+        "26.17"
+      ],
+      [
+        "Pika-1.0 [2]",
+        "-",
+        "80.69",
+        "82.92",
+        "71.77",
+        "96.94",
+        "97.36",
+        "99.74",
+        "99.50",
+        "47.50",
+        "62.04",
+        "61.87",
+        "88.72",
+        "43.08",
+        "86.20",
+        "90.57",
+        "61.03",
+        "49.83",
+        "22.26",
+        "24.22",
+        "25.94"
+      ],
+      [
+        "VideoCrafter-2.0 [14]",
+        "-",
+        "80.44",
+        "82.20",
+        "73.42",
+        "96.85",
+        "98.22",
+        "98.41",
+        "97.73",
+        "42.50",
+        "63.13",
+        "67.22",
+        "92.55",
+        "40.66",
+        "95.00",
+        "92.92",
+        "35.86",
+        "55.29",
+        "25.13",
+        "25.84",
+        "28.23"
+      ],
+      [
+        "CogVideoX [113]",
+        "5B",
+        "81.61",
+        "82.75",
+        "77.04",
+        "96.23",
+        "96.52",
+        "98.66",
+        "96.92",
+        "70.97",
+        "61.98",
+        "62.90",
+        "85.23",
+        "62.11",
+        "99.40",
+        "82.81",
+        "66.35",
+        "53.20",
+        "24.91",
+        "25.38",
+        "27.59"
+      ],
+      [
+        "Kling [4]",
+        "-",
+        "81.85",
+        "83.39",
+        "75.68",
+        "98.33",
+        "97.60",
+        "99.30",
+        "99.40",
+        "46.94",
+        "61.21",
+        "65.62",
+        "87.24",
+        "68.05",
+        "93.40",
+        "89.90",
+        "73.03",
+        "50.86",
+        "19.62",
+        "24.17",
+        "26.42"
+      ],
+      [
+        "Step-Video-T2V [70]",
+        "30B",
+        "81.83",
+        "84.46",
+        "71.28",
+        "98.05",
+        "97.67",
+        "99.40",
+        "99.08",
+        "53.06",
+        "61.23",
+        "70.63",
+        "80.56",
+        "50.55",
+        "94.00",
+        "88.25",
+        "71.47",
+        "24.38",
+        "23.17",
+        "26.01",
+        "27.12"
+      ],
+      [
+        "Gen-3 [3]",
+        "-",
+        "82.32",
+        "84.11",
+        "75.17",
+        "97.10",
+        "96.62",
+        "98.61",
+        "99.23",
+        "60.14",
+        "63.34",
+        "66.82",
+        "87.81",
+        "53.64",
+        "96.40",
+        "80.90",
+        "65.09",
+        "54.57",
+        "24.31",
+        "24.71",
+        "26.69"
+      ],
+      [
+        "Emu3 [98]",
+        "8B",
+        "80.96",
+        "-",
+        "-",
+        "95.32",
+        "97.69",
+        "-",
+        "98.93",
+        "79.27",
+        "59.64",
+        "-",
+        "86.17",
+        "44.64",
+        "77.71",
+        "-",
+        "68.73",
+        "37.11",
+        "20.92",
+        "-",
+        "-"
+      ],
+      [
+        "VILA-U [105]",
+        "7B",
+        "74.01",
+        "76.26",
+        "65.04",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Show-o2",
+        "2B",
+        "81.34",
+        "82.10",
+        "78.31",
+        "97.28",
+        "96.78",
+        "97.68",
+        "98.25",
+        "40.83",
+        "65.15",
+        "67.06",
+        "94.81",
+        "76.01",
+        "95.20",
+        "80.89",
+        "62.61",
+        "57.67",
+        "23.29",
+        "25.27",
+        "27.00"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T7",
+    "caption": "Table 7: Comparison with image-to-video models on the VBench [44] benchmark.",
+    "rows": [
+      [
+        "Models",
+        "I2V Subject",
+        "I2V Background",
+        "Camera Motion",
+        "Subject Consistency",
+        "Background Consistency",
+        "Temporal Flickering",
+        "Motion Smoothness",
+        "Dynamic Degree",
+        "Aesthetic Quality",
+        "Imaging Quality"
+      ],
+      [
+        "DynamiCrafter-1024 [110]",
+        "96.71",
+        "96.05",
+        "35.44",
+        "95.69",
+        "97.38",
+        "97.63",
+        "97.38",
+        "47.40",
+        "66.46",
+        "69.34"
+      ],
+      [
+        "SEINE-512x320 [23]",
+        "94.85",
+        "94.02",
+        "23.36",
+        "94.20",
+        "97.26",
+        "96.72",
+        "96.68",
+        "34.31",
+        "58.42",
+        "70.97"
+      ],
+      [
+        "I2VGen-XL [119]",
+        "96.74",
+        "95.44",
+        "13.32",
+        "96.36",
+        "97.93",
+        "98.48",
+        "98.31",
+        "24.96",
+        "65.33",
+        "69.85"
+      ],
+      [
+        "Animate-Anything [28]",
+        "98.54",
+        "96.88",
+        "12.56",
+        "98.90",
+        "98.19",
+        "98.14",
+        "98.61",
+        "2.68",
+        "67.12",
+        "72.09"
+      ],
+      [
+        "ConsistI2V [81]",
+        "94.69",
+        "94.57",
+        "33.60",
+        "95.27",
+        "98.28",
+        "97.56",
+        "97.38",
+        "18.62",
+        "59.00",
+        "66.92"
+      ],
+      [
+        "VideoCrafter-I2V [13]",
+        "90.97",
+        "90.51",
+        "33.58",
+        "97.86",
+        "98.79",
+        "98.19",
+        "98.00",
+        "22.60",
+        "60.78",
+        "71.68"
+      ],
+      [
+        "SVD-XT-1.1 [10]",
+        "97.51",
+        "97.62",
+        "-",
+        "95.42",
+        "96.77",
+        "99.17",
+        "98.12",
+        "43.17",
+        "60.23",
+        "70.23"
+      ],
+      [
+        "MarDini [65]",
+        "98.78",
+        "96.46",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Show-o2",
+        "96.94",
+        "98.83",
+        "28.41",
+        "93.83",
+        "97.45",
+        "-",
+        "97.76",
+        "25.85",
+        "61.92",
+        "69.87"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T8",
+    "caption": "Table 8: Effect of spatial (-temporal) fusion.",
+    "rows": [
+      [
+        "",
+        "MME−p ↑",
+        "GQA ↑",
+        "POPE ↑",
+        "FID-5K ↓"
+      ],
+      [
+        "w/o Fusion",
+        "1164.7",
+        "56.2",
+        "82.6",
+        "21.8"
+      ],
+      [
+        "w Fusion",
+        "1187.8",
+        "57.6",
+        "82.6",
+        "20.5"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T9",
+    "caption": "Table 9: Effect of CFG guidance and inference steps.",
+    "rows": [
+      [
+        "CFG guidance",
+        "Inference steps",
+        "GenEval",
+        "DPG-Bench"
+      ],
+      [
+        "2.5",
+        "50",
+        "0.65",
+        "81.6"
+      ],
+      [
+        "5.0",
+        "50",
+        "0.71",
+        "83.9"
+      ],
+      [
+        "7.5",
+        "50",
+        "0.71",
+        "84.8"
+      ],
+      [
+        "10",
+        "50",
+        "0.71",
+        "85.0"
+      ],
+      [
+        "7.5",
+        "25",
+        "0.71",
+        "84.6"
+      ],
+      [
+        "7.5",
+        "100",
+        "0.73",
+        "84.7"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T10",
+    "caption": "Table 10: Effect of training stages.",
+    "rows": [
+      [
+        "Stage-1",
+        "Stage-2",
+        "GenEval",
+        "DPG-Bench"
+      ],
+      [
+        "✓",
+        "",
+        "0.63",
+        "83.28"
+      ],
+      [
+        "✓",
+        "✓",
+        "0.73",
+        "84.70"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T11",
+    "caption": "Table 11: Comparative analysis of selected unified multimodal models based on the utilization of visual representations and type of unified modeling for multimodal understanding and generation. In this context, native und. & gen. refers to the direct decoding of output sequences into texts and images, as opposed to serving as conditions for decoding using external pre-trained decoders like Stable Diffusion. Please refer to the complete table in the appendix. ∗ indicates the method uses two distinct models for multimodal understanding and generation, respectively.",
+    "rows": [
+      [
+        "Methods",
+        "Und. & Gen. Representation",
+        "Type of Unified Modeling"
+      ],
+      [
+        "Unified",
+        "Decoupled",
+        "Support Video",
+        "Native Und. & Gen.",
+        "Assembling Tailored Models",
+        "Paradigm"
+      ],
+      [
+        "Chameleon [89]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Show-o [108]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "Transfusion [121]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "VILA-U [105]",
+        "✓",
+        "",
+        "✓",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Emu3 [98]",
+        "✓",
+        "",
+        "✓",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "MonoFormer [120]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "Dual-Diffusion [58]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "Diff."
+      ],
+      [
+        "SynerGen-VL [53]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "MMAR [112]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + MAR"
+      ],
+      [
+        "MUSE-VL [109]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Orthus [49]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "Liquid [101]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "UGen [87]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "UniToken [46]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Harmon [104]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR+MAR"
+      ],
+      [
+        "DualToken [85]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "UniTok [69]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "VARGPT [122]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Selftok [95]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "✓",
+        "",
+        "✓",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "Janus-Series [24, 71, 25]",
+        "",
+        "✓",
+        "",
+        "✓",
+        "",
+        "AR (+Diff.)"
+      ],
+      [
+        "UnidFluid [35]",
+        "",
+        "✓",
+        "",
+        "✓",
+        "",
+        "AR + MAR"
+      ],
+      [
+        "OmniMamba [123]",
+        "",
+        "✓",
+        "",
+        "✓",
+        "",
+        "AR"
+      ],
+      [
+        "Mogao [60]",
+        "",
+        "✓",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "Bagel [29]",
+        "",
+        "✓",
+        "✓",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "NExT-GPT [103]",
+        "",
+        "✓",
+        "✓",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "SEED-X [37]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "MIO [100]",
+        "",
+        "✓",
+        "✓",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "MetaMorph [91]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "ILLUME [96]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "ILLUME+ [42]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "MetaQueries [74]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "Nexus-Gen [118]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "Ming-Lite-Uni [39]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "BLIP3-o [16]",
+        "",
+        "✓",
+        "",
+        "",
+        "✓",
+        "AR + Diff."
+      ],
+      [
+        "TokenFlow∗ [79]",
+        "✓",
+        "",
+        "",
+        "",
+        "✓",
+        "AR"
+      ],
+      [
+        "LlamaFusion [84]",
+        "✓",
+        "",
+        "",
+        "✓",
+        "",
+        "AR + Diff."
+      ],
+      [
+        "SemHiTok∗ [26]",
+        "✓",
+        "",
+        "",
+        "",
+        "✓",
+        "AR"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T12",
+    "caption": "Table 12: Evaluation on the WISE [73] benchmark. # Params. indicates the number of parameters of the base LLM.",
+    "rows": [
+      [
+        "Type",
+        "Method",
+        "# Params.",
+        "Cultural",
+        "Time",
+        "Space",
+        "Biology",
+        "Physics",
+        "Chemistry",
+        "Overall↑"
+      ],
+      [
+        "Native Unified",
+        "Orthus-Instruct [49]",
+        "7B",
+        "0.23",
+        "0.31",
+        "0.38",
+        "0.28",
+        "0.31",
+        "0.20",
+        "0.27"
+      ],
+      [
+        "Show-o [108]",
+        "1.3B",
+        "0.28",
+        "0.36",
+        "0.40",
+        "0.23",
+        "0.33",
+        "0.22",
+        "0.30"
+      ],
+      [
+        "VILA-U [105]",
+        "7B",
+        "0.26",
+        "0.33",
+        "0.37",
+        "0.35",
+        "0.39",
+        "0.23",
+        "0.31"
+      ],
+      [
+        "Janus-Pro [24]",
+        "1.5B",
+        "0.20",
+        "0.28",
+        "0.45",
+        "0.24",
+        "0.32",
+        "0.16",
+        "0.26"
+      ],
+      [
+        "Janus-Pro [24]",
+        "7B",
+        "0.30",
+        "0.37",
+        "0.49",
+        "0.36",
+        "0.42",
+        "0.26",
+        "0.35"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "1.5B",
+        "0.30",
+        "0.38",
+        "0.47",
+        "0.32",
+        "0.42",
+        "0.28",
+        "0.35"
+      ],
+      [
+        "Show-o2 (Ours)",
+        "7B",
+        "0.33",
+        "0.42",
+        "0.53",
+        "0.39",
+        "0.45",
+        "0.26",
+        "0.39"
+      ]
+    ]
+  }
+]

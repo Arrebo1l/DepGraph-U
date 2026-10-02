@@ -1,0 +1,148 @@
+{
+  "repeat": 2,
+  "index": 365,
+  "order": [
+    "policy_only",
+    "depgraphu",
+    "native",
+    "rewrite_only"
+  ],
+  "arms": {
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 2,
+      "label": "formal/r2/policy_only/00365",
+      "prompt": "a photo of a bottle right of a train",
+      "seed": 42,
+      "seconds": 32.883477210998535,
+      "pixel_sha256": "21e90f7d49ca6df3d4615db770f9fbf43e99f7d63727477084c640bada953d8b",
+      "png_sha256": "164f53f01edab5ee4cb0e42502d22178a6db6fd283a6e4321f51ca21518f881f",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618199040
+    },
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 2,
+      "label": "formal/r2/depgraphu/00365",
+      "prompt": "a photo of a bottle right of a train",
+      "seed": 42,
+      "seconds": 32.98268345743418,
+      "pixel_sha256": "21e90f7d49ca6df3d4615db770f9fbf43e99f7d63727477084c640bada953d8b",
+      "png_sha256": "164f53f01edab5ee4cb0e42502d22178a6db6fd283a6e4321f51ca21518f881f",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617500672
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 2,
+      "label": "formal/r2/native/00365",
+      "prompt": "a photo of a bottle right of a train",
+      "seed": 42,
+      "seconds": 36.55202904343605,
+      "pixel_sha256": "f3188e7226e632de3d1ed0bf93777923959146c7d158942ddd5f099469bea0e4",
+      "png_sha256": "a59c753f2f3f01f3a1b1ba0cd8b9abe4d176e7d103b42d4af988174b884460bb",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618199040
+    },
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 2,
+      "label": "formal/r2/rewrite_only/00365",
+      "prompt": "a photo of a bottle right of a train",
+      "seed": 42,
+      "seconds": 36.56167386844754,
+      "pixel_sha256": "f3188e7226e632de3d1ed0bf93777923959146c7d158942ddd5f099469bea0e4",
+      "png_sha256": "a59c753f2f3f01f3a1b1ba0cd8b9abe4d176e7d103b42d4af988174b884460bb",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617500672
+    }
+  }
+}

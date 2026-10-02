@@ -1,0 +1,23 @@
+\TGformat\TGtitle{6}{\textbf{Generation guard and interface validation.} All recorded predictions and future-state checks match. Overhead measures synchronized model calls; RNG was checked at runtime, with no exported raw states.}
+\begin{tabular}{>{\raggedright\arraybackslash}p{229.0286pt}>{\centering\arraybackslash}p{95.4286pt}>{\centering\arraybackslash}p{104.9714pt}>{\centering\arraybackslash}p{104.9714pt}}
+\toprule
+\textbf{Validation group} & \textbf{Paired steps} & \textbf{Prediction / state} & \textbf{Max. prediction error} \\
+\midrule
+\multicolumn{4}{l}{\textit{(a) Fixed-policy generation replay}} \\
+Normal generation branches & 1,530 & All recorded checks match & 0 \\
+Forced conditional-only branch & 1,530 & All recorded checks match & 0 \\
+Zero-hit fallback & 510 & All recorded checks match & 0 \\
+\rowcolor{TGshade}
+\textbf{All generation replay groups} & \textbf{3,570} & \textbf{All match} & 0 \\
+\bottomrule
+\end{tabular}\par
+\vspace{7pt}
+\begin{tabular}{>{\raggedright\arraybackslash}p{183.4857pt}>{\centering\arraybackslash}p{178.6571pt}>{\centering\arraybackslash}p{178.6571pt}}
+\toprule
+\textbf{Additional validation} & \textbf{Evidence} & \textbf{Result} \\
+Text / training-label interfaces & 9 records & Logits/loss retained; conflicts rejected \\
+Zero-hit model-call overhead & 510 paired calls & $+0.0145\%$ aggregate \\
+Prompt--seed overhead range & 15 groups & $-0.1232\%$ to $+0.1282\%$ \\
+\bottomrule
+\end{tabular}\par
+\TGnote{Coverage: generation guards and the listed text interfaces; understanding-side KV/mask/position boundaries are separate.}

@@ -1,0 +1,43 @@
+--- a/generators/image_generation_generator.py
++++ b/generators/image_generation_generator.py
+@@ -83,6 +83,7 @@
+         vocab_total = model(torch.zeros(1, 1, dtype=torch.long, device=device), infer=True).logits.size(-1)
+         text_vocab_size = vocab_total - codebook_size
+     vocab_offset = text_vocab_size
++    output_offset = 0 if getattr(model.model, '_tg_vocab_slice', None) is not None else vocab_offset
+ 
+     for step in range(timesteps):
+         if unknown_cnt.item() == 0:
+@@ -108,16 +109,16 @@
+             cond_logits = model(x, infer=True,
+                     cat='cond', use_cache=use_cache, 
+                     to_compute_mask = cond_to_compute_mask if not refresh_steps[step] else None,
+-                ).logits[..., vocab_offset : vocab_offset + codebook_size]
++                ).logits[..., output_offset : output_offset + codebook_size]
+             cond_mask_logits = cond_logits[vq_mask].view(B, -1, codebook_size)
+             uncond_logits = model(uncond, infer=True,
+                     cat='uncond', use_cache=use_cache, 
+                     to_compute_mask = uncond_to_compute_mask if not refresh_steps[step] else None
+-                ).logits[..., vocab_offset : vocab_offset + codebook_size]
++                ).logits[..., output_offset : output_offset + codebook_size]
+             uncond_mask_logits = uncond_logits[uncond_vq_mask].view(B, -1, codebook_size)
+             logits = (1 + cfg_scale) * cond_mask_logits - cfg_scale * uncond_mask_logits
+         else:
+-            logits = model(x, infer=True).logits[:, vq_mask[0], vocab_offset : vocab_offset + codebook_size]
++            logits = model(x, infer=True).logits[:, vq_mask[0], output_offset : output_offset + codebook_size]
+ 
+         sampled = gumbel_max_sample(logits, temperature, generator=generator)
+         sampled_full = sampled + vocab_offset
+@@ -145,6 +146,12 @@
+             uncond_to_compute_mask = uncond_conf <= uncond_conf_threshold
+             
+ 
++        trace_hook = getattr(model, '_tg_trace_hook', None)
++        if trace_hook is not None:
++            trace_hook(step, x, refresh_steps[step],
++                       cond_to_compute_mask if use_cache and step < timesteps - 1 and not refresh_steps[step+1] else None,
++                       uncond_to_compute_mask if use_cache and step < timesteps - 1 and not refresh_steps[step+1] else None)
++
+     # Remove newline tokens
+     vq_ids = x[0, code_start:-2]
+     vq_ids = vq_ids[vq_ids != newline_id].view(1, seq_len)

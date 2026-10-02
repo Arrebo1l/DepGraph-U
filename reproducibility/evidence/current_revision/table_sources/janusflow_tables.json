@@ -1,0 +1,927 @@
+[
+  {
+    "id": "S3.T1",
+    "caption": "Table 1: Hyper-parameters of the proposed JanusFlow. Data ratio denotes the proportion of multimodal understanding data, image generation data and text-only data. In the initial 10,000 steps of Stage 2, we apply a data ratio of 30:50:20 to boost the understanding ability.",
+    "rows": [
+      [
+        "",
+        "Stage 1",
+        "Stage 2",
+        "Stage 3"
+      ],
+      [
+        "Learning Rate",
+        "1.0×10−4",
+        "1×10−4",
+        "2.0×10−5"
+      ],
+      [
+        "LR Scheduler",
+        "Constant",
+        "Constant",
+        "Constant"
+      ],
+      [
+        "Weight Decay",
+        "0.0",
+        "0.0",
+        "0.0"
+      ],
+      [
+        "Gradient Clip",
+        "1.0",
+        "1.0",
+        "1.0"
+      ],
+      [
+        "Optimizer",
+        "AdamW (β1=0.9,β2=0.95)"
+      ],
+      [
+        "Warm-up Steps",
+        "2,000",
+        "0",
+        "1,000"
+      ],
+      [
+        "Training Steps",
+        "10,000",
+        "380,000",
+        "26,000"
+      ],
+      [
+        "Batch Size",
+        "512",
+        "512",
+        "256"
+      ],
+      [
+        "Data Ratio",
+        "50:50:0",
+        "14:80:6",
+        "21:70:9"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T2",
+    "caption": "Table 2: Performances on GenEval benchmark. “Gen.” denotes “generation” and “Unified” denotes unified understanding and generation models. Models using external pre-trained generative models are signed with †.",
+    "rows": [
+      [
+        "Type",
+        "Method",
+        "Params",
+        "Single Obj.",
+        "Two Obj.",
+        "Count.",
+        "Colors",
+        "Pos.",
+        "Color Attri.",
+        "Overall↑"
+      ],
+      [
+        "Gen. Only",
+        "LlamaGen [83]",
+        "0.8B",
+        "0.71",
+        "0.34",
+        "0.21",
+        "0.58",
+        "0.07",
+        "0.04",
+        "0.32"
+      ],
+      [
+        "LDM [75]",
+        "1.4B",
+        "0.92",
+        "0.29",
+        "0.23",
+        "0.70",
+        "0.02",
+        "0.05",
+        "0.37"
+      ],
+      [
+        "SDv1.5 [75]",
+        "0.9B",
+        "0.97",
+        "0.38",
+        "0.35",
+        "0.76",
+        "0.04",
+        "0.06",
+        "0.43"
+      ],
+      [
+        "PixArt-α [9]",
+        "0.6B",
+        "0.98",
+        "0.50",
+        "0.44",
+        "0.80",
+        "0.08",
+        "0.07",
+        "0.48"
+      ],
+      [
+        "SDv2.1 [75]",
+        "0.9B",
+        "0.98",
+        "0.51",
+        "0.44",
+        "0.85",
+        "0.07",
+        "0.17",
+        "0.50"
+      ],
+      [
+        "DALL-E 2 [74]",
+        "6.5B",
+        "0.94",
+        "0.66",
+        "0.49",
+        "0.77",
+        "0.10",
+        "0.19",
+        "0.52"
+      ],
+      [
+        "Emu3-Gen [91]",
+        "8B",
+        "0.98",
+        "0.71",
+        "0.34",
+        "0.81",
+        "0.17",
+        "0.21",
+        "0.54"
+      ],
+      [
+        "SDXL [71]",
+        "2.6B",
+        "0.98",
+        "0.74",
+        "0.39",
+        "0.85",
+        "0.15",
+        "0.23",
+        "0.55"
+      ],
+      [
+        "IF-XL [17]",
+        "4.3B",
+        "0.97",
+        "0.74",
+        "0.66",
+        "0.81",
+        "0.13",
+        "0.35",
+        "0.61"
+      ],
+      [
+        "DALL-E 3 [6]",
+        "-",
+        "0.96",
+        "0.87",
+        "0.47",
+        "0.83",
+        "0.43",
+        "0.45",
+        "0.67"
+      ],
+      [
+        "Unified",
+        "Chameleon [85]",
+        "34B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "0.39"
+      ],
+      [
+        "LWM [58]",
+        "7B",
+        "0.93",
+        "0.41",
+        "0.46",
+        "0.79",
+        "0.09",
+        "0.15",
+        "0.47"
+      ],
+      [
+        "SEED-X† [27]",
+        "17B",
+        "0.97",
+        "0.58",
+        "0.26",
+        "0.80",
+        "0.19",
+        "0.14",
+        "0.49"
+      ],
+      [
+        "Show-o [96]",
+        "1.3B",
+        "0.95",
+        "0.52",
+        "0.49",
+        "0.82",
+        "0.11",
+        "0.28",
+        "0.53"
+      ],
+      [
+        "Janus [93]",
+        "1.3B",
+        "0.97",
+        "0.68",
+        "0.30",
+        "0.84",
+        "0.46",
+        "0.42",
+        "0.61"
+      ],
+      [
+        "JanusFlow (Ours)",
+        "1.3B",
+        "0.97",
+        "0.59",
+        "0.45",
+        "0.83",
+        "0.53",
+        "0.42",
+        "0.63"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T3",
+    "caption": "Table 3: Performances on DPG-Bench. The methods in this table are all generation-specific models except our method.",
+    "rows": [
+      [
+        "Method",
+        "Global",
+        "Entity",
+        "Attribute",
+        "Relation",
+        "Other",
+        "Overall↑"
+      ],
+      [
+        "SDv1.5 [75]",
+        "74.63",
+        "74.23",
+        "75.39",
+        "73.49",
+        "67.81",
+        "63.18"
+      ],
+      [
+        "PixArt-α [9]",
+        "74.97",
+        "79.32",
+        "78.60",
+        "82.57",
+        "76.96",
+        "71.11"
+      ],
+      [
+        "Lumina-Next [105]",
+        "82.82",
+        "88.65",
+        "86.44",
+        "80.53",
+        "81.82",
+        "74.63"
+      ],
+      [
+        "SDXL [71]",
+        "83.27",
+        "82.43",
+        "80.91",
+        "86.76",
+        "80.41",
+        "74.65"
+      ],
+      [
+        "Playground v2.5 [48]",
+        "83.06",
+        "82.59",
+        "81.20",
+        "84.08",
+        "83.50",
+        "75.47"
+      ],
+      [
+        "Hunyuan-DiT [54]",
+        "84.59",
+        "80.59",
+        "88.01",
+        "74.36",
+        "86.41",
+        "78.87"
+      ],
+      [
+        "PixArt-Σ [10]",
+        "86.89",
+        "82.89",
+        "88.94",
+        "86.59",
+        "87.68",
+        "80.54"
+      ],
+      [
+        "Emu3-Gen [91]",
+        "85.21",
+        "86.68",
+        "86.84",
+        "90.22",
+        "83.15",
+        "80.60"
+      ],
+      [
+        "JanusFlow (Ours)",
+        "87.03",
+        "87.31",
+        "87.39",
+        "89.79",
+        "88.10",
+        "80.09"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T4",
+    "caption": "Table 4: Results of MJHQ FID-30k. The models which have similar scales to our model are marked with blue background. JanusFlow achieves the best FID among 1.3B models.",
+    "rows": [
+      [
+        "Method",
+        "Params",
+        "FID↓"
+      ],
+      [
+        "LWM [58]",
+        "7B",
+        "17.77"
+      ],
+      [
+        "VILA-U 256 [95]",
+        "7B",
+        "12.81"
+      ],
+      [
+        "VILA-U 384 [95]",
+        "7B",
+        "7.69"
+      ],
+      [
+        "Show-o [96]",
+        "1.3B",
+        "15.18"
+      ],
+      [
+        "Janus [93]",
+        "1.3B",
+        "10.10"
+      ],
+      [
+        "JanusFlow (Ours)",
+        "1.3B",
+        "9.51"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T5",
+    "caption": "Table 5: Comparison with other methods on multimodal understanding benchmarks. “Und.” denotes “understanding” and “Unified” denotes unified understanding and generation models. The models employing external pre-trained generative models are marked with †. The models with LLMs which have similar number of parameters to us are marked with blue background under the line of dashes.",
+    "rows": [
+      [
+        "Type",
+        "Model",
+        "LLM Params",
+        "POPE↑",
+        "MME-P↑",
+        "MMBd​e​v↑",
+        "SEED↑",
+        "VQAv2test↑",
+        "GQA↑",
+        "MMMU↑",
+        "MM-Vet↑"
+      ],
+      [
+        "Und. Only",
+        "MobileVLM [12]",
+        "2.7B",
+        "84.9",
+        "1288.9",
+        "59.6",
+        "-",
+        "-",
+        "59.0",
+        "-",
+        "-"
+      ],
+      [
+        "MobileVLM-V2 [13]",
+        "2.7B",
+        "84.7",
+        "1440.5",
+        "63.2",
+        "-",
+        "-",
+        "61.1",
+        "-",
+        "-"
+      ],
+      [
+        "LLaVA-Phi [104]",
+        "2.7B",
+        "85.0",
+        "1335.1",
+        "59.8",
+        "-",
+        "71.4",
+        "-",
+        "-",
+        "28.9"
+      ],
+      [
+        "LLaVA [57]",
+        "7B",
+        "76.3",
+        "809.6",
+        "38.7",
+        "33.5",
+        "-",
+        "-",
+        "-",
+        "25.5"
+      ],
+      [
+        "LLaVA-v1.5 [56]",
+        "7B",
+        "85.9",
+        "1510.7",
+        "64.3",
+        "58.6",
+        "78.5",
+        "62.0",
+        "35.4",
+        "31.1"
+      ],
+      [
+        "InstructBLIP [15]",
+        "7B",
+        "-",
+        "-",
+        "36.0",
+        "53.4",
+        "-",
+        "49.2",
+        "-",
+        "26.2"
+      ],
+      [
+        "Qwen-VL-Chat [4]",
+        "7B",
+        "-",
+        "1487.5",
+        "60.6",
+        "58.2",
+        "78.2",
+        "57.5",
+        "-",
+        "-"
+      ],
+      [
+        "IDEFICS-9B [44]",
+        "8B",
+        "-",
+        "-",
+        "48.2",
+        "-",
+        "50.9",
+        "38.4",
+        "-",
+        "-"
+      ],
+      [
+        "Emu3-Chat [91]",
+        "8B",
+        "85.2",
+        "-",
+        "58.5",
+        "68.2",
+        "75.1",
+        "60.3",
+        "31.6",
+        "-"
+      ],
+      [
+        "InstructBLIP [15]",
+        "13B",
+        "78.9",
+        "1212.8",
+        "-",
+        "-",
+        "-",
+        "49.5",
+        "-",
+        "25.6"
+      ],
+      [
+        "LLaVA-v1.5-Phi-1.5 [96]",
+        "1.3B",
+        "84.1",
+        "1128.0",
+        "-",
+        "-",
+        "75.3",
+        "56.5",
+        "30.7",
+        "-"
+      ],
+      [
+        "MobileVLM [12]",
+        "1.4B",
+        "84.5",
+        "1196.2",
+        "53.2",
+        "-",
+        "-",
+        "56.1",
+        "-",
+        "-"
+      ],
+      [
+        "",
+        "MobileVLM-V2 [13]",
+        "1.4B",
+        "84.3",
+        "1302.8",
+        "57.7",
+        "-",
+        "-",
+        "59.3",
+        "-",
+        "-"
+      ],
+      [
+        "Unified",
+        "Gemini-Nano-1 [86]",
+        "1.8B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "62.7",
+        "-",
+        "26.3",
+        "-"
+      ],
+      [
+        "LWM [58]",
+        "7B",
+        "75.2",
+        "-",
+        "-",
+        "-",
+        "55.8",
+        "44.8",
+        "-",
+        "9.6"
+      ],
+      [
+        "VILA-U [95]",
+        "7B",
+        "85.8",
+        "1401.8",
+        "-",
+        "59.0",
+        "79.4",
+        "60.8",
+        "-",
+        "33.5"
+      ],
+      [
+        "Chameleon [85]",
+        "7B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "-",
+        "22.4",
+        "8.3"
+      ],
+      [
+        "DreamLLM† [19]",
+        "7B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "72.9",
+        "-",
+        "-",
+        "36.6"
+      ],
+      [
+        "LaVIT† [37]",
+        "7B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "66.0",
+        "46.8",
+        "-",
+        "-"
+      ],
+      [
+        "Emu† [84]",
+        "13B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "52.0",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "NExT-GPT† [94]",
+        "13B",
+        "-",
+        "-",
+        "-",
+        "-",
+        "66.7",
+        "-",
+        "-",
+        "-"
+      ],
+      [
+        "Show-o [96]",
+        "1.3B",
+        "73.8",
+        "948.4",
+        "-",
+        "-",
+        "59.3",
+        "48.7",
+        "25.1",
+        "-"
+      ],
+      [
+        "Janus [93]",
+        "1.3B",
+        "87.0",
+        "1338.0",
+        "69.4",
+        "63.7",
+        "77.3",
+        "59.1",
+        "30.5",
+        "34.3"
+      ],
+      [
+        "",
+        "JanusFlow (Ours)",
+        "1.3B",
+        "88.0",
+        "1333.1",
+        "74.9",
+        "70.5",
+        "79.8",
+        "60.3",
+        "29.3",
+        "30.9"
+      ]
+    ]
+  },
+  {
+    "id": "S4.T6",
+    "caption": "Table 6: Ablation studies. The weights of the modules with † are frozen during training. “Exp.” denotes “experiment”. “FID” in this table is MJHQ FID-10k with CFG factor w=7.5 and 30 steps. “CLIP” denotes CLIP similarity with the backbone of CLIP-ViT-Large-Patch/14. Exp. F is the final configuration for training JanusFlow.",
+    "rows": [
+      [
+        "Exp. ID",
+        "Model Setting",
+        "Train. Iter.",
+        "Evaluation Benchmarks"
+      ],
+      [
+        "REPA",
+        "Und. Modules",
+        "Gen. Modules",
+        "Type",
+        "POPE↑",
+        "VQAv2v​a​l↑",
+        "GQA↑",
+        "FID↓",
+        "CLIP ↑"
+      ],
+      [
+        "A",
+        "×",
+        "SigLIP",
+        "VAE†+ConvNeXt",
+        "Unified",
+        "50,000",
+        "82.40",
+        "69.62",
+        "54.43",
+        "19.84",
+        "24.94"
+      ],
+      [
+        "B",
+        "✓",
+        "Shared VAE†+ConvNeXt",
+        "Unified",
+        "50,000",
+        "78.13",
+        "53.94",
+        "44.04",
+        "18.05",
+        "26.38"
+      ],
+      [
+        "C",
+        "✓",
+        "VAE+ConvNeXt",
+        "VAE†+ConvNeXt",
+        "Unified",
+        "50,000",
+        "75.30",
+        "55.41",
+        "44.44",
+        "17.53",
+        "26.32"
+      ],
+      [
+        "D",
+        "✓",
+        "SigLIP",
+        "-",
+        "Und. Only",
+        "13,000",
+        "85.03",
+        "69.10",
+        "54.23",
+        "-",
+        "-"
+      ],
+      [
+        "E",
+        "✓",
+        "-",
+        "VAE†+ConvNeXt",
+        "Gen. Only",
+        "37,000",
+        "-",
+        "-",
+        "-",
+        "16.69",
+        "26.89"
+      ],
+      [
+        "F",
+        "✓",
+        "SigLIP",
+        "VAE†+ConvNeXt",
+        "Unified",
+        "50,000",
+        "84.73",
+        "69.20",
+        "54.83",
+        "17.61",
+        "26.40"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T1",
+    "caption": "Table 1: Results on visual understanding tasks.",
+    "rows": [
+      [
+        "Model",
+        "LLM Params",
+        "POPE↑",
+        "MME-P↑",
+        "MMBd​e​v↑",
+        "SEED↑",
+        "VQAv2test↑",
+        "GQA↑",
+        "MM-Vet↑"
+      ],
+      [
+        "JanusFlow 256",
+        "1.3B",
+        "85.3",
+        "1203.0",
+        "71.9",
+        "67.6",
+        "76.3",
+        "58.4",
+        "27.4"
+      ],
+      [
+        "JanusFlow 384",
+        "1.3B",
+        "88.0",
+        "1333.1",
+        "74.9",
+        "70.5",
+        "79.8",
+        "60.3",
+        "30.9"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T2",
+    "caption": "Table 2: Results on GenEval [28].",
+    "rows": [
+      [
+        "Method",
+        "LLM Params",
+        "Single Obj.",
+        "Two Obj.",
+        "Count.",
+        "Colors",
+        "Pos.",
+        "Color Attri.",
+        "Overall↑"
+      ],
+      [
+        "JanusFlow 256",
+        "1.3B",
+        "0.98",
+        "0.73",
+        "0.54",
+        "0.83",
+        "0.63",
+        "0.53",
+        "0.70"
+      ],
+      [
+        "JanusFlow 384",
+        "1.3B",
+        "0.97",
+        "0.59",
+        "0.45",
+        "0.83",
+        "0.53",
+        "0.42",
+        "0.63"
+      ]
+    ]
+  },
+  {
+    "id": "A1.T3",
+    "caption": "Table 3: Results on DPG-Bench [34] and MJHQ FID-30k [48].",
+    "rows": [
+      [
+        "Method",
+        "DPG-Bench↑",
+        "MJHQ FID-30k↓"
+      ],
+      [
+        "Global",
+        "Entity",
+        "Attribute",
+        "Relation",
+        "Other",
+        "Overall"
+      ],
+      [
+        "JanusFlow 256",
+        "91.20",
+        "88.83",
+        "88.00",
+        "87.60",
+        "89.53",
+        "81.23",
+        "12.70"
+      ],
+      [
+        "JanusFlow 384",
+        "87.03",
+        "87.31",
+        "87.39",
+        "89.79",
+        "88.10",
+        "80.09",
+        "9.51"
+      ]
+    ]
+  }
+]

@@ -1,0 +1,148 @@
+{
+  "repeat": 1,
+  "index": 188,
+  "order": [
+    "rewrite_only",
+    "policy_only",
+    "depgraphu",
+    "native"
+  ],
+  "arms": {
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 1,
+      "label": "formal/r1/rewrite_only/00188",
+      "prompt": "a photo of three persons",
+      "seed": 42,
+      "seconds": 36.39457331970334,
+      "pixel_sha256": "0c1475890c9142bd8c365504ce899d7ee970b08173ce3a15e0c2654ee756106b",
+      "png_sha256": "c2e95fba8ac368689d4c17139e3809132906899b5458914200fb447500f8fe73",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617271296
+    },
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 1,
+      "label": "formal/r1/policy_only/00188",
+      "prompt": "a photo of three persons",
+      "seed": 42,
+      "seconds": 32.856924783438444,
+      "pixel_sha256": "f7b91c7476c5662e0c8c72e815fc6ee9111bbf46997d847fff6e8d99aa267b3b",
+      "png_sha256": "8690598612a7718c7d7439deff32249ebc1b21740b9150976abc6cd517a647fa",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42617740288
+    },
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 1,
+      "label": "formal/r1/depgraphu/00188",
+      "prompt": "a photo of three persons",
+      "seed": 42,
+      "seconds": 32.842471804469824,
+      "pixel_sha256": "f7b91c7476c5662e0c8c72e815fc6ee9111bbf46997d847fff6e8d99aa267b3b",
+      "png_sha256": "8690598612a7718c7d7439deff32249ebc1b21740b9150976abc6cd517a647fa",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617271296
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 1,
+      "label": "formal/r1/native/00188",
+      "prompt": "a photo of three persons",
+      "seed": 42,
+      "seconds": 36.43539770320058,
+      "pixel_sha256": "0c1475890c9142bd8c365504ce899d7ee970b08173ce3a15e0c2654ee756106b",
+      "png_sha256": "c2e95fba8ac368689d4c17139e3809132906899b5458914200fb447500f8fe73",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42617740288
+    }
+  }
+}

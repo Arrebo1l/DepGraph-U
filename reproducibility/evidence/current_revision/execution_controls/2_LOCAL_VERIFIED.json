@@ -1,0 +1,127 @@
+{
+  "passed": true,
+  "utc": "2026-09-22T20:04:21.856990+00:00",
+  "integrity": {
+    "downloaded_files": 440,
+    "frozen_files": 72,
+    "fresh_remote_png_hashes": 1056,
+    "archive_sha256": "1d57ca6c554f0adbc63b3605d2653644f0648fb04b148c9201584d1aa1026d0d"
+  },
+  "formal_generations": 960,
+  "timing_generations": 480,
+  "profile_generations": 480,
+  "nonreference_formal_hash_comparisons": 840,
+  "repeat_count": 3,
+  "formal_prompts": 20,
+  "timing_results": [
+    {
+      "model": "1p5b",
+      "arm": "original",
+      "mean_s": 2.903152330716451,
+      "repeat_sd_s": 0.0023604503321125268,
+      "speedup_vs_selected_reference": 1.0,
+      "latency_reduction_percent": 0.0,
+      "profile_wall_time_s": 2.909880518913269,
+      "profile_overhead_percent": 0.23175456987327703
+    },
+    {
+      "model": "1p5b",
+      "arm": "cadd",
+      "mean_s": 2.0527506868044534,
+      "repeat_sd_s": 0.004672771921766558,
+      "speedup_vs_selected_reference": 1.4142741977282347,
+      "latency_reduction_percent": 29.29235351911873,
+      "profile_wall_time_s": 2.0656199216842652,
+      "profile_overhead_percent": 0.6269263463185348
+    },
+    {
+      "model": "1p5b",
+      "arm": "vocab",
+      "mean_s": 2.4294003129005435,
+      "repeat_sd_s": 0.0025112725409469627,
+      "speedup_vs_selected_reference": 1.1950078030780686,
+      "latency_reduction_percent": 16.318538052703325,
+      "profile_wall_time_s": 2.4275568882624308,
+      "profile_overhead_percent": -0.0758798222064816
+    },
+    {
+      "model": "1p5b",
+      "arm": "full",
+      "mean_s": 1.7708029667536418,
+      "repeat_sd_s": 0.003681460238895172,
+      "speedup_vs_selected_reference": 1.6394553122071567,
+      "latency_reduction_percent": 39.004131887332406,
+      "profile_wall_time_s": 1.787978216012319,
+      "profile_overhead_percent": 0.9699130609750473
+    },
+    {
+      "model": "7b",
+      "arm": "original",
+      "mean_s": 6.520616714159647,
+      "repeat_sd_s": 0.036552962254185466,
+      "speedup_vs_selected_reference": 1.0,
+      "latency_reduction_percent": 0.0,
+      "profile_wall_time_s": 6.533486676216126,
+      "profile_overhead_percent": 0.19737338691494521
+    },
+    {
+      "model": "7b",
+      "arm": "cadd",
+      "mean_s": 4.3297157168388365,
+      "repeat_sd_s": 0.01853392351667197,
+      "speedup_vs_selected_reference": 1.5060149766415627,
+      "latency_reduction_percent": 33.599597911701,
+      "profile_wall_time_s": 4.344763934612274,
+      "profile_overhead_percent": 0.3475567163662374
+    },
+    {
+      "model": "7b",
+      "arm": "vocab",
+      "mean_s": 5.398063405354818,
+      "repeat_sd_s": 0.021599970108026053,
+      "speedup_vs_selected_reference": 1.207954820925458,
+      "latency_reduction_percent": 17.21544691266983,
+      "profile_wall_time_s": 5.398450108369191,
+      "profile_overhead_percent": 0.0071637360537391
+    },
+    {
+      "model": "7b",
+      "arm": "full",
+      "mean_s": 3.670731182893117,
+      "repeat_sd_s": 0.016120820640642082,
+      "speedup_vs_selected_reference": 1.7763808868783384,
+      "latency_reduction_percent": 43.70576674255287,
+      "profile_wall_time_s": 3.6756329139073687,
+      "profile_overhead_percent": 0.13353554836963433
+    }
+  ],
+  "call_counts": {
+    "original": {
+      "trunk": 34,
+      "vocab": 34,
+      "head_b": 34
+    },
+    "cadd": {
+      "trunk": 20,
+      "vocab": 20,
+      "head_b": 34
+    },
+    "vocab": {
+      "trunk": 34,
+      "vocab": 0,
+      "head_b": 34
+    },
+    "full": {
+      "trunk": 20,
+      "vocab": 0,
+      "head_b": 34
+    }
+  },
+  "notes": [
+    "Reference is frozen FlashU configuration, not native Show-o2.",
+    "Three fresh-process runtime repeats with the same generation seed 42; SD is across repeat means.",
+    "Formal outputs, recorded tensor/RNG hashes and pruning topology match within each model/repeat group.",
+    "PNG files freshly rehashed remotely; PNG bytes not downloaded. Recorded intermediate hashes were compared locally; tensors were not recomputed.",
+    "Profile CSV uses exclusive CUDA stream intervals including launch gaps, not pure GPU-kernel duration. Headline latency is uninstrumented wall time."
+  ]
+}

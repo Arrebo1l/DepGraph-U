@@ -1,0 +1,90 @@
+[
+  {
+    "table": 1,
+    "scale": "1.5B",
+    "arm": "baseline",
+    "score_display": "0.69241",
+    "score": 0.6924064223798266,
+    "latency_display": "5.783",
+    "latency_s": 5.782875,
+    "speedup_display": "1.000",
+    "speedup": 1.0
+  },
+  {
+    "table": 1,
+    "scale": "1.5B",
+    "arm": "ours",
+    "score_display": "0.69241",
+    "score": 0.6924064223798266,
+    "latency_display": "3.312",
+    "latency_s": 3.3123500000000003,
+    "speedup_display": "1.746",
+    "speedup": 1.7458526423838059
+  },
+  {
+    "table": 1,
+    "scale": "7B",
+    "arm": "baseline",
+    "score_display": "0.55546",
+    "score": 0.5554628286410201,
+    "latency_display": "6.568",
+    "latency_s": 6.567958720460318,
+    "speedup_display": "1.000",
+    "speedup": 1.0
+  },
+  {
+    "table": 1,
+    "scale": "7B",
+    "arm": "ours",
+    "score_display": "0.55546",
+    "score": 0.5554628286410201,
+    "latency_display": "3.718",
+    "latency_s": 3.7176734292204827,
+    "speedup_display": "1.767",
+    "speedup": 1.7666852254522742
+  },
+  {
+    "table": 2,
+    "scale": "1.5B",
+    "arm": "baseline",
+    "score_display": "83.666",
+    "score": 83.66612484101384,
+    "latency_display": "2.973",
+    "latency_s": 2.9730527273993146,
+    "speedup_display": "1.000",
+    "speedup": 1.0
+  },
+  {
+    "table": 2,
+    "scale": "1.5B",
+    "arm": "ours",
+    "score_display": "83.666",
+    "score": 83.66612484101384,
+    "latency_display": "1.844",
+    "latency_s": 1.8437702120993669,
+    "speedup_display": "1.612",
+    "speedup": 1.6124854973191676
+  },
+  {
+    "table": 2,
+    "scale": "7B",
+    "arm": "baseline",
+    "score_display": "84.355",
+    "score": 84.35472363973385,
+    "latency_display": "6.575",
+    "latency_s": 6.574876106696618,
+    "speedup_display": "1.000",
+    "speedup": 1.0
+  },
+  {
+    "table": 2,
+    "scale": "7B",
+    "arm": "ours",
+    "score_display": "84.355",
+    "score": 84.35472363973385,
+    "latency_display": "3.723",
+    "latency_s": 3.722657030163552,
+    "speedup_display": "1.766",
+    "speedup": 1.766178311196118
+  }
+]

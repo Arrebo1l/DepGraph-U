@@ -1,0 +1,21 @@
+\begin{table}[!htb]
+\centering
+\caption{\textbf{Show-o2 execution policies.} Generation rewrites combine; the two KV configurations are alternatives.}
+\label{tab:capabilities}
+\begingroup\tableformat
+
+\begin{tabularx}{\linewidth}{L{84pt}|L{65pt}Y C{65pt}}
+\toprule
+\textbf{Method} & \textbf{Task} & \textbf{\tcell[c]{Reused / omitted\\computation}} & \textbf{DLS policy} \\
+\midrule
+CADD & Generation & \tcell[c]{Reuse Head-A cache;\\omit unused producers} & Unchanged \\
+\addlinespace[4pt]
+VocabBypass & Generation & \tcell[c]{Omit unused vocabulary\\projection} & Unchanged \\
+\midrule
+Exact-DLS KV & Understanding & \tcell[c]{Reuse layer-wise KV\\between rebuilds} & Unchanged \\
+\addlinespace[4pt]
+Stable-Graph KV & Understanding & \tcell[c]{Reuse layer-wise KV\\after one prefill} & Disabled \\
+\bottomrule
+\end{tabularx}
+\endgroup
+\end{table}

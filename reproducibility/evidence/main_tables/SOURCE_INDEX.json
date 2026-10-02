@@ -1,0 +1,45 @@
+{
+  "scope": "Hashes identify preserved full source records; machine locations are deliberately omitted. Compact summaries do not replace raw experimental archives.",
+  "sources": [
+    {
+      "record": "current_record_01",
+      "sha256": "01586f81f937d2777a11021e430ce60399119cb75cd9c6d7f6ac8ea5dd690a76",
+      "role": "Lumina GenEval independent local verification"
+    },
+    {
+      "record": "current_record_02",
+      "sha256": "e14caefbb5ca69fc0c246c5da3bf91386788d5f7920b0300c2f71fef40936a37",
+      "role": "Lumina DPG independent local verification"
+    },
+    {
+      "record": "current_record_03",
+      "sha256": "f6b936b75796db0ff1c5d75c03447b6f6c6ef66e25aecdbf582607768e4b882b",
+      "role": "OmniGen2 GenEval final read-only verification"
+    },
+    {
+      "record": "current_record_04",
+      "sha256": "1fa2716defb5fafdffd80a408adfb4ca84ddd86fa50b05e3a57d843e0083a0e6",
+      "role": "OmniGen2 DPG independent local verification"
+    },
+    {
+      "record": "current_record_05",
+      "sha256": "87c5dc4d4f14e3d573163d98a71a7b3643009c1e3331884053ff897fc2c977b5",
+      "role": "Stable-Graph fresh cap-128 independent verification"
+    },
+    {
+      "record": "projection_kv_controls",
+      "sha256": "66ef564cf4d03d314f9810cb41db26d2a2fc38827c33b48893fb0559796bca1b",
+      "role": "Three-repeat projection and KV matched controls; policy-change comparison retained as well."
+    },
+    {
+      "record": "figure6_original_flashu_cap128",
+      "sha256": "2889bf7562105ee7f1ceff4f08e2dcbc09eaf616cb3d1753d00d70dc415b75b8",
+      "role": "Full 1,500-row input to compact paired scatter records; sample identity and generated-token equality checked before extraction."
+    },
+    {
+      "record": "figure6_exact_dls_kv_cap128",
+      "sha256": "16caf0d5c77d45419f95fa5468be17850616904afd0159cb09d2eda001fe2956",
+      "role": "Full 1,500-row input to compact paired scatter records; sample identity and generated-token equality checked before extraction."
+    }
+  ]
+}

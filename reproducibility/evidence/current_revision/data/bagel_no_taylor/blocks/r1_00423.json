@@ -1,0 +1,148 @@
+{
+  "repeat": 1,
+  "index": 423,
+  "order": [
+    "policy_only",
+    "depgraphu",
+    "native",
+    "rewrite_only"
+  ],
+  "arms": {
+    "policy_only": {
+      "arm": "policy_only",
+      "repeat": 1,
+      "label": "formal/r1/policy_only/00423",
+      "prompt": "a photo of a cup left of an umbrella",
+      "seed": 42,
+      "seconds": 33.08186496049166,
+      "pixel_sha256": "9ba1e1162779f1c03cb5bc9ef08929b01dbd7d1f7352a3d063ac0099f662fa43",
+      "png_sha256": "1ac403b324ea7d82838c41d6e3b284e0eb80072ac9ff5b21717836372bfa7361",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618199040
+    },
+    "depgraphu": {
+      "arm": "depgraphu",
+      "repeat": 1,
+      "label": "formal/r1/depgraphu/00423",
+      "prompt": "a photo of a cup left of an umbrella",
+      "seed": 42,
+      "seconds": 33.044098909944296,
+      "pixel_sha256": "9ba1e1162779f1c03cb5bc9ef08929b01dbd7d1f7352a3d063ac0099f662fa43",
+      "png_sha256": "1ac403b324ea7d82838c41d6e3b284e0eb80072ac9ff5b21717836372bfa7361",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 2520,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617500672
+    },
+    "native": {
+      "arm": "native",
+      "repeat": 1,
+      "label": "formal/r1/native/00423",
+      "prompt": "a photo of a cup left of an umbrella",
+      "seed": 42,
+      "seconds": 36.549590568989515,
+      "pixel_sha256": "ce37c7468a0443654b0c1e319d62815b3e9a5a8815f35ffdcf61eb126f2679fa",
+      "png_sha256": "539bd0ea719f8bfd1cd4e886973df860ac9be0fc9e21aee4e789cc6ed3610f87",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": false,
+      "peak_gpu_bytes": 42618199040
+    },
+    "rewrite_only": {
+      "arm": "rewrite_only",
+      "repeat": 1,
+      "label": "formal/r1/rewrite_only/00423",
+      "prompt": "a photo of a cup left of an umbrella",
+      "seed": 42,
+      "seconds": 36.60623222589493,
+      "pixel_sha256": "ce37c7468a0443654b0c1e319d62815b3e9a5a8815f35ffdcf61eb126f2679fa",
+      "png_sha256": "539bd0ea719f8bfd1cd4e886973df860ac9be0fc9e21aee4e789cc6ed3610f87",
+      "rng_before": {
+        "cpu": "5feb54a46230d321d888e9b43cf5a57492665f199e4377408d79ee460e36679c",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "rng_after": {
+        "cpu": "a8efff94f7594547fbb0fccf6d1321e092a9d0fa423df73b49b63ae03a5e2cf8",
+        "cuda": [
+          "aefdce03def94ffed42159e55677ec20e91200e1981f25b1f271b6fd99c3c263"
+        ]
+      },
+      "initial_noise": [],
+      "trace_sha256": null,
+      "diagnostic": false,
+      "diagnostic_counts": {},
+      "flow_steps": null,
+      "cadd_counts": {},
+      "pruned_mlp_calls": 0,
+      "taylor_entry_calls": 0,
+      "taylor_enabled": false,
+      "last_layer_history_optimization": false,
+      "dead_cfg_producer_elided": true,
+      "peak_gpu_bytes": 42617500672
+    }
+  }
+}

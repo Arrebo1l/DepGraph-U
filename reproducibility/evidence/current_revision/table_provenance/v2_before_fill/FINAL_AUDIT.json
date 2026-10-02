@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "all_numeric_cells_row_labels_pending_status_unchanged": true,
+  "tables1to5_tabular_sources_unchanged": true,
+  "table6_only_column_widths_changed_in_tabular": true,
+  "table6_width_pt": 270,
+  "previous_width_pt": 560,
+  "data_font_pt": 9.5,
+  "caption_font_pt": 10,
+  "independent_zip_compile_all6_pages_same_text_and_180dpi_pixels": true,
+  "previous_sources_unchanged": true,
+  "details_preserved": "CAPTION_DETAILS.md and PROSE_NOTES.md",
+  "gpu_actions": false
+}

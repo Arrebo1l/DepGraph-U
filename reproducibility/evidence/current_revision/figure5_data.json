@@ -1,0 +1,67 @@
+{
+  "native_subset_n": 360,
+  "unique_prompts": 120,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "native_quality_seed_scores": [
+    0.725,
+    0.725,
+    0.7916666666666666
+  ],
+  "points": [
+    {
+      "interval": 1,
+      "native_mean_s": 10.639586329460144,
+      "ours_mean_s": 6.028431006272634,
+      "speedup_vs_native": 1.764901401109105,
+      "native_quality": 0.7472222222222222,
+      "native_sd": 0.03849001794597504,
+      "ours_quality": 0.7166666666666667,
+      "ours_sd": 0.014433756729740658
+    },
+    {
+      "interval": 2,
+      "native_mean_s": 10.639586329460144,
+      "ours_mean_s": 4.293510910537508,
+      "speedup_vs_native": 2.4780620222362884,
+      "native_quality": 0.7472222222222222,
+      "native_sd": 0.03849001794597504,
+      "ours_quality": 0.7194444444444444,
+      "ours_sd": 0.017347216662217772
+    },
+    {
+      "interval": 3,
+      "native_mean_s": 10.639586329460144,
+      "ours_mean_s": 3.684978246026569,
+      "speedup_vs_native": 2.8872860622535765,
+      "native_quality": 0.7472222222222222,
+      "native_sd": 0.03849001794597504,
+      "ours_quality": 0.7138888888888889,
+      "ours_sd": 0.03469443332443553
+    },
+    {
+      "interval": 5,
+      "native_mean_s": 10.639586329460144,
+      "ours_mean_s": 3.322905633846919,
+      "speedup_vs_native": 3.2018924103910598,
+      "native_quality": 0.7472222222222222,
+      "native_sd": 0.03849001794597504,
+      "ours_quality": 0.7277777777777779,
+      "ours_sd": 0.017347216662217755
+    },
+    {
+      "interval": 8,
+      "native_mean_s": 10.639586329460144,
+      "ours_mean_s": 3.3351934399869707,
+      "speedup_vs_native": 3.190095723353818,
+      "native_quality": 0.7472222222222222,
+      "native_sd": 0.03849001794597504,
+      "ours_quality": 0.7166666666666667,
+      "ours_sd": 0.03004626062886658
+    }
+  ],
+  "protocol": "Show-o2-1.5B, same120 rewritten prompts x3seeds,432x432,batch1,A800. Native100timepoints vs combined system70timepoints; fixed pretrained checkpoint/config. Historical separate runs, not per-prompt RNG paired. Quality seed SD. Do not claim unchanged native outputs or isolated component speedup. No new GPU run."
+}

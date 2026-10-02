@@ -1,0 +1,17 @@
+* text=auto
+*.pdf binary
+*.png binary
+*.jpg binary
+*.pptx binary
+*.zip binary
+# Archived artifacts are byte-hashed: do not rewrite their line endings.
+reproducibility/** -text
+environments/** -text
+implementations/** -text
+results/*.csv -text
+patches/** -text
+# Preserve historical whitespace in archived code, diffs, and raw CSV records.
+reproducibility/** -whitespace
+implementations/** -whitespace
+patches/** -whitespace
+results/*.csv -whitespace

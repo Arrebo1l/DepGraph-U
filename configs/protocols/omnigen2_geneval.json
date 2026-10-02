@@ -1,0 +1,101 @@
+{
+  "created_utc": "2026-09-20T06:15:39.513581+00:00",
+  "source_revision": "18e6f9d5271b517fcb32e999f10df943ae9b8f20",
+  "weight_revision": "df5dca8a981d74e6c3af214c145f5c735fe72367",
+  "scope": "One independent timing replication, then gated paired original-prompt GenEval",
+  "width": 1024,
+  "height": 1024,
+  "steps": 50,
+  "scheduler": "official FlowMatchEulerDiscreteScheduler",
+  "dtype": "bfloat16",
+  "batch_size": 1,
+  "text_cfg": 5.0,
+  "image_cfg": 1.0,
+  "cfg_range": [
+    0.0,
+    1.0
+  ],
+  "max_sequence_length": 1024,
+  "cache": {
+    "fresh_threshold": 3,
+    "first_enhance": 5,
+    "max_order": 4
+  },
+  "prompts": [
+    "A red apple on a white plate.",
+    "A blue bicycle parked beside a yellow wall.",
+    "Two dogs playing on green grass.",
+    "A small wooden cabin beside a lake, with mountains in the background.",
+    "A ceramic teapot to the left of a glass cup on a table.",
+    "A street market at night, with warm lights and people walking."
+  ],
+  "seeds": [
+    11,
+    17,
+    23,
+    29,
+    31,
+    37
+  ],
+  "repeats": 4,
+  "static_text_control_prompts": [
+    0,
+    1
+  ],
+  "gate": {
+    "exact_checked_outputs": true,
+    "all_timing_pairs_faster": true,
+    "median_latency_reduction_min": 0.05,
+    "policy": "Unchanged all-pairs-faster and median reduction >=5% in BOTH comparisons; failure stops without retries or threshold changes."
+  },
+  "arms": {
+    "A": "uncached reference",
+    "B": "official TaylorSeer",
+    "C": "TaylorSeer with last-layer-only history/prediction",
+    "D": "C plus guarded upstream refiner dispatch",
+    "E": "C plus static context hoisting",
+    "F": "D plus same static context hoisting"
+  },
+  "timing_scope": "CUDA-synchronized pipeline wall time including prompt encoding, sampling and VAE decode; excludes loading, trace collection, image saving and equality checks",
+  "correctness_scope": "per-branch model predictions and cache schedule, scheduler latents, final image pixels; checks RNG state; tested samples only",
+  "stop_on_output_mismatch": true,
+  "negative_prompt": "(((deformed))), blurry, over saturation, bad anatomy, disfigured, poorly drawn face, mutation, mutated, (extra_limb), (ugly), (poorly drawn hands), fused fingers, messy drawing, broken legs censor, censored, censor_bar",
+  "correctness_cases": [
+    "unmodified B vs adapted B and B repeat",
+    "B vs C, C vs D, C vs E, E vs F on prompt 0, seed 11",
+    "C vs D with CFG range [0.2,0.8]",
+    "C vs D reference editing using original B generated image, seed 11, image CFG 2, prompt Make the apple green while keeping the plate white.",
+    "uncached A repeat, no bypass",
+    "all timed pairs compare final pixels/PNG and RNG"
+  ],
+  "tf32": false,
+  "cpu_threads": 8,
+  "correctness_cases_frozen_before_first_model_run": true,
+  "prior_pilot": "Preserved separately, including 1/18 slower pair and failed primary all-faster gate. Never replace or discard.",
+  "replication": "Same six pilot prompts/seeds, four repeats, 24 C/D pairs and eight E/F pairs; reverse original starting order. Only one predeclared replication. Not a new six-prompt generalization claim.",
+  "prediction": "CADD expected to retain approximately 8-10 percent median reduction versus matched strong controls with exact tested outputs. No promise of every pair faster.",
+  "geneval": {
+    "prompts": 553,
+    "seeds": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "images_per_arm": 2212,
+    "metadata_sha256": "5c48e0813e812e3c373fa5c8ed07a8f0a483be30272b4427b0559c8048e67c13",
+    "baseline": "C: OmniGen2 + TaylorSeer with last-layer-only history/prediction",
+    "candidate": "D: same + CADD",
+    "prompt_rewriting": false,
+    "order": "alternate C/D by (4*prompt_index+seed)%2",
+    "evaluator_revision": "af4902f24d3ca90ebbb446dd9891a59e0f82725f",
+    "mmdet_revision": "e9cae2d0787cd5c2fc6165a6061f92fa09e48fb1",
+    "quality": "Independently run unchanged official GenEval scorer for both arms. Equality relative to TaylorSeer, not uncached OmniGen2."
+  },
+  "stop_conditions": [
+    "Any pixel/PNG/RNG mismatch",
+    "runtime failure",
+    "data free space below 3 GiB",
+    "replication gate failure"
+  ]
+}
